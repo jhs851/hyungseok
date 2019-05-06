@@ -19,7 +19,7 @@ This project is a personal project for my development record and my daily life r
 
 - [x] Update READ.md file
 - [x] Make and register a logo
-- [ ] Register Travis CI and obtain build pass badges
+- [x] Register Travis CI and obtain build pass badges
 - [ ] Get Style CI Badge
 - [ ] Complete main page UI.
 - [ ] Authentication (Social) with testing
