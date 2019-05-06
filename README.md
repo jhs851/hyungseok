@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://user-images.githubusercontent.com/23352881/57203590-66d96900-6fec-11e9-94f4-a0e7f3b30ffc.png"><img src="https://user-images.githubusercontent.com/23352881/57203590-66d96900-6fec-11e9-94f4-a0e7f3b30ffc.png" alt="logo"></a>
-<h1>HYUNGSEOK</h1>
+<h1 align="center">HYUNGSEOK</h1>
 </p>
 
 <p align="center">
@@ -18,7 +18,7 @@ This project is a personal project for my development record and my daily life r
 ## Task Lists
 
 - [x] Update READ.md file
-- [ ] Make and register a logo
+- [x] Make and register a logo
 - [ ] Register Travis CI and obtain build pass badges
 - [ ] Get Style CI Badge
 - [ ] Complete main page UI.

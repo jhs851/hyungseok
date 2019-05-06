@@ -1,0 +1,23 @@
+language: php
+
+php:
+  - 7.1
+  - 7.2
+  - hhvm
+
+before_script:
+  - cp .env.travis .env
+  - composer self-update
+  - composer install --no-interaction
+  - php artisan key:generate
+  - npm install npm@latest -g
+  - npm install
+
+script:
+  - vendor/bin/phpunit --coverage-text
+  - npm run production
+
+cache:
+  directories:
+    - node_modules
+    - vendor
