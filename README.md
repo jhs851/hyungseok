@@ -1,10 +1,15 @@
-# HYUNGSEOK
+<p align="center">
+<a href="https://user-images.githubusercontent.com/23352881/57203590-66d96900-6fec-11e9-94f4-a0e7f3b30ffc.png"><img src="https://user-images.githubusercontent.com/23352881/57203590-66d96900-6fec-11e9-94f4-a0e7f3b30ffc.png" alt="logo"></a>
+<h1>HYUNGSEOK</h1>
+</p>
 
-[![Build Status](https://travis-ci.org/jhs851/hyungseok.svg?branch=master)](https://travis-ci.org/jhs851/hyungseok)
-[![Code Coverage](https://img.shields.io/badge/coverage-14.2%25-lightgrey.svg)](https://github.com/jhs851/hyungseok)
-[![PHP Version](https://img.shields.io/badge/php-%5E7.1.3-blue.svg)](https://www.php.net/index.php)
-[![Code Style](https://img.shields.io/badge/code%20style-PSR--2-brightgreen.svg)](https://www.php-fig.org/psr/psr-2)
-[![License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/jhs851/hyungseok)
+<p align="center">
+<a href="https://travis-ci.org/jhs851/hyungseok"><img src="https://travis-ci.org/jhs851/hyungseok.svg?branch=master" alt="Build Status"></a>
+<a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/coverage-14.2%25-lightgrey.svg" alt="Code Coverage"></a>
+<a href="https://www.php.net/index.php"><img src="https://img.shields.io/badge/php-%5E7.1.3-blue.svg" alt="PHP Version"></a>
+<a href="https://www.php-fig.org/psr/psr-2"><img src="https://img.shields.io/badge/code%20style-PSR--2-brightgreen.svg" alt="Code Style"></a>
+<a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
+</p>
 
 ## About HYUNGSEOK
 
@@ -29,7 +34,9 @@ This project is a personal project for my development record and my daily life r
 - [ ] Implementing hobby post capabilities with testing
 - [ ] Implementing the User Activity History feature with testing
 - [ ] Create Adminitrator page
+= [ ] Speed optimization
 - [ ] Open the server
+- [ ] Create an Application with Web View
 
 ## Technology stacks
 
