@@ -7,7 +7,7 @@
 <a href="https://travis-ci.org/jhs851/hyungseok"><img src="https://travis-ci.org/jhs851/hyungseok.svg?branch=master" alt="Build Status"></a>
 <a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/coverage-14.2%25-lightgrey.svg" alt="Code Coverage"></a>
 <a href="https://www.php.net/index.php"><img src="https://img.shields.io/badge/php-%5E7.1.3-blue.svg" alt="PHP Version"></a>
-<a href="https://www.php-fig.org/psr/psr-2"><img src="https://img.shields.io/badge/code%20style-PSR--2-brightgreen.svg" alt="Code Style"></a>
+<a href="https://github.styleci.io/repos/185023970"><img src="https://github.styleci.io/repos/185023970/shield?branch=master" alt="StyleCI"></a>
 <a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
 </p>
 
@@ -20,7 +20,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Update READ.md file
 - [x] Make and register a logo
 - [x] Register Travis CI and obtain build pass badges
-- [ ] Get Style CI Badge
+- [x] Get Style CI Badge
 - [ ] Complete main page UI.
 - [ ] Authentication (Social) with testing
 - [ ] Implementing Development Post-Function
