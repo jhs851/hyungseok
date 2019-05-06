@@ -1,12 +1,30 @@
-preset: laravel
-
-enabled:
-  - mb_str_function
-
-finder:
-  not-name:
-    - "*.php.twig"
-  exclude:
-    - "vendor"
-    - "storage"
-    - "node_modules"
+php:
+  preset: laravel
+  risky: false
+  finder:
+    exclude:
+      - node_modules
+      - storage
+      - vendor
+    name: "*.php"
+    not-name: "*.blade.php"
+js:
+  tab-width: 4
+  use-tabs: false
+  double-quotes: false
+  trailing-commas: es6
+  semicolons: true
+  arrow-parens: avoid
+  bracket-spacing: true
+  finder:
+    exclude:
+      - node_modules
+      - storage
+      - vendor
+    name:
+      - "*.js"
+    not-name:
+      - "*.min.js"
+ts: false
+css: false
+py: false
