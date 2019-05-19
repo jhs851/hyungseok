@@ -16,10 +16,8 @@ window.Vue = require('vue');
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i);
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
-
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+const files = require.context('./', true, /\.vue$/i);
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,4 +27,43 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+
+    data() {
+        return {
+            scrolled: false
+        }
+    },
+
+    watch: {
+        scrolled(opposition) {
+            let $navigation = $('#navigaiton');
+
+            if (opposition && !$navigation.hasClass('top-nav-collapse')) $navigation.addClass('top-nav-collapse');
+            else $navigation.removeClass('top-nav-collapse');
+        }
+    },
+
+    methods: {
+        handleScroll() {
+            this.scrolled = window.scrollY > 0;
+        },
+
+        initializeWaves() {
+            Waves.attach('.btn', ['waves-light']);
+            Waves.attach('.btn-floating', ['waves-light', 'waves-ripple']);
+            Waves.init();
+        }
+    },
+
+    created () {
+        window.addEventListener('scroll', this.handleScroll);
+    },
+
+    destroyed () {
+        window.removeEventListener('scroll', this.handleScroll);
+    },
+
+    mounted() {
+        this.initializeWaves();
+    }
 });

@@ -1,12 +1,11 @@
 <p align="center">
-<a href="https://user-images.githubusercontent.com/23352881/57203590-66d96900-6fec-11e9-94f4-a0e7f3b30ffc.png"><img src="https://user-images.githubusercontent.com/23352881/57203590-66d96900-6fec-11e9-94f4-a0e7f3b30ffc.png" alt="logo"></a>
-<h1 align="center">HYUNGSEOK</h1>
+<a href="https://user-images.githubusercontent.com/23352881/57301434-fcbbe380-7113-11e9-8fd6-1718b3b224c4.png"><img src="https://user-images.githubusercontent.com/23352881/57301434-fcbbe380-7113-11e9-8fd6-1718b3b224c4.png" alt="logo"></a>
 </p>
 
 <p align="center">
 <a href="https://travis-ci.org/jhs851/hyungseok"><img src="https://travis-ci.org/jhs851/hyungseok.svg?branch=master" alt="Build Status"></a>
-<a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/coverage-14.2%25-lightgrey.svg" alt="Code Coverage"></a>
-<a href="https://www.php.net/index.php"><img src="https://img.shields.io/badge/php-%5E7.1.3-blue.svg" alt="PHP Version"></a>
+<a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/coverage-27.2%25-lightgrey.svg" alt="Code Coverage"></a>
+<a href="https://www.php.net/index.php"><img src="https://img.shields.io/badge/php-%3E%3D7.1-blue.svg" alt="PHP Version"></a>
 <a href="https://github.styleci.io/repos/185023970"><img src="https://github.styleci.io/repos/185023970/shield?branch=master" alt="StyleCI"></a>
 <a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
 </p>
@@ -21,7 +20,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Make and register a logo
 - [x] Register Travis CI and obtain build pass badges
 - [x] Get Style CI Badge
-- [ ] Complete main page UI.
+- [x] Complete main page UI.
 - [ ] Authentication (Social) with testing
 - [ ] Implementing Development Post-Function
 - [ ] Insert Mark Down Function

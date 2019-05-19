@@ -13,3 +13,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 .DS_Store
+_ide_helper.php
+composer.lock
+package-lock.json

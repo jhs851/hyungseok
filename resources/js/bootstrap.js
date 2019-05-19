@@ -11,6 +11,14 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+
+    // WowJS
+    new (require('wowjs')).WOW({
+        live: false
+    }).init();
+
+    // Waves
+    window.Waves = require('node-waves');
 } catch (e) {}
 
 /**
