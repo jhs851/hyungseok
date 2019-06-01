@@ -145,6 +145,11 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'email' => '이메일',
+        'password' => '비밀번호',
+        'password_confirm' => '비밀번호 확인',
+        'name' => '이름',
+    ],
 
 ];

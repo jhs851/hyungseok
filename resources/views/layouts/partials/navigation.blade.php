@@ -14,11 +14,11 @@
         <ul class="navbar-nav">
             @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="#">@lang('auth.login')</a>
+                    <a class="nav-link" href="{{ route('login') }}">@lang('auth.login')</a>
                 </li>
                 @if (Route::has('register'))
                     <li class="nav-item">
-                        <a class="nav-link" href="#">@lang('auth.register')</a>
+                        <a class="nav-link" href="{{ route('register') }}">@lang('auth.register')</a>
                     </li>
                 @endif
             @else
@@ -28,10 +28,8 @@
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                           onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
+                        <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            @lang('auth.logout')
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

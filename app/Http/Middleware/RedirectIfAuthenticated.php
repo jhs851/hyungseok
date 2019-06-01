@@ -3,21 +3,24 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
     /**
-     * Handle an incoming request.
+     * 들어오는 요청을 처리합니다.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  Request  $request
+     * @param  Closure  $next
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, string $guard = null)
     {
         if (Auth::guard($guard)->check()) {
+            flash()->warning(__('auth.already_logined'));
+
             return redirect('/home');
         }
 

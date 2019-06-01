@@ -4,34 +4,16 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{Hash, Validator};
 use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
-    */
-
     use RegistersUsers;
 
     /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
+     * RegisterController의 생성자 입니다.
      *
      * @return void
      */
@@ -41,7 +23,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * 들어오는 등록 요청에 대한 Validator를 가져옵니다.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -56,17 +38,28 @@ class RegisterController extends Controller
     }
 
     /**
-     * Create a new user instance after a valid registration.
+     * 유효한 등록 후 새 사용자 인스턴스를 만듭니다.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return User
      */
-    protected function create(array $data)
+    protected function create(array $data) : User
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    /**
+     * 사용자가 등록된 후에 동작입니다.
+     *
+     * @param  Request  $request
+     * @param  mixed  $user
+     */
+    protected function registered(Request $request, $user) : void
+    {
+        flash()->success(__('auth.welcome', ['name' => $user->name]));
     }
 }
