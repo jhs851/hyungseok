@@ -2,14 +2,14 @@
 
 namespace Tests\Unit;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\TestResponse;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class RegisterTest extends TestCase
+class RegisterationTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -22,7 +22,7 @@ class RegisterTest extends TestCase
              ->get(route('register'))
              ->assertStatus(302)
              ->assertSessionHas('flash_notification')
-             ->assertRedirect('/home');
+             ->assertRedirect(route('home'));
     }
 
     /**
@@ -116,7 +116,7 @@ class RegisterTest extends TestCase
     {
         $this->publishRegister()
             ->assertStatus(302)
-            ->assertRedirect('/home');
+            ->assertRedirect(route('home'));
     }
 
     /**

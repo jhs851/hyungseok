@@ -21,7 +21,7 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             flash()->warning(__('auth.already_logined'));
 
-            return redirect('/home');
+            return redirect(route('home'));
         }
 
         return $next($request);
