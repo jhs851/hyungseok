@@ -9,5 +9,6 @@ return [
     'forgot_password' => '비밀번호를 잊으셨나요?',
     'welcome' => ':name님 환영합니다!',
     'logout' => '로그아웃',
+    'logged_out' => '또 방문해주세요 :)',
     'already_logined' => '이미 로그인 하셨습니다.',
 ];

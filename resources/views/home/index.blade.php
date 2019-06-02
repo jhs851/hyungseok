@@ -5,15 +5,11 @@
         html, body {
             background-color: #fff;
             color: #636b6f;
-            height: 100vh;
+            height: calc(100vh - 66px);
         }
 
         .full-height {
-            height: 100vh;
-        }
-
-        .wrap {
-            padding-top: 0 !important;
+            height: calc(100vh - 66px);
         }
 
         .links a {

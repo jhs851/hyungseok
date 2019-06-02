@@ -4,7 +4,6 @@
 
 <p align="center">
 <a href="https://travis-ci.org/jhs851/hyungseok"><img src="https://travis-ci.org/jhs851/hyungseok.svg?branch=master" alt="Build Status"></a>
-<a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/coverage-27.2%25-lightgrey.svg" alt="Code Coverage"></a>
 <a href="https://www.php.net/index.php"><img src="https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square" alt="Minimum PHP Version"></a>
 <a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
 </p>

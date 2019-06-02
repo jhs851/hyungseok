@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Feautre;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
@@ -43,7 +43,7 @@ class RegisterationTest extends TestCase
     public function testNameFieldIsRequired() : void
     {
         $this->publishRegister(['name' => ''])
-            ->assertSessionHasErrors('name');
+             ->assertSessionHasErrors('name');
     }
 
     /**
@@ -52,7 +52,7 @@ class RegisterationTest extends TestCase
     public function testEmailFieldIsRequired() : void
     {
         $this->publishRegister(['email' => ''])
-            ->assertSessionHasErrors('email');
+             ->assertSessionHasErrors('email');
     }
 
     /**
@@ -61,7 +61,7 @@ class RegisterationTest extends TestCase
     public function testPasswordFieldIsRequired() : void
     {
         $this->publishRegister(['password' => ''])
-            ->assertSessionHasErrors('password');
+             ->assertSessionHasErrors('password');
     }
 
     /**
@@ -70,7 +70,7 @@ class RegisterationTest extends TestCase
     public function testPasswordConfirmationFieldRequired() : void
     {
         $this->publishRegister(['password_confirmation' => ''])
-            ->assertSessionHasErrors('password');
+             ->assertSessionHasErrors('password');
     }
 
     /**
@@ -115,8 +115,9 @@ class RegisterationTest extends TestCase
     public function testRedirectAfterCreateUser()
     {
         $this->publishRegister()
-            ->assertStatus(302)
-            ->assertRedirect(route('home'));
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
     }
 
     /**
@@ -131,7 +132,7 @@ class RegisterationTest extends TestCase
 
         return $this->withExceptionHandling()
             ->post(
-                '/register', array_merge(
+                route('register'), array_merge(
                     $user->getAttributes(),
                     ['password_confirmation' => $overrides['password_confirmation'] ?? $user->password]
                 )
