@@ -56,11 +56,16 @@ class LoginationTest extends TestCase
     /**
      * 로그인 된 유저는 로그인 폼에 접근할 수 없습니다.
      */
-    public function testAuthenticatedUsersCannotAccessLoginForm() : void
+    public function testAuthenticatedUsersCannotAccess() : void
     {
         $this->signIn();
 
         $this->get(route('login'))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
+
+        $this->publishLogin()
              ->assertStatus(302)
              ->assertSessionHas('flash_notification')
              ->assertRedirect(route('home'));

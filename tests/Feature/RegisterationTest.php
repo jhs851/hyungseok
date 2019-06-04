@@ -4,8 +4,7 @@ namespace Tests\Feautre;
 
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\TestResponse;
+use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -16,10 +15,16 @@ class RegisterationTest extends TestCase
     /**
      * 로그인한 사용자는 회원가입 폼에 접근할 수 없습니다.
      */
-    public function testLoggedInUsersDoNotHaveAccessToRegisterForm() : void
+    public function testAuthenticatedUsersCannotAccess() : void
     {
-        $this->signIn()
-             ->get(route('register'))
+        $this->signIn();
+
+        $this->get(route('register'))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
+
+        $this->publishRegister()
              ->assertStatus(302)
              ->assertSessionHas('flash_notification')
              ->assertRedirect(route('home'));

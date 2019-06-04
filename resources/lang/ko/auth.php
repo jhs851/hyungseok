@@ -11,4 +11,9 @@ return [
     'logout' => '로그아웃',
     'logged_out' => '또 방문해주세요 :)',
     'already_logined' => '이미 로그인 하셨습니다.',
+    'passwords' => [
+        'reset' => '비밀번호 초기화',
+        'send' => '비밀번호 초기화 링크 보내기',
+        'sending' => '이메일 전송중...',
+    ],
 ];
