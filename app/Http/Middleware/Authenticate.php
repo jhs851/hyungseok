@@ -3,18 +3,21 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Http\Request;
 
 class Authenticate extends Middleware
 {
     /**
-     * Get the path the user should be redirected to when they are not authenticated.
+     * 인증되지 않은 경우 사용자가 리디렉션해야 하는 경로를 반환합니다.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return string
      */
     protected function redirectTo($request)
     {
         if (! $request->expectsJson()) {
+            flash()->error(trans('auth.unauthenticated'));
+
             return route('login');
         }
     }
