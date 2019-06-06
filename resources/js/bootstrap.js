@@ -8,6 +8,7 @@ window._ = require('lodash');
 
 try {
     window.Popper = require('popper.js').default;
+
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
@@ -19,6 +20,17 @@ try {
 
     // Waves
     window.Waves = require('node-waves');
+
+    // Autosize
+    window.autosize = require('autosize');
+
+    // Toastr
+    window.toastr = require('toastr');
+    toastr.options = {
+        newestOnTop: true,
+        positionClass: 'toast-bottom-right',
+        progressBar: true
+    };
 } catch (e) {}
 
 /**

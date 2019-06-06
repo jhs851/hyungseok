@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         KgBot\LaravelLocalization\LaravelLocalizationServiceProvider::class,
+        SocialiteProviders\Manager\ServiceProvider::class,
 
         /*
          * Application Service Providers...

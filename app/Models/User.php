@@ -3,37 +3,67 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * 대량 할당할 수 있는 특성.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
+     * 숨겨야 하는 특성.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     /**
-     * The attributes that should be cast to native types.
+     * 날짜로 변경해야 하는 속성.
      *
      * @var array
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+    protected $dates = [
+        'email_verfied_at',
     ];
+
+    /**
+     * Development에 대한 HasMany 인스턴스를 반환합니다.
+     *
+     * @return HasMany
+     */
+    public function developments() : HasMany
+    {
+        return $this->hasMany(Development::class);
+    }
+
+    /**
+     * 주어진 data로 User 레코드를 저장하고 반환합니다.
+     *
+     * @param  array  $data
+     * @return static
+     */
+    public static function register(array $data) : User
+    {
+        return static::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password'] ? Hash::make($data['password']) : null,
+        ]);
+    }
 }

@@ -3,8 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Event;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -14,7 +12,14 @@ class EventServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $listen = [];
+    protected $listen = [
+        \SocialiteProviders\Manager\SocialiteWasCalled::class => [
+            \SocialiteProviders\Naver\NaverExtendSocialite::class,
+            \SocialiteProviders\Kakao\KakaoExtendSocialite::class,
+            \SocialiteProviders\Google\GoogleExtendSocialite::class,
+            \SocialiteProviders\Facebook\FacebookExtendSocialite::class,
+        ]
+    ];
 
     /**
      * Register any events for your application.

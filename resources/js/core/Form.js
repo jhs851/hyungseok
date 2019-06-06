@@ -43,14 +43,65 @@ class Form {
     }
 
     /**
+     * 주어진 URL에 GET 요청을 보냅니다.
+     *
+     * @param   {string} url
+     * @returns {Promise<any>}
+     */
+    get(url) {
+        return this.submit('get', url);
+    }
+
+    /**
      * 주어진 URL에 POST 요청을 보냅니다.
      *
      * @param   {string} url
      * @returns {Promise<any>}
      */
     post(url) {
+        return this.submit('post', url);
+    }
+
+    /**
+     * 주어진 URL에 PETCH 요청을 보냅니다.
+     *
+     * @param   {string} url
+     * @returns {Promise<any>}
+     */
+    petch(url) {
+        return this.submit('petch', url);
+    }
+
+    /**
+     * 주어진 URL에 PUT 요청을 보냅니다.
+     *
+     * @param   {string} url
+     * @returns {Promise<any>}
+     */
+    put(url) {
+        return this.submit('put', url);
+    }
+
+    /**
+     * 주어진 URL에 delete 요청을 보냅니다.
+     *
+     * @param   {string} url
+     * @returns {Promise<any>}
+     */
+    delete(url) {
+        return this.submit('delete', url);
+    }
+
+    /**
+     * 주어진 URL에 주어진 request type 요청을 보냅니다.
+     *
+     * @param  {string} requestType
+     * @param  {string} url
+     * @return {Promise<any>}
+     */
+    submit(requestType, url) {
         return new Promise((resolve, reject) => {
-            axios.post(url, this.data())
+            axios[requestType](url, this.data())
                 .then(({data}) => {
                     this.success(data);
 

@@ -150,6 +150,7 @@ return [
         'password' => '비밀번호',
         'password_confirm' => '비밀번호 확인',
         'name' => '이름',
+        'title' => '제목',
     ],
 
 ];

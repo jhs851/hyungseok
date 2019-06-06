@@ -28,7 +28,9 @@
             </div>
 
             <div class="links">
-                <a href="{{ route('developments.index') }}">Development post</a>
+                <a href="{{ route('developments.index') }}">
+                    @lang('developments.title')
+                </a>
             </div>
         </div>
     </div>

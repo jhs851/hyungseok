@@ -62,7 +62,7 @@
 
             submitButtonContent() {
                 return this.sending
-                    ? `<i class="fas fa-spinner fa-pulse"></i> ${this.trans('auth.passwords.sending')}`
+                    ? `<i class="fas fa-spinner fa-pulse mr-2"></i> ${this.trans('auth.sending')}`
                     : this.trans('auth.passwords.send');
             }
         }

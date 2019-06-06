@@ -30,42 +30,61 @@ files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(
 const app = new Vue({
     el: '#app',
 
-    data() {
-        return {
-            scrolled: false
-        }
-    },
-
-    watch: {
-        scrolled(opposition) {
-            let $navigation = $('#navigaiton');
-
-            if (opposition && !$navigation.hasClass('top-nav-collapse')) $navigation.addClass('top-nav-collapse');
-            else $navigation.removeClass('top-nav-collapse');
-        }
-    },
-
     methods: {
-        handleScroll() {
-            this.scrolled = window.scrollY > 0;
-        },
-
+        /**
+         * Waves effect를 .btn과 .btn-floating element에 attach하고 enable합니다.
+         */
         initializeWaves() {
             Waves.attach('.btn', ['waves-light']);
             Waves.attach('.btn-floating', ['waves-light', 'waves-ripple']);
             Waves.init();
+        },
+
+        /**
+         * 모든 textarea element들을 autosize 합니다.
+         */
+        enableAutosize() {
+            autosize(document.querySelectorAll('textarea'));
+        },
+
+        /**
+         * 주어진 폼을 submit 합니다.
+         *
+         * @param {string} formName
+         */
+        submit(formName) {
+            if (this.$refs.hasOwnProperty(formName)) {
+                this.$refs[formName].submit();
+            }
+        },
+
+        /**
+         * 주어진 event의 target element를 disabled 하고 주어진 message로 변경합니다.
+         *
+         * @param {Object} event
+         * @param {string} message
+         */
+        disable(event, message) {
+            let $target = $(event.target);
+
+            if ($target.hasClass('disabled')) {
+                return event.preventDefault();
+            }
+
+            $target.addClass('disabled').html(`<i class="fas fa-spinner fa-pulse mr-2"></i> ${message}`);
+        },
+
+        /**
+         * 모든 tooltip을 활성화 합니다.
+         */
+        enableTooltips() {
+            $('[data-toggle="tooltip"]').tooltip();
         }
-    },
-
-    created () {
-        window.addEventListener('scroll', this.handleScroll);
-    },
-
-    destroyed () {
-        window.removeEventListener('scroll', this.handleScroll);
     },
 
     mounted() {
         this.initializeWaves();
+        this.enableAutosize();
+        this.enableTooltips();
     }
 });

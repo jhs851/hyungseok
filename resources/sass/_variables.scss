@@ -1,5 +1,3 @@
-// Body
-$body-bg: #f5f8fa;
 
 // Typography
 $font-family-sans-serif: 'Spoqa Han Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -7,12 +5,9 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 
 // Colors
-//$success: #DFB2A9;
-//$info: #E2C4AB;
-//$primary: #F8D6C6;
-//$warning: #FAE2BD;
-//$danger: #F4BBBA;
-
+$white: #fff;
+$gray-600: #6c757d;
+$gray-800: #343a40;
 $blue: #3490dc;
 $indigo: #6574cd;
 $purple: #9561e2;
@@ -23,6 +18,16 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+// Social colors
+$naver: #1ec800 !default;
+$kakao: #3b2f39 !default;
+$google: #db4437 !default;
+$facebook: #3c5a99 !default;
+
+// Add colors
+$theme-colors: ("naver": $naver, "kakao": $kakao, "google": $google, "facebook": $facebook);
+$colors: ("naver": $naver, "kakao": $kakao, "google": $google, "facebook": $facebook);
 
 // Add spacing
 $spacer: 1rem;

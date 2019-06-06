@@ -11,12 +11,36 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Animations
+@import '~wowjs/css/libs/animate.css';
+
 // Font Awesome 5
 @import '~@fortawesome/fontawesome-free/scss/brands';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 
+// Waves
+@import '~node-waves/src/scss/waves';
+
+// Toastr
+@import '~toastr/toastr';
+
+// Style sheets
+@import './stylesheets/buttons';
+
 .wrap {
     padding-top: 66px;
+}
+
+textarea {
+    resize: none;
+}
+
+html.full-height, html.full-height body, html.full-height .wrap {
+    height: 100%;
+}
+
+[v-cloak] {
+    display: none;
 }

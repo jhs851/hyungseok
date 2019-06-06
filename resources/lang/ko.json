@@ -1,7 +1,7 @@
 {
     "Verify Email Address": "이메일 주소 인증",
     "Please click the button below to verify your email address.": "이메일 주소를 인증하려면 아래 버튼을 클릭해주세요.",
-    "If you did not create an account, no further action is required.": "계정을 생성하지 않은 경우 추가 조치는 필요하지 않습니다.",
+    "If you did not create an account, no further action is required.": "이메일 인증을 원하지 않는 경우 추가 조치는 필요하지 않습니다.",
     "Reset Password Notification": "암호 재설정 알림입니다.",
     "You are receiving this email because we received a password reset request for your account.": "귀하는 계정에 대한 비밀번호 재설정 요청을 받았기 때문에 이 이메일을 받고 있습니다.",
     "Reset Password": "비밀번호 재설정",

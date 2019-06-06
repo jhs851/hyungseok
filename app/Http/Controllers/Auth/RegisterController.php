@@ -38,18 +38,14 @@ class RegisterController extends Controller
     }
 
     /**
-     * 유효한 등록 후 새 사용자 인스턴스를 만듭니다.
+     * 유효성 검사 후 새 사용자 인스턴스를 만듭니다.
      *
      * @param  array  $data
      * @return User
      */
     protected function create(array $data) : User
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        return User::register($data);
     }
 
     /**

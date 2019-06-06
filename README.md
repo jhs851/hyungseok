@@ -19,7 +19,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Register Travis CI and obtain build pass badges
 - [x] Get Style CI Badge
 - [x] Complete main page UI.
-- [ ] Authentication (Social) with testing
+- [x] Authentication (Social) with testing
 - [ ] Implementing Development Post-Function
 - [ ] Insert Mark Down Function
 - [ ] Testing Development Post-Function
@@ -33,6 +33,9 @@ This project is a personal project for my development record and my daily life r
 - [ ] Create Adminitrator page
 = [ ] Speed optimization
 - [ ] Open the server
+- [ ] Register mail in Mailgun
+- [ ] Implement social login registration and authentication.
+- [ ] Social login testing.
 - [ ] Create an Application with Web View
 
 ## Technology stacks

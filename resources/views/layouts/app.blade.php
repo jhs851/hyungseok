@@ -56,11 +56,8 @@
 </head>
 
 <body>
-    @includeWhen(! isset($withoutNavigation), 'layouts.partials.navigation')
-
     <main id="app" class="wrap">
-        {{-- Flassh message --}}
-        @include('flash::message')
+        @include('layouts.partials.navigation')
 
         @yield('content')
     </main>
@@ -69,6 +66,8 @@
 
     {{-- Scripts --}}
     <script src="{{ mix('js/app.js') }}"></script>
+    {{-- Flassh message --}}
+    @include('flash::message')
 
     @yield('script')
 </body>
