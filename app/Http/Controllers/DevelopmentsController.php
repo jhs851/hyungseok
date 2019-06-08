@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\{JsonResponse, RedirectResponse};
 use Illuminate\View\View;
 
 class DevelopmentsController extends Controller
@@ -58,45 +57,49 @@ class DevelopmentsController extends Controller
     /**
      * 지정된 리소스를 표시합니다.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Development  $development
+     * @return View
      */
-    public function show($id)
+    public function show(Development $development) : View
     {
-        //
-    }
-
-    /**
-     * 지정된 리소스를 편집하기 위한 폼을 표시합니다.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('developments.show', compact('development'));
     }
 
     /**
      * 스토리지에서 지정된 리소스를 업데이트합니다.
      *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
+     * @param  DevelopmentRequest  $request
+     * @param  Development  $development
+     * @return JsonResponse
+     * @throws AuthorizationException
      */
-    public function update(Request $request, $id)
+    public function update(DevelopmentRequest $request, Development $development) : JsonResponse
     {
-        //
+        $this->authorize($development, 'update');
+
+        $development->update($request->all());
+
+        return response()->json([
+            'message' => trans('developments.updated'),
+            'development' => $development,
+        ]);
     }
 
     /**
      * 지정된 리소스를 스토리지에서 제거합니다.
      *
-     * @param  int  $id
-     * @return Response
+     * @param  Development  $development
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(Development $development) : RedirectResponse
     {
-        //
+        $this->authorize($development, 'update');
+
+        $development->delete();
+
+        flash()->success(trans('developments.deleted'));
+
+        return redirect(route('developments.index'));
     }
 }

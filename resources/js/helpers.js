@@ -1,4 +1,5 @@
 import Translator from './core/Translator';
+import VueClipboard from 'vue-clipboard2';
 
 Vue.mixin({
     data() {
@@ -27,4 +28,4 @@ Vue.mixin({
             return this.translator.trans(key);
         }
     }
-});
+}).use(VueClipboard);

@@ -1,37 +1,10 @@
-@extends('layouts.app')
-
-@section('style')
-    <style>
-        html, body, .wrap, .container, .row {
-            height: 100%;
-        }
-
-        body {
-            background-color: #f9f9f9;
-        }
-
-        #navigaiton {
-            background-color: white;
-            border-bottom: 1px solid #dee2e6;
-        }
-    </style>
-@stop
-
-@section('nav-right')
-    <li class="nav-item">
-        <a class="nav-link">
-            <button class="btn btn-primary" @click.prevent="submit('developments-form')">
-                @lang('developments.submit') <i class="fas fa-file-alt ml-2"></i>
-            </button>
-        </a>
-    </li>
-@stop
+@extends('layouts.app', ['writing' => true])
 
 @section('content')
-    <div class="container">
+    <div class="container mt-4">
         <div class="row">
-            <div id="editor-wrapper" class="col-md-10 offset-md-1 p-3 p-md-6 bg-white border border-top-0">
-                <form ref="developments-form" method="POST" action="{{ route('developments.store') }}">
+            <div class="col-md-10 offset-md-1 p-3 p-md-6 bg-white shadow">
+                <form ref="form" method="POST" action="{{ route('developments.store') }}">
                     @csrf
 
                     <div class="form-group">
@@ -41,7 +14,7 @@
                     <hr class="mb-5">
 
                     <div class="form-group">
-                        <textarea class="border-0 w-100" name="body" placeholder="@lang('developments.body_placeholder')" required>{{ old('body') }}</textarea>
+                        <textarea class="border-0 w-100" name="body" placeholder="@lang('developments.body_placeholder')" required rows="30">{{ old('body') }}</textarea>
                     </div>
                 </form>
             </div>

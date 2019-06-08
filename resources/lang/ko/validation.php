@@ -151,6 +151,7 @@ return [
         'password_confirm' => '비밀번호 확인',
         'name' => '이름',
         'title' => '제목',
+        'body' => '본문',
     ],
 
 ];

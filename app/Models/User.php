@@ -66,4 +66,14 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => $data['password'] ? Hash::make($data['password']) : null,
         ]);
     }
+
+    /**
+     * 사용자가 관리자인지 확인합니다.
+     *
+     * @return bool
+     */
+    public function isAdmin() : bool
+    {
+        return in_array($this->email, ['jhs851@naver.com']);
+    }
 }

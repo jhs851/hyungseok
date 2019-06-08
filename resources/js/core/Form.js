@@ -63,16 +63,6 @@ class Form {
     }
 
     /**
-     * 주어진 URL에 PETCH 요청을 보냅니다.
-     *
-     * @param   {string} url
-     * @returns {Promise<any>}
-     */
-    petch(url) {
-        return this.submit('petch', url);
-    }
-
-    /**
      * 주어진 URL에 PUT 요청을 보냅니다.
      *
      * @param   {string} url
@@ -121,7 +111,9 @@ class Form {
      * @param {object} data
      */
     success(data) {
-        this.reset();
+        if (data.hasOwnProperty('message')) {
+            toastr.success(data.message);
+        }
     }
 
     /**

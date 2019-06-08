@@ -13,7 +13,7 @@ Route::get('/js/languages.js', [
 ]);
 
 // Development posts
-Route::resource('developments', 'DevelopmentsController');
+Route::resource('developments', 'DevelopmentsController')->except('edit');
 
 // Authenticate
 Auth::routes(['verify' => true]);

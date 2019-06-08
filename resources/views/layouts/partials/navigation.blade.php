@@ -1,16 +1,14 @@
-<nav id="navigaiton" class="navbar navbar-expand-md navbar-light fixed-top">
-    <a class="navbar-brand py-0" href="{{ route('home') }}">
-        <img class="img-fluid" src="{{ asset('images/etc/logo.png') }}" alt="">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<navigation ref="navigation" inline-template @isset ($writing) :is-write="true" @endisset>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top">
+        <a class="navbar-brand py-0" href="{{ route('home') }}">
+            <img class="img-fluid" src="{{ asset('images/etc/logo.png') }}" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            @hasSection('nav-left')
-                @yield('nav-left')
-            @else
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-item dropdown {{ str_contains(request()->path(), 'developments') ? 'active' : '' }}">
                     <a id="developmentDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         @lang('developments.title')
@@ -26,13 +24,9 @@
                         </a>
                     </div>
                 </li>
-            @endif
-        </ul>
+            </ul>
 
-        <ul class="navbar-nav">
-            @hasSection('nav-right')
-                @yield('nav-right')
-            @else
+            <ul class="navbar-nav">
                 @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">@lang('auth.login')</a>
@@ -59,7 +53,22 @@
                         </div>
                     </li>
                 @endguest
-            @endif
-        </ul>
-    </div>
-</nav>
+
+                <li class="nav-item mr-2" v-if="writing || editing">
+                    <a class="nav-link p-0">
+                        <button class="btn btn-primary" @click.prevent="submit">
+                            @lang('developments.submit') <i class="fas fa-file-alt ml-2"></i>
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item" v-if="editing">
+                    <a class="nav-link p-0">
+                        <button class="btn btn-outline-primary" @click.prevent="cancel">
+                            @lang('developments.cancel') <i class="fas fa-ban ml-1"></i>
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</navigation>
