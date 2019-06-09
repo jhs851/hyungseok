@@ -79,6 +79,10 @@ const app = new Vue({
          */
         enableTooltips() {
             $('[data-toggle="tooltip"]').tooltip();
+        },
+
+        enablePrism() {
+            Prism.highlightAll();
         }
     },
 
@@ -86,5 +90,6 @@ const app = new Vue({
         this.initializeWaves();
         this.enableAutosize();
         this.enableTooltips();
+        this.enablePrism();
     }
 });

@@ -1,7 +1,10 @@
 import Translator from './core/Translator';
 import VueClipboard from 'vue-clipboard2';
+import VueMarkdown from 'vue-markdown';
 
 Vue.mixin({
+    components: { VueMarkdown },
+
     data() {
         return {
             translator: new Translator

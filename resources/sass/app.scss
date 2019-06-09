@@ -26,8 +26,15 @@
 // Toastr
 @import '~toastr/toastr';
 
+// Github markdown
+@import '~github-markdown-css/github-markdown.css';
+
+// Prismjs
+@import '~prismjs/themes/prism-okaidia.css';
+
 // Style sheets
 @import './stylesheets/buttons';
+@import './stylesheets/modal';
 
 .wrap {
     padding-top: 66px;

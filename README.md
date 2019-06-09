@@ -31,7 +31,7 @@ This project is a personal project for my development record and my daily life r
 - [ ] Implementing hobby post capabilities with testing
 - [ ] Implementing the User Activity History feature with testing
 - [ ] Create Adminitrator page
-= [ ] Speed optimization
+- [ ] Speed optimization
 - [ ] Open the server
 - [ ] Register mail in Mailgun
 - [ ] Implement social login registration and authentication.

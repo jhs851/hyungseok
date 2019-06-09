@@ -11,7 +11,7 @@
 
         data() {
             return {
-                editing: false,
+                editing: true,
                 form: new Form(this.data)
             };
         },
@@ -33,7 +33,8 @@
                     .catch(errors => _.forEachRight(errors, field => field.forEach(message => toastr.error(message))));
             },
 
-            success() {
+            success(data) {
+                this.form = new Form(data.development);
                 this.editing = false;
                 this.$root.$refs.navigation.editing = false;
             },

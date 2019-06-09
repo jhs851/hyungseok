@@ -17,7 +17,7 @@
                                 </a>
                             </h5>
 
-                            <p class="card-text text-black-50">{{ $development->body }}</p>
+                            <p class="card-text text-black-50">{{ str_limit($development->body) }}</p>
                         </div>
                     </div>
                 @empty

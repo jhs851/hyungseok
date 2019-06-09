@@ -17,6 +17,16 @@ class Development extends Model
     ];
 
     /**
+     * 직렬화에서 볼 수 있는 속성.
+     *
+     * @var array
+     */
+    protected $visible = [
+        'title',
+        'body',
+    ];
+
+    /**
      * 모든 쿼리에 빠르게 로드되는 관계.
      *
      * @var array

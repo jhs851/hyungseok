@@ -3,10 +3,12 @@
 @section('content')
     <div class="container mt-4">
         <div class="row">
-            <development ref="form" inline-template :data="{{ json_encode($development->only(['title', 'body'])) }}">
+            <development ref="form" inline-template :data="{{ $development }}">
                 <div class="col-md-10 offset-md-1 p-3 p-md-6 bg-white shadow">
                     <div>
                         <template v-if="editing">
+                            <markdown-helper></markdown-helper>
+
                             <div class="form-group">
                                 <input type="text" ref="title" class="border-0 h2" v-model="form.title" placeholder="@lang('validation.attributes.title')" required autocomplete="title" autofocus>
                             </div>
@@ -71,7 +73,7 @@
 
                             <hr class="mb-5">
 
-                            <p class="mb-0" v-text="form.body"></p>
+                            <vue-markdown class="markdown-body" :task-lists="false">@{{ form.body }}</vue-markdown>
                         </template>
                     </div>
                 </div>

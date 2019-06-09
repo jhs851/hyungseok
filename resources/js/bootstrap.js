@@ -31,6 +31,9 @@ try {
         positionClass: 'toast-bottom-right',
         progressBar: true
     };
+
+    // Prismjs
+    window.Prism = require('prismjs');
 } catch (e) {}
 
 /**

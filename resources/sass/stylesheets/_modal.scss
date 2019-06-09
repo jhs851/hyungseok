@@ -1,0 +1,16 @@
+.modal {
+    .modal-full-height {
+        position: absolute;
+        margin: 0;
+        width: 400px;
+        min-height: 100%;
+        height: auto;
+        top: 0;
+        right: 0;
+        @include flexbox;
+    }
+
+    .modal-dialog.modal-right {
+        right: 0;
+    }
+}
