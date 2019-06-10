@@ -8,7 +8,7 @@
             </h2>
         </div>
 
-        <div id="headingsCollapse" class="collapse show" aria-labelledby="headings" data-parent="#markdownHelperAccordion">
+        <div id="headingsCollapse" class="collapse" aria-labelledby="headings" data-parent="#markdownHelperAccordion">
             <div class="card-body markdown-body">
                 <p v-text="trans('markdown.headings.description')"></p>
 

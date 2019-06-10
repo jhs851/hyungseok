@@ -10,7 +10,7 @@
 
         <div id="codeCollapse" class="collapse" aria-labelledby="code" data-parent="#markdownHelperAccordion">
             <div class="card-body markdown-body">
-                <pre v-html="trans('markdown.code.example1')"></pre>
+                <pre v-text="trans('markdown.code.example1')"></pre>
 
                 <vue-markdown :source="trans('markdown.code.example1')"></vue-markdown>
 
@@ -36,7 +36,7 @@
 
                 <pre v-text="trans('markdown.code.example4')"></pre>
 
-                <vue-markdown :source="trans('markdown.code.example4')"></vue-markdown>
+                <vue-markdown :source="trans('markdown.code.example4')" @rendered="enablePrism"></vue-markdown>
             </div>
         </div>
     </div>

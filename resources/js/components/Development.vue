@@ -11,7 +11,7 @@
 
         data() {
             return {
-                editing: true,
+                editing: false,
                 form: new Form(this.data)
             };
         },

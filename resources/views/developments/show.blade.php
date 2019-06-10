@@ -16,7 +16,7 @@
                             <hr class="mb-5">
 
                             <div class="form-group mb-0">
-                                <textarea class="border-0 w-100" v-model="form.body" placeholder="@lang('developments.body_placeholder')" required rows="30"></textarea>
+                                <markdown-editor ref="body" v-model="form.body" :configs="simpleMDEConfigs"></markdown-editor>
                             </div>
                         </template>
 
@@ -73,7 +73,7 @@
 
                             <hr class="mb-5">
 
-                            <vue-markdown class="markdown-body" :task-lists="false">@{{ form.body }}</vue-markdown>
+                            <vue-markdown class="markdown-body" :task-lists="false" @rendered="enablePrism">@{{ form.body }}</vue-markdown>
                         </template>
                     </div>
                 </div>

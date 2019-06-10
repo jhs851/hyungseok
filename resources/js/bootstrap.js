@@ -21,9 +21,6 @@ try {
     // Waves
     window.Waves = require('node-waves');
 
-    // Autosize
-    window.autosize = require('autosize');
-
     // Toastr
     window.toastr = require('toastr');
     toastr.options = {
@@ -34,6 +31,9 @@ try {
 
     // Prismjs
     window.Prism = require('prismjs');
+
+    // SimpleMDE
+    window.SimpleMDE = require('simplemde');
 } catch (e) {}
 
 /**

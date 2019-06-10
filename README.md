@@ -21,7 +21,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Complete main page UI.
 - [x] Authentication (Social) with testing
 - [x] Implementing Development Post-Function
-- [ ] Insert Mark Down Function
+- [x] Insert Mark Down Function
 - [ ] Testing Development Post-Function
 - [ ] Implementing replies with testing
 - [ ] Tags, Search Capabilities Implemented with testing

@@ -1,6 +1,8 @@
 @extends('layouts.app', ['writing' => true])
 
 @section('content')
+    <markdown-helper></markdown-helper>
+
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-10 offset-md-1 p-3 p-md-6 bg-white shadow">
@@ -14,7 +16,8 @@
                     <hr class="mb-5">
 
                     <div class="form-group">
-                        <textarea class="border-0 w-100" name="body" placeholder="@lang('developments.body_placeholder')" required rows="30">{{ old('body') }}</textarea>
+                        <markdown-editor name="body" value="{{ old('body') }}" :configs="simpleMDEConfigs"></markdown-editor>
+                        {{--<textarea class="border-0 w-100" name="body" placeholder="@lang('developments.body_placeholder')" required rows="30">{{ old('body') }}</textarea>--}}
                     </div>
                 </form>
             </div>

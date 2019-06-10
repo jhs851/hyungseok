@@ -41,13 +41,6 @@ const app = new Vue({
         },
 
         /**
-         * 모든 textarea element들을 autosize 합니다.
-         */
-        enableAutosize() {
-            autosize(document.querySelectorAll('textarea'));
-        },
-
-        /**
          * 주어진 폼을 submit 합니다.
          *
          * @param {string} formName
@@ -79,17 +72,11 @@ const app = new Vue({
          */
         enableTooltips() {
             $('[data-toggle="tooltip"]').tooltip();
-        },
-
-        enablePrism() {
-            Prism.highlightAll();
         }
     },
 
     mounted() {
         this.initializeWaves();
-        this.enableAutosize();
         this.enableTooltips();
-        this.enablePrism();
     }
 });

@@ -65,6 +65,7 @@
     @include('layouts.partials.footer')
 
     {{-- Scripts --}}
+    <script src="{{ asset('js/languages.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
     {{-- Flassh message --}}
     @include('flash::message')

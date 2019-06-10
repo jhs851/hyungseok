@@ -2,6 +2,8 @@
 
 return [
     'header' => '마크다운 문법',
+    'column' => '컬럼',
+    'content' => '내용',
     'headings' => [
         'title' => '제목들',
         'description' => '제목을 만들려면 제목 텍스트 앞에 1개에서 6개의 # 기호를 추가합니다. 사용하는 `#`의 수에 따라 머리글의 크기가 결정됩니다.',
@@ -19,8 +21,8 @@ return [
     ],
     'styling_text' => [
         'title' => '스타일링 텍스트',
-        'description' => '강조 표시는 굵게, 기울임꼴 또는 삭제선 텍스트로 지정할 수 있습니다.',
-        'example' => "스타일 | 문법 | 예시 | 출력\n----- | --------|----------|--------\n굵게 | `** **` 또는 `__ __` | `**굵은 텍스트**` | **굵은 텍스트**\n기울임 | `* *` 또는 `_ _` | `*기울인 텍스트*` | *기울인 텍스트*\n삭제선 | `~~ ~~` | `~~삭제선 텍스트~~` | ~~삭제선 텍스트~~\n굵고 기울게 | `** **` 그리고 `_ _` | `**이 텍스트는 _극도로_ 중요하다**` | **이 텍스트는 _극도로_ 중요하다**",
+        'description' => '텍스트를 굵게, 기울임꼴, 삭제선, 밑줄선, 마크로 지정할 수 있습니다.',
+        'example' => "스타일 | 문법 | 예시 | 출력 |\n----- | --------|----------|--------|\n굵게 | `** **` 또는 `__ __` | `**굵은 텍스트**` | **굵은 텍스트** |\n기울임 | `* *` 또는 `_ _` | `*기울인 텍스트*` | *기울인 텍스트* |\n삭제선 | `~~ ~~` | `~~삭제선 텍스트~~` | ~~삭제선 텍스트~~ |\n밑줄선 | `++ ++` | `++밑줄친 텍스트++` | ++밑줄친 텍스트++ |\n마크 | `== ==` | `==마크된 텍스트==` | ==마크된 텍스트== |\n굵고 기울게 | `** **` 그리고 `_ _` | `**이 텍스트는 _극도로_ 중요하다**` | **이 텍스트는 _극도로_ 중요하다** |",
     ],
     'quoting_text' => [
         'title' => '텍스트 인용',
@@ -57,5 +59,48 @@ return [
         'example3' => "```\n샘플 문자를 여기에...\n```",
         'description4' => '구문 강조 표시',
         'example4' => "```javascript\nlet foo = bar => bar++;\n\nconsole.log(foo(5));\n```",
+    ],
+    'table' => [
+        'title' => '테이블',
+        'description1' => '',
+        'example1' => "| 컬럼 | 컬럼 | 컬럼 |\n| ---- | ---- | ---- |\n| 내용 | 내용 | 내용 |",
+        'description2' => '컬럼을 오른쪽 정렬',
+        'example2' => "| 컬럼 | 컬럼 | 컬럼 |\n| ----: | ----: | ----: |\n| 내용 | 내용 | 내용 |",
+    ],
+    'image' => [
+        'title' => '이미지',
+        'description' => '링크와 마찬가지로 이미지에도 각주 스타일 구문이 있습니다.',
+        'example' => "![Minion](https://octodex.github.com/images/minion.png)\n![Stormtroopocat](https://octodex.github.com/images/stormtroopocat.jpg \"The Stormtroopocat\")",
+    ],
+    'abbreviations' => [
+        'title' => '약어',
+        'example' => "HTML 약자 예제입니다.\n\n\"HTML\"을 변환하지만 \"xxxHTMLyyy\" 등과 같은 부분 항목은 그대로 유지합니다.\n\n*[HTML]: 하이퍼 텍스트 마크업 언어",
+    ],
+    'emojies' => [
+        'title' => 'Emojies',
+        'description' => '<a href="https://github.com/markdown-it/markdown-it-emoji/blob/master/lib/data/shortcuts.js">더 많은 emojies</a>',
+        'example' => "> 클래식 마크업: :wink: :blush: :cry: :kissing: :laughing: :yum:\n>\n> 짧게 (이모티콘): :-) :-( 8-) ;)",
+    ],
+    'subscript_superscript' => [
+        'title' => 'Subscript / Superscript',
+        'example' => "- 19^th^\n- H~2~O",
+    ],
+    'task_lists' => [
+        'title' => '작업 목록',
+        'description1' => '작업 목록을 만들려면 <code>[ ]</code> 뒤에 일반 공백 문자가 있는 항목이 서문에 나열됩니다. 작업을 완료로 표시하려면 <code>[x]</code>를 사용합니다.',
+        'example1' => "- [x] 변경 사항을 완료합니다\n- [ ] 나의 커밋을 Github에게 푸시합니다\n- [ ] Pull request를 확인합니다",
+        'description2' => '작업 목록 항목 설명이 괄호로 시작하는 경우 <code>\</code>를 사용하여 항목 설명을 피해야 합니다.',
+        'example2' => '- [ ] \(선택적) 후속 문제를 엽니다',
+        'description3' => '자세한 내용은 "<a href="https://help.github.com/en/articles/about-task-lists">작업 목록 내용</a>"을(를) 참조하시기 바랍니다.',
+    ],
+    'toolbar' => [
+        'bold' => '굵게',
+        'italic' => '기울임',
+        'strikethrough' => '삭제선',
+        'heading_bigger' => '제목(크게)',
+        'heading_smaller' => '제목(작게)',
+        'ul' => '무질서한 목록',
+        'ol' => '순서있는 목록',
+        'preview' => '미리보기',
     ],
 ];

@@ -1,0 +1,13 @@
+.editor-toolbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 66px;
+    z-index: $zindex-sticky;
+    background-color: white;
+    border-bottom: 1px solid #bbb;
+    opacity: initial;
+
+    @include hover {
+        opacity: initial;
+    }
+}

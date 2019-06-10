@@ -20,7 +20,6 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.8.1",
-        "autosize": "^4.0.2",
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
         "github-markdown-css": "^3.0.1",
@@ -33,6 +32,7 @@
         "vue": "^2.5.17",
         "vue-clipboard2": "^0.3.0",
         "vue-markdown": "^2.2.4",
+        "vue-simplemde": "^0.5.2",
         "wowjs": "^1.1.3"
     }
 }

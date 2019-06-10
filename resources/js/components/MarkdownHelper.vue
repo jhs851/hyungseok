@@ -22,6 +22,18 @@
                     <markdown-lists></markdown-lists>
 
                     <markdown-code></markdown-code>
+
+                    <markdown-table></markdown-table>
+
+                    <markdown-image></markdown-image>
+
+                    <markdown-abbreviations></markdown-abbreviations>
+
+                    <markdown-emojies></markdown-emojies>
+
+                    <markdown-subscript-superscript></markdown-subscript-superscript>
+
+                    <markdown-task-lists></markdown-task-lists>
                 </div>
             </div>
         </modal>

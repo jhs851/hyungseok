@@ -1,11 +1,11 @@
 class Translator {
     /**
      * 새로운 Translator 인스턴스를 생성합니다.
-     *
-     * @param {Object} lines
      */
-    constructor(lines = {}) {
-        this.lines = lines;
+    constructor() {
+        if (! window.hasOwnProperty('i18n')) {
+            throw 'Failed to retrieve translation file.';
+        }
     }
 
     /**
@@ -36,7 +36,7 @@ class Translator {
      * @return {string}
      */
     get(key, attributes = []) {
-        let line = _.get(this.lines, key, key);
+        let line = _.get(window.i18n, key, key);
 
         attributes.forEach((replacement, attribute) => line = _.replace(line, `:${attribute}`, replacement));
 

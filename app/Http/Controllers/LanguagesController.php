@@ -2,16 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use KgBot\LaravelLocalization\Classes\ExportLocalizations;
 
 class LanguagesController extends Controller
 {
     public function __invoke(ExportLocalizations $localizations)
     {
-        $languages = $localizations->export()->toArray();
+        return response($this->getContent($localizations))
+            ->header('Content-type', 'text/javascript');
+    }
 
+    /**
+     * 응답에 반환할 컨텐츠를 반환합니다.
+     *
+     * @param  ExportLocalizations  $localizations
+     * @return string
+     */
+    protected function getContent(ExportLocalizations $localizations) : string
+    {
+        return Cache::rememberForever('languages.js', function () use ($localizations) {
+            return 'window.i18n = ' . json_encode(
+                $this->getLanguages($localizations->export()->toArray()), JSON_UNESCAPED_UNICODE
+                );
+        });
+    }
+
+    /**
+     * 번역 내용을 반환합니다.
+     *
+     * @param  array  $languages
+     * @return array
+     */
+    protected function getLanguages(array $languages) : array
+    {
         return array_merge(
-            $languages[$this->locale()],
+            $languages[$this->getLocale()],
             $this->getJsonLocale($languages)
         );
     }
@@ -21,7 +47,7 @@ class LanguagesController extends Controller
      *
      * @return string
      */
-    protected function locale() : string
+    protected function getLocale() : string
     {
         return app()->getLocale();
     }
@@ -35,7 +61,7 @@ class LanguagesController extends Controller
     protected function getJsonLocale(array $languages) : array
     {
         if ($this->hasJsonLocale($languages)) {
-            return (array) $languages['json'][$this->locale()];
+            return (array) $languages['json'][$this->getLocale()];
         }
 
         return [];
@@ -50,6 +76,6 @@ class LanguagesController extends Controller
     protected function hasJsonLocale(array $languages) : bool
     {
         return array_key_exists('json', $languages) &&
-               array_key_exists($this->locale(), $languages['json']);
+               array_key_exists($this->getLocale(), $languages['json']);
     }
 }
