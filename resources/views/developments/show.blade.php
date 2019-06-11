@@ -41,7 +41,7 @@
                                         @lang(('developments.copy_url'))
                                     </clipboard>
 
-                                    @can ($development, 'update')
+                                    @can ('update', $development)
                                         <span class="ml-2">・</span>
 
                                         <div class="dropdown">

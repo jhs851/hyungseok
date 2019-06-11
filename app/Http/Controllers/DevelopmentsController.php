@@ -75,7 +75,7 @@ class DevelopmentsController extends Controller
      */
     public function update(DevelopmentRequest $request, Development $development) : JsonResponse
     {
-        $this->authorize($development, 'update');
+        $this->authorize('update', $development);
 
         $development->update($request->all());
 
@@ -94,7 +94,7 @@ class DevelopmentsController extends Controller
      */
     public function destroy(Development $development) : RedirectResponse
     {
-        $this->authorize($development, 'update');
+        $this->authorize('update', $development);
 
         $development->delete();
 

@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\{Collection, Model};
 
 if (! function_exists('create')) {
     /**
@@ -9,9 +9,9 @@ if (! function_exists('create')) {
      * @param  string  $class
      * @param  array  $attributes
      * @param  int|null  $times
-     * @return Model
+     * @return Model|Collection
      */
-    function create(string $class, array $attributes = [], int $times = null) : Model
+    function create(string $class, array $attributes = [], int $times = null)
     {
         return factory($class, $times)->create($attributes);
     }
@@ -26,7 +26,7 @@ if (! function_exists('make')) {
      * @param  int|null  $times
      * @return Model
      */
-    function make(string $class, array $attributes = [], int $times = null) : Model
+    function make(string $class, array $attributes = [], int $times = null)
     {
         return factory($class, $times)->make($attributes);
     }

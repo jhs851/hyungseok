@@ -18,6 +18,6 @@ class DevelopmentPolicy
      */
     public function update(User $user, Development $development) : bool
     {
-        return $user->id === $development->user_id;
+        return $user->id == $development->user_id;
     }
 }
