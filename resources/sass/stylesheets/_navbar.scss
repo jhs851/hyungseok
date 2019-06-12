@@ -1,0 +1,16 @@
+#navigation {
+    position: -webkit-sticky;
+    position: sticky;
+    top: calc(-50px + -3.7rem);
+    z-index: $zindex-sticky;
+    background-color: white;
+
+    .navbar-nav {
+        .nav-item {
+            .nav-link,
+            .dropdown-menu .dropdown-item {
+                font-size: .75rem;
+            }
+        }
+    }
+}

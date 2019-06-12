@@ -56,13 +56,13 @@
 </head>
 
 <body>
-    <main id="app" class="wrap">
+    <main id="app" class="wrap container">
         @include('layouts.partials.navigation')
 
         @yield('content')
-    </main>
 
-    @include('layouts.partials.footer')
+        @include('layouts.partials.footer')
+    </main>
 
     {{-- Scripts --}}
     <script src="{{ asset('js/languages.js') }}"></script>

@@ -1,0 +1,28 @@
+{
+    "plugins": [
+        ["prismjs", {
+            "languages": [
+                "markup",
+                "javascript",
+                "css",
+                "bash",
+                "c",
+                "csharp",
+                "cpp",
+                "docker",
+                "git",
+                "java",
+                "json",
+                "markdown",
+                "php",
+                "powershell",
+                "python",
+                "scss",
+                "sql",
+                "vim"
+            ],
+            "theme": "okaidia",
+            "css": true
+        }]
+    ]
+}

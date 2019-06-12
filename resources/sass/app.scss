@@ -5,11 +5,16 @@
 // Variables
 @import 'variables';
 
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
 // Mixins
 @import 'mixins';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// Local fonts
+@include font-face('FiraCode', '/fonts/FiraCode/FiraCode-Light', 300);
+@include font-face('FiraCode', '/fonts/FiraCode/FiraCode-Medium', 400);
+@include font-face('FiraCode', '/fonts/FiraCode/FiraCode-Bold', 700);
 
 // Animations
 @import '~wowjs/css/libs/animate.css';
@@ -29,9 +34,6 @@
 // Github markdown
 @import '~github-markdown-css/github-markdown.css';
 
-// Prismjs
-@import '~prismjs/themes/prism.css';
-
 // Vue SimpleMDE
 @import '~simplemde/dist/simplemde.min.css';
 
@@ -39,17 +41,15 @@
 @import './stylesheets/buttons';
 @import './stylesheets/modal';
 @import './stylesheets/simplemde';
+@import './stylesheets/markdown';
+@import './stylesheets/navbar';
 
 .wrap {
-    padding-top: 66px;
+    padding-top: 80px;
 }
 
 textarea {
     resize: none;
-}
-
-html.full-height, html.full-height body, html.full-height .wrap {
-    height: 100%;
 }
 
 [v-cloak] {

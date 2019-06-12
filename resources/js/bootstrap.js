@@ -29,12 +29,12 @@ try {
         progressBar: true
     };
 
-    // Prismjs
-    window.Prism = require('prismjs');
-
     // SimpleMDE
     window.SimpleMDE = require('simplemde');
 } catch (e) {}
+
+// Prismjs
+import Prism from 'prismjs';
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

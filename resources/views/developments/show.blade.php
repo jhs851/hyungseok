@@ -3,8 +3,8 @@
 @section('content')
     <div class="container mt-4">
         <div class="row">
-            <development ref="form" inline-template :data="{{ $development }}">
-                <div class="col-md-10 offset-md-1 p-3 p-md-6 bg-white shadow">
+            <div class="col-md-10 offset-md-1 p-3 p-md-5 bg-white shadow">
+                <development ref="form" inline-template :data="{{ $development }}">
                     <div>
                         <template v-if="editing">
                             <markdown-helper></markdown-helper>
@@ -49,7 +49,7 @@
                                                 <i class="fas fa-list-ul"></i>
                                             </a>
 
-                                            <div class="dropdown-menu dropdown-menu-right py-0 rounded-0" aria-labelledby="editDropdown">
+                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="editDropdown">
                                                 <a class="dropdown-item py-3 d-flex justify-content-between align-items-center" href="#" @click.prevent="edit">
                                                     @lang('developments.edit')
                                                     <i class="fas fa-pen"></i>
@@ -76,8 +76,8 @@
                             <vue-markdown class="markdown-body" :task-lists="false" @rendered="enablePrism">@{{ form.body }}</vue-markdown>
                         </template>
                     </div>
-                </div>
-            </development>
+                </development>
+            </div>
         </div>
     </div>
 @stop

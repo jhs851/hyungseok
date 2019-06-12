@@ -1,37 +1,31 @@
 @extends('layouts.app')
 
-@section('style')
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            height: calc(100vh - 66px);
-        }
-
-        .full-height {
-            height: calc(100vh - 66px);
-        }
-
-        .links a {
-            color: #636b6f;
-            padding: 0 25px;
-            text-decoration: none;
-        }
-    </style>
-@stop
-
 @section('content')
-    <div class="d-flex align-items-center justify-content-center full-height">
-        <div class="text-center">
-            <div class="title mb-5">
-                <img class="img-fluid" src="{{ asset('images/etc/logo.png') }}" alt="">
-            </div>
+    <h5 class="mb-4">
+        @lang('developments.title')
+    </h5>
 
-            <div class="links">
-                <a href="{{ route('developments.index') }}">
-                    @lang('developments.title')
-                </a>
+    <div class="row">
+        @forelse ($developments as $development)
+            <div class="col-md-6">
+                <div class="card rounded-0 wow fadeInUp">
+                    <div class="card-header text-muted d-flex justify-content-between">
+                        <small>{{ $development->created_at->format('Y. m. d.') }}</small>
+                        <small>@lang('developments.visits', ['visits' => 0])</small>
+                    </div>
+
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{{ route('developments.show', ['$development' => $development->id]) }}">
+                                {{ $development->title }}
+                            </a>
+                        </h5>
+
+                        <p class="card-text text-black-50">{{ str_limit($development->body) }}</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        @empty
+        @endforelse
     </div>
 @stop
