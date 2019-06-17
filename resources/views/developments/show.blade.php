@@ -81,5 +81,25 @@
                 </development>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6 offset-md-3 py-6 text-center">
+                <h3 class="font-weight-bold">@lang('comments.title')</h3>
+
+                <p class="text-muted mb-4">@lang('comments.description')</p>
+
+                <form method="POST" action="#">
+                    @csrf
+
+                    <div class="form-group mb-4">
+                        <textarea name="body" class="form-control rounded-0 p-3" placeholder="@lang('comments.placehoder')"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-outline-primary rounded-0 px-4 font-weight-bold">@lang('comments.store')</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 @stop
