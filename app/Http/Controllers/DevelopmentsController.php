@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
+use App\Models\User;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\{JsonResponse, RedirectResponse};
@@ -26,7 +27,17 @@ class DevelopmentsController extends Controller
      */
     public function index() : View
     {
-        return view('developments.index', ['developments' => Development::latest()->paginate(10)]);
+        $query = new Development;
+
+        if ($username = request('by')) {
+            $user = User::where('name', $username)->firstOrFail();
+
+            $query = $query->where('user_id', $user->id);
+        }
+
+        $developments = $query->latest()->paginate(10);
+
+        return view('developments.index', compact('developments'));
     }
 
     /**

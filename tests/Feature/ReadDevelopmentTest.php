@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Development;
+use App\Models\{Development, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -47,5 +47,20 @@ class ReadDevelopmentTest extends TestCase
     {
         $this->get(route('developments.show', ['development' => $this->development->id]))
              ->assertSee($this->development->title);
+    }
+
+    /**
+     * 사용자는 개발 포스트의 어떠한 작성자에 대해 필터할 수 있습니다.
+     */
+    public function AUserCanFilterDevelopmentsByAnyUsername() : void
+    {
+        $this->signIn(create(User::class, ['name' => 'JohnDoe']));
+
+        $developmentByJohn = create(Development::class, ['user_id' => auth()->id()]);
+        $developmentNotByJohn = create(Development::class);
+
+        $this->get(route('developments.index', ['by' => 'JohnDoe']))
+            ->assertSee($developmentByJohn->title)
+            ->assertDontSee($developmentNotByJohn->title);
     }
 }

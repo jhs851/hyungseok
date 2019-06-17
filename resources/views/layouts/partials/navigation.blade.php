@@ -19,9 +19,16 @@
                         <a class="dropdown-item" href="{{ route('developments.index') }}">
                             @lang('developments.title')
                         </a>
+
                         <a class="dropdown-item" href="{{ route('developments.create') }}">
                             @lang('developments.create')
                         </a>
+
+                        @auth
+                            <a class="dropdown-item" href="{{ route('developments.index', ['by' => auth()->user()->name]) }}">
+                                @lang('developments.my_developments')
+                            </a>
+                        @endauth
                     </div>
                 </li>
 

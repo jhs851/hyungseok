@@ -18,4 +18,5 @@ return [
     'copied' => '복사되었습니다.',
     'updated' => '수정되었습니다.',
     'deleted' => '삭제되었습니다.',
+    'my_developments' => '나의 글',
 ];
