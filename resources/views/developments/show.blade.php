@@ -1,9 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.app', ['theme' => 'dark'])
 
 @section('content')
-    <div class="container mt-4">
+    @doorkeeper(['description' => trans('developments.description'), 'theme' => 'dark', 'mb' => 'mb-0']) @enddoorkeeper
+
+    <div class="container" style="margin-top: -130px;">
         <div class="row">
-            <div class="col-md-10 offset-md-1 p-3 p-md-5 bg-white shadow">
+            <div class="col-md-10 offset-md-1 p-3 p-md-5 bg-white shadow" style="min-height: 800px;">
                 <development ref="form" inline-template :data="{{ $development }}">
                     <div>
                         <template v-if="editing">

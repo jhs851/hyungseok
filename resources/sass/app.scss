@@ -37,15 +37,26 @@
 // Vue SimpleMDE
 @import '~simplemde/dist/simplemde.min.css';
 
+// Hover
+@import '~hover.css/scss/hover';
+
 // Style sheets
 @import './stylesheets/buttons';
 @import './stylesheets/modal';
 @import './stylesheets/simplemde';
 @import './stylesheets/markdown';
+@import './stylesheets/shadows';
+@import './stylesheets/doorkeeper';
 @import './stylesheets/navbar';
+@import './stylesheets/footer';
 
-.wrap {
-    padding-top: 80px;
+
+a, .btn-link {
+    color: $blue;
+
+    @include hover {
+        color: $blue;
+    }
 }
 
 textarea {
@@ -54,4 +65,21 @@ textarea {
 
 [v-cloak] {
     display: none;
+}
+
+.wow {
+    visibility: hidden;
+}
+
+main {
+    padding: 15px;
+}
+
+.overlay-link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
 }

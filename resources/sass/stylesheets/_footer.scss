@@ -1,0 +1,54 @@
+footer {
+    .policy-link {
+        font-size: 12px;
+        line-height: 1.33;
+        font-weight: 300;
+        width: 120px;
+        color: #474761;
+        text-align: center;
+
+        @include hover-focus {
+            text-decoration: none;
+        }
+
+         + .policy-link {
+            margin-left: 18px;
+        }
+    }
+
+    .policy-locales {
+        display: inline-block;
+        width: auto;
+
+        > button {
+            background-color: transparent;
+            border: none;
+            outline: none;
+            display: block;
+            width: 100%;
+        }
+    }
+
+    @include media-breakpoint-up(md) {
+        .policy-link {
+            font-size: 13px;
+            line-height: 1.33;
+            width: 200px;
+            color: #acaebb;
+            display: inline-block;
+            padding: 7px 6px;
+            border: 1px solid #ceced8;
+            @include border-radius(50px);
+
+            + .policy-link {
+                margin-top: 8px;
+                margin-left: 0;
+            }
+        }
+
+        .policy-locales {
+            border: 1px solid #707072;
+            color: #707072;
+        }
+    }
+}

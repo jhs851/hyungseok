@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" @isset ($fullHeight) class="full-height" @endisset>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -56,17 +56,20 @@
 </head>
 
 <body>
-    <main id="app" class="wrap container">
+    <div id="app">
         @include('layouts.partials.navigation')
 
-        @yield('content')
+        <main class="position-relative bg-white">
+            @yield('content')
+        </main>
 
         @include('layouts.partials.footer')
-    </main>
+    </div>
 
     {{-- Scripts --}}
     <script src="{{ asset('js/languages.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
+
     {{-- Flassh message --}}
     @include('flash::message')
 

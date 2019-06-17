@@ -13,7 +13,9 @@ return [
     |
     */
 
-    'previous' => '&laquo; 이전',
-    'next' => '다음 &raquo;',
+    'previous' => '&lsaquo; 이전',
+    'next' => '다음 &rsaquo;',
+    'first' => '&laquo; 처음',
+    'last' => '마지막 &raquo;',
 
 ];

@@ -1,0 +1,15 @@
+.doorkeeper {
+    height: calc(100vh - 30px);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    &.doorkeeper-light {
+        background-image: url('/images/backgrounds/light.jpg');
+    }
+
+    &.doorkeeper-dark {
+        background-image: url('/images/backgrounds/dark.jpg');
+        color: white;
+    }
+}

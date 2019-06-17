@@ -26,7 +26,7 @@ class DevelopmentsController extends Controller
      */
     public function index() : View
     {
-        return view('developments.index', ['developments' => Development::latest()->get()]);
+        return view('developments.index', ['developments' => Development::latest()->paginate(10)]);
     }
 
     /**
