@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo};
+use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\HasMany};
 
 class Development extends Model
 {
@@ -43,5 +43,15 @@ class Development extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Comment에 대한 HasMany 인스턴스를 반환합니다.
+     *
+     * @return HasMany
+     */
+    public function comments() : HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }
