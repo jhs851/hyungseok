@@ -54,4 +54,15 @@ class Development extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * 댓글을 생성합니다.
+     *
+     * @param  array  $comment
+     * @return Comment
+     */
+    public function addComment(array $comment) : Comment
+    {
+        return $this->comments()->create($comment);
+    }
 }

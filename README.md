@@ -24,7 +24,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Insert Mark Down Function
 - [x] Testing Development Post-Function
 - [x] Change theme and improve main page UI.
-- [ ] Implementing replies with testing
+- [ ] Implementing comments with testing
 - [ ] Tags, Search Capabilities Implemented with testing
 - [ ] Implementing Simple Development Tips-Function with testing
 - [ ] Implementing Authorization with testing

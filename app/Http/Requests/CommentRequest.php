@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DevelopmentRequest extends FormRequest
+class CommentRequest extends FormRequest
 {
     /**
      * 사용자에게 이 요청을 할 수 있는 권한이 있는지 확인합니다.
@@ -24,7 +24,7 @@ class DevelopmentRequest extends FormRequest
     public function rules() : array
     {
         return [
-            'title' => 'required',
+            'user_id' => ['required', 'exists:users,id'],
             'body' => 'required',
         ];
     }

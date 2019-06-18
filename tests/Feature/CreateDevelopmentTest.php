@@ -29,9 +29,7 @@ class CreateDevelopmentTest extends TestCase
      */
     public function testNewUsersMustFirstConfirmTheirEmailBeforeCreatingDevelopments() : void
     {
-        $user = create(User::class, ['email_verified_at' => null]);
-
-        $this->signIn($user);
+        $this->signIn(create(User::class, ['email_verified_at' => null]));
 
         $this->post(route('developments.store'), make(Development::class)->toArray())
              ->assertRedirect(route('verification.notice'))

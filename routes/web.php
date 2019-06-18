@@ -12,9 +12,6 @@ Route::get('/js/languages.js', [
     'uses' => 'LanguagesController',
 ]);
 
-// Development posts
-Route::resource('developments', 'DevelopmentsController')->except('edit');
-
 // Authenticate
 Auth::routes(['verify' => true]);
 
@@ -22,4 +19,13 @@ Auth::routes(['verify' => true]);
 Route::get('/social/{provider}', [
     'as' => 'social.login',
     'uses' => 'Auth\SocialController@execute',
+]);
+
+// Development posts
+Route::resource('/developments', 'DevelopmentsController')->except('edit');
+
+// Comments
+Route::post('/developments/{development}/comments', [
+    'as' => 'comments.store',
+    'uses' => 'CommentsController@store',
 ]);

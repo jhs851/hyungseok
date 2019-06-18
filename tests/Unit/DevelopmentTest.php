@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\{Development, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -53,5 +54,26 @@ class DevelopmentTest extends TestCase
     public function testADevelopmentHasUser() : void
     {
         $this->assertInstanceOf(User::class, $this->development->user);
+    }
+
+    /**
+     * 개발 모델은 댓글을 가지고 있습니다.
+     */
+    public function testADevelopmentHasComments() : void
+    {
+        $this->assertInstanceOf(Collection::class, $this->development->comments);
+    }
+
+    /**
+     * 개발 모델은 댓글을 추가할 수 있습니다.
+     */
+    public function testADevelopmentCanAddComment() : void
+    {
+        $this->development->addComment([
+            'user_id' => 1,
+            'body' => 'Foobar',
+        ]);
+
+        $this->assertCount(1, $this->development->comments);
     }
 }
