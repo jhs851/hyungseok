@@ -30,6 +30,8 @@ class CommentsController extends Controller
             'body' => $request->body,
         ]);
 
+        flash()->success(trans('comments.store'));
+
         return redirect(route('developments.show', $development->id));
     }
 }

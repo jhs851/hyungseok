@@ -2,7 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\HasMany};
+use App\Filters\DevelopmentFilters;
+use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
 
 class Development extends Model
 {
@@ -64,5 +65,17 @@ class Development extends Model
     public function addComment(array $comment) : Comment
     {
         return $this->comments()->create($comment);
+    }
+
+    /**
+     * 필터링된 개발 포스트 Builder를 반환합니다.
+     *
+     * @param  Builder  $query
+     * @param  DevelopmentFilters  $filters
+     * @return Builder
+     */
+    public function scopeFilter(Builder $query, DevelopmentFilters $filters)
+    {
+        return $filters->apply($query);
     }
 }

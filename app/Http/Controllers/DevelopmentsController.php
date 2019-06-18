@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\DevelopmentFilters;
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
-use App\Models\User;
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\{JsonResponse, RedirectResponse};
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
 
 class DevelopmentsController extends Controller
@@ -23,21 +24,12 @@ class DevelopmentsController extends Controller
     /**
      * 리소스 목록을 표시합니다.
      *
+     * @param  DevelopmentFilters  $filters
      * @return View
      */
-    public function index() : View
+    public function index(DevelopmentFilters $filters) : View
     {
-        $query = new Development;
-
-        if ($username = request('by')) {
-            $user = User::where('name', $username)->firstOrFail();
-
-            $query = $query->where('user_id', $user->id);
-        }
-
-        $developments = $query->latest()->paginate(10);
-
-        return view('developments.index', compact('developments'));
+        return view('developments.index', ['developments' => $this->getDevelopments($filters)]);
     }
 
     /**
@@ -112,5 +104,16 @@ class DevelopmentsController extends Controller
         flash()->success(trans('developments.deleted'));
 
         return redirect(route('developments.index'));
+    }
+
+    /**
+     * 개발 포스트를 반환합니다.
+     *
+     * @param  DevelopmentFilters  $filters
+     * @return LengthAwarePaginator
+     */
+    protected function getDevelopments(DevelopmentFilters $filters) : LengthAwarePaginator
+    {
+        return Development::filter($filters)->latest()->paginate(10);
     }
 }
