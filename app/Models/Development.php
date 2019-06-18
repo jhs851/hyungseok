@@ -25,6 +25,7 @@ class Development extends Model
     protected $visible = [
         'title',
         'body',
+        'comments_count',
     ];
 
     /**
@@ -34,6 +35,15 @@ class Development extends Model
      */
     protected $with = [
         'user',
+    ];
+
+    /**
+     * 모든 쿼리에 빠르게 로드되어야 하는 관계의 카운트.
+     *
+     * @var array
+     */
+    protected $withCount = [
+        'comments',
     ];
 
     /**

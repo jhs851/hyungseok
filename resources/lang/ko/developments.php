@@ -19,4 +19,5 @@ return [
     'updated' => '수정되었습니다.',
     'deleted' => '삭제되었습니다.',
     'my_developments' => '나의 글',
+    'popularity' => '인기있는 글',
 ];

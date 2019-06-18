@@ -35,7 +35,7 @@
 
                                     <small>
                                         <i class="far fa-comment mr-1"></i>
-                                        0
+                                        {{ $development->comments_count }}
                                     </small>
                                 </div>
                             </div>

@@ -13,6 +13,7 @@ class DevelopmentFilters extends Filters
      */
     protected $filters = [
         'by',
+        'popularity',
     ];
 
     /**
@@ -23,5 +24,13 @@ class DevelopmentFilters extends Filters
     protected function by(string $username) : void
     {
         $this->builder->where('user_id', User::where('name', $username)->value('id'));
+    }
+
+    /**
+     * 개발 포스트를 댓글 수의 내림차순으로 정렬합니다.
+     */
+    protected function popularity() : void
+    {
+        $this->builder->orderBy('comments_count', 'desc');
     }
 }

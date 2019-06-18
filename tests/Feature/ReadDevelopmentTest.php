@@ -74,4 +74,20 @@ class ReadDevelopmentTest extends TestCase
         $this->get(route('developments.show', $this->development->id))
             ->assertSee($comment->body);
     }
+
+    /**
+     * 사용자는 인기있는 개발 포스트를 필터링 할 수 있습니다.
+     */
+    public function testAUserCanFilterDevelopmentsByPopularity() : void
+    {
+        $DevelopmentWithTwoComments = create(Development::class);
+        create(Comment::class, ['development_id' => $DevelopmentWithTwoComments], 2);
+
+        $threadWithThreeReplies = create(Development::class);
+        create(Comment::class, ['development_id' => $threadWithThreeReplies], 3);
+
+        $response = $this->getJson(route('developments.index', ['popularity' => 1]))->json();
+
+        $this->assertEquals([3, 2, 0], array_column($response['data'], 'comments_count'));
+    }
 }

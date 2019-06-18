@@ -29,6 +29,10 @@
                                 @lang('developments.my_developments')
                             </a>
                         @endauth
+
+                        <a class="dropdown-item" href="{{ route('developments.index', ['popularity' => 1]) }}">
+                            @lang('developments.popularity')
+                        </a>
                     </div>
                 </li>
 

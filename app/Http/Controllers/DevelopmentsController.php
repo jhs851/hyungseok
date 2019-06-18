@@ -25,11 +25,17 @@ class DevelopmentsController extends Controller
      * 리소스 목록을 표시합니다.
      *
      * @param  DevelopmentFilters  $filters
-     * @return View
+     * @return LengthAwarePaginator|View
      */
-    public function index(DevelopmentFilters $filters) : View
+    public function index(DevelopmentFilters $filters)
     {
-        return view('developments.index', ['developments' => $this->getDevelopments($filters)]);
+        $developments = $this->getDevelopments($filters);
+
+        if (request()->expectsJson()) {
+            return $developments;
+        }
+
+        return view('developments.index', compact('developments'));
     }
 
     /**
