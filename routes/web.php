@@ -29,3 +29,9 @@ Route::post('/developments/{development}/comments', [
     'as' => 'comments.store',
     'uses' => 'CommentsController@store',
 ]);
+
+// Favorite
+Route::post('/developments/{development}/favorite', [
+    'as' => 'favorites.store',
+    'uses' => 'FavoritesController@store',
+]);

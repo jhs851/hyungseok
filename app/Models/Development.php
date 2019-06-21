@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Filters\DevelopmentFilters;
-use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
+use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany, Relations\MorphMany};
 
 class Development extends Model
 {
@@ -44,6 +44,7 @@ class Development extends Model
      */
     protected $withCount = [
         'comments',
+        'favorites',
     ];
 
     /**
@@ -64,6 +65,42 @@ class Development extends Model
     public function comments() : HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Favorite에 대한 MorphMany 인스턴스를 반환합니다.
+     *
+     * @return MorphMany
+     */
+    public function favorites() : MorphMany
+    {
+        return $this->morphMany(Favorite::class, 'favorited');
+    }
+
+    /**
+     * 개발 포스트에 '좋아요'를 합니다.
+     *
+     * @return Favorite|null
+     */
+    public function favorite() : ?Favorite
+    {
+        $attributes = ['user_id' => auth()->id()];
+
+        if ($this->favorites()->where($attributes)->exists()) {
+            return null;
+        }
+
+        return $this->favorites()->create($attributes);
+    }
+
+    /**
+     * 현재 사용자가 좋아료를 했는지 확인합니다.
+     *
+     * @return bool
+     */
+    public function getisFavoritedAttribute() : bool
+    {
+        return $this->favorites()->where('user_id', auth()->id())->exists();
     }
 
     /**

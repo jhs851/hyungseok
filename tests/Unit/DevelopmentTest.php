@@ -76,4 +76,24 @@ class DevelopmentTest extends TestCase
 
         $this->assertCount(1, $this->development->comments);
     }
+
+    /**
+     * 댓글은 좋아요를 가지고 있습니다.
+     */
+    public function testItHasFavorites() : void
+    {
+        $this->assertInstanceOf(Collection::class, $this->development->favorites);
+    }
+
+    /**
+     * 댓글은 좋아요를 추가할 수 있습니다.
+     */
+    public function testCanCreateFavorites() : void
+    {
+        $this->signIn();
+
+        $this->development->favorite();
+
+        $this->assertCount(1, $this->development->favorites);
+    }
 }
