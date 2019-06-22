@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Core\Favoritable;
+use App\Core\{Favoritable, RecordActivity};
 use App\Filters\DevelopmentFilters;
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
 
 class Development extends Model
 {
-    use Favoritable;
+    use Favoritable, RecordActivity;
 
     /**
      * The attributes that are mass assignable.
