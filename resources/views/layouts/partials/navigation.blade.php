@@ -46,14 +46,25 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            @lang('auth.logout')
-
-                            <form id="logout-form" action="{{ route('logout') }}" class="d-none" method="POST">
-                                @csrf
-                            </form>
+                    <li class="nav-item dropdown {{ str_contains(request()->path(), 'users') ? 'active' : '' }}">
+                        <a id="userDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ auth()->user()->name }}
                         </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="{{ route('users.show', ['user' => auth()->id()]) }}">
+                                @lang('auth.activities')
+                            </a>
+
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                @lang('auth.logout')
+
+                                <form id="logout-form" action="{{ route('logout') }}" class="d-none" method="POST">
+                                    @csrf
+                                </form>
+                            </a>
+                        </div>
                     </li>
                 @endguest
 

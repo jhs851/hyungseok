@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\{Development, User};
+use App\Models\{Comment, Development, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -95,5 +95,19 @@ class DevelopmentTest extends TestCase
         $this->development->favorite();
 
         $this->assertCount(1, $this->development->favorites);
+    }
+
+    /**
+     * 개발 모델을 삭제할 때 하위 댓글들을 모두 삭제합니다.
+     */
+    public function testWhenDeleteADevelopmentModelDeleteAllSubComments()
+    {
+        $comment = create(Comment::class, ['development_id' => $this->development->id]);
+
+        $this->assertDatabaseHas('comments', $comment->toArray());
+
+        $this->development->delete();
+
+        $this->assertDatabaseMissing('comments', $comment->toArray());
     }
 }

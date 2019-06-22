@@ -30,8 +30,14 @@ Route::post('/developments/{development}/comments', [
     'uses' => 'CommentsController@store',
 ]);
 
-// Favorite
+// Favorites
 Route::post('/developments/{development}/favorite', [
     'as' => 'favorites.store',
     'uses' => 'FavoritesController@store',
+]);
+
+// Users
+Route::get('/users/{user}', [
+    'as' => 'users.show',
+    'uses' => 'UsersController@show',
 ]);

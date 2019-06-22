@@ -50,6 +50,20 @@ class Development extends Model
     ];
 
     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function (Development $development) {
+            $development->comments->each->delete();
+        });
+    }
+
+    /**
      * User 에 대한 BelongsTo 인스턴스를 반환합니다.
      *
      * @return BelongsTo

@@ -8,12 +8,12 @@
                     <div class="col-md-12">
                         <div class="card rounded-0 my-2">
                             <div class="card-header text-muted d-flex justify-content-between">
-                                <a href="#">{{ $development->user->name }}</a>
+                                <a href="{{ route('users.show', ['user' => $development->user->id]) }}">{{ $development->user->name }}</a>
                             </div>
 
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="{{ route('developments.show', ['$development' => $development->id]) }}">
+                                    <a href="{{ route('developments.show', ['development' => $development->id]) }}">
                                         {{ $development->title }}
                                     </a>
                                 </h5>

@@ -2,7 +2,7 @@
     <img src="//via.placeholder.com/64x64" class="img-fluid mr-3 rounded-circle" alt="">
     <div class="media-body">
         <h6 class="mt-0 d-flex align-items-end">
-            <a href="#">
+            <a href="{{ route('users.show', ['user' => $comment->user->id]) }}">
                 {{ $comment->user->name }}
             </a>
 

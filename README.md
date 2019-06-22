@@ -26,6 +26,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Change theme and improve main page UI.
 - [x] Implementing comments with testing
 - [x] User can favorite development posts.
+- [x] User has a profile.
 - [ ] Tags, Search Capabilities Implemented with testing
 - [ ] Implementing Simple Development Tips-Function with testing
 - [ ] Implementing Authorization with testing
