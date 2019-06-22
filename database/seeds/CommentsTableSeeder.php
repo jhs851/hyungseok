@@ -13,7 +13,12 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         Development::all()->each(function ($development) {
-            factory(Comment::class, 10)->create(['development_id' => $development->id]);
+            factory(Comment::class, 10)->create(['development_id' => $development->id])->each(function ($comment) {
+                $comment->activities()->create([
+                    'type' => 'created_comment',
+                    'user_id' => $comment->user->id,
+                ]);
+            });
         });
 
         $this->command->info('Seeded comments table.');

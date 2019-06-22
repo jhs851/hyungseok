@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\{Comment, User};
+use App\Models\{Comment, Development, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -45,5 +45,13 @@ class CommentTest extends TestCase
     public function testItHasOnUser() : void
     {
         $this->assertInstanceOf(User::class, $this->comment->user);
+    }
+
+    /**
+     * 댓글은 개발 포스트를 가지고 있습니다.
+     */
+    public function testItHasOnDevelopment() : void
+    {
+        $this->assertInstanceOf(Development::class, $this->comment->development);
     }
 }

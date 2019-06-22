@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{Model, Relations\MorphTo};
+use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\MorphTo};
 
 class Activity extends Model
 {
@@ -24,5 +24,15 @@ class Activity extends Model
     public function subject() : MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * User 모델에 대한 BelongsTo 인스턴스를 반환합니다.
+     *
+     * @return BelongsTo
+     */
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

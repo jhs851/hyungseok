@@ -35,4 +35,6 @@ return [
         'with_facebook' => '페이스북으로 로그인',
     ],
     'activities' => '활동내역',
+    'created_development' => '작성한 개발 포스트들',
+    'created_comment' => '작성한 댓글들',
 ];

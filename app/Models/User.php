@@ -53,6 +53,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Activity 모델에 대한 HasMany 인스턴스를 반환합니다.
+     *
+     * @return HasMany
+     */
+    public function activities() : HasMany
+    {
+        return $this->hasMany(Activity::class);
+    }
+
+    /**
      * 주어진 data로 User 레코드를 저장하고 반환합니다.
      *
      * @param  array  $data
@@ -63,7 +73,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return static::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => $data['password'] ? Hash::make($data['password']) : null,
+            'password' => isset($data['password']) && $data['password'] ? Hash::make($data['password']) : null,
         ]);
     }
 

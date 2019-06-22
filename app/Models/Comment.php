@@ -37,4 +37,14 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * 개발 모델에 대한 BelongsTo 인스턴스를 반환합니다.
+     *
+     * @return BelongsTo
+     */
+    public function development() : BelongsTo
+    {
+        return $this->belongsTo(Development::class);
+    }
 }

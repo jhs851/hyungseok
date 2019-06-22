@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\Activity;
+use App\Models\{Activity, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -46,5 +46,13 @@ class ActivityTest extends TestCase
     public function testItHasSubject() : void
     {
         $this->assertInstanceOf(MorphTo::class, $this->activity->subject());
+    }
+
+    /**
+     * 활동 모델은 회원을 가지고 있습니다.
+     */
+    public function testItHasUser() : void
+    {
+        $this->assertInstanceOf(User::class, $this->activity->user);
     }
 }
