@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Core\Favoritable;
 use App\Filters\DevelopmentFilters;
-use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany, Relations\MorphMany};
+use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
 
 class Development extends Model
 {
+    use Favoritable;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -44,7 +47,6 @@ class Development extends Model
      */
     protected $withCount = [
         'comments',
-        'favorites',
     ];
 
     /**
@@ -68,42 +70,6 @@ class Development extends Model
     }
 
     /**
-     * Favorite에 대한 MorphMany 인스턴스를 반환합니다.
-     *
-     * @return MorphMany
-     */
-    public function favorites() : MorphMany
-    {
-        return $this->morphMany(Favorite::class, 'favorited');
-    }
-
-    /**
-     * 개발 포스트에 '좋아요'를 합니다.
-     *
-     * @return Favorite|null
-     */
-    public function favorite() : ?Favorite
-    {
-        $attributes = ['user_id' => auth()->id()];
-
-        if ($this->favorites()->where($attributes)->exists()) {
-            return null;
-        }
-
-        return $this->favorites()->create($attributes);
-    }
-
-    /**
-     * 현재 사용자가 좋아료를 했는지 확인합니다.
-     *
-     * @return bool
-     */
-    public function getisFavoritedAttribute() : bool
-    {
-        return $this->favorites()->where('user_id', auth()->id())->exists();
-    }
-
-    /**
      * 댓글을 생성합니다.
      *
      * @param  array  $comment
@@ -121,7 +87,7 @@ class Development extends Model
      * @param  DevelopmentFilters  $filters
      * @return Builder
      */
-    public function scopeFilter(Builder $query, DevelopmentFilters $filters)
+    public function scopeFilter(Builder $query, DevelopmentFilters $filters) : Builder
     {
         return $filters->apply($query);
     }

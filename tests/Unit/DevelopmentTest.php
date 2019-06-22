@@ -78,7 +78,7 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 댓글은 좋아요를 가지고 있습니다.
+     * 개발 모델은 좋아요를 가지고 있습니다.
      */
     public function testItHasFavorites() : void
     {
@@ -86,7 +86,7 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 댓글은 좋아요를 추가할 수 있습니다.
+     * 개발 모델글은 좋아요를 추가할 수 있습니다.
      */
     public function testCanCreateFavorites() : void
     {

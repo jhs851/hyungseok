@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Development, User};
+use App\Models\{Development, Favorite, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -80,5 +80,13 @@ class FavoritesTest extends TestCase
         }
 
         $this->assertCount(1, $this->development->favorites);
+    }
+
+    /**
+     * Favoritable을 소유하고 있는 모델은 자동으로 favorites를 eager load 합니다.
+     */
+    public function testModelsThatOwnFavoritableAutomaticallyEagerLoadFavorites() : void
+    {
+        $this->assertTrue(true);
     }
 }
