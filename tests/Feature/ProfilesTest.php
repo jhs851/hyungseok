@@ -26,9 +26,11 @@ class ProfilesTest extends TestCase
      */
     public function testProfilesDisplayAllDevelopmentsCreatedByTheAssociatedUser()
     {
-        $user = create(User::class);
-        $development = create(Development::class, ['user_id' => $user->id]);
-        $this->get(route('users.show', $user->id))
+        $this->signIn();
+
+        $development = create(Development::class, ['user_id' => auth()->id()]);
+
+        $this->get(route('users.show', auth()->id()))
              ->assertSee($development->title)
              ->assertSee($development->bodyy);
     }

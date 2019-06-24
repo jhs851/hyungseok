@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\MorphTo};
+use Illuminate\Database\Eloquent\{Collection, Model, Relations\BelongsTo, Relations\MorphTo};
 
 class Activity extends Model
 {
@@ -14,6 +14,15 @@ class Activity extends Model
     protected $fillable = [
         'type',
         'user_id',
+    ];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = [
+        'subject',
     ];
 
     /**
@@ -34,5 +43,22 @@ class Activity extends Model
     public function user() : BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * 주어진 사용자의 활동 내역을 타입 별로 그룹화해서 반환합니다.
+     *
+     * @param  User  $user
+     * @param  int  $take
+     * @return Collection
+     */
+    public static function feed(User $user, int $take = 50) : Collection
+    {
+        return static::where('user_id', $user->id)
+            ->take($take)
+            ->get()
+            ->groupBy(function ($activity) {
+                return $activity->type;
+            });
     }
 }

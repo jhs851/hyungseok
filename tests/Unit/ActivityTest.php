@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use App\Models\{Activity, User};
+use App\Models\{Activity, Comment, Development, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -29,7 +29,9 @@ class ActivityTest extends TestCase
     {
         parent::setUp();
 
-        $this->activity = create(Activity::class);
+        $this->signIn();
+
+        $this->activity = create(Development::class)->activities->first();
     }
 
     /**
@@ -54,5 +56,24 @@ class ActivityTest extends TestCase
     public function testItHasUser() : void
     {
         $this->assertInstanceOf(User::class, $this->activity->user);
+    }
+
+    /**
+     * 활동 모델은 모든 사용자에 대한 피드를 가져올 수 있습니다.
+     */
+    public function testItFetchesAFeedForAnyUser() : void
+    {
+        $development = create(Development::class, ['user_id' => auth()->id()]);
+        create(Comment::class, ['development_id' => $development->id, 'user_id' => auth()->id()]);
+
+        $feed = Activity::feed(auth()->user());
+
+        $this->assertTrue($feed->keys()->contains(
+            'created_development'
+        ));
+
+        $this->assertTrue($feed->keys()->contains(
+            'created_comment'
+        ));
     }
 }
