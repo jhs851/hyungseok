@@ -37,4 +37,5 @@ return [
     'activities' => '활동내역',
     'created_development' => '작성한 개발 포스트들',
     'created_comment' => '작성한 댓글들',
+    'created_favorite' => '좋아한 글들',
 ];

@@ -34,12 +34,24 @@ class RecordActivitiesTest extends TestCase
     /**
      * 댓글이 생성 됬을 때 활동 내역을 저장합니다.
      */
-    public function testItRecordsActivityWhenACommentIsCreated()
+    public function testItRecordsActivityWhenACommentIsCreated() : void
     {
         $this->signIn();
 
         create(Comment::class);
 
         $this->assertEquals(2, Activity::count());
+    }
+
+    /**
+     * 개발 포스트에 좋아요를 했을 때 활동 내역을 저장합니다.
+     */
+    public function testItRecordsActivityWhenAFavoriteOnDevelopment() : void
+    {
+        $this->signIn();
+
+        create(Development::class)->favorite();
+
+        $this->assertEquals(2, Activity::count(2));
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Core;
 
 use App\Models\Favorite;
-use Illuminate\Database\Eloquent\{Builder, Relations\MorphMany};
+use Illuminate\Database\Eloquent\{Builder, Model, Relations\MorphMany};
 
 trait Favoritable
 {
@@ -16,6 +16,10 @@ trait Favoritable
     {
         static::addGlobalScope('favorites', function (Builder $modal) {
             $modal->with('favorites');
+        });
+
+        static::deleting(function (Model $model) {
+            $model->favorites->each->delete();
         });
     }
 

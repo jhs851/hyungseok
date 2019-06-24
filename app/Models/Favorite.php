@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\RecordActivity;
+use Illuminate\Database\Eloquent\{Model, Relations\MorphTo};
 
 class Favorite extends Model
 {
+    use RecordActivity;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -14,4 +17,14 @@ class Favorite extends Model
     protected $fillable = [
         'user_id',
     ];
+
+    /**
+     * 현재 Favorite을 소유한 모델의 MorphTo 인스턴스를 반환합니다.
+     *
+     * @return MorphTo
+     */
+    public function favorited() : MorphTo
+    {
+        return $this->morphTo();
+    }
 }

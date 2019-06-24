@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Activity, Comment, Development, User};
+use App\Models\{Activity, Comment, Development, Favorite, User};
 use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
 use Tests\TestCase;
 
@@ -104,6 +104,7 @@ class CreateDevelopmentTest extends TestCase
 
         $development = create(Development::class, ['user_id' => auth()->id()]);
         $comment = create(Comment::class, ['development_id' => $development->id]);
+        $development->favorite();
 
         $this->json('DELETE', route('developments.destroy', $development->id))
              ->assertRedirect(route('developments.index'))
@@ -112,6 +113,7 @@ class CreateDevelopmentTest extends TestCase
         $this->assertDatabaseMissing('developments', ['id' => $development->id]);
         $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
         $this->assertEquals(0, Activity::count());
+        $this->assertEquals(0, Favorite::count());
     }
 
     /**
