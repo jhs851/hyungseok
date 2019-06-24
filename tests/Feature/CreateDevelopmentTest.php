@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Development, User};
+use App\Models\{Activity, Comment, Development, User};
 use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
 use Tests\TestCase;
 
@@ -103,12 +103,15 @@ class CreateDevelopmentTest extends TestCase
         $this->signIn();
 
         $development = create(Development::class, ['user_id' => auth()->id()]);
+        $comment = create(Comment::class, ['development_id' => $development->id]);
 
         $this->json('DELETE', route('developments.destroy', $development->id))
              ->assertRedirect(route('developments.index'))
              ->assertSessionHas('flash_notification');
 
         $this->assertDatabaseMissing('developments', ['id' => $development->id]);
+        $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+        $this->assertEquals(0, Activity::count());
     }
 
     /**
