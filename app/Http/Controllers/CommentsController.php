@@ -24,7 +24,7 @@ class CommentsController extends Controller
      * @param  Development  $development
      * @return RedirectResponse
      */
-    public function store(CommentRequest $request, Development $development)
+    public function store(CommentRequest $request, Development $development) : RedirectResponse
     {
         $development->addComment([
             'user_id' => auth()->id(),
@@ -44,7 +44,7 @@ class CommentsController extends Controller
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function update(CommentRequest $request, Comment $comment)
+    public function update(CommentRequest $request, Comment $comment) : JsonResponse
     {
         $this->authorize('update', $comment);
 
@@ -57,17 +57,15 @@ class CommentsController extends Controller
      * 지정된 리소스를 스토리지에서 제거합니다.
      *
      * @param  Comment  $comment
+     * @return JsonResponse
      * @throws AuthorizationException
-     * @return RedirectResponse
      */
-    public function destroy(Comment $comment)
+    public function destroy(Comment $comment) : JsonResponse
     {
         $this->authorize('update', $comment);
 
         $comment->delete();
 
-        flash()->success(trans('developments.deleted'));
-
-        return redirect(route('developments.show', $comment->development->id));
+        return response()->json(['message' => trans('developments.deleted')]);
     }
 }

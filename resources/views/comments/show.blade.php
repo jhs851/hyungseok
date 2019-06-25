@@ -27,15 +27,10 @@
                                 <i class="fas fa-pen"></i>
                             </a>
 
-                            <form method="POST" action="{{ route('comments.destroy', $comment->id) }}">
-                                @csrf
-                                @method('DELETE')
-
-                                <button type="submit" class="dropdown-item text-danger py-3 d-flex justify-content-between align-items-center" @click="destroy">
-                                    @lang('developments.delete')
-                                    <i class="far fa-trash-alt"></i>
-                                </button>
-                            </form>
+                            <a class="dropdown-item text-danger py-3 d-flex justify-content-between align-items-center" href="#" @click.prevent="destroy">
+                                @lang('developments.delete')
+                                <i class="far fa-trash-alt"></i>
+                            </a>
                         </div>
                     </div>
                 @endcan

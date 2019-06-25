@@ -16,6 +16,10 @@
             };
         },
 
+        mounted() {
+            this.$el.addEventListener('animationend', () => this.$el.remove());
+        },
+
         methods: {
             edit() {
                 this.editing = true;
@@ -29,6 +33,15 @@
             cancel() {
                 this.editing = false;
                 this.form.revert();
+            },
+
+            destroy() {
+                if (! confirm(this.trans('developments.confirm_destroy'))) {
+                    return;
+                }
+
+                this.form.delete(`/comments/${this.data.id}`)
+                    .then(() => this.$el.classList.add('animated', 'fadeOut'));
             }
         }
     }
