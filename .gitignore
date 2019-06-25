@@ -3,7 +3,7 @@
 /public/storage
 /public/css/app.css
 /public/js/app.js
-/public/fonts
+/public/fonts/vendor
 /storage/*.key
 /vendor
 .env

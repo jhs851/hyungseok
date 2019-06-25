@@ -3,7 +3,7 @@
 namespace App\Core;
 
 use App\Models\Favorite;
-use Illuminate\Database\Eloquent\{Builder, Model, Relations\MorphMany};
+use Illuminate\Database\Eloquent\{Model, Relations\MorphMany};
 
 trait Favoritable
 {
@@ -14,13 +14,17 @@ trait Favoritable
      */
     protected static function bootFavoritable() : void
     {
-        static::addGlobalScope('favorites', function (Builder $modal) {
-            $modal->with('favorites');
-        });
-
         static::deleting(function (Model $model) {
             $model->favorites->each->delete();
         });
+    }
+
+    /**
+     * 현재 트레이트를 포함한 모델에서 자동으로 불러집니다.
+     */
+    public function initializeFavoritable() : void
+    {
+        $this->append(['favoritesCount', 'isFavorited']);
     }
 
     /**
@@ -40,6 +44,18 @@ trait Favoritable
     }
 
     /**
+     * 개발 포스트에 '좋아요'를 취소합니다.
+     *
+     * @return static
+     */
+    public function unfavorite()
+    {
+        $this->favorites()->where(['user_id' => auth()->id()])->get()->each->delete();
+
+        return $this;
+    }
+
+    /**
      * Favorite에 대한 MorphMany 인스턴스를 반환합니다.
      *
      * @return MorphMany
@@ -50,7 +66,7 @@ trait Favoritable
     }
 
     /**
-     * 현재 사용자가 좋아료를 했는지 확인합니다.
+     * 현재 사용자가 좋아요를 했는지 확인합니다.
      *
      * @return bool
      */

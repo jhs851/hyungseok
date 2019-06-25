@@ -36,6 +36,10 @@ Route::post('/developments/{development}/favorite', [
     'as' => 'favorites.store',
     'uses' => 'FavoritesController@store',
 ]);
+Route::delete('/developments/{development}/favorite', [
+    'as' => 'favorites.destroy',
+    'uses' => 'FavoritesController@destroy',
+]);
 
 // Users
 Route::get('/users/{user}', [

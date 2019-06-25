@@ -41,14 +41,6 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 개발 모델을 불러오면 제목과 본문, 댓글 수 만 보입니다.
-     */
-    public function testWhenCallDevelopmentOnlyTheTitleAndBodyAreVisible() : void
-    {
-        $this->assertEquals(['title', 'body', 'comments_count'], $this->development->getVisible());
-    }
-
-    /**
      * 개발 모델은 사용자와 연결 돼있습니다.
      */
     public function testADevelopmentHasUser() : void

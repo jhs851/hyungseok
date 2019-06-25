@@ -40,14 +40,7 @@
 
                                 <div class="d-flex align-items-center">
                                     @auth
-                                        <form method="POST" action="{{ route('favorites.store', $development->id) }}">
-                                            {{ csrf_field() }}
-
-                                            <button type="submit" class="btn btn-sm btn-link" {{ $development->isFavorited ? 'disabled' : '' }}>
-                                                <i class="{{ $development->isFavorited ? 'fas' : 'far' }} fa-heart text-danger"></i>
-                                                {{ $development->favorites_count }}
-                                            </button>
-                                        </form>
+                                        <favorite :data="{{ $development }}"></favorite>
 
                                         <span class="mx-2">・</span>
                                     @endauth

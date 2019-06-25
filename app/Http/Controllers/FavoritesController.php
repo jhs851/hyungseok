@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Development;
-use Illuminate\Http\RedirectResponse;
 
 class FavoritesController extends Controller
 {
@@ -19,12 +18,19 @@ class FavoritesController extends Controller
      * 새로 생성된 리소스를 저장소에 저장합니다.
      *
      * @param  Development  $development
-     * @return RedirectResponse
      */
-    public function store(Development $development) : RedirectResponse
+    public function store(Development $development)
     {
         $development->favorite();
+    }
 
-        return redirect(route('developments.show', ['development' => $development->id]));
+    /**
+     * 지정된 리소스를 스토리지에서 제거합니다.
+     *
+     * @param  Development  $development
+     */
+    public function destroy(Development $development)
+    {
+        $development->unfavorite();
     }
 }
