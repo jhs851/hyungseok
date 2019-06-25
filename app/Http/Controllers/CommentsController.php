@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
-use App\Models\Development;
+use App\Models\{Comment, Development};
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\RedirectResponse;
 
 class CommentsController extends Controller
@@ -31,6 +32,25 @@ class CommentsController extends Controller
         ]);
 
         flash()->success(trans('comments.store'));
+
+        return redirect(route('developments.show', $development->id));
+    }
+
+    /**
+     * 지정된 리소스를 스토리지에서 제거합니다.
+     *
+     * @param  Development  $development
+     * @param  Comment  $comment
+     * @throws AuthorizationException
+     * @return RedirectResponse
+     */
+    public function destroy(Development $development, Comment $comment)
+    {
+        $this->authorize('update', $comment);
+
+        $comment->delete();
+
+        flash()->success(trans('developments.deleted'));
 
         return redirect(route('developments.show', $development->id));
     }

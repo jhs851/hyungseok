@@ -70,4 +70,44 @@ class ParticipateInForumTest extends TestCase
         $this->get(route('developments.show', ['development' => $this->development->id]))
              ->assertSee($comment->body);
     }
+
+    /**
+     * 게스트는 댓글을 삭제할 수 없습니다.
+     */
+    public function testGuestsCannotDeleteComments() : void
+    {
+        $comment = create(Comment::class);
+
+        $this->withExceptionHandling()
+             ->delete(route('comments.destroy', ['development' => $comment->development->id, 'comment' => $comment->id]))
+             ->assertRedirect(route('login'));
+    }
+
+    /**
+     * 권한이 없는 사용자는 댓글을 삭제할 수 없습니다.
+     */
+    public function testUnauthorziedUsersCannotDeleteComments() : void
+    {
+        $this->signIn();
+
+        $comment = create(Comment::class);
+
+        $this->withExceptionHandling()
+             ->delete(route('comments.destroy', ['development' => $comment->development->id, 'comment' => $comment->id]))
+             ->assertStatus(403);
+    }
+
+    /**
+     * 권한이 있는 사용자는 댓글을 삭제할 수 있습니다.
+     */
+    public function testAuthorziedUsersCanDeleteComments() : void
+    {
+        $this->signIn();
+
+        $comment = create(Comment::class, ['user_id' => auth()->id()]);
+
+        $this->delete(route('comments.destroy', ['development' => $comment->development->id, 'comment' => $comment->id]));
+
+        $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+    }
 }

@@ -30,6 +30,11 @@ Route::post('/developments/{development}/comments', [
     'uses' => 'CommentsController@store',
 ]);
 
+Route::delete('/developments/{development}/comments/{comment}', [
+    'as' => 'comments.destroy',
+    'uses' => 'CommentsController@destroy',
+]);
+
 // Favorites
 Route::post('/developments/{development}/favorite', [
     'as' => 'favorites.store',
