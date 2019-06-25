@@ -79,7 +79,7 @@ class ParticipateInForumTest extends TestCase
         $comment = create(Comment::class);
 
         $this->withExceptionHandling()
-             ->delete(route('comments.destroy', ['development' => $comment->development->id, 'comment' => $comment->id]))
+             ->delete(route('comments.destroy', $comment->id))
              ->assertRedirect(route('login'));
     }
 
@@ -93,7 +93,7 @@ class ParticipateInForumTest extends TestCase
         $comment = create(Comment::class);
 
         $this->withExceptionHandling()
-             ->delete(route('comments.destroy', ['development' => $comment->development->id, 'comment' => $comment->id]))
+             ->delete(route('comments.destroy', $comment->id))
              ->assertStatus(403);
     }
 
@@ -106,8 +106,55 @@ class ParticipateInForumTest extends TestCase
 
         $comment = create(Comment::class, ['user_id' => auth()->id()]);
 
-        $this->delete(route('comments.destroy', ['development' => $comment->development->id, 'comment' => $comment->id]));
+        $this->delete(route('comments.destroy', $comment->id));
 
         $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+    }
+
+    /**
+     * 게스트는 댓글을 변경할 수 없습니다.
+     */
+    public function testGuestsCannotUpdateComments() : void
+    {
+        $comment = create(Comment::class);
+
+        $this->withExceptionHandling()
+             ->put(route('comments.update', $comment->id))
+             ->assertRedirect(route('login'));
+    }
+
+    /**
+     * 권한이 없는 사용자는 댓글을 변경할 수 없습니다.
+     */
+    public function testUnauthorziedUsersCannotUpdateComments() : void
+    {
+        $this->signIn();
+
+        $comment = create(Comment::class);
+
+        $this->withExceptionHandling()
+             ->put(route('comments.update', $comment->id), ['body' => 'Updated'])
+             ->assertStatus(403);
+    }
+
+    /**
+     * 권한이 있는 사용자는 댓글을 변경할 수 있습니다.
+     */
+    public function testAuthorziedUsersCanUpdateComments() : void
+    {
+        $this->signIn();
+
+        $comment = create(Comment::class, ['user_id' => auth()->id()]);
+
+        $updatedComment = 'You been changed, fool.';
+
+        $this->put(route('comments.update', $comment->id), [
+            'body' => $updatedComment,
+        ]);
+
+        $this->assertDatabaseHas('comments', [
+            'id'   => $comment->id,
+            'body' => $updatedComment,
+        ]);
     }
 }

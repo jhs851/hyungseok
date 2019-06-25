@@ -43,6 +43,15 @@ class Form {
     }
 
     /**
+     * 폼 필드를 되돌립니다.
+     */
+    revert() {
+        for (let field in this.original) {
+            this[field] = this.original[field];
+        }
+    }
+
+    /**
      * 주어진 URL에 GET 요청을 보냅니다.
      *
      * @param   {string} url
@@ -114,6 +123,9 @@ class Form {
         if (data.hasOwnProperty('message')) {
             toastr.success(data.message);
         }
+
+        this.original = this.data();
+        this.errors.clear();
     }
 
     /**

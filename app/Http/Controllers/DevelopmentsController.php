@@ -88,10 +88,7 @@ class DevelopmentsController extends Controller
 
         $development->update($request->all());
 
-        return response()->json([
-            'message' => trans('developments.updated'),
-            'development' => $development,
-        ]);
+        return response()->json(['message' => trans('developments.updated')]);
     }
 
     /**

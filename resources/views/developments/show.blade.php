@@ -6,7 +6,7 @@
     <div class="container" style="margin-top: -130px;">
         <div class="row">
             <div class="col-md-10 offset-md-1 p-3 p-md-5 bg-white shadow" style="min-height: 800px;">
-                <development ref="form" inline-template :data="{{ $development }}">
+                <development ref="form" inline-template v-cloak :data="{{ $development }}">
                     <div>
                         <template v-if="editing">
                             <markdown-helper></markdown-helper>

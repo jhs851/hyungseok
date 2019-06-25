@@ -144,6 +144,17 @@ Vue.mixin({
          */
         enablePrism() {
             this.$nextTick(() => Prism.highlightAll());
+        },
+
+        /**
+         * 정말 삭제할건지 확인합니다.
+         *
+         * @param e
+         */
+        destroy(e) {
+            if (! confirm(this.trans('developments.confirm_destroy'))) {
+                e.preventDefault();
+            }
         }
     }
 })
