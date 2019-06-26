@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CommentRequest;
 use App\Models\{Comment, Development};
 use Illuminate\Auth\Access\AuthorizationException;
-use Illuminate\Http\{JsonResponse, RedirectResponse};
+use Illuminate\Http\JsonResponse;
 
 class CommentsController extends Controller
 {
@@ -22,18 +22,19 @@ class CommentsController extends Controller
      *
      * @param  CommentRequest  $request
      * @param  Development  $development
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function store(CommentRequest $request, Development $development) : RedirectResponse
+    public function store(CommentRequest $request, Development $development) : JsonResponse
     {
-        $development->addComment([
+        $comment = $development->addComment([
             'user_id' => auth()->id(),
             'body' => $request->body,
         ]);
 
-        flash()->success(trans('comments.store'));
-
-        return redirect(route('developments.show', $development->id));
+        return response()->json([
+            'message' => trans('comments.store'),
+            'comment' => $comment->load('user'),
+        ]);
     }
 
     /**

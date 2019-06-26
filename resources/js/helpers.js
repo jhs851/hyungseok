@@ -8,11 +8,21 @@ Vue.mixin({
 
     data() {
         return {
-            translator: new Translator
+            translator: new Translator,
+            user: {}
         };
     },
 
+    created() {
+        this.user = this.auth ? JSON.parse(document.head.querySelector('meta[name="user"]').content) : {};
+    },
+
     computed: {
+        /**
+         * Simple MDE 설정을 반환합니다.
+         *
+         * @returns {object}
+         */
         simpleMDEConfigs() {
             return {
                 hideIcons: ['guide', 'side-by-side', 'fullscreen'],
@@ -30,6 +40,11 @@ Vue.mixin({
             };
         },
 
+        /**
+         * Simeple MDE 툴바 설정을 반환합니다.
+         *
+         * @returns {array}
+         */
         simpleMDEToolbar() {
             return [
                 {
@@ -121,6 +136,15 @@ Vue.mixin({
                     title: this.trans('markdown.toolbar.preview')
                 }
             ];
+        },
+
+        /**
+         * 현재 사용자가 있는지 확인합니다.
+         *
+         * @returns {boolean}
+         */
+        auth() {
+            return document.head.querySelector('meta[name="auth"]').content;
         }
     },
 
@@ -155,6 +179,20 @@ Vue.mixin({
             if (! confirm(this.trans('developments.confirm_destroy'))) {
                 e.preventDefault();
             }
+        },
+
+        /**
+         * 현재 사용자에게 권한이 있는지 확인합니다.
+         *
+         * @param   {function} handler
+         * @returns {boolean}
+         */
+        authorize(handler) {
+            if (this.user.hasOwnProperty('isAdmin') && this.user.isAdmin) {
+                return true;
+            }
+
+            return handler(this.auth);
         }
     }
 })

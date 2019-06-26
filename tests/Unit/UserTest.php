@@ -92,8 +92,18 @@ class UserTest extends TestCase
      */
     public function testItCanDetermineIsAdmin() : void
     {
-        $admin = create(User::class, ['email' => 'jhs851@naver.com']);
+        $admin = create(User::class, ['email' => config('auth.admin')[0]]);
 
         $this->assertTrue($admin->isAdmin());
+    }
+
+    /**
+     * 유저 모델은 관리자인지 확인하는 Mutator를 가지고 있습니다.
+     */
+    public function testItHasIsAdminMutator() : void
+    {
+        $admin = create(User::class, ['email' => config('auth.admin')[0]]);
+
+        $this->assertTrue($admin->isAdmin);
     }
 }

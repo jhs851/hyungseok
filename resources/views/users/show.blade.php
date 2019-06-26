@@ -13,6 +13,9 @@
                 @includeIf("users.activities.{$activity->type}")
             @endforeach
         @empty
+            <p class="text-center py-9 my-5">
+                @lang('auth.empty_activities')
+            </p>
         @endforelse
     </div>
 @stop

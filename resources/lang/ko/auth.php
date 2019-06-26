@@ -38,4 +38,5 @@ return [
     'created_development' => '작성한 개발 포스트들',
     'created_comment' => '작성한 댓글들',
     'created_favorite' => '좋아한 글들',
+    'empty_activities' => '활동 내역이 없습니다.<br><a href="' . route('developments.create') . '" class="btn btn-outline-primary mt-2">글쓰기</a>',
 ];

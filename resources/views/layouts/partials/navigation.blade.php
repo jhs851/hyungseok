@@ -68,7 +68,7 @@
                     </li>
                 @endguest
 
-                <li class="nav-item mr-2" v-if="writing || editing">
+                <li v-cloak class="nav-item mr-2" v-if="writing || editing">
                     <a class="nav-link p-0">
                         <button class="btn btn-primary" @click.prevent="submit">
                             @lang('developments.submit') <i class="fas fa-file-alt ml-2"></i>
@@ -76,7 +76,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item" v-if="editing">
+                <li v-cloak class="nav-item" v-if="editing">
                     <a class="nav-link p-0">
                         <button class="btn btn-outline-primary" @click.prevent="cancel">
                             @lang('developments.cancel') <i class="fas fa-ban ml-1"></i>

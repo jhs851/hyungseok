@@ -27,6 +27,7 @@
         "hover.css": "^2.3.2",
         "jquery": "^3.2",
         "lodash": "^4.17.5",
+        "moment": "^2.24.0",
         "node-waves": "^0.7.6",
         "popper.js": "^1.12",
         "prismjs": "^1.16.0",

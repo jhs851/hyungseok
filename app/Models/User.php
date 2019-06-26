@@ -43,6 +43,15 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'isAdmin',
+    ];
+
+    /**
      * Development에 대한 HasMany 인스턴스를 반환합니다.
      *
      * @return HasMany
@@ -84,6 +93,16 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAdmin() : bool
     {
-        return in_array($this->email, ['jhs851@naver.com']);
+        return in_array($this->email, config('auth.admin'));
+    }
+
+    /**
+     * 사용자가 관리자인지 확인하는 Mutator 입니다.
+     *
+     * @return bool
+     */
+    public function getIsAdminAttribute() : bool
+    {
+        return $this->isAdmin();
     }
 }

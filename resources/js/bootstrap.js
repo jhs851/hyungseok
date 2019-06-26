@@ -31,6 +31,10 @@ try {
 
     // SimpleMDE
     window.SimpleMDE = require('simplemde');
+
+    // moment
+    window.moment = require('moment');
+    moment.locale(document.documentElement.lang);
 } catch (e) {}
 
 // Prismjs

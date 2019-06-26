@@ -44,6 +44,10 @@
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    {{-- Authenticate --}}
+    <meta name="auth" content="{{ auth()->check() }}">
+    @auth <meta name="user" content="{{ auth()->user() }}"> @endauth
+
     {{-- Favicon --}}
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
