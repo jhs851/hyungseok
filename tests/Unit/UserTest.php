@@ -92,7 +92,7 @@ class UserTest extends TestCase
      */
     public function testItCanDetermineIsAdmin() : void
     {
-        $admin = create(User::class, ['email' => config('auth.admin')[0]]);
+        $admin = create(User::class, ['email' => config('auth.admin.email')[0]]);
 
         $this->assertTrue($admin->isAdmin());
     }
@@ -102,8 +102,16 @@ class UserTest extends TestCase
      */
     public function testItHasIsAdminMutator() : void
     {
-        $admin = create(User::class, ['email' => config('auth.admin')[0]]);
+        $admin = create(User::class, ['email' => config('auth.admin.email')[0]]);
 
         $this->assertTrue($admin->isAdmin);
+    }
+    
+    /**
+     * 유저 모델은 이메일이 인증되었는지 확인하는 Mutator를 가지고 있습니다.
+     */
+    public function testItHasDetermineVerifiedEmailMutator() : void
+    {
+        $this->assertTrue($this->user->hasVerifiedEmail);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\{Favoritable, RecordActivity};
 use App\Filters\DevelopmentFilters;
+use App\Notifications\DevelopmentWasUpdated;
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
 
 class Development extends Model
@@ -80,7 +81,13 @@ class Development extends Model
      */
     public function addComment(array $comment) : Comment
     {
-        return $this->comments()->create($comment);
+        $comment = $this->comments()->create($comment);
+
+        if ($this->user_id != $comment['user_id']) {
+            $this->user->notify(new DevelopmentWasUpdated($this, $comment));
+        }
+
+        return $comment;
     }
 
     /**

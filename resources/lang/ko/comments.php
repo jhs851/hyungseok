@@ -6,4 +6,6 @@ return [
     'placehoder' => '댓글을 작성해주세요...',
     'create' => '작성',
     'store' => '작성되었습니다.',
+    'commented' => ':name님께서 :title 글에 댓글을 남기셨습니다.',
+    'please_verified' => '<a href="' . route('verification.notice') . '">이메일 인증</a> 후에 토론에 참여할 수 있습니다.',
 ];

@@ -46,3 +46,6 @@ Route::get('/users/{user}', [
     'as' => 'users.show',
     'uses' => 'UsersController@show',
 ]);
+
+// Notifications
+Route::resource('/users/{user}/notifications', 'UserNotificationsController')->only(['index', 'destroy']);

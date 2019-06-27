@@ -46,6 +46,8 @@
                         </li>
                     @endif
                 @else
+                    <user-notifications></user-notifications>
+
                     <li class="nav-item dropdown {{ str_contains(request()->path(), 'users') ? 'active' : '' }}">
                         <a id="userDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

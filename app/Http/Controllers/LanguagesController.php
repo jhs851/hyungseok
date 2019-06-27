@@ -21,11 +21,17 @@ class LanguagesController extends Controller
      */
     protected function getContent(ExportLocalizations $localizations) : string
     {
-        return Cache::rememberForever('languages.js', function () use ($localizations) {
-            return 'window.i18n = ' . json_encode(
-                $this->getLanguages($localizations->export()->toArray()), JSON_UNESCAPED_UNICODE
-                );
-        });
+        $i18n = 'window.i18n = ' . json_encode(
+            $this->getLanguages($localizations->export()->toArray()), JSON_UNESCAPED_UNICODE
+        );
+
+        if (app()->environment('production')) {
+            return Cache::rememberForever('languages.js', function () use ($i18n) {
+                return $i18n;
+            });
+        }
+
+        return $i18n;
     }
 
     /**

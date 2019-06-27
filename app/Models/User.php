@@ -49,6 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $appends = [
         'isAdmin',
+        'hasVerifiedEmail',
     ];
 
     /**
@@ -93,7 +94,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function isAdmin() : bool
     {
-        return in_array($this->email, config('auth.admin'));
+        return in_array($this->email, config('auth.admin.email'));
     }
 
     /**
@@ -104,5 +105,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getIsAdminAttribute() : bool
     {
         return $this->isAdmin();
+    }
+
+    /**
+     * 사용자가 이메일 인증이 되었는지 확인 하는 Mutator 입니다.
+     *
+     * @return bool
+     */
+    public function getHasVerifiedEmailAttribute() : bool
+    {
+        return $this->hasVerifiedEmail();
     }
 }
