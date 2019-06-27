@@ -3,9 +3,11 @@
 namespace Tests\Unit;
 
 use App\Models\{Comment, Development, User};
+use App\Notifications\DevelopmentWasUpdated;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class DevelopmentTest extends TestCase
@@ -101,5 +103,22 @@ class DevelopmentTest extends TestCase
         $this->development->delete();
 
         $this->assertDatabaseMissing('comments', $comment->toArray());
+    }
+
+    /**
+     * 개발 포스트에 댓글이 추가되면 알림을 보냅니다.
+     */
+    public function testItNotifiesWhenACommentIsAdded() : void
+    {
+        Notification::fake();
+
+        $this->signIn()
+            ->development
+            ->addComment([
+                'user_id' => 2,
+                'body' => 'Foobar',
+            ]);
+
+        Notification::assertSentTo($this->development->user, DevelopmentWasUpdated::class);
     }
 }
