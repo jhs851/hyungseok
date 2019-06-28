@@ -66,8 +66,47 @@ class Comment extends Model
      */
     public function mentionedUsers() : array
     {
-        preg_match_all('/\@([^\s\.]+)/', $this->body, $matches);
+        preg_match_all($this->mentionPattern(), $this->body, $matches);
 
         return $matches[1];
+    }
+
+    /**
+     * body 컬럼의 setMutator 입니다.
+     *
+     * @param  string|null  $body
+     */
+    public function setBodyAttribute(?string $body) : void
+    {
+        $this->attributes['body'] = preg_replace_callback(
+            $this->mentionPattern(),
+            [$this, 'wrapAnchorTag'],
+            $body
+        );
+    }
+
+    /**
+     * 언급을 구분하는 패턴을 반환합니다.
+     *
+     * @return string
+     */
+    protected function mentionPattern() : string
+    {
+        return '/@([\w\-]+)/';
+    }
+
+    /**
+     * 주어진 사용자의 이름을 a 태그로 감쌉니다.
+     *
+     * @param  array  $matches
+     * @return string
+     */
+    protected function wrapAnchorTag(array $matches) : string
+    {
+        if ($user = User::where('name', $matches[1])->first()) {
+            return "<a href=\"" . route('users.show', $user->id) . "\">{$matches[0]}</a>";
+        }
+
+        return $matches[0];
     }
 }

@@ -64,4 +64,24 @@ class CommentTest extends TestCase
 
         $this->assertEquals(['JaneDoe', 'JohnDoe'], $comment->mentionedUsers());
     }
+
+    /**
+     * Body안에 사용자 이름이 언급되고, 언급된 사용자가 존재한다면 a 태그로 감쌉니다.
+     */
+    public function testItWrapsMentionedUsernamesInTheBodyWithinAnchorTags() : void
+    {
+        $john = create(User::class, ['name' => 'John']);
+        $comment = create(Comment::class, ['body' => 'Hello @John']);
+        $otherComment = create(Comment::class, ['body' => 'Hello @Bob']);
+
+        $this->assertEquals(
+            'Hello <a href="' . route('users.show', $john->id) . '">@John</a>',
+            $comment->body
+        );
+
+        $this->assertEquals(
+            'Hello @Bob',
+            $otherComment->body
+        );
+    }
 }
