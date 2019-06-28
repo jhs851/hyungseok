@@ -32,10 +32,12 @@
         "popper.js": "^1.12",
         "prismjs": "^1.16.0",
         "toastr": "^2.1.4",
+        "tributejs": "^3.7.1",
         "vue": "^2.5.17",
         "vue-clipboard2": "^0.3.0",
         "vue-markdown": "^2.2.4",
         "vue-simplemde": "^0.5.2",
+        "vue-tribute": "^1.0.2",
         "wowjs": "^1.1.3"
     }
 }

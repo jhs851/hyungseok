@@ -2,9 +2,10 @@ import Translator from './core/Translator';
 import VueClipboard from 'vue-clipboard2';
 import VueMarkdown from 'vue-markdown';
 import VueSimpleMDE from 'vue-simplemde';
+import VueTribute from 'vue-tribute';
 
 Vue.mixin({
-    components: { VueMarkdown },
+    components: { VueMarkdown, VueTribute },
 
     data() {
         return {
@@ -145,6 +146,23 @@ Vue.mixin({
          */
         auth() {
             return document.head.querySelector('meta[name="auth"]').content;
+        },
+
+        /**
+         * Vue Tribute 옵션을 반환합니다.
+         *
+         * @return {object}
+         */
+        tributeOptions() {
+            return {
+                lookup: 'name',
+                fillAttr: 'name',
+                values: function (text, cb) {
+                    $.getJSON('/api/users', { name: text }, username => {
+                        cb(username);
+                    });
+                }
+            };
         }
     },
 
