@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\{CommentStoreRequest, CommentUpdateRequest};
+use App\Http\Requests\CommentRequest;
 use App\Models\{Comment, Development};
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
 class CommentsController extends Controller
@@ -21,36 +20,28 @@ class CommentsController extends Controller
     /**
      * 새로 생성된 리소스를 저장소에 저장합니다.
      *
-     * @param  CommentStoreRequest  $request
+     * @param  CommentRequest  $request
      * @param  Development  $development
      * @return JsonResponse
-     * @throws AuthorizationException
      */
-    public function store(CommentStoreRequest $request, Development $development) : JsonResponse
+    public function store(CommentRequest $request, Development $development) : JsonResponse
     {
-        $this->authorize('create', new Comment);
-
-        $comment = $development->addComment([
-            'user_id' => auth()->id(),
-            'body' => $request->body,
-        ]);
-
         return response()->json([
             'message' => trans('comments.store'),
-            'comment' => $comment->load('user'),
+            'comment' => $development->addComment($request->getAttributes())->load('user'),
         ]);
     }
 
     /**
      * 스토리지에서 지정된 리소스를 업데이트합니다.
      *
-     * @param  CommentUpdateRequest  $request
+     * @param  CommentRequest  $request
      * @param  Comment  $comment
      * @return JsonResponse
      */
-    public function update(CommentUpdateRequest $request, Comment $comment) : JsonResponse
+    public function update(CommentRequest $request, Comment $comment) : JsonResponse
     {
-        $comment->update($request->all());
+        $comment->update($request->getAttributes());
 
         return response()->json(['message' => trans('developments.updated')]);
     }
