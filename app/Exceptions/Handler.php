@@ -3,7 +3,12 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\{Request, Response};
+use Illuminate\Session\TokenMismatchException;
+use Symfony\Component\HttpKernel\Exception\{AccessDeniedHttpException, HttpException, NotFoundHttpException};
 
 class Handler extends ExceptionHandler
 {
@@ -29,8 +34,9 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param  Exception  $exception
      * @return void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -40,12 +46,31 @@ class Handler extends ExceptionHandler
     /**
      * Render an exception into an HTTP response.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  Exception  $exception
+     * @return Response
      */
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Prepare exception for rendering.
+     *
+     * @param  Exception  $e
+     * @return Exception
+     */
+    protected function prepareException(Exception $e) : Exception
+    {
+        if ($e instanceof ModelNotFoundException) {
+            $e = new NotFoundHttpException($e->getMessage(), $e);
+        } elseif ($e instanceof AuthorizationException) {
+            $e = new AccessDeniedHttpException(trans($e->getMessage()), $e);
+        } elseif ($e instanceof TokenMismatchException) {
+            $e = new HttpException(419, $e->getMessage(), $e);
+        }
+
+        return $e;
     }
 }

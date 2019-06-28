@@ -19,6 +19,8 @@ class DevelopmentsController extends Controller
     public function __construct()
     {
         $this->middleware('verified')->except(['index', 'show']);
+
+        $this->middleware('can:update,development')->only(['update', 'destroy']);
     }
 
     /**
@@ -80,12 +82,9 @@ class DevelopmentsController extends Controller
      * @param  DevelopmentRequest  $request
      * @param  Development  $development
      * @return JsonResponse
-     * @throws AuthorizationException
      */
     public function update(DevelopmentRequest $request, Development $development) : JsonResponse
     {
-        $this->authorize('update', $development);
-
         $development->update($request->all());
 
         return response()->json(['message' => trans('developments.updated')]);
@@ -100,8 +99,6 @@ class DevelopmentsController extends Controller
      */
     public function destroy(Development $development) : RedirectResponse
     {
-        $this->authorize('update', $development);
-
         $development->delete();
 
         flash()->success(trans('developments.deleted'));

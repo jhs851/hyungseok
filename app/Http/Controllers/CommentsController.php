@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CommentRequest;
 use App\Models\{Comment, Development};
+use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
 
@@ -15,6 +16,8 @@ class CommentsController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
+
+        $this->middleware('can:update,comment')->except('store');
     }
 
     /**
@@ -23,9 +26,12 @@ class CommentsController extends Controller
      * @param  CommentRequest  $request
      * @param  Development  $development
      * @return JsonResponse
+     * @throws AuthorizationException
      */
     public function store(CommentRequest $request, Development $development) : JsonResponse
     {
+        $this->authorize('create', new Comment);
+
         $comment = $development->addComment([
             'user_id' => auth()->id(),
             'body' => $request->body,
@@ -43,12 +49,9 @@ class CommentsController extends Controller
      * @param  CommentRequest  $request
      * @param  Comment  $comment
      * @return JsonResponse
-     * @throws AuthorizationException
      */
     public function update(CommentRequest $request, Comment $comment) : JsonResponse
     {
-        $this->authorize('update', $comment);
-
         $comment->update($request->all());
 
         return response()->json(['message' => trans('developments.updated')]);
@@ -59,12 +62,10 @@ class CommentsController extends Controller
      *
      * @param  Comment  $comment
      * @return JsonResponse
-     * @throws AuthorizationException
+     * @throws Exception
      */
     public function destroy(Comment $comment) : JsonResponse
     {
-        $this->authorize('update', $comment);
-
         $comment->delete();
 
         return response()->json(['message' => trans('developments.deleted')]);

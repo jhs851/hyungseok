@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\RecordActivity;
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo};
+use Illuminate\Support\Carbon;
 
 class Comment extends Model
 {
@@ -46,5 +47,15 @@ class Comment extends Model
     public function development() : BelongsTo
     {
         return $this->belongsTo(Development::class);
+    }
+
+    /**
+     * 댓글이 현재 시간의 1분 안에 생성되었는지 확인합니다.
+     *
+     * @return bool
+     */
+    public function wasJustPublished() : bool
+    {
+        return $this->created_at->gt(Carbon::now()->subMinute());
     }
 }

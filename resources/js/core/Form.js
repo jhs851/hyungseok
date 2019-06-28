@@ -107,9 +107,9 @@ class Form {
                     resolve(data);
                 })
                 .catch(error => {
-                    this.fail(error.response.data.errors);
+                    this.fail(error.response.data);
 
-                    reject(error.response.data.errors);
+                    reject(error.response.data);
                 });
         });
     }
@@ -131,10 +131,14 @@ class Form {
     /**
      * 실패한 형태를 핸들링합니다.
      *
-     * @param {object} errors
+     * @param {object} data
      */
-    fail(errors) {
-        this.errors.record(errors);
+    fail(data) {
+        if (data.hasOwnProperty('errors')) {
+            return this.errors.record(data.errors);
+        }
+
+        toastr.error(data.message);
     }
 }
 

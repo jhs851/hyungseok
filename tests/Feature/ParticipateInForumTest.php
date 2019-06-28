@@ -157,4 +157,24 @@ class ParticipateInForumTest extends TestCase
             'body' => $updatedComment,
         ]);
     }
+
+    /**
+     * 사용자는 1분당 최대 한개의 댓글만 저장할 수 있습니다.
+     */
+    public function testUsersMayOnlyCommentAMaximumOfOncePerMinute() : void
+    {
+        $this->signIn();
+
+        $comment = make(Comment::class, ['body' => 'My simple comment.']);
+
+        $this->post(route('comments.store', $this->development->id), $comment->toArray())
+             ->assertStatus(200);
+
+        $message = $this->withExceptionHandling()
+             ->postJson(route('comments.store', $this->development->id), $comment->toArray())
+             ->assertStatus(403)
+             ->json('message');
+
+        $this->assertEquals(trans('comments.too_many_requests'), $message);
+    }
 }

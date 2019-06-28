@@ -55,6 +55,12 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                            @unless (auth()->user()->hasVerifiedEmail)
+                                <a class="dropdown-item bg-danger text-white" href="{{ route('verification.notice') }}">
+                                    @lang('auth.verify.title')
+                                </a>
+                            @endunless
+
                             <a class="dropdown-item" href="{{ route('users.show', ['user' => auth()->id()]) }}">
                                 @lang('auth.activities')
                             </a>

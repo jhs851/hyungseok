@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
@@ -70,6 +70,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function activities() : HasMany
     {
         return $this->hasMany(Activity::class)->latest();
+    }
+
+    /**
+     * 사용자가 마지막에 작성한 Comment에 대해 HasOne 인스턴스를 반환합니다.
+     *
+     * @return HasOne
+     */
+    public function lastComment() : HasOne
+    {
+        return $this->hasOne(Comment::class)->latest();
     }
 
     /**
