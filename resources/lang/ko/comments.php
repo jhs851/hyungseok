@@ -9,4 +9,5 @@ return [
     'commented' => ':name님께서 :title 글에 댓글을 남기셨습니다.',
     'please_verified' => '<a href="' . route('verification.notice') . '">이메일 인증</a> 후에 토론에 참여할 수 있습니다.',
     'too_many_requests' => '지정된 시간에 너무 많은 요청을 보냈습니다.',
+    'mentioned' => ':name님께서 :title 글에 귀하를 언급했습니다.'
 ];
