@@ -84,4 +84,21 @@ class CommentTest extends TestCase
             $otherComment->body
         );
     }
+
+    /**
+     * 댓글 모델을 변경했을 때 사용자 이름이 언급된다면, a 태그로 감쌉니다.
+     */
+    public function testItWrapsMentionedUsernamesInTheBodyWhenUpdateCommenttWithinAnchorTags() : void
+    {
+        $jeong = create(User::class, ['email' => config('auth.admin.email')[0], 'name' => '정형석']);
+
+        $this->signIn($jeong);
+
+        $this->put(route('comments.update', $this->comment->id), ['body' => '안녕 @정형석']);
+
+        $this->assertEquals(
+            '안녕 <a href="' . route('users.show', $jeong->id) . '">@정형석</a>',
+            $this->comment->fresh()->body
+        );
+    }
 }

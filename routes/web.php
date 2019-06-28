@@ -42,10 +42,7 @@ Route::delete('/developments/{development}/favorite', [
 ]);
 
 // Users
-Route::get('/users/{user}', [
-    'as' => 'users.show',
-    'uses' => 'UsersController@show',
-]);
+Route::resource('/users', 'UsersController')->only(['index', 'show']);
 
 // Notifications
 Route::resource('/users/{user}/notifications', 'UserNotificationsController')->only(['index', 'destroy']);

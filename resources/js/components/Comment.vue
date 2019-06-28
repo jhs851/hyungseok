@@ -36,7 +36,9 @@
 
             <div v-if="editing">
                 <div class="form-group mb-2">
-                    <textarea v-model="form.body" :class="{ 'is-invalid': form.errors.has('body') }" class="form-control rounded-0 p-3" @keydown="form.errors.clear('body')" :placeholder="trans('comments.placehoder')"></textarea>
+                    <vue-tribute :options="tributeOptions">
+                        <textarea v-model="form.body" :class="{ 'is-invalid': form.errors.has('body') }" class="form-control rounded-0 p-3" @keydown="form.errors.clear('body')" :placeholder="trans('comments.placehoder')"></textarea>
+                    </vue-tribute>
 
                     <span v-if="form.errors.has('body')" class="invalid-feedback text-left" role="alert">
                         <strong v-text="form.errors.get('body')"></strong>
@@ -105,6 +107,7 @@
              */
             edit() {
                 this.editing = true;
+                this.form.body = this.form.body.replace(/<\/?[^>]+(>|$)/g, '');
             },
 
             /**
@@ -112,7 +115,10 @@
              */
             submit() {
                 this.form.put(`/comments/${this.data.id}`)
-                    .then(() => this.editing = false);
+                    .then(data => {
+                        this.editing = false;
+                        this.form = new Form({ body: data.comment.body });
+                    });
             },
 
             /**

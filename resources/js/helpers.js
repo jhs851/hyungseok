@@ -158,9 +158,7 @@ Vue.mixin({
                 lookup: 'name',
                 fillAttr: 'name',
                 values: function (text, cb) {
-                    $.getJSON('/api/users', { name: text }, username => {
-                        cb(username);
-                    });
+                    $.getJSON('/users', { name: text }, username => cb(username));
                 }
             };
         }

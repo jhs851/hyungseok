@@ -1,0 +1,24 @@
+.tribute-container {
+    @extend .z-depth-1;
+
+    ul {
+        background-color: white;
+    }
+
+    li {
+        padding: .5rem 1rem;
+
+        span {
+            color: $primary;
+        }
+
+        &.highlight {
+            background-color: $primary;
+            color: white;
+
+            span {
+                color: white;
+            }
+        }
+    }
+}

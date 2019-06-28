@@ -43,7 +43,10 @@ class CommentsController extends Controller
     {
         $comment->update($request->getAttributes());
 
-        return response()->json(['message' => trans('developments.updated')]);
+        return response()->json([
+            'message' => trans('developments.updated'),
+            'comment' => $comment,
+        ]);
     }
 
     /**

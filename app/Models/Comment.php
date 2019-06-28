@@ -92,7 +92,7 @@ class Comment extends Model
      */
     protected function mentionPattern() : string
     {
-        return '/@([\w\-]+)/';
+        return '/@([\w\-가-힣]+)/';
     }
 
     /**
@@ -103,7 +103,6 @@ class Comment extends Model
      */
     protected function wrapAnchorTag(array $matches) : string
     {
-        dd($matches[1]);
         if ($user = User::where('name', $matches[1])->first()) {
             return "<a href=\"" . route('users.show', $user->id) . "\">{$matches[0]}</a>";
         }
