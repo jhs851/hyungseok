@@ -29,7 +29,8 @@ This project is a personal project for my development record and my daily life r
 - [x] User has a profile.
 - [x] Record activities.
 - [x] Notification.
-- [ ] Mentioned users.
+- [x] Mentioned users.
+- [ ] Users can have avatar.
 - [ ] Tags, Search Capabilities Implemented with testing
 - [ ] Implementing Simple Development Tips-Function with testing
 - [ ] Implementing Authorization with testing

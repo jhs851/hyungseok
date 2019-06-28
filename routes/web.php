@@ -46,3 +46,9 @@ Route::resource('/users', 'UsersController')->only(['index', 'show']);
 
 // Notifications
 Route::resource('/users/{user}/notifications', 'UserNotificationsController')->only(['index', 'destroy']);
+
+// Avatars
+Route::post('/users/{user}/avatar', [
+    'as' => 'users.avatar',
+    'uses' => 'AvatarsController@store',
+]);
