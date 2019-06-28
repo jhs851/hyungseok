@@ -54,4 +54,14 @@ class CommentTest extends TestCase
     {
         $this->assertInstanceOf(Development::class, $this->comment->development);
     }
+
+    /**
+     * 댓글 모델은 Body에서 언급된 모든 사용자를 감지할 수 있습니다.
+     */
+    public function testItCanDetectAllMentionedUsersInTheBody() : void
+    {
+        $comment = create(Comment::class, ['body' => '@JaneDoe wants to talk to @JohnDoe']);
+
+        $this->assertEquals(['JaneDoe', 'JohnDoe'], $comment->mentionedUsers());
+    }
 }

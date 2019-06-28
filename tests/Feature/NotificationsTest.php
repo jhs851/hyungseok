@@ -3,9 +3,11 @@
 namespace Tests\Feature;
 
 use App\Models\{Development, User};
+use App\Notifications\DevelopmentWasUpdated;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class NotificationsTest extends TestCase
@@ -30,23 +32,18 @@ class NotificationsTest extends TestCase
      */
     public function testANotificationIsPreparedWhenADevelopmentReceivesANewCommentThatIsNotByTheCurrentUser() : void
     {
+        $this->signIn();
+
         $development = create(Development::class, ['user_id' => auth()->id()]);
 
-        $this->assertCount(0, auth()->user()->notifications);
-
-        $development->addComment([
-            'user_id' => auth()->id(),
-            'body' => 'Some reply here',
-        ]);
-
-        $this->assertCount(0, auth()->user()->fresh()->notifications);
+        Notification::fake();
 
         $development->addComment([
             'user_id' => create(User::class)->id,
-            'body' => 'Some reply here',
+            'body' => 'Foobar',
         ]);
 
-        $this->assertCount(1, auth()->user()->fresh()->notifications);
+        Notification::assertSentTo($development->user, DevelopmentWasUpdated::class);
     }
 
     /**

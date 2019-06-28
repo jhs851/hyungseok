@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
+use App\Events\DevelopmentRecivedNewComment;
 use App\Models\{Comment, Development, User};
-use App\Notifications\DevelopmentWasUpdated;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
 class DevelopmentTest extends TestCase
@@ -94,7 +94,7 @@ class DevelopmentTest extends TestCase
     /**
      * 개발 모델을 삭제할 때 하위 댓글들을 모두 삭제합니다.
      */
-    public function testWhenDeleteADevelopmentModelDeleteAllSubComments()
+    public function testWhenDeleteADevelopmentModelDeleteAllSubComments() : void
     {
         $comment = create(Comment::class, ['development_id' => $this->development->id]);
 
@@ -106,19 +106,17 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 개발 포스트에 댓글이 추가되면 알림을 보냅니다.
+     * 개발 포스트에 댓글이 추가되면 이벤트를 실행합니다.
      */
-    public function testItNotifiesWhenACommentIsAdded() : void
+    public function testItFireEventWhenACommentIsAdded() : void
     {
-        Notification::fake();
+        Event::fake();
 
-        $this->signIn()
-            ->development
-            ->addComment([
-                'user_id' => 2,
-                'body' => 'Foobar',
-            ]);
+        $this->development->addComment([
+            'user_id' => 2,
+            'body' => 'Event testing...',
+        ]);
 
-        Notification::assertSentTo($this->development->user, DevelopmentWasUpdated::class);
+        Event::assertDispatched(DevelopmentRecivedNewComment::class);
     }
 }

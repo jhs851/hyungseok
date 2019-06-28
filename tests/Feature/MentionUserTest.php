@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Comment;
-use App\Models\Development;
-use App\Models\User;
+use App\Models\{Comment, Development, User};
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 

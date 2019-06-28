@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\{CommentStoreRequest, CommentUpdateRequest};
-use App\Models\{Comment, Development, User};
-use App\Notifications\YouWereMentioned;
+use App\Models\{Comment, Development};
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
@@ -35,14 +34,6 @@ class CommentsController extends Controller
             'user_id' => auth()->id(),
             'body' => $request->body,
         ]);
-
-        preg_match_all('/\@([^\s\.]+)/', $comment->body, $matches);
-
-        foreach ($matches[1] as $name) {
-            if ($user = User::where('name', $name)->first()) {
-                $user->notify(new YouWereMentioned($comment));
-            }
-        }
 
         return response()->json([
             'message' => trans('comments.store'),

@@ -18,7 +18,11 @@ class EventServiceProvider extends ServiceProvider
             \SocialiteProviders\Kakao\KakaoExtendSocialite::class,
             \SocialiteProviders\Google\GoogleExtendSocialite::class,
             \SocialiteProviders\Facebook\FacebookExtendSocialite::class,
-        ]
+        ],
+        \App\Events\DevelopmentRecivedNewComment::class => [
+            \App\Listeners\NotifyMentionedUsers::class,
+            \App\Listeners\NotifyAWriter::class,
+        ],
     ];
 
     /**

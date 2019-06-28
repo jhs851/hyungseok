@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Core\{Favoritable, RecordActivity};
+use App\Events\DevelopmentRecivedNewComment;
 use App\Filters\DevelopmentFilters;
-use App\Notifications\DevelopmentWasUpdated;
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
 
 class Development extends Model
@@ -83,9 +83,7 @@ class Development extends Model
     {
         $comment = $this->comments()->create($comment);
 
-        if ($this->user_id != $comment['user_id']) {
-            $this->user->notify(new DevelopmentWasUpdated($this, $comment));
-        }
+        DevelopmentRecivedNewComment::dispatch($comment);
 
         return $comment;
     }

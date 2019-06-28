@@ -58,4 +58,16 @@ class Comment extends Model
     {
         return $this->created_at->gt(Carbon::now()->subMinute());
     }
+
+    /**
+     * 언급된 사용자들을 반환합니다.
+     *
+     * @return array
+     */
+    public function mentionedUsers() : array
+    {
+        preg_match_all('/\@([^\s\.]+)/', $this->body, $matches);
+
+        return $matches[1];
+    }
 }
