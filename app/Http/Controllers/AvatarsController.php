@@ -13,7 +13,7 @@ class AvatarsController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'can:update,user']);
     }
 
     /**
@@ -35,6 +35,6 @@ class AvatarsController extends Controller
 
         flash()->success(trans('auth.avatars.store'));
 
-        return back();
+        return redirect(route('users.show', $user->id));
     }
 }

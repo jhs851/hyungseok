@@ -5,6 +5,7 @@ namespace Tests\Feautre;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
@@ -31,14 +32,21 @@ class RegisterationTest extends TestCase
     }
 
     /**
-     * 회원가입 폼에 User fillable input들이 보입니다.
+     * 회원가입 폼에 avatar_path 를 제외한 User fillable input들이 보입니다.
      */
-    public function testWllSeeTheRequiredFillableFields() : void
+    public function testWllSeeTheRequiredFillableFieldsWithoutAvatarPath() : void
     {
         $response = $this->get(route('register'));
 
-        foreach (array_merge(make(User::class)->getFillable(), ['password_confirmation']) as $fillable) {
-            $response->assertSee("name=\"{$fillable}\"");
+        $fields = array_filter(
+            array_merge(make(User::class)->getFillable(), ['password_confirmation']),
+            function ($field) {
+                return $field !== 'avatar_path';
+            }
+        );
+
+        foreach ($fields as $field) {
+            $response->assertSee("name=\"{$field}\"");
         }
     }
 

@@ -1,6 +1,6 @@
 <template>
     <div class="media my-5 text-left">
-        <img src="//via.placeholder.com/64x64" class="img-fluid mr-3 rounded-circle" alt="">
+        <img :src="data.user.avatar" class="img-fluid mr-3 rounded-circle" alt="">
 
         <div class="media-body">
             <h6 class="mt-0 d-flex align-items-end">

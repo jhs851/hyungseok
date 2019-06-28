@@ -51,6 +51,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'isAdmin',
         'hasVerifiedEmail',
+        'avatar',
     ];
 
     /**
@@ -126,5 +127,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function getHasVerifiedEmailAttribute() : bool
     {
         return $this->hasVerifiedEmail();
+    }
+
+    /**
+     * 아바타 경로를 반환합니다.
+     *
+     * @return string
+     */
+    public function getAvatarAttribute() : string
+    {
+        return asset($this->avatar_path ?: 'avatars/default.png');
     }
 }

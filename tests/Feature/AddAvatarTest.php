@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -17,8 +18,20 @@ class AddAvatarTest extends TestCase
     public function testOnlyMembersCanAddAvatars() : void
     {
         $this->withExceptionHandling()
-             ->post(route('users.avatar', 1))
+             ->post(route('users.avatar.store', 1))
              ->assertRedirect(route('login'));
+    }
+
+    /**
+     * 권한이 없는 사용자는 아바타를 추가할 수 없습니다.
+     */
+    public function testUnauthorizeUserCannotAddAvatars() : void
+    {
+        $this->signIn();
+
+        $this->withExceptionHandling()
+             ->post(route('users.avatar.store', create(User::class)->id))
+             ->assertStatus(403);
     }
 
     /**
@@ -29,7 +42,7 @@ class AddAvatarTest extends TestCase
         $this->signIn();
 
         $this->withExceptionHandling()
-             ->post(route('users.avatar', auth()->user()->id), [
+             ->post(route('users.avatar.store', auth()->user()->id), [
                 'avatar' => 'not-an_image',
             ])
             ->assertSessionHasErrors('avatar');
@@ -44,7 +57,7 @@ class AddAvatarTest extends TestCase
 
         Storage::fake('public');
 
-        $this->post(route('users.avatar', auth()->user()->id), [
+        $this->post(route('users.avatar.store', auth()->user()->id), [
             'avatar' => $file = UploadedFile::fake()->image('avatar.jpg'),
         ]);
 

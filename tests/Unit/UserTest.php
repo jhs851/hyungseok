@@ -33,11 +33,11 @@ class UserTest extends TestCase
     }
 
     /**
-     * 유저 모델의 fillable은 이름, 이메일, 비밀번호 입니다.
+     * 유저 모델의 fillable은 이름, 이메일, 비밀번호, 아바타 경로 입니다.
      */
-    public function testItFillableIsTheNameAndEmailAndPassword() : void
+    public function testItFillableIsTheNameAndEmailAndPasswordAndAvatarPath() : void
     {
-        $this->assertEquals(['name', 'email', 'password'], $this->user->getFillable());
+        $this->assertEquals(['name', 'email', 'password', 'avatar_path'], $this->user->getFillable());
     }
 
     /**
@@ -113,5 +113,19 @@ class UserTest extends TestCase
     public function testItHasDetermineVerifiedEmailMutator() : void
     {
         $this->assertTrue($this->user->hasVerifiedEmail);
+    }
+
+    /**
+     * 유저 모델은 아바타 경로를 반환하는 Mutator를 가지고 있습니다.
+     */
+    public function testItHasAvatarMutatorAndCanDetermineTheirAvatarPath() : void
+    {
+        $this->assertNotNull($this->user->avatar);
+
+        $this->assertEquals(asset('avatars/default.png'), $this->user->avatar);
+
+        $this->user->avatar_path = 'avatars/me.jpg';
+
+        $this->assertEquals(asset('avatars/me.jpg'), $this->user->avatar);
     }
 }

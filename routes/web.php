@@ -49,6 +49,6 @@ Route::resource('/users/{user}/notifications', 'UserNotificationsController')->o
 
 // Avatars
 Route::post('/users/{user}/avatar', [
-    'as' => 'users.avatar',
+    'as' => 'users.avatar.store',
     'uses' => 'AvatarsController@store',
 ]);
