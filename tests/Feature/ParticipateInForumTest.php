@@ -172,7 +172,7 @@ class ParticipateInForumTest extends TestCase
 
         $message = $this->withExceptionHandling()
              ->postJson(route('comments.store', $this->development->id), $comment->toArray())
-             ->assertStatus(403)
+             ->assertStatus(429)
              ->json('message');
 
         $this->assertEquals(trans('comments.too_many_requests'), $message);

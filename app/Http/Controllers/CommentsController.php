@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CommentRequest;
+use App\Http\Requests\{CommentStoreRequest, CommentUpdateRequest};
 use App\Models\{Comment, Development};
 use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -16,19 +16,17 @@ class CommentsController extends Controller
     public function __construct()
     {
         $this->middleware('verified');
-
-        $this->middleware('can:update,comment')->except('store');
     }
 
     /**
      * 새로 생성된 리소스를 저장소에 저장합니다.
      *
-     * @param  CommentRequest  $request
+     * @param  CommentStoreRequest  $request
      * @param  Development  $development
      * @return JsonResponse
      * @throws AuthorizationException
      */
-    public function store(CommentRequest $request, Development $development) : JsonResponse
+    public function store(CommentStoreRequest $request, Development $development) : JsonResponse
     {
         $this->authorize('create', new Comment);
 
@@ -46,11 +44,11 @@ class CommentsController extends Controller
     /**
      * 스토리지에서 지정된 리소스를 업데이트합니다.
      *
-     * @param  CommentRequest  $request
+     * @param  CommentUpdateRequest  $request
      * @param  Comment  $comment
      * @return JsonResponse
      */
-    public function update(CommentRequest $request, Comment $comment) : JsonResponse
+    public function update(CommentUpdateRequest $request, Comment $comment) : JsonResponse
     {
         $comment->update($request->all());
 
@@ -66,6 +64,8 @@ class CommentsController extends Controller
      */
     public function destroy(Comment $comment) : JsonResponse
     {
+        $this->authorize('update', $comment);
+
         $comment->delete();
 
         return response()->json(['message' => trans('developments.deleted')]);

@@ -3,7 +3,7 @@
 namespace App\Policies;
 
 use App\Models\{User, Comment};
-use Illuminate\Auth\Access\{AuthorizationException, HandlesAuthorization};
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CommentPolicy
 {
@@ -14,7 +14,6 @@ class CommentPolicy
      *
      * @param  User  $user
      * @return mixed
-     * @throws AuthorizationException
      */
     public function create(User $user)
     {
@@ -22,9 +21,7 @@ class CommentPolicy
             return true;
         }
 
-        return $lastComment->wasJustPublished()
-            ? $this->deny('comments.too_many_requests')
-            : $this->allow();
+        return ! $lastComment->wasJustPublished();
     }
 
     /**
