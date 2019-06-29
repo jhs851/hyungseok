@@ -101,4 +101,16 @@ class CommentTest extends TestCase
             $this->comment->fresh()->body
         );
     }
+
+    /**
+     * 댓글 모델은 댓글이 베스트 댓글인지 알 수 있습니다.
+     */
+    public function testItKnowsIfItIsTheBestComment() : void
+    {
+        $this->assertFalse($this->comment->isBest());
+
+        $this->comment->development->update(['best_comment_id' => $this->comment->id]);
+
+        $this->assertTrue($this->comment->fresh()->isBest());
+    }
 }

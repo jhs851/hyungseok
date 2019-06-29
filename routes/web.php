@@ -31,6 +31,12 @@ Route::post('/developments/{development}/comments', [
 ]);
 Route::resource('/comments', 'CommentsController')->only(['update', 'destroy']);
 
+// Best Comment
+Route::post('/comments/{comment}/best', [
+    'as' => 'best-comments.store',
+    'uses' => 'BestCommentsController@store',
+]);
+
 // Favorites
 Route::post('/developments/{development}/favorite', [
     'as' => 'favorites.store',

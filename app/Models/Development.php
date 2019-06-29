@@ -19,6 +19,7 @@ class Development extends Model
     protected $fillable = [
         'title',
         'body',
+        'best_comment_id',
     ];
 
     /**
@@ -28,15 +29,6 @@ class Development extends Model
      */
     protected $with = [
         'user',
-    ];
-
-    /**
-     * 모든 쿼리에 빠르게 로드되어야 하는 관계의 카운트.
-     *
-     * @var array
-     */
-    protected $withCount = [
-        'comments',
     ];
 
     /**
@@ -98,5 +90,18 @@ class Development extends Model
     public function scopeFilter(Builder $query, DevelopmentFilters $filters) : Builder
     {
         return $filters->apply($query);
+    }
+
+    /**
+     * 주어진 댓글을 베스트 댓글로 마크합니다.
+     *
+     * @param  Comment  $comment
+     * @return Development
+     */
+    public function markBestComment(Comment $comment) : Development
+    {
+        $this->update(['best_comment_id' => $comment->id]);
+
+        return $this;
     }
 }

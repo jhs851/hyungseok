@@ -16,8 +16,10 @@ class CreateDevelopmentsTable extends Migration
         Schema::create('developments', function (Blueprint $table) {
             $table->bigIncrements('id')->unsigned();
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('best_comment_id')->nullable();
             $table->string('title');
             $table->text('body');
+            $table->unsignedInteger('comments_count')->default(0);
             $table->unsignedInteger('visits')->default(0);
             $table->timestamps();
         });

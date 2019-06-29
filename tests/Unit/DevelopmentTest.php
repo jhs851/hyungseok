@@ -35,11 +35,11 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 개발 모델의 fillable은 제목과 본문입니다.
+     * 개발 모델의 fillable은 제목과 본문과 베스트 댓글 id 입니다.
      */
-    public function testTheDevelopmentFillableIsTheTitleAndBody() : void
+    public function testTheDevelopmentFillableIsTheTitleAndBodyAndBestCommentId() : void
     {
-        $this->assertEquals(['title', 'body'], $this->development->getFillable());
+        $this->assertEquals(['title', 'body', 'best_comment_id'], $this->development->getFillable());
     }
 
     /**
@@ -98,11 +98,11 @@ class DevelopmentTest extends TestCase
     {
         $comment = create(Comment::class, ['development_id' => $this->development->id]);
 
-        $this->assertDatabaseHas('comments', $comment->toArray());
+        $this->assertDatabaseHas('comments', ['id' => $comment->id]);
 
         $this->development->delete();
 
-        $this->assertDatabaseMissing('comments', $comment->toArray());
+        $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
     }
 
     /**
@@ -118,5 +118,19 @@ class DevelopmentTest extends TestCase
         ]);
 
         Event::assertDispatched(DevelopmentRecivedNewComment::class);
+    }
+
+    /**
+     * 개발 모델은 댓글을 베스트 댓글로 마크할 수 있습니다.
+     */
+    public function testItCanMayMarkCommentAsTheBestComment() : void
+    {
+        $comment = create(Comment::class, ['development_id' => $this->development->id]);
+
+        $this->assertFalse($comment->isBest());
+
+        $this->development->markBestComment($comment);
+
+        $this->assertTrue($comment->fresh()->isBest());
     }
 }

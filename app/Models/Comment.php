@@ -30,6 +30,24 @@ class Comment extends Model
     ];
 
     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function (Comment $comment) {
+            $comment->development->increment('comments_count');
+        });
+
+        static::deleted(function (Comment $comment) {
+            $comment->development->decrement('comments_count');
+        });
+    }
+
+    /**
      * User에 대한 BelongsTo 인스턴스를 반환합니다.
      *
      * @return BelongsTo
@@ -108,5 +126,15 @@ class Comment extends Model
         }
 
         return $matches[0];
+    }
+
+    /**
+     * 댓글이 개발 포스트의 베스트 댓글인지 확인합니다.
+     *
+     * @return bool
+     */
+    public function isBest() : bool
+    {
+        return $this->development->best_comment_id == $this->id;
     }
 }
