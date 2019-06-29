@@ -34,7 +34,6 @@ This project is a personal project for my development record and my daily life r
 - [x] Mentioned users.
 - [x] Users can have avatar.
 - [x] Users can delete avatar.
-- [ ] Automatically delete unused avatars using a schedule.
 - [ ] Trending Developments With Redis
 - [ ] Tags, Search Capabilities Implemented with testing
 - [ ] Create Adminitrator page

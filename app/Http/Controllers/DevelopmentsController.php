@@ -6,9 +6,9 @@ use App\Filters\DevelopmentFilters;
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
 use Exception;
-use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\{JsonResponse, RedirectResponse};
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\View\View;
 
 class DevelopmentsController extends Controller
@@ -37,7 +37,9 @@ class DevelopmentsController extends Controller
             return $developments;
         }
 
-        return view('developments.index', compact('developments'));
+        $trending = array_map('json_decode', Redis::zrevrange('trending_developments', 0, 4));
+
+        return view('developments.index', compact('developments', 'trending'));
     }
 
     /**
@@ -73,6 +75,11 @@ class DevelopmentsController extends Controller
      */
     public function show(Development $development) : View
     {
+        Redis::zincrby('trending_developments', 1, json_encode([
+            'title' => $development->title,
+            'path' => route('developments.show', $development->id),
+        ]));
+
         return view('developments.show', compact('development'));
     }
 

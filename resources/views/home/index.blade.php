@@ -40,9 +40,14 @@
                                     0
                                 </small>
 
-                                <small>
+                                <small class="mr-3">
                                     <i class="far fa-comment mr-1"></i>
                                     {{ $development->comments_count }}
+                                </small>
+
+                                <small>
+                                    <i class="far fa-heart mr-1"></i>
+                                    {{ $development->favorites_count }}
                                 </small>
                             </div>
                         </div>
