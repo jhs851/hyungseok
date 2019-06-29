@@ -22,21 +22,21 @@ This project is a personal project for my development record and my daily life r
 - [x] Authentication (Social) with testing
 - [x] Implementing Development Post-Function
 - [x] Insert Mark Down Function
+- [x] Implementing Simple Development Tips-Function with testing
 - [x] Testing Development Post-Function
 - [x] Change theme and improve main page UI.
 - [x] Implementing comments with testing
+- [x] Implementing Authorization with testing
 - [x] User can favorite development posts.
 - [x] User has a profile.
-- [x] Record activities.
-- [x] Notification.
+- [x] Implementing the User Activity History feature with testing
+- [x] Notifications.
 - [x] Mentioned users.
 - [x] Users can have avatar.
+- [ ] Users can delete avatar.
+- [ ] Automatically delete unused avatars using a schedule.
+- [ ] Trending Developments With Redis
 - [ ] Tags, Search Capabilities Implemented with testing
-- [ ] Implementing Simple Development Tips-Function with testing
-- [ ] Implementing Authorization with testing
-- [ ] Implementing diary functions with testing
-- [ ] Implementing hobby post capabilities with testing
-- [ ] Implementing the User Activity History feature with testing
 - [ ] Create Adminitrator page
 - [ ] Speed optimization
 - [ ] Open the server
