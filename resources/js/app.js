@@ -71,7 +71,7 @@ const app = new Vue({
          * 모든 tooltip을 활성화 합니다.
          */
         enableTooltips() {
-            $('[data-toggle="tooltip"]').tooltip();
+            this.$nextTick(() => $('[data-toggle="tooltip"]').tooltip());
         }
     },
 

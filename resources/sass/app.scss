@@ -43,6 +43,9 @@
 // Tributejs
 @import '~tributejs/scss/tribute';
 
+// Cropper
+@import '~cropper/dist/cropper.css';
+
 // Style sheets
 @import './stylesheets/buttons';
 @import './stylesheets/modal';
@@ -85,4 +88,11 @@ main {
     bottom: 0;
     left: 0;
     z-index: 1;
+}
+
+.avatar {
+    width: 64px;
+    height: 64px;
+    max-width: 100%;
+    @include border-radius(50%);
 }

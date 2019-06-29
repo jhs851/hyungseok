@@ -204,11 +204,15 @@ Vue.mixin({
          * @returns {boolean}
          */
         authorize(handler) {
-            if (this.user.hasOwnProperty('isAdmin') && this.user.isAdmin) {
+            if (! this.auth) {
+                return false;
+            }
+
+            if (this.user.isAdmin) {
                 return true;
             }
 
-            return handler(this.auth);
+            return handler(this.user.id);
         }
     }
 })

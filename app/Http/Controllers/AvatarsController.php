@@ -2,39 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AvatarRequest;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class AvatarsController extends Controller
 {
     /**
-     * AvatarsController constructor.
-     */
-    public function __construct()
-    {
-        $this->middleware(['auth', 'can:update,user']);
-    }
-
-    /**
      * 새로 생성된 리소스를 저장소에 저장합니다.
      *
-     * @param  Request  $request
+     * @param  AvatarRequest  $request
      * @param  User  $user
-     * @return RedirectResponse
+     * @return JsonResponse
      */
-    public function store(Request $request, User $user) : RedirectResponse
+    public function store(AvatarRequest $request, User $user) : JsonResponse
     {
-        $request->validate([
-            'avatar' => ['required', 'image'],
+        $user->update($request->getAttributes());
+
+        return response()->json([
+            'message' => trans('auth.avatars.store'),
+            'avatar' => $user->avatar,
         ]);
-
-        $user->update([
-            'avatar_path' => $request->file('avatar')->store('avatars', 'public'),
-        ]);
-
-        flash()->success(trans('auth.avatars.store'));
-
-        return redirect(route('users.show', $user->id));
     }
 }

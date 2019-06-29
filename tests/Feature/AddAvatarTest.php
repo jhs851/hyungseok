@@ -3,9 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use Faker\Provider\Image;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Tests\TestCase;
 
 class AddAvatarTest extends TestCase
@@ -18,8 +18,8 @@ class AddAvatarTest extends TestCase
     public function testOnlyMembersCanAddAvatars() : void
     {
         $this->withExceptionHandling()
-             ->post(route('users.avatar.store', 1))
-             ->assertRedirect(route('login'));
+             ->post(route('users.avatar.store', create(User::class)->id))
+             ->assertStatus(403);
     }
 
     /**
@@ -35,17 +35,15 @@ class AddAvatarTest extends TestCase
     }
 
     /**
-     * 아바타는 반드시 이미지로 공급되어야 합니다.
+     * 아바타는 반드시 src값이 있어야 합니다.
      */
     public function testAValidAvatarMustBeProvided() : void
     {
         $this->signIn();
 
         $this->withExceptionHandling()
-             ->post(route('users.avatar.store', auth()->user()->id), [
-                'avatar' => 'not-an_image',
-            ])
-            ->assertSessionHasErrors('avatar');
+             ->post(route('users.avatar.store', auth()->user()->id))
+            ->assertSessionHasErrors('src');
     }
 
     /**
@@ -55,14 +53,16 @@ class AddAvatarTest extends TestCase
     {
         $this->signIn();
 
-        Storage::fake('public');
-
         $this->post(route('users.avatar.store', auth()->user()->id), [
-            'avatar' => $file = UploadedFile::fake()->image('avatar.jpg'),
+            'src' => Image::imageUrl(64, 64),
         ]);
 
-        $this->assertEquals('avatars/' . $file->hashName(), auth()->user()->fresh()->avatar_path);
+        tap(auth()->user()->fresh()->avatar_path, function ($path) {
+            $this->assertNotNull($path);
 
-        Storage::disk('public')->assertExists('avatars/' . $file->hashName());
+            $this->assertFileExists(public_path($path));
+
+            File::delete(public_path($path));
+        });
     }
 }

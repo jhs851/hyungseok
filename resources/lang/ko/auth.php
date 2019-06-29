@@ -40,6 +40,9 @@ return [
     'created_favorite' => '좋아한 글들',
     'empty_activities' => '활동 내역이 없습니다.<br><a href="' . route('developments.create') . '" class="btn btn-outline-primary mt-2">글쓰기</a>',
     'avatars' => [
+        'title' => '드래그해서 사용할 영역을 선택해주세요!',
         'store' => '저장되었습니다.',
+        'submit' => '저장하기',
+        'fail_to_create_image' => '이미지 생성에 실패했습니다.',
     ],
 ];
