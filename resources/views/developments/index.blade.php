@@ -4,23 +4,25 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <div class="card rounded-0 my-2">
-                    <div class="card-header">
-                        @lang('developments.trending')
-                    </div>
+                @if ($trending)
+                    <div class="card rounded-0 my-2">
+                        <div class="card-header">
+                            @lang('developments.trending')
+                        </div>
 
-                    <div class="card-body">
-                        <ul class="list-group">
-                            @foreach ($trending as $development)
-                                <li class="list-group-item">
-                                    <a href="{{ $development->path }}">
-                                        {{ $development->title }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                @foreach ($trending as $development)
+                                    <li class="list-group-item">
+                                        <a href="{{ $development->path }}">
+                                            {{ $development->title }}
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
 
             @if ($developments->total())

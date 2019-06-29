@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Core\Trending;
 use App\Filters\DevelopmentFilters;
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
 use Exception;
 use Illuminate\Http\{JsonResponse, RedirectResponse};
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\View\View;
 
 class DevelopmentsController extends Controller
@@ -29,7 +29,7 @@ class DevelopmentsController extends Controller
      * @param  DevelopmentFilters  $filters
      * @return LengthAwarePaginator|View
      */
-    public function index(DevelopmentFilters $filters)
+    public function index(DevelopmentFilters $filters, Trending $trending)
     {
         $developments = $this->getDevelopments($filters);
 
@@ -37,9 +37,10 @@ class DevelopmentsController extends Controller
             return $developments;
         }
 
-        $trending = array_map('json_decode', Redis::zrevrange('trending_developments', 0, 4));
-
-        return view('developments.index', compact('developments', 'trending'));
+        return view('developments.index', [
+            'developments' => $developments,
+            'trending' => $trending->get(),
+        ]);
     }
 
     /**
@@ -73,12 +74,9 @@ class DevelopmentsController extends Controller
      * @param  Development  $development
      * @return View
      */
-    public function show(Development $development) : View
+    public function show(Development $development, Trending $trending) : View
     {
-        Redis::zincrby('trending_developments', 1, json_encode([
-            'title' => $development->title,
-            'path' => route('developments.show', $development->id),
-        ]));
+        $trending->push($development);
 
         return view('developments.show', compact('development'));
     }

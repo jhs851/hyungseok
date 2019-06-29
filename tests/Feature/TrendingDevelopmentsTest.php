@@ -2,15 +2,22 @@
 
 namespace Tests\Feature;
 
+use App\Core\Trending;
 use App\Models\Development;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Redis;
 use Tests\TestCase;
 
 class TrendingDevelopmentsTest extends TestCase
 {
     use DatabaseMigrations;
+
+    /**
+     * Trending 인스턴스.
+     *
+     * @var Trending
+     */
+    protected $trending;
 
     /**
      * Setup the test environment.
@@ -22,7 +29,7 @@ class TrendingDevelopmentsTest extends TestCase
     {
         parent::setUp();
 
-        Redis::del('trending_developments');
+        $this->trending = Trending::reset();
     }
 
     /**
@@ -30,16 +37,14 @@ class TrendingDevelopmentsTest extends TestCase
      */
     public function testItIncrementsDevelopmentsScoreEachTimeItIsRead() : void
     {
-        $this->assertEmpty(Redis::zrevrange('trending_developments', 0, -1));
+        $this->assertEmpty($this->trending->get());
 
         $development = create(Development::class);
 
         $this->call('GET', route('developments.show', $development->id));
 
-        $trending = Redis::zrevrange('trending_developments', 0, -1);
+        $this->assertCount(1, $trending = $this->trending->get());
 
-        $this->assertCount(1, $trending);
-
-        $this->assertEquals($development->title, json_decode($trending[0])->title);
+        $this->assertEquals($development->title, $trending[0]->title);
     }
 }
