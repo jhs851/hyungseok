@@ -67,11 +67,21 @@
         </modal>
 
 
-        <label v-if="canUpdate" class="m-0" style="cursor: pointer;">
-            <img class="avatar mr-2" :src="avatar" alt="">
+        <div class="dropdown" v-if="canUpdate">
+            <a id="avatarDropdown" class="dropdown-toggle-split" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img class="avatar mr-2" :src="avatar" alt="">
+            </a>
 
-            <input name="avatar" type="file" class="d-none" accept="image/*" @change="onChange">
-        </label>
+            <div class="dropdown-menu" aria-labelledby="avatarDropdown">
+                <label class="dropdown-item py-3 m-0" style="cursor: pointer;">
+                    {{ trans('auth.avatars.edit') }}
+
+                    <input name="avatar" type="file" class="d-none" accept="image/*" @change="onChange">
+                </label>
+
+                <a class="dropdown-item py-3" href="#" @click.prevent="destroy" v-text="trans('auth.avatars.destroy')"></a>
+            </div>
+        </div>
 
         <a v-else :href="avatar" target="_blank">
             <img class="avatar mr-2" :src="avatar" alt="">
@@ -165,6 +175,19 @@
 
                         this.avatar = data.avatar;
                     });
+            },
+
+            destroy() {
+                if (! confirm(this.trans('developments.confirm_destroy'))) {
+                    return;
+                }
+
+                axios.delete(`/users/${this.model.id}/avatar`)
+                    .then(({data}) => {
+                        toastr.success(data.message);
+
+                        this.avatar = '/avatars/default.png';
+                    })
             },
 
             replace() {

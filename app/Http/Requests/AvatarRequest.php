@@ -2,20 +2,12 @@
 
 namespace App\Http\Requests;
 
-use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\{Facades\File, Facades\Gate, Str};
+use Illuminate\Support\{Facades\File, Str};
 use Intervention\Image\Facades\Image;
 
 class AvatarRequest extends FormRequest
 {
-    /**
-     * User 인스턴스.
-     *
-     * @var User
-     */
-    protected $user;
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +15,7 @@ class AvatarRequest extends FormRequest
      */
     public function authorize() : bool
     {
-        $this->user = $this->route()->user;
-
-        return Gate::allows('update', $this->user);
+        return true;
     }
 
     /**
@@ -81,18 +71,10 @@ class AvatarRequest extends FormRequest
         $image->resize(64, 64)
               ->save(public_path($path), 90, 'png');
 
-        if ($this->user->avatar_path) {
-            $this->deleteAvatar();
+        if ($oldAvatar = $this->route()->user->avatar_path) {
+            File::delete(public_path($oldAvatar));
         }
 
         return $path;
-    }
-
-    /**
-     * 라우트 모델 사용자의 아바타를 삭제합니다.
-     */
-    protected function deleteAvatar() : void
-    {
-        File::delete(public_path($this->user->avatar_path));
     }
 }

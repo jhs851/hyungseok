@@ -44,5 +44,8 @@ return [
         'store' => '저장되었습니다.',
         'submit' => '저장하기',
         'fail_to_create_image' => '이미지 생성에 실패했습니다.',
+        'removed' => '삭제되었습니다.',
+        'edit' => '아바타 변경하기',
+        'destroy' => '아바타 삭제하기',
     ],
 ];
