@@ -18,6 +18,7 @@ class CreateDevelopmentsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('title');
             $table->text('body');
+            $table->unsignedInteger('visits')->default(0);
             $table->timestamps();
         });
     }

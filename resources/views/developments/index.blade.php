@@ -52,7 +52,7 @@
                                 <div>
                                     <small class="mr-3">
                                         <i class="far fa-eye mr-1"></i>
-                                        0
+                                        {{ $development->visits }}
                                     </small>
 
                                     <small class="mr-3">

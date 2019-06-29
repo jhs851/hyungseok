@@ -90,4 +90,16 @@ class ReadDevelopmentTest extends TestCase
 
         $this->assertEquals([3, 2, 0], array_column($response['data'], 'comments_count'));
     }
+
+    /**
+     * 우리는 개발 포스트를 읽을 때마다 조회수를 증가 시킵니다.
+     */
+    public function testWeRecordANewVisitEachTimeTheDevelopmentIsRead() : void
+    {
+        $this->assertSame(0, $this->development->visits);
+
+        $this->get(route('developments.show', $this->development->id));
+
+        $this->assertEquals(1, $this->development->fresh()->visits);
+    }
 }

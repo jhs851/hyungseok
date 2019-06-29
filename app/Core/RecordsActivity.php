@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\{Model, Relations\MorphMany};
 use ReflectionClass;
 use ReflectionException;
 
-trait RecordActivity
+trait RecordsActivity
 {
     /**
      * The "booting" method of the model.
      *
      * @return void
      */
-    protected static function bootRecordActivity()
+    protected static function bootRecordsActivity()
     {
         if (auth()->guest()) {
             return;
@@ -22,7 +22,7 @@ trait RecordActivity
 
         foreach (static::getActivitiesToRecord() as $event) {
             static::$event(function (Model $model) use ($event) {
-                $model->recordActivity($event);
+                $model->recordsActivity($event);
             });
         }
 
@@ -48,7 +48,7 @@ trait RecordActivity
      * @return Activity
      * @throws ReflectionException
      */
-    protected function recordActivity(string $event) : Activity
+    protected function recordsActivity(string $event) : Activity
     {
         return $this->activities()->create([
             'type' => $this->getActivityType($event),

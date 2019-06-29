@@ -27,6 +27,7 @@ class DevelopmentsController extends Controller
      * 리소스 목록을 표시합니다.
      *
      * @param  DevelopmentFilters  $filters
+     * @param  Trending  $trending
      * @return LengthAwarePaginator|View
      */
     public function index(DevelopmentFilters $filters, Trending $trending)
@@ -72,11 +73,14 @@ class DevelopmentsController extends Controller
      * 지정된 리소스를 표시합니다.
      *
      * @param  Development  $development
+     * @param  Trending  $trending
      * @return View
      */
     public function show(Development $development, Trending $trending) : View
     {
         $trending->push($development);
+
+        $development->increment('visits');
 
         return view('developments.show', compact('development'));
     }
