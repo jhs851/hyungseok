@@ -67,7 +67,7 @@ class VerificationTest extends TestCase
      */
     public function testHasNotVerifiedAndAuthenticatedUserCanAccessVerficiationNoticieView() : void
     {
-        $this->signIn(create(User::class, ['email_verified_at' => null]));
+        $this->signIn(factory(User::class)->state('unconfirmed')->create());
 
         $this->get(route('verification.notice'))
              ->assertStatus(200);
@@ -92,7 +92,7 @@ class VerificationTest extends TestCase
     {
         $this->signIn();
 
-        $otherUser = create(User::class, ['email_verified_at' => null]);
+        $otherUser = factory(User::class)->state('unconfirmed')->create();
 
         $this->expectException(AuthorizationException::class);
 
@@ -104,7 +104,7 @@ class VerificationTest extends TestCase
      */
     public function testIfAttemptToVerificateAnEmailWithTheCorrectLinkVerificateEmail()
     {
-        $this->signIn($user = create(User::class, ['email_verified_at' => null]));
+        $this->signIn($user = factory(User::class)->state('unconfirmed')->create());
 
         $this->assertFalse(auth()->user()->hasVerifiedEmail());
 
@@ -120,7 +120,7 @@ class VerificationTest extends TestCase
     {
         Event::fake();
 
-        $this->signIn(create(User::class, ['email_verified_at' => null]));
+        $this->signIn(factory(User::class)->state('unconfirmed')->create());
 
         $this->get(URL::signedRoute('verification.verify', ['id' => auth()->id()]));
 
@@ -145,7 +145,7 @@ class VerificationTest extends TestCase
      */
     public function testUsersWhoseEmailNotVerificatedCanSendVerificationEmails()
     {
-        $this->signIn($user = create(User::class, ['email_verified_at' => null]));
+        $this->signIn($user = factory(User::class)->state('unconfirmed')->create());
 
         Notification::fake();
 
@@ -159,7 +159,7 @@ class VerificationTest extends TestCase
      */
     public function testAfterSendingTheVerificationEmailRedirectItWithResentSession()
     {
-        $this->signIn(create(User::class, ['email_verified_at' => null]));
+        $this->signIn(factory(User::class)->state('unconfirmed')->create());
 
         $this->get(route('verification.resend'))
              ->assertStatus(302)

@@ -46,7 +46,7 @@ class ParticipateInForumTest extends TestCase
      */
     public function testNewUsersMustFirstConfirmTheirEmailBeforeCreatingComments() : void
     {
-        $this->signIn(create(User::class, ['email_verified_at' => null]));
+        $this->signIn(factory(User::class)->state('unconfirmed')->create());
 
         $this->post(route('comments.store', ['development' => $this->development->id]), make(Comment::class)->toArray())
              ->assertRedirect(route('verification.notice'))

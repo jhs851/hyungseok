@@ -25,3 +25,16 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
     ];
 });
+
+$factory->state(User::class, 'unconfirmed', function (Faker $faker) {
+    return [
+        'email_verified_at' => null,
+    ];
+});
+
+$factory->state(User::class, 'admin', function (Faker $faker) {
+    return [
+        'name' => config('auth.admin.name'),
+        'email' => config('auth.admin.email')[0],
+    ];
+});

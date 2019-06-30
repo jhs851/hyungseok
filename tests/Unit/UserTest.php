@@ -92,7 +92,7 @@ class UserTest extends TestCase
      */
     public function testItCanDetermineIsAdmin() : void
     {
-        $admin = create(User::class, ['email' => config('auth.admin.email')[0]]);
+        $admin = factory(User::class)->state('admin')->create();
 
         $this->assertTrue($admin->isAdmin());
     }
@@ -102,7 +102,7 @@ class UserTest extends TestCase
      */
     public function testItHasIsAdminMutator() : void
     {
-        $admin = create(User::class, ['email' => config('auth.admin.email')[0]]);
+        $admin = factory(User::class)->state('admin')->create();
 
         $this->assertTrue($admin->isAdmin);
     }

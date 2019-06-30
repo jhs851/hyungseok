@@ -46,7 +46,7 @@ class FavoritesTest extends TestCase
      */
     public function testNewUsersMustFirstConfirmTheirEmailBeforeCreatingFavorite() : void
     {
-        $this->signIn(create(User::class, ['email_verified_at' => null]));
+        $this->signIn(factory(User::class)->state('unconfirmed')->create());
 
         $this->post(route('favorites.store', ['development' => $this->development->id]))
              ->assertRedirect(route('verification.notice'))

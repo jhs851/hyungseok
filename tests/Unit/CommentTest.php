@@ -90,7 +90,7 @@ class CommentTest extends TestCase
      */
     public function testItWrapsMentionedUsernamesInTheBodyWhenUpdateCommenttWithinAnchorTags() : void
     {
-        $jeong = create(User::class, ['email' => config('auth.admin.email')[0], 'name' => '정형석']);
+        $jeong = factory(User::class)->state('admin')->create(['name' => '정형석']);
 
         $this->signIn($jeong);
 
