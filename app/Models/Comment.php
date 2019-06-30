@@ -52,6 +52,15 @@ class Comment extends Model
             $comment->development->increment('comments_count');
         });
 
+        static::deleting(function (Comment $comment) {
+            if ($comment->isBest) {
+                tap($comment->development, function (Development $development) {
+                    $development->best_comment_id = null;
+                    $development->save();
+                });
+            }
+        });
+
         static::deleted(function (Comment $comment) {
             $comment->development->decrement('comments_count');
         });

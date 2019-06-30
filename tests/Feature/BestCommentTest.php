@@ -45,4 +45,20 @@ class BestCommentTest extends TestCase
              ->post(route('best-comments.store', $comments[1]->id))
              ->assertStatus(403);
     }
+
+    /**
+     * 베스트 댓글이 삭제되면 개발이 적절하게 업데이트 됩니다.
+     */
+    public function testIfABestCommentIsDeletedThenTheDevelopmentIsProperlyUpdatedToReflectThat() : void
+    {
+        $this->signIn();
+
+        $comment = create(Comment::class, ['user_id' => auth()->id()]);
+
+        $comment->development->markBestComment($comment);
+
+        $this->deleteJson(route('comments.destroy', $comment->id));
+
+        $this->assertNull($comment->development->fresh()->best_reply_id);
+    }
 }
