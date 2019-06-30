@@ -94,5 +94,10 @@ main {
     width: 64px;
     height: 64px;
     max-width: 100%;
+    @extend .z-depth-1;
     @include border-radius(50%);
+}
+
+.best-comment {
+    background-color: rgba($info, .6);
 }

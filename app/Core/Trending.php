@@ -47,7 +47,7 @@ class Trending
      *
      * @return string
      */
-    protected function cacheKey()
+    public function cacheKey()
     {
         return app()->environment('testing') ? 'testing_trending_developments' : 'trending_developments';
     }

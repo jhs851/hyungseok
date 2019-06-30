@@ -1,6 +1,6 @@
 <template>
-    <div class="media my-5 text-left">
-        <img :src="data.user.avatar" class="img-fluid mr-3 rounded-circle" alt="">
+    <div class="media my-3 p-3 text-left" :class="{ 'best-comment': isBest }">
+        <img :src="data.user.avatar" class="avatar mr-3" alt="">
 
         <div class="media-body">
             <h6 class="mt-0 d-flex align-items-end">
@@ -12,8 +12,12 @@
                     </small>
                 </div>
 
-                <template v-if="canUpdate">
-                    <div v-if="! editing" class="dropdown">
+                <div v-if="authorize(data) && ! editing && ! isBest" class="d-flex align-items-center">
+                    <a v-if="! isBest" href="#" @click.prevent="toBest">
+                        <i :class="isBest ? 'text-danger' : 'text-dark'" class="fas fa-map-pin mr-2"></i>
+                    </a>
+
+                    <div v-if="authorize(data) && ! editing" class="dropdown">
                         <a :id="`comment${data.id}Dropdown`" class="dropdown-toggle-split text-black-50" href="#"
                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             <i class="fas fa-list-ul"></i>
@@ -31,7 +35,7 @@
                             </a>
                         </div>
                     </div>
-                </template>
+                </div>
             </h6>
 
             <div v-if="editing">
@@ -63,14 +67,15 @@
         props: {
             data: {
                 type: Object,
-                required: true
+                required: true,
             }
         },
 
         data() {
             return {
                 form: new Form({ body: this.data.body }),
-                editing: false
+                editing: false,
+                isBest: false
             };
         },
 
@@ -87,17 +92,6 @@
              */
             diffForHumans(date) {
                 return moment(date).fromNow();
-            }
-        },
-
-        computed: {
-            /**
-             * 사용자가 변경할수 있는 권한이 있는지 확인합니다.
-             *
-             * @returns {boolean}
-             */
-            canUpdate() {
-                return this.authorize(auth => auth == this.data.user_id);
             }
         },
 
@@ -139,7 +133,12 @@
 
                 this.form.delete(`/comments/${this.data.id}`)
                     .then(() => this.$el.classList.add('animated', 'fadeOut'));
+            },
+
+            toBest() {
+
             }
         }
     }
 </script>
+

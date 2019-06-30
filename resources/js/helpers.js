@@ -200,10 +200,10 @@ Vue.mixin({
         /**
          * 현재 사용자에게 권한이 있는지 확인합니다.
          *
-         * @param   {function} handler
+         * @param   {object} model
          * @returns {boolean}
          */
-        authorize(handler) {
+        authorize(model) {
             if (! this.auth) {
                 return false;
             }
@@ -212,7 +212,7 @@ Vue.mixin({
                 return true;
             }
 
-            return handler(this.user.id);
+            return model.hasOwnProperty('user_id') && this.user.id == model.user_id;
         }
     }
 })
