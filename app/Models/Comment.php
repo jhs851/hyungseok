@@ -27,6 +27,16 @@ class Comment extends Model
      */
     protected $with = [
         'user',
+        'development',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = [
+        'isBest',
     ];
 
     /**
@@ -129,11 +139,11 @@ class Comment extends Model
     }
 
     /**
-     * 댓글이 개발 포스트의 베스트 댓글인지 확인합니다.
+     * 댓글이 개발 포스트의 베스트 댓글인지 확인하는 Mutator 입니다.
      *
      * @return bool
      */
-    public function isBest() : bool
+    public function getIsBestAttribute() : bool
     {
         return $this->development->best_comment_id == $this->id;
     }

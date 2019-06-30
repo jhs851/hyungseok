@@ -21,11 +21,11 @@ class BestCommentTest extends TestCase
 
         $comments = create(Comment::class, ['development_id' => $development->id], 2);
 
-        $this->assertFalse($comments[1]->isBest());
+        $this->assertFalse($comments[1]->isBest);
 
         $this->postJson(route('best-comments.store', $comments[1]->id));
 
-        $this->assertTrue($comments[1]->fresh()->isBest());
+        $this->assertTrue($comments[1]->fresh()->isBest);
     }
 
     /**

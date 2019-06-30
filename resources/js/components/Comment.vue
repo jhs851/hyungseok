@@ -12,8 +12,8 @@
                     </small>
                 </div>
 
-                <div v-if="authorize(data) && ! editing && ! isBest" class="d-flex align-items-center">
-                    <a v-if="! isBest" href="#" @click.prevent="toBest">
+                <div class="d-flex align-items-center">
+                    <a v-if="authorize(data.development) && ! isBest" href="#" @click.prevent="markBestComment">
                         <i :class="isBest ? 'text-danger' : 'text-dark'" class="fas fa-map-pin mr-2"></i>
                     </a>
 
@@ -75,8 +75,12 @@
             return {
                 form: new Form({ body: this.data.body }),
                 editing: false,
-                isBest: false
+                isBest: this.data.isBest
             };
+        },
+
+        created() {
+            this.$root.$on('best-comment-selected', id => this.isBest = (id === this.data.id));
         },
 
         mounted() {
@@ -135,8 +139,15 @@
                     .then(() => this.$el.classList.add('animated', 'fadeOut'));
             },
 
-            toBest() {
+            markBestComment() {
+                this.isBest = true;
 
+                axios.post(`/comments/${this.data.id}/best`)
+                     .then(({data}) => {
+                         toastr.success(data.message);
+
+                         this.$root.$emit('best-comment-selected', this.data.id);
+                     });
             }
         }
     }

@@ -107,10 +107,10 @@ class CommentTest extends TestCase
      */
     public function testItKnowsIfItIsTheBestComment() : void
     {
-        $this->assertFalse($this->comment->isBest());
+        $this->assertFalse($this->comment->isBest);
 
         $this->comment->development->update(['best_comment_id' => $this->comment->id]);
 
-        $this->assertTrue($this->comment->fresh()->isBest());
+        $this->assertTrue($this->comment->fresh()->isBest);
     }
 }

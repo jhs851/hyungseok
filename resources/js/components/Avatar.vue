@@ -67,7 +67,7 @@
         </modal>
 
 
-        <div class="dropdown" v-if="canUpdate">
+        <div class="dropdown" v-if="authorize(model)">
             <a id="avatarDropdown" class="dropdown-toggle-split" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img class="avatar mr-2" :src="avatar" alt="">
             </a>
@@ -114,12 +114,6 @@
                 'shown.bs.modal': this.enable,
                 'hide.bs.modal': this.disable
             });
-        },
-
-        computed: {
-            canUpdate() {
-                return this.authorize(auth => this.model.id == auth);
-            }
         },
 
         methods: {

@@ -127,10 +127,10 @@ class DevelopmentTest extends TestCase
     {
         $comment = create(Comment::class, ['development_id' => $this->development->id]);
 
-        $this->assertFalse($comment->isBest());
+        $this->assertFalse($comment->isBest);
 
         $this->development->markBestComment($comment);
 
-        $this->assertTrue($comment->fresh()->isBest());
+        $this->assertTrue($comment->fresh()->isBest);
     }
 }
