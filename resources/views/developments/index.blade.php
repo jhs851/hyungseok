@@ -6,12 +6,15 @@
             <div class="col-md-4">
                 <div class="card rounded-0 my-2">
                     <div class="card-header">
-                        Search
+                        @lang('developments.search')
                     </div>
 
                     <div class="card-body">
                         <form method="GET" action="{{ route('developments.index') }}">
-                            <input class="form-control" type="text" name="search" placeholder="Search for something..." value="{{ request()->get('search') }}">
+                                <input class="form-control pr-5" type="search" name="search"
+                                       placeholder="@lang('developments.search_placeholder')"
+                                       value="{{ request()->get('search') }}"
+                                       style="background: url({{ asset('images/icons/algolia-blue-mark.png') }}) right center / auto 100% no-repeat;">
                         </form>
                     </div>
                 </div>

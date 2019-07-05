@@ -70,7 +70,7 @@ trait Favoritable
      *
      * @return bool
      */
-    public function getisFavoritedAttribute() : bool
+    public function getIsFavoritedAttribute() : bool
     {
         return $this->favorites()->where('user_id', auth()->id())->exists();
     }

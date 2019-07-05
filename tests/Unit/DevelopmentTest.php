@@ -88,7 +88,7 @@ class DevelopmentTest extends TestCase
 
         $this->development->favorite();
 
-        $this->assertCount(1, $this->development->favorites);
+        $this->assertCount(1, $this->development->fresh()->favorites);
     }
 
     /**
@@ -132,5 +132,15 @@ class DevelopmentTest extends TestCase
         $this->development->markBestComment($comment);
 
         $this->assertTrue($comment->fresh()->isBest);
+    }
+
+    /**
+     * 개발 모델을 스카웃에 인덱싱할 때 user 키와 favorites 키를 제거하고 임포트 합니다.
+     */
+    public function testWhenindexingAItInTheScountRemoveTheUserKeyAndTheFavoritesKeyAndImportIt() : void
+    {
+        $this->assertArrayNotHasKey('user', $this->development->toSearchableArray());
+
+        $this->assertArrayNotHasKey('favorites', $this->development->toSearchableArray());
     }
 }

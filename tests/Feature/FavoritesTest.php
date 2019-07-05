@@ -62,7 +62,7 @@ class FavoritesTest extends TestCase
 
         $this->post(route('favorites.store', ['development' => $this->development->id]));
 
-        $this->assertCount(1, $this->development->favorites);
+        $this->assertCount(1, $this->development->fresh()->favorites);
     }
 
     /**
@@ -74,7 +74,7 @@ class FavoritesTest extends TestCase
 
         $this->development->favorite();
 
-        $this->assertCount(1, $this->development->favorites);
+        $this->assertCount(1, $this->development->fresh()->favorites);
 
         $this->delete(route('favorites.destroy', $this->development->id));
 
@@ -96,7 +96,7 @@ class FavoritesTest extends TestCase
             $this->fail('Did not expect to insert the same record set twice.');
         }
 
-        $this->assertCount(1, $this->development->favorites);
+        $this->assertCount(1, $this->development->fresh()->favorites);
     }
 
     /**

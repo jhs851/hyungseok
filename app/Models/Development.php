@@ -31,6 +31,7 @@ class Development extends Model
      */
     protected $with = [
         'user',
+        'favorites',
     ];
 
     /**
@@ -105,5 +106,19 @@ class Development extends Model
         $this->update(['best_comment_id' => $comment->id]);
 
         return $this;
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray() : array
+    {
+        $development = $this->toArray();
+
+        unset($development['user'], $development['favorites']);
+
+        return $development;
     }
 }
