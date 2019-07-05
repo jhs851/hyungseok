@@ -23,16 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerComponents();
-    }
-
-    /**
-     * 컴포넌트들을 등록합니다.
-     */
-    protected function registerComponents() : void
-    {
-        Blade::component('layouts.components.doorkeeper', 'doorkeeper');
-
-        Blade::component('layouts.components.line', 'line');
+        //
     }
 }

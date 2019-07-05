@@ -63,7 +63,7 @@
     <div id="app">
         @include('layouts.partials.navigation')
 
-        <main class="position-relative bg-white">
+        <main class="bg-white">
             @yield('content')
         </main>
 

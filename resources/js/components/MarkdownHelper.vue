@@ -1,6 +1,9 @@
 <template>
     <div>
-        <modal name="markdownHelperModal" :full-height="true" position="right">
+        <modal name="markdownHelperModal" ref="modal" full-height="right"
+               dialog-styles="width: 800px; max-width: 800px;"
+               content-classes="border-top-0 border-bottom-0 rounded-0 position-absolute h-100" content-styles="width: 400px; right: 0;"
+               header-classes="rounded-0">
             <h5 class="mb-0" slot="header" v-text="trans('markdown.header')"></h5>
 
             <div slot="body">
@@ -39,11 +42,25 @@
         </modal>
 
         <button type="button" class="btn btn-primary btn-sm btn-floating position-fixed"
-                data-toggle="modal" data-target="#markdownHelperModal" style="right: 30px; bottom: 30px;">
+                data-toggle="modal" data-target="#markdownHelperModal" data-backdrop="false" style="right: 30px; bottom: 30px;">
             <i class="fas fa-question"></i>
         </button>
     </div>
 </template>
+
+<script>
+    import 'webpack-jquery-ui/resizable';
+
+    export default {
+        mounted() {
+            $(this.$refs.modal.$el).find('.modal-content').resizable({
+                handles: 'w',
+                minWidth: 400,
+                maxWidth: 800
+            });
+        }
+    }
+</script>
 
 <style scoped lang="scss">
     a {

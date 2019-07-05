@@ -52,8 +52,6 @@
 @import './stylesheets/simplemde';
 @import './stylesheets/markdown';
 @import './stylesheets/shadows';
-@import './stylesheets/doorkeeper';
-@import './stylesheets/navbar';
 @import './stylesheets/footer';
 @import './stylesheets/tribute';
 
@@ -77,8 +75,8 @@ textarea {
     visibility: hidden;
 }
 
-main {
-    padding: 15px;
+.fixed-top + main {
+    padding-top: 56px;
 }
 
 .overlay-link {

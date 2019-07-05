@@ -1,8 +1,8 @@
 <template>
     <div class="modal fade" :id="name" tabindex="-1" role="dialog" :aria-labelledby="name" aria-hidden="true" v-cloak>
-        <div class="modal-dialog" :class="dialogClasses" role="document">
-            <div class="modal-content">
-                <div v-if="hasHeader" class="modal-header">
+        <div class="modal-dialog" :class="getDialogClasses" :style="dialogStyles" role="document">
+            <div class="modal-content" :class="contentClasses" :style="contentStyles">
+                <div v-if="hasHeader" class="modal-header" :class="headerClasses">
                     <slot class="modal-title" :id="`${name}Label`" name="header"></slot>
 
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -40,11 +40,28 @@
                 default: ''
             },
             fullHeight: {
-                type: Boolean,
-                default: false
+                type: String,
+                default: ''
             },
-            position: {
-                type: String
+            dialogClasses: {
+                type: String,
+                default: ''
+            },
+            contentClasses: {
+                type: String,
+                default: ''
+            },
+            headerClasses: {
+                type: String,
+                default: ''
+            },
+            dialogStyles: {
+                type: String,
+                default: ''
+            },
+            contentStyles: {
+                type: String,
+                default: ''
             }
         },
 
@@ -69,13 +86,12 @@
                 return this.$slots.hasOwnProperty('footer');
             },
 
-            dialogClasses() {
+            getDialogClasses() {
                 return [
                     this.verticalCenter ? 'modal-dialog-centered' : '',
                     this.size ? `modal-${this.size}` : '',
-                    this.fullHeight ? 'modal-full-height' : '',
-                    this.position ? `modal-${this.position}` : ''
-                ];
+                    this.fullHeight ? `modal-full-height modal-${this.fullHeight}` : ''
+                ].concat(this.dialogClasses);
             }
         }
     }

@@ -1,5 +1,5 @@
-<navigation ref="navigation" inline-template @isset ($writing) :is-write="true" @endisset>
-    <nav class="navbar navbar-expand-md navbar-{{ $theme ?? 'light' }} {{ isset($withoutDoorkeeper) ? '' : 'with-doorkeeper' }}">
+<navigation ref="navigation" inline-template {!! isset($writing) ? ':is-write="true"' : '' !!}>
+    <nav id="navigation" class="navbar navbar-expand-md navbar-light" :class="writing || editing ? 'fixed-top bg-white border-bottom' : ''">
         <a class="navbar-brand font-weight-bold" href="{{ route('home') }}">HS</a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

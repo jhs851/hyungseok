@@ -83,10 +83,6 @@
             this.$root.$on('best-comment-selected', id => this.isBest = (id === this.data.id));
         },
 
-        mounted() {
-            this.$el.addEventListener('animationend', () => this.$el.remove());
-        },
-
         filters: {
             /**
              * 주어진 날짜를 기준으로 몇일 후인지 반환합니다.
@@ -136,9 +132,12 @@
                 }
 
                 this.form.delete(`/comments/${this.data.id}`)
-                    .then(() => this.$el.classList.add('animated', 'fadeOut'));
+                    .then(() => this.$emit('delete'));
             },
 
+            /**
+             * 베스트 댓글로 마크합니다.
+             */
             markBestComment() {
                 this.isBest = true;
 

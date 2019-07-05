@@ -1,17 +1,15 @@
-@extends('layouts.app', ['theme' => 'dark'])
+@extends('layouts.app')
 
 @section('content')
-    @doorkeeper(['description' => trans('developments.description'), 'theme' => 'dark', 'mb' => 'mb-0']) @enddoorkeeper
-
     <development ref="form" inline-template v-cloak :data="{{ $development }}">
-        <div class="container" style="margin-top: -130px;">
-            <div class="row">
-                <div class="col-md-10 offset-md-1 p-3 p-md-5 bg-white shadow" style="min-height: 800px;">
+        <div class="container">
+            <div class="row py-5">
+                <div class="col-12 p-3 p-md-5 bg-white shadow" style="min-height: 800px;">
                     <template v-if="editing">
                         <markdown-helper></markdown-helper>
 
                         <div class="form-group">
-                            <input type="text" ref="title" class="border-0 h2" v-model="form.title" placeholder="@lang('validation.attributes.title')" required autocomplete="title" autofocus>
+                            <input type="text" ref="title" class="border-0 h2 w-100" v-model="form.title" placeholder="@lang('validation.attributes.title')" required autocomplete="title" autofocus>
                         </div>
 
                         <hr class="mb-5">
@@ -85,8 +83,8 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 offset-md-3 py-6 text-center">
+            <div v-if="! editing" class="row">
+                <div class="col-md-6 offset-md-3 pb-6 text-center">
                     <h3 class="font-weight-bold">@lang('comments.title')</h3>
 
                     <p class="text-muted mb-4">@lang('comments.description')</p>

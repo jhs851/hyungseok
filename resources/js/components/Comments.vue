@@ -1,6 +1,8 @@
 <template>
     <div>
-        <comment v-for="comment in items" :data="comment" :key="comment.id"></comment>
+        <transition-group enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDown" tag="div">
+            <comment v-for="(comment, index) in items" :key="comment.id" :data="comment" @delete="remove(index)"></comment>
+        </transition-group>
 
         <new-comment @store="add"></new-comment>
     </div>
@@ -29,6 +31,15 @@
              */
             add(item) {
                 this.items.push(item);
+            },
+
+            /**
+             * 아이템을 삭제합니다.
+             *
+             * @param {int} index
+             */
+            remove(index) {
+                this.$delete(this.items, index);
             }
         }
     }

@@ -1,7 +1,37 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        #navigation {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            z-index: 1030;
+        }
+
+        main {
+            padding: 15px;
+            position: relative;
+        }
+    </style>
+@stop
+
 @section('content')
-    @doorkeeper(['title' => trans('home.main.title'), 'description' => trans('home.main.description')]) @enddoorkeeper
+    <div class="d-flex justify-content-center align-items-center flex-column text-center mb-9" style="background: url('/images/backgrounds/light.jpg') center / cover no-repeat; height: calc(100vh - 30px);">
+        <h1 class="font-weight-bold display-3 mb-4 wow fadeInUp" style="letter-spacing: 10px;">
+            @lang('home.main.title')
+        </h1>
+
+        <h3 class="mb-4 pb-2 wow fadeInUp" data-wow-delay=".6s">
+            @lang('home.main.description')
+        </h3>
+
+        @component('layouts.components.line', [
+            'classes' => 'wow fadeInUp mb-7' . (isset($theme) && $theme == 'dark' ? ' bg-white' : ''),
+            'attributes' => isset($title) ? 'data-wow-delay="1.2s"' : 'data-wow-delay=".6s"'
+        ]) @endcomponent
+    </div>
 
     <div class="container mb-6">
         <div class="row mb-5">
@@ -10,7 +40,7 @@
                     @lang('home.latest_articles')
                 </h3>
 
-                @line(['classes' => 'wow fadeInUp mx-auto', 'attributes' => 'data-wow-delay=".6s"']) @endline
+                @component('layouts.components.line', ['classes' => 'wow fadeInUp mx-auto', 'attributes' => 'data-wow-delay=".6s"']) @endcomponent
             </div>
         </div>
 
@@ -23,7 +53,7 @@
                         <img class="card-img-top" src="{{ asset('images/developments/' . ($index + 1) . '.jpg') }}" alt="">
 
                         <div class="card-body pt-6 pb-5 px-5">
-                            @line(['classes' => 'mx-auto mb-4', 'width' => 40, 'height' => 3]) @endline
+                            @component('layouts.components.line', ['classes' => 'mx-auto mb-4', 'width' => 40, 'height' => 3]) @endcomponent
 
                             <h4 class="card-title text-center">{{ $development->title }}</h4>
                         </div>
