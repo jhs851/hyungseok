@@ -6,10 +6,11 @@ use App\Core\{Favoritable, RecordsActivity};
 use App\Events\DevelopmentRecivedNewComment;
 use App\Filters\DevelopmentFilters;
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
+use Laravel\Scout\Searchable;
 
 class Development extends Model
 {
-    use Favoritable, RecordsActivity;
+    use Favoritable, RecordsActivity, Searchable;
 
     /**
      * The attributes that are mass assignable.
