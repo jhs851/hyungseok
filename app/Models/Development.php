@@ -6,6 +6,7 @@ use App\Core\{Favoritable, RecordsActivity};
 use App\Events\DevelopmentRecivedNewComment;
 use App\Filters\DevelopmentFilters;
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
+use Laravel\Scout\Builder as ScoutBuilder;
 use Laravel\Scout\Searchable;
 
 class Development extends Model
@@ -86,9 +87,9 @@ class Development extends Model
      *
      * @param  Builder  $query
      * @param  DevelopmentFilters  $filters
-     * @return Builder
+     * @return Builder|ScoutBuilder
      */
-    public function scopeFilter(Builder $query, DevelopmentFilters $filters) : Builder
+    public function scopeFilter(Builder $query, DevelopmentFilters $filters)
     {
         return $filters->apply($query);
     }

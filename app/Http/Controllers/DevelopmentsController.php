@@ -7,8 +7,8 @@ use App\Filters\DevelopmentFilters;
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
 use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\{JsonResponse, RedirectResponse};
-use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\View\View;
 
 class DevelopmentsController extends Controller
@@ -123,6 +123,6 @@ class DevelopmentsController extends Controller
      */
     protected function getDevelopments(DevelopmentFilters $filters) : LengthAwarePaginator
     {
-        return Development::filter($filters)->latest()->paginate(10);
+        return Development::filter($filters)->orderBy('created_at', 'desc')->paginate(10);
     }
 }

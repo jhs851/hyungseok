@@ -4,6 +4,18 @@
     <div class="container py-3">
         <div class="row">
             <div class="col-md-4">
+                <div class="card rounded-0 my-2">
+                    <div class="card-header">
+                        Search
+                    </div>
+
+                    <div class="card-body">
+                        <form method="GET" action="{{ route('developments.index') }}">
+                            <input class="form-control" type="text" name="search" placeholder="Search for something..." value="{{ request()->get('search') }}">
+                        </form>
+                    </div>
+                </div>
+
                 @if ($trending)
                     <div class="card rounded-0 my-2">
                         <div class="card-header">

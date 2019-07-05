@@ -2,7 +2,9 @@
 
 namespace App\Filters;
 
+use App\Models\Development;
 use App\Models\User;
+use Laravel\Scout\Builder;
 
 class DevelopmentFilters extends Filters
 {
@@ -12,6 +14,7 @@ class DevelopmentFilters extends Filters
      * @var array
      */
     protected $filters = [
+        'search',
         'by',
         'popularity',
     ];
@@ -32,5 +35,20 @@ class DevelopmentFilters extends Filters
     protected function popularity() : void
     {
         $this->builder->orderBy('comments_count', 'desc');
+    }
+
+    /**
+     * 검색한 내용이 있으면 검색한 내용으로 필터링 합니다.
+     *
+     * @param  string  $search
+     */
+    protected function search(string $search) : void
+    {
+        $this->builder = app(Builder::class, [
+            'model' => new Development,
+            'query' => $search,
+            'callback' => null,
+            'softDelete'=> config('scout.soft_delete', false),
+        ]);
     }
 }
