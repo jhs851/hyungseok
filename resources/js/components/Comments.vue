@@ -9,6 +9,8 @@
 </template>
 
 <script>
+    import VueTribute from 'vue-tribute';
+
     export default {
         props: {
             data: {
@@ -16,6 +18,8 @@
                 required: true
             }
         },
+
+        components: { VueTribute },
 
         data() {
             return {
@@ -40,6 +44,23 @@
              */
             remove(index) {
                 this.$delete(this.items, index);
+            }
+        },
+
+        computed: {
+            /**
+             * Vue Tribute 옵션을 반환합니다.
+             *
+             * @return {object}
+             */
+            tributeOptions() {
+                return {
+                    lookup: 'name',
+                    fillAttr: 'name',
+                    values: function (text, cb) {
+                        $.getJSON('/users', { name: text }, username => cb(username));
+                    }
+                };
             }
         }
     }

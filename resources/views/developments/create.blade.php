@@ -22,7 +22,7 @@
                     <hr class="mb-5">
 
                     <div class="form-group mb-0">
-                        <markdown-editor name="body" value="{{ old('body') }}" :configs="simpleMDEConfigs"></markdown-editor>
+                        <markdown-editor name="body" value="{{ old('body') }}"></markdown-editor>
                     </div>
                 </form>
             </div>

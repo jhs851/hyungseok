@@ -62,3 +62,5 @@ Route::delete('/users/{user}/avatar', [
     'as' => 'users.avatar.destroy',
     'uses' => 'AvatarsController@destroy',
 ]);
+
+Route::view('scan', 'developments.scan');

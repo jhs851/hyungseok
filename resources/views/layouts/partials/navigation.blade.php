@@ -17,7 +17,7 @@
 
                     <div class="dropdown-menu" aria-labelledby="developmentDropdown">
                         <a class="dropdown-item" href="{{ route('developments.index') }}">
-                            @lang('developments.title')
+                            @lang('developments.list')
                         </a>
 
                         <a class="dropdown-item" href="{{ route('developments.create') }}">

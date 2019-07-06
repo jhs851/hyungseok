@@ -15,7 +15,7 @@
                         <hr class="mb-5">
 
                         <div class="form-group mb-0">
-                            <markdown-editor ref="body" v-model="form.body" :configs="simpleMDEConfigs"></markdown-editor>
+                            <markdown-editor ref="body" v-model="form.body"></markdown-editor>
                         </div>
                     </template>
 

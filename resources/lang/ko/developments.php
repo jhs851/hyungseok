@@ -2,7 +2,7 @@
 
 return [
     'title' => '기술 개발',
-    'description' => '기록하고 잊어라',
+    'list' => '모든 글',
     'empty' => '등록된 글이 없습니다.<br><a href="' . route('developments.create') . '" class="btn btn-outline-primary mt-2">글쓰기</a>',
     'create' => '새글 쓰기',
     'body_placeholder' => "본문을 작성해주세요.\n해당 문서는 마크다운 문법을 지원합니다.",

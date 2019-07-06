@@ -40,7 +40,7 @@
 
             <div v-if="editing">
                 <div class="form-group mb-2">
-                    <vue-tribute :options="tributeOptions">
+                    <vue-tribute :options="$parent.tributeOptions">
                         <textarea v-model="form.body" :class="{ 'is-invalid': form.errors.has('body') }" class="form-control rounded-0 p-3" @keydown="form.errors.clear('body')" :placeholder="trans('comments.placehoder')"></textarea>
                     </vue-tribute>
 
