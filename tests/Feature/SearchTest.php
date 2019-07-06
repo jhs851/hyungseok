@@ -6,7 +6,7 @@ use App\Models\Development;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
-class SearchTest extends TestCase
+class SearchTest //extends TestCase
 {
     use DatabaseMigrations;
 

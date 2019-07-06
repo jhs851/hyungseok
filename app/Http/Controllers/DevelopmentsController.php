@@ -32,14 +32,14 @@ class DevelopmentsController extends Controller
      */
     public function index(DevelopmentFilters $filters, Trending $trending)
     {
-        $developments = $this->getDevelopments($filters);
+        // $developments = $this->getDevelopments($filters);
 
-        if (request()->expectsJson()) {
-            return $developments;
-        }
+//        if (request()->expectsJson()) {
+//            return $developments;
+//        }
 
         return view('developments.index', [
-            'developments' => $developments,
+            // 'developments' => $developments,
             'trending' => $trending->get(),
         ]);
     }
@@ -80,7 +80,8 @@ class DevelopmentsController extends Controller
     {
         $trending->push($development);
 
-        $development->increment('visits');
+        $development->visits++;
+        $development->save();
 
         return view('developments.show', compact('development'));
     }

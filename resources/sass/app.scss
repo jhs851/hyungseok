@@ -46,9 +46,6 @@
 // Cropper
 @import '~cropper/dist/cropper.css';
 
-// instantsearch.css
-@import '~instantsearch.css/themes/algolia.css';
-
 // Style sheets
 @import './stylesheets/buttons';
 @import './stylesheets/modal';
@@ -57,6 +54,7 @@
 @import './stylesheets/shadows';
 @import './stylesheets/footer';
 @import './stylesheets/tribute';
+@import './stylesheets/instantsearch';
 
 a, .btn-link {
     color: $blue;

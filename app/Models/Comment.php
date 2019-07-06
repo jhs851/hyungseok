@@ -49,7 +49,8 @@ class Comment extends Model
         parent::boot();
 
         static::created(function (Comment $comment) {
-            $comment->development->increment('comments_count');
+            $comment->development->comments_count++;
+            $comment->development->save();
         });
 
         static::deleting(function (Comment $comment) {
@@ -62,7 +63,8 @@ class Comment extends Model
         });
 
         static::deleted(function (Comment $comment) {
-            $comment->development->decrement('comments_count');
+            $comment->development->comments_count--;
+            $comment->development->save();
         });
     }
 

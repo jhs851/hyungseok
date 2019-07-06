@@ -1,6 +1,7 @@
 import Translator from './core/Translator';
 import VueClipboard from 'vue-clipboard2';
 import InstantSearch from 'vue-instantsearch';
+import VueAutosuggest from 'vue-autosuggest';
 
 Vue.mixin({
     data() {
@@ -22,6 +23,35 @@ Vue.mixin({
          */
         auth() {
             return document.head.querySelector('meta[name="auth"]').content;
+        }
+    },
+
+    filters: {
+        /**
+         * 주어진 날짜를 주어진 포팻으로 반환합니다.
+         *
+         * @param  {string} date
+         * @param  {string} format
+         * @return {string}
+         */
+        dateFormat(date, format) {
+            return moment(date).format(format);
+        },
+
+        /**
+         * 주어진 문자열을 주어진 수로 자릅니다.
+         *
+         * @param {string} value
+         * @param {number} limit
+         * @param {string} end
+         * @return {string}
+         */
+        strLimit(value, limit = 100, end = '...') {
+            if (value.length <= limit) {
+                return value;
+            }
+
+            return value.substr(0, limit).trim() + end;
         }
     },
 
@@ -78,4 +108,5 @@ Vue.mixin({
     }
 })
     .use(VueClipboard)
-    .use(InstantSearch);
+    .use(InstantSearch)
+    .use(VueAutosuggest);

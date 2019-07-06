@@ -115,10 +115,6 @@ class Development extends Model
      */
     public function toSearchableArray() : array
     {
-        $development = $this->toArray();
-
-        unset($development['user'], $development['favorites']);
-
-        return $development;
+        return $this->toArray() + ['created_at_timestamp' => $this->created_at->timestamp];
     }
 }

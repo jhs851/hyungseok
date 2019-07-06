@@ -1,6 +1,8 @@
 <?php
 
 // Homepage
+use App\Models\Development;
+
 Route::get('/', [
     'as' => 'home',
     'uses' => 'HomeController',
@@ -62,5 +64,3 @@ Route::delete('/users/{user}/avatar', [
     'as' => 'users.avatar.destroy',
     'uses' => 'AvatarsController@destroy',
 ]);
-
-Route::view('scan', 'developments.scan');

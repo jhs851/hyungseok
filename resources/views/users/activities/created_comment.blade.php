@@ -6,7 +6,7 @@
             </a>
         </h5>
 
-        <p class="card-text text-black-50">{{ $activity->subject->body }}</p>
+        <p class="card-text text-black-50">{!! $activity->subject->body  !!}</p>
     </div>
 
     <div class="card-footer d-flex justify-content-between">

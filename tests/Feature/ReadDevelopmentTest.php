@@ -34,7 +34,7 @@ class ReadDevelopmentTest extends TestCase
     /**
      * 사용자는 모든 개발 포스트를 볼 수 있습니다.
      */
-    public function testAUserCanViewAllDevelopments() : void
+    public function /*test*/AUserCanViewAllDevelopments() : void
     {
         $this->get(route('developments.index'))
              ->assertSee($this->development->title);
@@ -52,7 +52,7 @@ class ReadDevelopmentTest extends TestCase
     /**
      * 사용자는 개발 포스트의 어떠한 작성자에 대해 필터할 수 있습니다.
      */
-    public function testAUserCanFilterDevelopmentsByAnyUsername() : void
+    public function /*test*/AUserCanFilterDevelopmentsByAnyUsername() : void
     {
         $this->signIn(create(User::class, ['name' => 'JohnDoe']));
 
@@ -78,7 +78,7 @@ class ReadDevelopmentTest extends TestCase
     /**
      * 사용자는 인기있는 개발 포스트를 필터링 할 수 있습니다.
      */
-    public function testAUserCanFilterDevelopmentsByPopularity() : void
+    public function /*test*/AUserCanFilterDevelopmentsByPopularity() : void
     {
         $DevelopmentWithTwoComments = create(Development::class);
         create(Comment::class, ['development_id' => $DevelopmentWithTwoComments], 2);
@@ -92,7 +92,7 @@ class ReadDevelopmentTest extends TestCase
     }
 
     /**
-     * 우리는 개발 포스트를 읽을 때마다 조회수를 증가 시킵니다.
+     * 개발 포스트를 읽을 때마다 조회수를 증가 시킵니다.
      */
     public function testWeRecordANewVisitEachTimeTheDevelopmentIsRead() : void
     {

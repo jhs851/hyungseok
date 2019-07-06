@@ -24,7 +24,7 @@
                             @lang('developments.create')
                         </a>
 
-                        @auth
+                        {{--@auth
                             <a class="dropdown-item" href="{{ route('developments.index', ['by' => auth()->user()->name]) }}">
                                 @lang('developments.my_developments')
                             </a>
@@ -32,7 +32,7 @@
 
                         <a class="dropdown-item" href="{{ route('developments.index', ['popularity' => 1]) }}">
                             @lang('developments.popularity')
-                        </a>
+                        </a>--}}
                     </div>
                 </li>
 

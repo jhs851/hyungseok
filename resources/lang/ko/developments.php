@@ -23,4 +23,6 @@ return [
     'trending' => '유행하고 있는 글',
     'search' => '검색',
     'search_placeholder' => '제목 및 내용을 검색하세요.',
+    'searching' => '검색중...',
+    'autocomplete_placeholder' => '선택하려면 <b>enter</b> 키를 누르고, 탐색하려면 <b>↑↓</b>, 취소하려면 <b>esc</b>를 누르세요',
 ];
