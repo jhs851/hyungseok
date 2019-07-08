@@ -28,8 +28,8 @@
         </h3>
 
         @component('layouts.components.line', [
-            'classes' => 'wow fadeInUp mb-7' . (isset($theme) && $theme == 'dark' ? ' bg-white' : ''),
-            'attributes' => isset($title) ? 'data-wow-delay="1.2s"' : 'data-wow-delay=".6s"'
+            'classes' => 'wow fadeInUp mb-7',
+            'attributes' => 'data-wow-delay="1.2s"',
         ]) @endcomponent
     </div>
 

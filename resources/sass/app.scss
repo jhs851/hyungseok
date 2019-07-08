@@ -95,6 +95,11 @@ textarea {
     max-width: 100%;
     @extend .z-depth-1;
     @include border-radius(50%);
+
+    &.avatar-sm {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 .best-comment {

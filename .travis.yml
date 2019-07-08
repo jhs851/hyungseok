@@ -5,7 +5,6 @@ php:
 
 before_script:
   - cp .env.travis .env
-  - wget https://keys.algolia.engineering/client/algolia-keys && chmod +x algolia-keys
   - composer self-update
   - composer install --no-interaction
   - php artisan key:generate
@@ -14,7 +13,7 @@ before_script:
   - npm install
 
 script:
-  - $(./algolia-keys export) && vendor/bin/phpunit --coverage-text
+  - vendor/bin/phpunit --coverage-text
   - npm run production
 
 cache:

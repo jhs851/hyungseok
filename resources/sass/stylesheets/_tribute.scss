@@ -1,24 +1,31 @@
 .tribute-container {
+    max-height: 234px;
     @extend .z-depth-1;
 
     ul {
+        margin-top: 0;
         background-color: white;
+        @include border-radius(.25rem !important);
     }
 
     li {
-        padding: .5rem 1rem;
+        padding: 0 1rem;
+        @include transition(all .2s ease-out);
 
         span {
-            color: $primary;
+            font-weight: normal;
         }
 
         &.highlight {
-            background-color: $primary;
-            color: white;
-
-            span {
-                color: white;
-            }
+            background-color: #f5f5fa;
         }
+
+        + li > div {
+            border-top: 1px solid rgba(132, 138, 184, .2);
+        }
+    }
+
+    .menu-highlighted {
+        font-weight: normal;
     }
 }

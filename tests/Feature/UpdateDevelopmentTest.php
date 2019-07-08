@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\Development;
+use App\Models\{Development, Tag};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -49,6 +49,18 @@ class UpdateDevelopmentTest extends TestCase
     }
 
     /**
+     * 개발 블로그를 변경할 때 태그 값은 필수 항목입니다.
+     */
+    public function testADevelopmentRequiresTagsToBeUpdated() : void
+    {
+        $development = create(Development::class, ['user_id' => auth()->id()]);
+
+        $this->withExceptionHandling()
+            ->put(route('developments.update', $development->id), ['title' => 'Changed', 'body' => 'Changed body'])
+            ->assertSessionHasErrors('tags');
+    }
+
+    /**
      * 권한이 없는 사용자는 개발 블로그를 변경할 수 없습니다.
      */
     public function testUnauthorizedUsersMayNotUpdateDevelopments() : void
@@ -65,11 +77,13 @@ class UpdateDevelopmentTest extends TestCase
      */
     public function testADevelopmentCanBeUpdatedByItsCreator() : void
     {
+        $tags = create(Tag::class, [], 3);
         $development = create(Development::class, ['user_id' => auth()->id()]);
 
         $this->put(route('developments.update', $development->id), [
             'title' => 'Changed',
             'body'  => 'Changed body.',
+            'tags'  => $tags->pluck('id')->toArray(),
         ]);
 
         tap($development->fresh(), function($development) {

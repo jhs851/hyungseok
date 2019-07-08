@@ -64,6 +64,8 @@ class DevelopmentsController extends Controller
     {
         $development = $request->user()->developments()->create($request->all());
 
+        $development->tags()->sync($request->input('tags'));
+
         flash()->success(trans('developments.store'));
 
         return redirect(route('developments.show', ['development' => $development->id]));
@@ -96,6 +98,8 @@ class DevelopmentsController extends Controller
     public function update(DevelopmentRequest $request, Development $development) : JsonResponse
     {
         $development->update($request->all());
+
+        $development->tags()->sync($request->input('tags'));
 
         return response()->json(['message' => trans('developments.updated')]);
     }

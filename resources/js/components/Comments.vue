@@ -57,9 +57,18 @@
                 return {
                     lookup: 'name',
                     fillAttr: 'name',
-                    values: function (text, cb) {
+                    values: (text, cb) => {
                         $.getJSON('/users', { name: text }, username => cb(username));
-                    }
+                    },
+                    menuItemTemplate: ({original}) => `
+                        <div class="py-2">
+                            <div class="d-flex justify-content-center align-items-center">
+                                <img class="avatar avatar-sm" src="${original.avatar}" alt="">
+
+                                <small class="ml-2">${original.name}</small>
+                            </div>
+                        </div>
+                    `
                 };
             }
         }

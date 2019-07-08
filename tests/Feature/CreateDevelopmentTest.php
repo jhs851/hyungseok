@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Activity, Comment, Development, Favorite, User};
+use App\Models\{Activity, Comment, Development, Favorite, Tag, User};
 use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
 use Tests\TestCase;
 
@@ -43,12 +43,16 @@ class CreateDevelopmentTest extends TestCase
     {
         $this->signIn();
 
-        $thread = make(Development::class);
-        $response = $this->post(route('developments.store'), $thread->toArray());
+        $development = make(Development::class);
+        $tags = create(Tag::class, [], 3);
+        $response = $this->post(
+            route('developments.store'),
+            $development->toArray() + ['tags' => $tags->pluck('id')->toArray()]
+        );
 
         $this->get($response->headers->get('Location'))
-             ->assertSee($thread->title)
-             ->assertSee($thread->body);
+             ->assertSee($development->title)
+             ->assertSee($development->body);
     }
 
     /**
@@ -60,13 +64,20 @@ class CreateDevelopmentTest extends TestCase
              ->assertSessionHasErrors('title');
     }
 
-    /**
-     * 본문 값은 반드시 있어야 합니다.
-     */
+
     public function testADevelopmentRequiresABody() : void
     {
         $this->publishDevelopment(['body' => ''])
             ->assertSessionHasErrors('body');
+    }
+
+    /**
+     * 태그 값은 반드시 있어야 합니다.
+     */
+    public function testADevelopmentRequiresTags() : void
+    {
+        $this->publishDevelopment(['tags' => []])
+            ->assertSessionHasErrors('tags');
     }
 
     /**

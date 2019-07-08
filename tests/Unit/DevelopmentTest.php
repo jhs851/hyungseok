@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Events\DevelopmentRecivedNewComment;
-use App\Models\{Comment, Development, User};
+use App\Models\{Comment, Development, Tag, User};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -59,6 +59,14 @@ class DevelopmentTest extends TestCase
     }
 
     /**
+     * 개발 모델은 태그를 가지고 있습니다.
+     */
+    public function testADevelopmentHasTags() : void
+    {
+        $this->assertInstanceOf(Collection::class, $this->development->tags);
+    }
+
+    /**
      * 개발 모델은 댓글을 추가할 수 있습니다.
      */
     public function testADevelopmentCanAddComment() : void
@@ -103,6 +111,22 @@ class DevelopmentTest extends TestCase
         $this->development->delete();
 
         $this->assertDatabaseMissing('comments', ['id' => $comment->id]);
+    }
+
+    /**
+     * 개발 모델을 삭제할 때 태그들을 분리합니다.
+     */
+    public function testWhenDeleteADevelopmentModelDetachAllTags() : void
+    {
+        $tag = create(Tag::class);
+
+        $this->development->tags()->sync($tag->id);
+
+        $this->assertDatabaseHas('development_tag', ['development_id' => $this->development->id, 'tag_id' => $tag->id]);
+
+        $this->development->delete();
+
+        $this->assertDatabaseMissing('development_tag', ['development_id' => $this->development->id, 'tag_id' => $tag->id]);
     }
 
     /**

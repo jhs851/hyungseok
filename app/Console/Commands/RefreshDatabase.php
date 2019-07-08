@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Core\Trending;
+use App\Models\Development;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\{Artisan, File, Redis};
 use SplFileInfo;
@@ -56,6 +57,14 @@ class RefreshDatabase extends Command
             ->each(function (SplFileInfo $file) {
                 File::delete($file->getPathname());
             });
+
+        Artisan::call('scout:flush', [
+            'model' => Development::class,
+        ]);
+
+        Artisan::call('scout:import', [
+            'model' => Development::class,
+        ]);
 
         $this->info('Refreshed.');
     }

@@ -5,7 +5,7 @@ namespace App\Models;
 use App\Core\{Favoritable, RecordsActivity};
 use App\Events\DevelopmentRecivedNewComment;
 use App\Filters\DevelopmentFilters;
-use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\HasMany};
+use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\BelongsToMany, Relations\HasMany};
 use Laravel\Scout\Builder as ScoutBuilder;
 use Laravel\Scout\Searchable;
 
@@ -45,6 +45,8 @@ class Development extends Model
 
         static::deleting(function (Development $development) {
             $development->comments->each->delete();
+
+            $development->tags()->detach();
         });
     }
 
@@ -66,6 +68,16 @@ class Development extends Model
     public function comments() : HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Tag에 대한 BelongsToMany 인스턴스를 반환합니다.
+     *
+     * @return BelongsToMany
+     */
+    public function tags() : BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     /**
