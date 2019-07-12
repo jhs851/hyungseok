@@ -22,23 +22,24 @@ class Translator {
      * 주어진 키에 해당하는 번역을 반환합니다.
      *
      * @param  {string} key
+     * @param  {object} attributes
      * @return {string}
      */
-    trans(key) {
-        return this.get(key);
+    trans(key, attributes = {}) {
+        return this.get(key, attributes);
     }
 
     /**
      * 주어진 키에 해당하는 번역을 반환합니다.
      *
      * @param  {string} key
-     * @param  {array}  attributes
+     * @param  {object} attributes
      * @return {string}
      */
-    get(key, attributes = []) {
+    get(key, attributes = {}) {
         let line = _.get(window.i18n, key, key);
 
-        attributes.forEach((replacement, attribute) => line = _.replace(line, `:${attribute}`, replacement));
+        _.eachRight(attributes, (paramValue, paramKey) => line = _.replace(line, `:${paramKey}`, paramValue));
 
         return line;
     }

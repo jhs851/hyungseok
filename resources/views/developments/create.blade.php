@@ -1,11 +1,5 @@
 @extends('layouts.app', ['writing' => true])
 
-@section('style')
-    <style>
-
-    </style>
-@stop
-
 @section('content')
     <markdown-helper></markdown-helper>
 
@@ -16,13 +10,19 @@
                     @csrf
 
                     <div class="form-group">
-                        <input type="text" class="border-0 h2 w-100" name="title" value="{{ old('title') }}" placeholder="@lang('validation.attributes.title')" required autocomplete="title" autofocus>
+                        <input type="text" class="border-0 h2 w-100" name="title" value="{{ old('title') }}"
+                               placeholder="@lang('validation.attributes.title')" required autocomplete="title"
+                               autofocus>
                     </div>
 
                     <hr class="mb-5">
 
-                    <div class="form-group mb-0">
+                    <div class="form-group mb">
                         <markdown-editor name="body" value="{{ old('body') }}"></markdown-editor>
+                    </div>
+
+                    <div class="form-group mb-0">
+                        <tags-select></tags-select>
                     </div>
                 </form>
             </div>

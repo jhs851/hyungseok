@@ -2,6 +2,7 @@ import Translator from './core/Translator';
 import VueClipboard from 'vue-clipboard2';
 import InstantSearch from 'vue-instantsearch';
 import VueAutosuggest from 'vue-autosuggest';
+import VueMarkdown from 'vue-markdown';
 
 Vue.mixin({
     data() {
@@ -10,6 +11,8 @@ Vue.mixin({
             user: {}
         };
     },
+
+    components: { VueMarkdown },
 
     created() {
         this.user = this.auth ? JSON.parse(document.head.querySelector('meta[name="user"]').content) : {};
@@ -60,14 +63,15 @@ Vue.mixin({
          * 주어진 키에 대한 번역을 반환합니다.
          *
          * @param  {string|null} key
+         * @param  {object}       attributes
          * @return {string|Translator}
          */
-        trans(key = null) {
+        trans(key = null, attributes = {}) {
             if (! key) {
                 return this.translator;
             }
 
-            return this.translator.trans(key);
+            return this.translator.trans(key, attributes);
         },
 
         /**

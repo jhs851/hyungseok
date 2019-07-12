@@ -62,6 +62,8 @@ class DevelopmentsController extends Controller
      */
     public function store(DevelopmentRequest $request) : RedirectResponse
     {
+        dd($request->all());
+
         $development = $request->user()->developments()->create($request->all());
 
         $development->tags()->sync($request->input('tags'));

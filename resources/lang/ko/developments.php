@@ -25,4 +25,15 @@ return [
     'search_placeholder' => '제목 및 내용을 검색하세요.',
     'searching' => '검색중...',
     'autocomplete_placeholder' => '선택하려면 <b>enter</b> 키를 누르고, 탐색하려면 <b>↑↓</b>, 취소하려면 <b>esc</b>를 누르세요',
+    'tags_placeholder' => ' #태그를 선택해주세요.',
+    'multi_select' => [
+        'select_label' => 'Enter 키를 눌러 선택',
+        'group_label' => 'Enter 키를 눌러 그룹을 선택',
+        'selected_label' => '선택된',
+        'deselect_label' => 'Enter 키를 눌러 제거',
+        'deselect_group_label' => 'Enter 키를 눌러 그룹을 제거',
+        'max_elements' => '최대 :max 옵션이 선택되었습니다. 먼저 선택한 옵션을 제거하여 다른 옵션을 선택하세요.',
+        'no_result' => '결과를 찾을 수 없습니다. 검색 쿼리를 변경하는 것을 고려하세요.',
+        'no_options' => '목록이 비어 있습니다.',
+    ],
 ];

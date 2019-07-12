@@ -41,6 +41,7 @@
         "vue-clipboard2": "^0.3.0",
         "vue-instantsearch": "^2.2.1",
         "vue-markdown": "^2.2.4",
+        "vue-multiselect": "^2.1.6",
         "vue-tribute": "^1.0.2",
         "webpack-jquery-ui": "^2.0.1",
         "wowjs": "^1.1.3"

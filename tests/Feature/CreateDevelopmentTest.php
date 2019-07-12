@@ -72,15 +72,6 @@ class CreateDevelopmentTest extends TestCase
     }
 
     /**
-     * 태그 값은 반드시 있어야 합니다.
-     */
-    public function testADevelopmentRequiresTags() : void
-    {
-        $this->publishDevelopment(['tags' => []])
-            ->assertSessionHasErrors('tags');
-    }
-
-    /**
      * 게스트는 개발 포스트를 삭제할 수 없습니다.
      */
     public function testGuestsCannotDeleteDevelopments() : void

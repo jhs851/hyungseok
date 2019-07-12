@@ -32,6 +32,7 @@ class Development extends Model
     protected $with = [
         'user',
         'favorites',
+        'tags',
     ];
 
     /**
