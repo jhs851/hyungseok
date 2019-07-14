@@ -64,11 +64,31 @@ class CreateDevelopmentTest extends TestCase
              ->assertSessionHasErrors('title');
     }
 
-
+    /**
+     * 본문 값은 반드시 있어야 합니다.
+     */
     public function testADevelopmentRequiresABody() : void
     {
         $this->publishDevelopment(['body' => ''])
             ->assertSessionHasErrors('body');
+    }
+
+    /**
+     * 태그 값은 배열이어야 합니다.
+     */
+    public function testTagValuesMustBeArray() : void
+    {
+        $this->publishDevelopment(['tags' => 'Hello'])
+             ->assertSessionHasErrors('tags');
+    }
+
+    /**
+     * 태그 값은 이미 존재하는 태그이어야 합니다.
+     */
+    public function testTagValueMustAlreadyExist() : void
+    {
+        $this->publishDevelopment(['tags' => [1]])
+             ->assertSessionHasErrors('tags.*');
     }
 
     /**

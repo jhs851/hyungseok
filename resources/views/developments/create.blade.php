@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="form-group mb-0">
-                        <tags-select></tags-select>
+                        <tags-select :old="{{ json_encode(old('tags', [])) }}"></tags-select>
                     </div>
                 </form>
             </div>

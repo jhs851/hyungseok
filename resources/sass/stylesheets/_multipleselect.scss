@@ -1,0 +1,8 @@
+.multiselect__tags {
+    border-color: #ddd;
+    @include border-radius(4px);
+}
+
+.multiselect__tag-icon::after {
+    color: white;
+}
