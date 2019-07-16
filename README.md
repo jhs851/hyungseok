@@ -38,6 +38,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Mark the best comment
 - [x] Tags, Search Capabilities Implemented with testing
 - [ ] Create Adminitrator page
+- [ ] Localization
 - [ ] Speed optimization
 - [ ] Open the server
 - [ ] Register mail in Mailgun
@@ -47,7 +48,7 @@ This project is a personal project for my development record and my daily life r
 
 ## Technology stacks
 
-- **[PHP 7.1]()**
+- **[PHP 7.1](https://www.php.net/)**
 - **[Laravel 5.8](https://github.com/laravel/laravel)**
 - [Symfony 4.2](https://symfony.com/)
 - [PHPUnit 7.5](https://phpunit.de/)

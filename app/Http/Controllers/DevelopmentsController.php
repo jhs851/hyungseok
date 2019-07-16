@@ -101,7 +101,10 @@ class DevelopmentsController extends Controller
 
         $development->tags()->sync($request->input('tags'));
 
-        return response()->json(['message' => trans('developments.updated')]);
+        return response()->json([
+            'message' => trans('developments.updated'),
+            'development' => $development->fresh(),
+        ]);
     }
 
     /**

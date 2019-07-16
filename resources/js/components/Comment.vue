@@ -42,11 +42,11 @@
                 <div class="form-group mb-2">
                     <vue-tribute :options="$parent.tributeOptions">
                         <textarea v-model="form.body" :class="{ 'is-invalid': form.errors.has('body') }" class="form-control rounded-0 p-3" @keydown="form.errors.clear('body')" :placeholder="trans('comments.placehoder')"></textarea>
-                    </vue-tribute>
 
-                    <span v-if="form.errors.has('body')" class="invalid-feedback text-left" role="alert">
-                        <strong v-text="form.errors.get('body')"></strong>
-                    </span>
+                        <span v-if="form.errors.has('body')" class="invalid-feedback text-left" role="alert">
+                            <strong v-text="form.errors.get('body')"></strong>
+                        </span>
+                    </vue-tribute>
                 </div>
 
                 <div class="d-flex justify-content-end">

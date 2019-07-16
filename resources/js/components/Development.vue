@@ -12,7 +12,12 @@
         data() {
             return {
                 editing: false,
-                form: new Form(this.data)
+                form: new Form({
+                    title: this.data.title,
+                    body: this.data.body,
+                    tags: this.data.tags.map(tag => tag.id)
+                }),
+                tags: this.data.tags
             };
         },
 
@@ -39,7 +44,7 @@
             submit() {
                 this.form.put(location.pathname)
                     .then(this.success)
-                    .catch(errors => _.forEachRight(errors, field => field.forEach(message => toastr.error(message))));
+                    .catch(data => _.forEachRight(data.errors, error => error.forEach(message => toastr.error(message))));
             },
 
             /**
@@ -50,6 +55,16 @@
             success(data) {
                 this.editing = false;
                 this.$root.$refs.navigation.editing = false;
+                this.tags = data.development.tags;
+            },
+
+            /**
+             * 태그를 업데이트 합니다.
+             *
+             * @param {array} ids
+             */
+            updateTags(ids) {
+                this.form.tags = ids;
             }
         }
     }

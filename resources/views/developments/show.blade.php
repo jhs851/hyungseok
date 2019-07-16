@@ -14,8 +14,12 @@
 
                         <hr class="mb-5">
 
-                        <div class="form-group mb-0">
+                        <div class="form-group">
                             <markdown-editor ref="body" v-model="form.body"></markdown-editor>
+                        </div>
+
+                        <div class="form-group mb-0">
+                            <tags-select :old="form.tags" @change="updateTags"></tags-select>
                         </div>
                     </template>
 
@@ -81,11 +85,9 @@
                         <vue-markdown class="markdown-body" :task-lists="false" @rendered="enablePrism">@{{ form.body }}</vue-markdown>
 
                         <ul class="list-unstyled mb-0 d-flex mt-auto">
-                            @foreach ($development->tags as $tag)
-                                <li class="mr-2">
-                                    <span class="badge badge-light font-weight-normal px-3 py-2">#{{ $tag->name }}</span>
-                                </li>
-                            @endforeach
+                            <li v-for="tag in tags" class="mr-2">
+                                <span class="badge badge-light font-weight-normal px-3 py-2" v-text="`#${tag.name}`"></span>
+                            </li>
                         </ul>
                     </template>
                 </div>

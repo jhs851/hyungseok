@@ -1,6 +1,6 @@
 <template>
     <div>
-        <multiselect v-model="value" :options="tags" label="name" track-by="id"
+        <multiselect v-model="value" :options="tags" label="name" track-by="id" @input="change"
                      :placeholder="trans('developments.tags_placeholder')" :multiple="true" :close-on-select="false"
                      :select-label="trans('developments.multi_select.select_label')"
                      :selected-label="trans('developments.multi_select.selected_label')"
@@ -45,6 +45,12 @@
                     });
                 }
             });
+        },
+
+        methods: {
+            change() {
+                this.$emit('change', this.value.map(v => v.id));
+            }
         }
     }
 </script>
