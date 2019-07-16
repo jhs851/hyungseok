@@ -74,6 +74,15 @@ class CreateDevelopmentTest extends TestCase
     }
 
     /**
+     * 태그 값은 반드시 있어야 합니다.
+     */
+    public function testADevelopmentRequiresTags() : void
+    {
+        $this->publishDevelopment(['tags' => []])
+             ->assertSessionHasErrors('tags');
+    }
+
+    /**
      * 태그 값은 배열이어야 합니다.
      */
     public function testTagValuesMustBeArray() : void

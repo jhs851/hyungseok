@@ -2,7 +2,7 @@
 
 @section('content')
     <search-view class="container py-3" index="developments" v-cloak>
-        <div class="row" slot-scope="{ onSelect, query, indicesToSuggestions, getSuggestion }">
+        <div class="row" slot-scope="{ onSelect, query, indicesToSuggestions, getSuggestion, log }">
             <div class="col-md-4">
                 <div class="card rounded-0 my-2">
                     <div class="card-header">
@@ -69,6 +69,40 @@
                         </div>
                     </div>
                 @endif
+
+                <div class="card rounded-0 my-2">
+                    <div class="card-header">
+                        @lang('developments.filter_by_tag')
+                    </div>
+
+                    <div class="card-body">
+                        <ais-refinement-list attribute="tags.name" searchable show-more :show-more-limit="50" :sort-by="['count:desc', 'name:asc']">
+                            <template slot-scope="{ items, isShowingMore, isFromSearch, canToggleShowMore, refine, toggleShowMore, searchForItems }">
+                                {{--<div class="form-group">
+                                    <input class="form-control" @input="searchForItems($event.target.value)">
+                                </div>--}}
+
+                                <small v-if="isFromSearch && ! items.length" class="d-block text-center text-danger">
+                                    @lang('developments.empty_tags')
+                                </small>
+
+                                <div v-for="item in items" :key="item.value" class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" :id="item.value" @change.prevent="refine(item.value)">
+                                    <label class="custom-control-label" :for="item.value">
+                                        <ais-highlight attribute="item" :hit="item"></ais-highlight>
+                                        <small class="badge badge-warning font-weight-normal" v-text="item.count.toLocaleString()"></small>
+                                    </label>
+                                </div>
+
+                                <div class="text-right mt-3">
+                                    <a href="#" class="btn btn-primary" @click.prevent="toggleShowMore" :disabled="! canToggleShowMore">
+                                        @{{ ! isShowingMore ? trans('developments.show_more') : trans('developments.show_less') }}
+                                    </a>
+                                </div>
+                            </template>
+                        </ais-refinement-list>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-8">
@@ -79,25 +113,6 @@
                                 <a :href="`/users/${development.user_id}`">
                                     <ais-highlight attribute="user.name" :hit="development" highlighted-tag-name="em" />
                                 </a>
-                            </div>
-
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a :href="`/developments/${development.id}`">
-                                        <ais-highlight attribute="title" :hit="development" highlighted-tag-name="em" />
-                                    </a>
-                                </h5>
-
-                                <p class="card-text text-black-50">
-                                    <ais-highlight attribute="body" :hit="development" highlighted-tag-name="em" />
-                                </p>
-                            </div>
-
-                            <div class="card-footer d-flex justify-content-between">
-                                <small>
-                                    <i class="far fa-clock mr-1"></i>
-                                    @{{ development.created_at | dateFormat('Y. M. D') }}
-                                </small>
 
                                 <div>
                                     <small class="mr-3">
@@ -115,6 +130,31 @@
                                         @{{ development.favoritesCount }}
                                     </small>
                                 </div>
+                            </div>
+
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <a :href="`/developments/${development.id}`">
+                                        <ais-highlight attribute="title" :hit="development" highlighted-tag-name="em" />
+                                    </a>
+                                </h5>
+
+                                <p class="card-text text-black-50">
+                                    <ais-highlight attribute="body" :hit="development" highlighted-tag-name="em" />
+                                </p>
+                            </div>
+
+                            <div class="card-footer d-flex justify-content-between">
+                                <ul class="list-unstyled d-flex m-0">
+                                    <li class="mr-1" v-for="tag in development.tags">
+                                        <span class="badge badge-warning font-weight-normal px-2 py-1" v-text="`#${tag.name}`"></span>
+                                    </li>
+                                </ul>
+
+                                <small>
+                                    <i class="far fa-clock mr-1"></i>
+                                    @{{ development.created_at | dateFormat('Y. M. D') }}
+                                </small>
                             </div>
                         </div>
 

@@ -26,7 +26,7 @@ class DevelopmentRequest extends FormRequest
         return [
             'title' => 'required',
             'body' => 'required',
-            'tags' => 'array',
+            'tags' => ['required', 'array'],
             'tags.*' => 'exists:tags,id',
         ];
     }

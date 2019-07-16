@@ -4,7 +4,7 @@
     <development ref="form" inline-template v-cloak :data="{{ $development }}">
         <div class="container">
             <div class="row py-5">
-                <div class="col-12 p-3 p-md-5 bg-white shadow" style="min-height: 800px;">
+                <div class="col-12 p-3 p-md-5 bg-white shadow d-flex flex-column" style="min-height: 800px;">
                     <template v-if="editing">
                         <markdown-helper></markdown-helper>
 
@@ -79,6 +79,14 @@
                         <hr class="mb-5">
 
                         <vue-markdown class="markdown-body" :task-lists="false" @rendered="enablePrism">@{{ form.body }}</vue-markdown>
+
+                        <ul class="list-unstyled mb-0 d-flex mt-auto">
+                            @foreach ($development->tags as $tag)
+                                <li class="mr-2">
+                                    <span class="badge badge-light font-weight-normal px-3 py-2">#{{ $tag->name }}</span>
+                                </li>
+                            @endforeach
+                        </ul>
                     </template>
                 </div>
             </div>

@@ -11,12 +11,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(DevelopmentsTableSeeder::class);
+        if (! app()->environment('production')) {
+            $this->call(DevelopmentsTableSeeder::class);
 
-        $this->call(CommentsTableSeeder::class);
+            $this->call(CommentsTableSeeder::class);
 
-        $this->call(TagsTableSeeder::class);
+            $this->call(TagsTableSeeder::class);
 
-        $this->call(UsersTableSeeder::class);
+            $this->call(UsersTableSeeder::class);
+        }
     }
 }

@@ -36,7 +36,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Users can delete avatar.
 - [x] Trending developments with redis
 - [x] Mark the best comment
-- [ ] Tags, Search Capabilities Implemented with testing
+- [x] Tags, Search Capabilities Implemented with testing
 - [ ] Create Adminitrator page
 - [ ] Speed optimization
 - [ ] Open the server

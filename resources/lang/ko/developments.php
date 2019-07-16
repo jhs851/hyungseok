@@ -8,7 +8,6 @@ return [
     'body_placeholder' => "본문을 작성해주세요.\n해당 문서는 마크다운 문법을 지원합니다.",
     'submit' => '발행',
     'store' => '저장되었습니다.',
-    'invalid' => '제목과 본문을 입력해주세요.',
     'copy_url' => 'URL 복사',
     'edit' => '수정하기',
     'delete' => '삭제하기',
@@ -26,6 +25,10 @@ return [
     'searching' => '검색중...',
     'autocomplete_placeholder' => '선택하려면 <b>enter</b> 키를 누르고, 탐색하려면 <b>↑↓</b>, 취소하려면 <b>esc</b>를 누르세요',
     'tags_placeholder' => ' #태그를 선택해주세요.',
+    'filter_by_tag' => '태그에 의해 필터',
+    'empty_tags' => '사용된 태그가 없습니다.',
+    'show_more' => '더보기',
+    'show_less' => '덜보기',
     'multi_select' => [
         'select_label' => 'Enter 키를 눌러 선택',
         'group_label' => 'Enter 키를 눌러 그룹을 선택',

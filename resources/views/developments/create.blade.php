@@ -31,7 +31,9 @@
 @stop
 
 @section('script')
-    @if ($errors->all())
-        <script>toastr.error('@lang('developments.invalid')')</script>
-    @endif
+    <script>
+        @foreach ($errors->all() as $message)
+            toastr.error('{{ $message }}');
+        @endforeach
+    </script>
 @stop
