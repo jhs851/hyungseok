@@ -2,4 +2,8 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ec2-user/app/codeship/build/
+    destination: /home/hyungseok/codeship/build
+
+hooks:
+  AfterInstall:
+    - location: deployment/scripts/after-install.sh
