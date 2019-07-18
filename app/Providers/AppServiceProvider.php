@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\{Facades\Blade, ServiceProvider};
+use App\Models\{Comment, Development};
+use App\Observers\{CommentObserver, DevelopmentObserver};
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // $this->registerObservers();
+    }
+
+    /**
+     * 모델의 옵저버를 등록합니다.
+     */
+    protected function registerObservers()
+    {
+        Comment::observe(CommentObserver::class);
+        Development::observe(DevelopmentObserver::class);
     }
 }

@@ -40,35 +40,6 @@ class Comment extends Model
     ];
 
     /**
-     * The "booting" method of the model.
-     *
-     * @return void
-     */
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::created(function (Comment $comment) {
-            $comment->development->comments_count++;
-            $comment->development->save();
-        });
-
-        static::deleting(function (Comment $comment) {
-            if ($comment->isBest) {
-                tap($comment->development, function (Development $development) {
-                    $development->best_comment_id = null;
-                    $development->save();
-                });
-            }
-        });
-
-        static::deleted(function (Comment $comment) {
-            $comment->development->comments_count--;
-            $comment->development->save();
-        });
-    }
-
-    /**
      * User에 대한 BelongsTo 인스턴스를 반환합니다.
      *
      * @return BelongsTo
