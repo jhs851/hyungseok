@@ -17,7 +17,7 @@ class UploadImagesController extends Controller
     {
         return response()->json([
             'message' => trans('developments.uploaded_image'),
-            'path' => asset($request->file('image')->store('images', 'public')),
+            'path' => asset($request->file('image')->store('images')),
         ]);
     }
 }

@@ -5,7 +5,8 @@ namespace Tests\Feature;
 use App\Models\User;
 use Faker\Provider\Image;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\File;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class AvatarTest extends TestCase
@@ -53,16 +54,16 @@ class AvatarTest extends TestCase
     {
         $this->signIn();
 
+        Storage::fake();
+
         $this->post(route('users.avatar.store', auth()->user()->id), [
             'src' => Image::imageUrl(64, 64),
         ]);
 
-        tap(auth()->user()->fresh()->avatar_path, function ($path) {
+        tap(auth()->user()->fresh()->avatar_path, function (string $path) {
             $this->assertNotNull($path);
 
-            $this->assertFileExists(public_path($path));
-
-            File::delete(public_path($path));
+            Storage::assertExists($path);
         });
     }
 
@@ -81,7 +82,9 @@ class AvatarTest extends TestCase
      */
     public function testUnauthorizeUsersCannotDeleteAvatars() : void
     {
-        $image = $this->createImage();
+        Storage::fake();
+
+        $image = $this->createFakeImage();
 
         $this->signIn();
 
@@ -90,8 +93,6 @@ class AvatarTest extends TestCase
         $this->withExceptionHandling()
              ->delete(route('users.avatar.destroy', $user->id))
              ->assertStatus(403);
-
-        File::delete(public_path($image));
     }
 
     /**
@@ -99,7 +100,11 @@ class AvatarTest extends TestCase
      */
     public function testAUserMayDeleteAnAvatarToTheirProfile() : void
     {
-        $image = $this->createImage();
+        Storage::fake();
+
+        $image = $this->createFakeImage();
+
+        Storage::assertExists($image);
 
         $this->signIn(create(User::class, ['avatar_path' => $image]));
 
@@ -107,9 +112,7 @@ class AvatarTest extends TestCase
 
         $this->assertNull(auth()->user()->fresh()->avatar_path);
 
-        $this->assertFileNotExists(public_path($image));
-
-        File::delete(public_path($image));
+        Storage::assertMissing($image);
     }
 
     /**
@@ -117,10 +120,10 @@ class AvatarTest extends TestCase
      *
      * @return string
      */
-    protected function createImage() : string
+    protected function createFakeImage() : string
     {
-        $image = explode('/', Image::image(public_path('avatars'), 64, 64));
+        $image = UploadedFile::fake()->image('foo.jpg');
 
-        return implode('/', array_splice($image, -2));
+        return Storage::put('avatars', $image);
     }
 }

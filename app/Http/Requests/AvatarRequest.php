@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\{Facades\File, Str};
+use Illuminate\Support\{Facades\Storage, Str};
 use Intervention\Image\Facades\Image;
 
 class AvatarRequest extends FormRequest
@@ -68,11 +68,10 @@ class AvatarRequest extends FormRequest
             );
         }
 
-        $image->resize(64, 64)
-              ->save(public_path($path), 90, 'png');
+        Storage::put($path, (string) $image->resize(64, 64)->encode('png'));
 
         if ($oldAvatar = $this->route()->user->avatar_path) {
-            File::delete(public_path($oldAvatar));
+            Storage::delete($oldAvatar);
         }
 
         return $path;

@@ -53,10 +53,10 @@ class UploadImagesTest extends TestCase
     {
         $this->signIn(create(User::class));
 
-        Storage::fake('public');
+        Storage::fake();
 
         $this->post(route('images.store'), ['image' => $file = UploadedFile::fake()->image('foobar.jpg')]);
 
-        Storage::disk('public')->assertExists('images/' . $file->hashName());
+        Storage::assertExists('images/' . $file->hashName());
     }
 }

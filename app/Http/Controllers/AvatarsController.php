@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AvatarRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class AvatarsController extends Controller
 {
@@ -45,7 +45,7 @@ class AvatarsController extends Controller
         if ($avatar = $user->avatar_path) {
             $user->update(['avatar_path' => null]);
 
-            File::delete(public_path($avatar));
+            Storage::delete($avatar);
         }
 
         return response()->json([

@@ -38,6 +38,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Mark the best comment
 - [x] Tags, Search Capabilities Implemented with testing
 - [x] Can upload images
+- [x] Use storage
 - [ ] Create Adminitrator page
 - [ ] Speed optimization
 - [ ] Open the server
