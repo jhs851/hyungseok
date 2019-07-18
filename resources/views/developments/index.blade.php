@@ -25,14 +25,13 @@
                                     :input-props="{
                                         type: 'search',
                                         class: 'form-control pr-5',
-                                        style: 'background: url({{ asset('images/icons/algolia-blue-mark.png') }}) right center / auto 100% no-repeat;',
+                                        style: 'background: url({{ asset('/svg/algolia-blue-mark.svg') }}) right center / auto 100% no-repeat;',
                                         autocapitalize: 'off',
                                         spellcheck: 'false',
                                         maxlength: '512',
                                         placeholder: '@lang('developments.search_placeholder')'
                                     }"
                                 >
-
                                     <li slot="before-section-default" class="placeholder">@lang('developments.autocomplete_placeholder')</li>
 
                                     <template slot-scope="{ suggestion }">

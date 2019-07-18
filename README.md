@@ -39,6 +39,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Tags, Search Capabilities Implemented with testing
 - [x] Can upload images
 - [x] Use storage
+- [x] Changed to svg the icon.
 - [ ] Create Adminitrator page
 - [ ] Speed optimization
 - [ ] Open the server

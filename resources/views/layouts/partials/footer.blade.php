@@ -24,7 +24,11 @@
 
             <div class="col-12 col-md-6 pt-4 pt-md-1 text-md-right">
                 <a href="https://blog.naver.com/jhs851" class="btn btn-sm btn-floating btn-naver hvr-icon-pulse-grow" target="_blank">
-                    <img class="img-fluid hvr-icon" src="{{ asset('images/icons/naver.png') }}" alt="" style="width: 14px; margin-top: -5px;">
+                    <svg class="hvr-icon" viewBox="0 0 18 17" style="width: 14px; margin-top: -5px;">
+                        <g>
+                            <polygon style="fill:#FFFFFF;" points="11.86,0 11.86,8.58 6.16,0 0,0 0,17 6.14,17 6.14,8.42 11.84,17 18,17 18,0"></polygon>
+                        </g>
+                    </svg>
                 </a>
 
                 <a href="https://www.facebook.com/hyungseok.jeong.7" class="btn btn-sm btn-floating btn-facebook hvr-icon-pulse-grow" target="_blank">
