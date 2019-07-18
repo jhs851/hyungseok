@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class DevelopmentRequest extends FormRequest
+class UploadImageRequest extends FormRequest
 {
     /**
-     * 사용자에게 이 요청을 할 수 있는 권한이 있는지 확인합니다.
+     * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
@@ -17,17 +17,14 @@ class DevelopmentRequest extends FormRequest
     }
 
     /**
-     * 요청에 적용되는 유효성 검사 규칙을 반환합니다.
+     * Get the validation rules that apply to the request.
      *
      * @return array
      */
     public function rules() : array
     {
         return [
-            'title' => 'required',
-            'body' => 'required',
-            'tags' => ['required', 'array'],
-            'tags.*' => 'exists:tags,id',
+            'image' => ['required', 'image'],
         ];
     }
 }

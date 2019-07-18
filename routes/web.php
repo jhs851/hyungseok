@@ -64,3 +64,8 @@ Route::delete('/users/{user}/avatar', [
     'as' => 'users.avatar.destroy',
     'uses' => 'AvatarsController@destroy',
 ]);
+
+Route::post('/images', [
+    'as' => 'images.store',
+    'uses' => 'UploadImagesController@store',
+]);

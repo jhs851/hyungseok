@@ -57,7 +57,7 @@ return [
         'example2' => "    // Some comments\n    line 1 of code\n    line 2 of code\n    line 3 of code",
         'description3' => '코드 모음',
         'example3' => "```\n샘플 문자를 여기에...\n```",
-        'description4' => '구문 강조 표시',
+        'description4' => '구문 강조 표시<br><span class="badge badge-warning font-weight-normal">markup</span> <span class="badge badge-warning font-weight-normal">javascript</span> <span class="badge badge-warning font-weight-normal">css</span> <span class="badge badge-warning font-weight-normal">bash</span> <span class="badge badge-warning font-weight-normal">c</span> <span class="badge badge-warning font-weight-normal">c#</span> <span class="badge badge-warning font-weight-normal">c++</span> <span class="badge badge-warning font-weight-normal">docker</span> <span class="badge badge-warning font-weight-normal">git</span> <span class="badge badge-warning font-weight-normal">java</span> <span class="badge badge-warning font-weight-normal">json</span> <span class="badge badge-warning font-weight-normal">markdown</span> <span class="badge badge-warning font-weight-normal">php</span> <span class="badge badge-warning font-weight-normal">powershell</span> <span class="badge badge-warning font-weight-normal">python</span> <span class="badge badge-warning font-weight-normal">scss</span> <span class="badge badge-warning font-weight-normal">sql</span> <span class="badge badge-warning font-weight-normal">vim</span>',
         'example4' => "```javascript\nlet foo = bar => bar++;\n\nconsole.log(foo(5));\n```",
     ],
     'table' => [
@@ -101,6 +101,7 @@ return [
         'heading_smaller' => '제목(작게)',
         'ul' => '무질서한 목록',
         'ol' => '순서있는 목록',
+        'image_upload' => '이미지 업로드',
         'preview' => '미리보기',
     ],
 ];

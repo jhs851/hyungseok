@@ -5,7 +5,6 @@ namespace Tests\Feautre;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 

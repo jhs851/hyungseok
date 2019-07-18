@@ -32,7 +32,7 @@
 
                 <hr>
 
-                <p v-text="trans('markdown.code.description4')"></p>
+                <p v-html="trans('markdown.code.description4')"></p>
 
                 <pre v-text="trans('markdown.code.example4')"></pre>
 

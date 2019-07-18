@@ -15,11 +15,31 @@
                         <hr class="mb-5">
 
                         <div class="form-group">
-                            <markdown-editor ref="body" v-model="form.body"></markdown-editor>
+                            <markdown-editor ref="body" v-model="form.body" @uploaded="addPath"></markdown-editor>
                         </div>
 
-                        <div class="form-group mb-0">
+                        <div class="form-group">
                             <tags-select :old="form.tags" @change="updateTags"></tags-select>
+                        </div>
+
+                        <div v-if="uploadedImagesPath.length" class="form-group border px-3 py-2 mb-0">
+                            <a class="text-black-50 mb-2" data-toggle="collapse" href="#uploadedImagesCollapse" role="button" aria-expanded="false" aria-controls="uploadedImagesCollapse">
+                                @lang('developments.uploaded_images')
+                            </a>
+
+                            <ul class="collapse show list-unstyled mb-0" id="uploadedImagesCollapse">
+                                <li v-for="path in uploadedImagesPath">
+                                    <div class="input-group my-1">
+                                        <input type="text" :value="path" class="form-control" readonly>
+
+                                        <div class="input-group-append">
+                                            <clipboard class="input-group-text" :data="path">
+                                                <i class="far fa-copy"></i>
+                                            </clipboard>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </template>
 

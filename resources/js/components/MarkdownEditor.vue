@@ -1,6 +1,8 @@
 <template>
     <div class="markdown-editor">
         <textarea :name="name"></textarea>
+
+        <input id="upload-image" class="d-none" type="file" accept="image/*" @input="upload">
     </div>
 </template>
 
@@ -120,6 +122,12 @@
                     },
                     '|',
                     {
+                        name: 'image_upload',
+                        action: this.uploadImage,
+                        className: 'fas fa-upload',
+                        title: this.trans('markdown.toolbar.image_upload')
+                    },
+                    {
                         name: 'preview',
                         action: SimpleMDE.togglePreview,
                         className: 'far fa-eye no-disable',
@@ -164,6 +172,23 @@
                 this.simplemde.codemirror.on('change', () => {
                     this.$emit('input', this.simplemde.value());
                 });
+            },
+
+            uploadImage() {
+                $('#upload-image').click();
+            },
+
+            upload($event) {
+                let data = new FormData();
+
+                data.append('image', $event.target.files[0]);
+
+                axios.post('/images', data, { 'content-type': 'multipart/form-data' })
+                     .then(({data}) => {
+                         toastr.success(data.message);
+
+                         this.$emit('uploaded', data.path);
+                     });
             }
         },
 

@@ -37,7 +37,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Trending developments with redis
 - [x] Mark the best comment
 - [x] Tags, Search Capabilities Implemented with testing
-- [ ] Can load images
+- [x] Can upload images
 - [ ] Create Adminitrator page
 - [ ] Speed optimization
 - [ ] Open the server

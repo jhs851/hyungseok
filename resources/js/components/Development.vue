@@ -17,7 +17,8 @@
                     body: this.data.body,
                     tags: this.data.tags.map(tag => tag.id)
                 }),
-                tags: this.data.tags
+                tags: this.data.tags,
+                uploadedImagesPath: []
             };
         },
 
@@ -65,6 +66,15 @@
              */
             updateTags(ids) {
                 this.form.tags = ids;
+            },
+
+            /**
+             * 주어진 경로를 추가합니다.
+             *
+             * @param {string} path
+             */
+            addPath(path) {
+                this.uploadedImagesPath.push(path);
             }
         }
     }

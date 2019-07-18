@@ -3,7 +3,3 @@ os: linux
 files:
   - source:  /
     destination: /home/hyungseok/codeship/build
-
-hooks:
-  AfterInstall:
-    - location: deployment/scripts/after-install.sh
