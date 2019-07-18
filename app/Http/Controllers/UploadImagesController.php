@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadImageRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class UploadImagesController extends Controller
 {
@@ -17,7 +18,7 @@ class UploadImagesController extends Controller
     {
         return response()->json([
             'message' => trans('developments.uploaded_image'),
-            'path' => asset($request->file('image')->store('images')),
+            'path' => Storage::url($request->file('image')->store('images')),
         ]);
     }
 }

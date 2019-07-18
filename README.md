@@ -40,6 +40,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Can upload images
 - [x] Use storage
 - [x] Changed to svg the icon.
+- [x] Change storage driver to s3
 - [ ] Create Adminitrator page
 - [ ] Speed optimization
 - [ ] Open the server

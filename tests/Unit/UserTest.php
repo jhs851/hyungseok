@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -126,6 +127,6 @@ class UserTest extends TestCase
 
         $this->user->avatar_path = 'avatars/me.jpg';
 
-        $this->assertEquals(asset('avatars/me.jpg'), $this->user->avatar);
+        $this->assertEquals(Storage::url('avatars/me.jpg'), $this->user->avatar);
     }
 }

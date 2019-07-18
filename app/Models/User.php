@@ -6,7 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\{Hash, Storage};
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -136,6 +136,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getAvatarAttribute() : string
     {
-        return asset($this->avatar_path ?: 'avatars/default.png');
+        if ($this->avatar_path) {
+            return Storage::url($this->avatar_path);
+        }
+
+        return asset('avatars/default.png');
     }
 }
