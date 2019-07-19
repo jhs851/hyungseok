@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid p-5">
-        <div class="charts row">
+        <div class="row">
             <div class="col-md-4">
                 <div class="rounded bg-white" style="height: 300px;">
                     <div class="py-3 px-4">
@@ -62,7 +62,7 @@
             </div>
         </div>
 
-        <div class="charts row mt-5">
+        <div class="row mt-5">
             <div class="col-md-4">
                 <div class="rounded bg-white" style="height: 300px;">
                     <div class="py-3 px-4">

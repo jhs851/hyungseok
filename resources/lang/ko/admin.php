@@ -11,6 +11,12 @@ return [
         'aws_s3_usage' => 'AWS S3 사용량',
         'database_useage' => '데이터베이스 사용량',
     ],
+    'developments' => [
+        'total' => '모든 개발 포스트들',
+        'increase' => '지난달에 비해 :percentage% 상승',
+        'decrease' => '지난달에 비해 :percentage% 하락',
+        'month_of_new' => '한 달간 새로운 글',
+    ],
     'comments' => [
         'title' => '댓글',
     ],

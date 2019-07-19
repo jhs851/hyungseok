@@ -17,7 +17,7 @@
             </li>
 
             <li class="nav-item {{ Str::contains(request()->path(), 'developments') ? 'active' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.developments.index') }}" class="nav-link">
                     <i class="far fa-newspaper"></i> @lang('developments.title')
                 </a>
             </li>
