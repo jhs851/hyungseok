@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Closure;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -51,7 +52,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware('web')
              ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
+             ->group($this->getWebRoutes());
     }
 
     /**
@@ -67,5 +68,19 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace . '\Api')
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * web 폴더의 라우트 파일들을 require 하는 Closure를 반환합니다.
+     *
+     * @return Closure
+     */
+    protected function getWebRoutes() : Closure
+    {
+        return function ($router) {
+            array_map(function ($route) {
+                require $route;
+            }, glob(base_path('routes/web/*.php')));
+        };
     }
 }
