@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Str;
+
 return [
 
     /*
@@ -62,6 +64,12 @@ return [
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
             'url' => 'https://hyungseok-storage.s3.ap-northeast-2.amazonaws.com/',
+
+            'cache' => [
+                'store' => env('CACHE_DRIVER', 'file'),
+                'expire' => 60000,
+                'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_storage_cache'),
+            ],
         ],
 
     ],
