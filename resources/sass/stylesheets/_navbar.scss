@@ -1,0 +1,53 @@
+#app.used-side-navbar {
+    margin-left: 300px;
+}
+
+.side-navbar {
+    display: block;
+    width: 300px;
+    padding: 0;
+    position: fixed;
+    z-index: $zindex-fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    + .navbar {
+        height: 70px;
+    }
+
+    .navbar-brand {
+        display: block;
+        font-size: $h4-font-size;
+        font-weight: $font-weight-bold;
+        height: 70px;
+        line-height: 70px;
+        padding: 0 1.5rem;
+        margin-right: 0;
+        @include transition(all .3s);
+    }
+
+    .navbar-collapse {
+        flex-direction: column;
+        height: 100%;
+        padding: 1rem;
+        -webkit-align-items: flex-start;
+        align-items: start;
+
+        .nav-link {
+            font-size: $h4-font-size;
+            font-weight: $font-weight-bold;
+            margin-bottom: $headings-margin-bottom;
+        }
+    }
+
+    .navbar-nav {
+        display: block;
+    }
+
+    .navbar-brand i,
+    .navbar-collapse .nav-link i {
+        width: 25px;
+        margin-right: 1rem;
+    }
+}

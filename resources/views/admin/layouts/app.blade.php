@@ -32,11 +32,21 @@
     </head>
 
     <body>
-        <div id="app">
-            <main>
-                @yield('content')
-            </main>
-        </div>
+        @isset ($withoutTemplate)
+            <div id="app">
+                <main>
+                    @yield('content')
+                </main>
+            </div>
+        @else
+            <div id="app" class="used-side-navbar">
+                @include('admin.layouts.partials.navigation')
+
+                <main>
+                    @yield('content')
+                </main>
+            </div>
+        @endisset
 
         {{-- Scripts --}}
         <script src="{{ asset('js/languages.js') }}"></script>

@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('admin.layouts.app', ['withoutTemplate' => true])
 
 @section('style')
     <style>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <form method="POST" action="" class="text-left fadeInUp">
+                <form method="POST" action="{{ route('admin.login') }}" class="text-left fadeInUp">
                     @csrf
 
                     <div class="form-group row wow fadeInUp" data-wow-delay=".4s">

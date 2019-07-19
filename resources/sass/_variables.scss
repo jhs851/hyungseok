@@ -25,7 +25,8 @@ $cyan: #6cb2eb;
 
 // Theme colors
 $primary: #0c552b;
-$secondary: #95d803;
+$secondary: #022410;
+$tertiary: #295042 !default;
 $success: $blue;
 $info: $cyan;
 $warning: #e9e8e3;
@@ -38,8 +39,8 @@ $google: #db4437 !default;
 $facebook: #3c5a99 !default;
 
 // Add colors
-$theme-colors: ("naver": $naver, "kakao": $kakao, "google": $google, "facebook": $facebook);
-$colors: ("naver": $naver, "kakao": $kakao, "google": $google, "facebook": $facebook);
+$theme-colors: ("naver": $naver, "kakao": $kakao, "google": $google, "facebook": $facebook, "tertiary": $tertiary);
+$colors: ("naver": $naver, "kakao": $kakao, "google": $google, "facebook": $facebook, "tertiary": $tertiary);
 
 // Add spacing
 $spacer: 1rem;
