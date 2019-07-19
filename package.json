@@ -24,6 +24,7 @@
         "algoliasearch": "^3.33.0",
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
+        "chart.js": "^2.8.0",
         "cropper": "^4.0.0",
         "github-markdown-css": "^3.0.1",
         "hover.css": "^2.3.2",

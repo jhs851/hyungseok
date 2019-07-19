@@ -35,6 +35,9 @@ try {
     // moment
     window.moment = require('moment');
     moment.locale(document.documentElement.lang);
+
+    // chart.js
+    window.Chart = require('chart.js');
 } catch (e) {}
 
 // Prismjs
