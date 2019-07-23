@@ -1,3 +1,15 @@
+@if (Str::contains(request()->path(), 'admin'))
+    @section('style')
+        @parent
+
+        <style>
+            .editor-toolbar {
+                top: 0;
+            }
+        </style>
+    @stop
+@endif
+
 <div class="form-group">
     <input type="text" class="border-0 h2 w-100" name="title" value="{{ old('title', $development->title) }}"
            placeholder="@lang('validation.attributes.title')" required autocomplete="title"

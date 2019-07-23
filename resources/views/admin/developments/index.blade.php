@@ -124,8 +124,8 @@
                                         <col>
                                         <col style="width: 10%;">
                                         <col style="width: 10%;">
-                                        <col style="width: 10%;">
-                                        <col style="width: 10%;">
+                                        <col style="width: 12%;">
+                                        <col style="width: 12%;">
                                     </colgroup>
 
                                     <thead class="thead-light">
@@ -169,10 +169,10 @@
                                                 @{{ development.created_at | dateFormat('Y. M. D') }}
                                             </td>
                                             <td>
-                                                <a :href="`/admin/developments/${development.id}`" class="text-black-50 h4">
+                                                <a :href="`/admin/developments/${development.id}`" class="text-black-50 h4 mb-0">
                                                     <i class="far fa-eye"></i>
                                                 </a>
-                                                <a :href="`/admin/developments/${development.id}/edit`" class="text-black-50 h4 ml-2">
+                                                <a :href="`/admin/developments/${development.id}/edit`" class="text-black-50 h4 ml-2 mb-0">
                                                     <i class="far fa-edit"></i>
                                                 </a>
 

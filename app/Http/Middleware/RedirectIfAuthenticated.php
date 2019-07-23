@@ -35,7 +35,7 @@ class RedirectIfAuthenticated
      * @param  Request  $request
      * @return bool
      */
-    public function isAdmin(Request $request) : bool
+    protected function isAdmin(Request $request) : bool
     {
         return Str::contains($request->path(), 'admin') && $request->user()->isAdmin;
     }

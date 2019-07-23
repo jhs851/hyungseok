@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Core\Trending;
-use App\Filters\DevelopmentFilters;
+use App\Core\{DevelopmentsService, Trending};
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
 use Exception;
@@ -13,6 +12,8 @@ use Illuminate\View\View;
 
 class DevelopmentsController extends Controller
 {
+    use DevelopmentsService;
+
     /**
      * DevelopmentsController 생성자입니다.
      */
@@ -26,20 +27,12 @@ class DevelopmentsController extends Controller
     /**
      * 리소스 목록을 표시합니다.
      *
-     * @param  DevelopmentFilters  $filters
      * @param  Trending  $trending
      * @return LengthAwarePaginator|View
      */
-    public function index(DevelopmentFilters $filters, Trending $trending)
+    public function index(Trending $trending)
     {
-        // $developments = $this->getDevelopments($filters);
-
-//        if (request()->expectsJson()) {
-//            return $developments;
-//        }
-
         return view('developments.index', [
-            // 'developments' => $developments,
             'trending' => $trending->get(),
         ]);
     }
@@ -55,19 +48,13 @@ class DevelopmentsController extends Controller
     }
 
     /**
-     * 새로 생성된 리소스를 저장소에 저장합니다.
+     * 리소르를 저장한 후에 응답입니다.
      *
      * @param  DevelopmentRequest  $request
      * @return RedirectResponse
      */
-    public function store(DevelopmentRequest $request) : RedirectResponse
+    public function stored(DevelopmentRequest $request, Development $development) : RedirectResponse
     {
-        $development = $request->user()->developments()->create($request->all());
-
-        $development->tags()->sync($request->input('tags'));
-
-        flash()->success(trans('developments.store'));
-
         return redirect(route('developments.show', ['development' => $development->id]));
     }
 
@@ -89,18 +76,14 @@ class DevelopmentsController extends Controller
     }
 
     /**
-     * 스토리지에서 지정된 리소스를 업데이트합니다.
+     * 리소르를 업데이트 한 후에 응답입니다.
      *
      * @param  DevelopmentRequest  $request
      * @param  Development  $development
      * @return JsonResponse
      */
-    public function update(DevelopmentRequest $request, Development $development) : JsonResponse
+    public function updated(DevelopmentRequest $request, Development $development) : JsonResponse
     {
-        $development->update($request->all());
-
-        $development->tags()->sync($request->input('tags'));
-
         return response()->json([
             'message' => trans('developments.updated'),
             'development' => $development->fresh(),
@@ -108,29 +91,14 @@ class DevelopmentsController extends Controller
     }
 
     /**
-     * 지정된 리소스를 스토리지에서 제거합니다.
+     * 리소스를 제거 한 후에 응답입니다.
      *
      * @param  Development  $development
      * @return RedirectResponse
      * @throws Exception
      */
-    public function destroy(Development $development) : RedirectResponse
+    public function destroyed(Development $development) : RedirectResponse
     {
-        $development->delete();
-
-        flash()->success(trans('developments.deleted'));
-
         return redirect(route('developments.index'));
-    }
-
-    /**
-     * 개발 포스트를 반환합니다.
-     *
-     * @param  DevelopmentFilters  $filters
-     * @return LengthAwarePaginator
-     */
-    protected function getDevelopments(DevelopmentFilters $filters) : LengthAwarePaginator
-    {
-        return Development::filter($filters)->orderBy('created_at', 'desc')->paginate(10);
     }
 }

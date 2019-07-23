@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Core\DevelopmentsService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
@@ -11,6 +12,8 @@ use Illuminate\View\View;
 
 class DevelopmentsController extends Controller
 {
+    use DevelopmentsService;
+
     /**
      * 리소스 목록을 표시합니다.
      *
@@ -38,19 +41,14 @@ class DevelopmentsController extends Controller
     }
 
     /**
-     * 새로 생성된 리소스를 저장소에 저장합니다.
+     * 리소르를 저장한 후에 응답입니다.
      *
      * @param  DevelopmentRequest  $request
+     * @param  Development  $development
      * @return RedirectResponse
      */
-    public function store(DevelopmentRequest $request) : RedirectResponse
+    public function stored(DevelopmentRequest $request, Development $development) : RedirectResponse
     {
-        $development = $request->user()->developments()->create($request->all());
-
-        $development->tags()->sync($request->input('tags'));
-
-        flash()->success(trans('developments.store'));
-
         return redirect(route('admin.developments.show', $development->id));
     }
 
@@ -77,36 +75,28 @@ class DevelopmentsController extends Controller
     }
 
     /**
-     * 스토리지에서 지정된 리소스를 업데이트합니다.
+     * 리소르를 업데이트 한 후에 응답입니다.
      *
      * @param  DevelopmentRequest  $request
      * @param  Development  $development
      * @return RedirectResponse
      */
-    public function update(DevelopmentRequest $request, Development $development) : RedirectResponse
+    public function updated(DevelopmentRequest $request, Development $development) : RedirectResponse
     {
-        $development->update($request->all());
-
-        $development->tags()->sync($request->input('tags'));
-
         flash()->success(trans('developments.updated'));
 
         return redirect(route('admin.developments.show', $development->id));
     }
 
     /**
-     * 지정된 리소스를 스토리지에서 제거합니다.
+     * 리소스를 제거 한 후에 응답입니다.
      *
      * @param  Development  $development
      * @return RedirectResponse
      * @throws Exception
      */
-    public function destroy(Development $development) : RedirectResponse
+    public function destroyed(Development $development) : RedirectResponse
     {
-        $development->delete();
-
-        flash()->success(trans('developments.deleted'));
-
         return redirect(route('admin.developments.index'));
     }
 }

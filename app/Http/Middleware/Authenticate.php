@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class Authenticate extends Middleware
 {
@@ -18,7 +19,20 @@ class Authenticate extends Middleware
         if (! $request->expectsJson()) {
             flash()->error(trans('auth.unauthenticated'));
 
-            return route('login');
+            return $this->accessingAdmin($request)
+                ? route('admin.login')
+                : route('login');
         }
+    }
+
+    /**
+     * 현재 로그인한 사용자가 관리자이고 관리자 로그인 페이지에 액세스 했는지 확인합니다.
+     *
+     * @param  Request  $request
+     * @return bool
+     */
+    protected function accessingAdmin(Request $request) : bool
+    {
+        return Str::contains($request->path(), 'admin');
     }
 }

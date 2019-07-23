@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{Comment, Development, User};
+use App\Models\{Comment, Development};
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -32,36 +32,12 @@ class ReadDevelopmentTest extends TestCase
     }
 
     /**
-     * 사용자는 모든 개발 포스트를 볼 수 있습니다.
-     */
-    public function /*test*/AUserCanViewAllDevelopments() : void
-    {
-        $this->get(route('developments.index'))
-             ->assertSee($this->development->title);
-    }
-
-    /**
      * 사용자는 한개의 개발 포스트를 볼 수 있습니다.
      */
     public function testAUserCanReadASingleDevelopment() : void
     {
         $this->get(route('developments.show', ['development' => $this->development->id]))
              ->assertSee($this->development->title);
-    }
-
-    /**
-     * 사용자는 개발 포스트의 어떠한 작성자에 대해 필터할 수 있습니다.
-     */
-    public function /*test*/AUserCanFilterDevelopmentsByAnyUsername() : void
-    {
-        $this->signIn(create(User::class, ['name' => 'JohnDoe']));
-
-        $developmentByJohn = create(Development::class, ['user_id' => auth()->id()]);
-        $developmentNotByJohn = create(Development::class);
-
-        $this->get(route('developments.index', ['by' => 'JohnDoe']))
-            ->assertSee($developmentByJohn->title)
-            ->assertDontSee($developmentNotByJohn->title);
     }
 
     /**
@@ -73,22 +49,6 @@ class ReadDevelopmentTest extends TestCase
 
         $this->get(route('developments.show', $this->development->id))
             ->assertSee($comment->body);
-    }
-
-    /**
-     * 사용자는 인기있는 개발 포스트를 필터링 할 수 있습니다.
-     */
-    public function /*test*/AUserCanFilterDevelopmentsByPopularity() : void
-    {
-        $DevelopmentWithTwoComments = create(Development::class);
-        create(Comment::class, ['development_id' => $DevelopmentWithTwoComments], 2);
-
-        $threadWithThreeReplies = create(Development::class);
-        create(Comment::class, ['development_id' => $threadWithThreeReplies], 3);
-
-        $response = $this->getJson(route('developments.index', ['popularity' => 1]))->json();
-
-        $this->assertEquals([3, 2, 0], array_column($response['data'], 'comments_count'));
     }
 
     /**

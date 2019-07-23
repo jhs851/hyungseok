@@ -4,10 +4,8 @@ namespace App\Models;
 
 use App\Core\{Favoritable, RecordsActivity};
 use App\Events\DevelopmentRecivedNewComment;
-use App\Filters\DevelopmentFilters;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\{Builder, Model, Relations\BelongsTo, Relations\BelongsToMany, Relations\HasMany};
-use Laravel\Scout\Builder as ScoutBuilder;
 use Laravel\Scout\Searchable;
 
 class Development extends Model
@@ -95,18 +93,6 @@ class Development extends Model
         DevelopmentRecivedNewComment::dispatch($comment);
 
         return $comment;
-    }
-
-    /**
-     * 필터링된 개발 포스트 Builder를 반환합니다.
-     *
-     * @param  Builder  $query
-     * @param  DevelopmentFilters  $filters
-     * @return Builder|ScoutBuilder
-     */
-    public function scopeFilter(Builder $query, DevelopmentFilters $filters)
-    {
-        return $filters->apply($query);
     }
 
     /**

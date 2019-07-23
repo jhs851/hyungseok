@@ -4,7 +4,7 @@
     <div class="container-fluid p-5">
         <div class="row">
             <div class="col-md-4">
-                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100 position-relative" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.traffic_this_month')
@@ -13,7 +13,8 @@
                         <h1 class="display-4">1.3GB</h1>
                     </div>
 
-                    <chart-line label="@lang('admin.dashboard.unit', ['unit' => 'GB'])"
+                    <chart-line class="position-absolute" style="bottom: 0;"
+                                label="@lang('admin.dashboard.unit', ['unit' => 'GB'])"
                                 :labels="['1일', '2일', '3일', '5일', '6일', '14일']"
                                 :data="[0.8, 0.1, 0.15, 0.15, 0.05, 0.05]"
                                 point-background-color="rgba(227, 52, 47, .8)"
@@ -24,7 +25,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100 position-relative" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.last_1_hour_cpu_usage')
@@ -33,7 +34,8 @@
                         <h1 class="display-4">평균 52.36%</h1>
                     </div>
 
-                    <chart-line label="@lang('admin.dashboard.unit', ['unit' => '%'])"
+                    <chart-line class="position-absolute" style="bottom: 0;"
+                                label="@lang('admin.dashboard.unit', ['unit' => '%'])"
                                 :labels="['04:40', '04:45', '04:50', '04:55', '05:00', '05:05', '05:10', '05:15', '05:20', '05:25', '05:30']"
                                 :data="[46, 60, 56, 50, 53, 56, 50, 56, 53, 46, 50]"
                                 point-background-color="rgba(246, 153, 63, .8)"
@@ -43,7 +45,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100 position-relative" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.aws_s3_usage')
@@ -52,7 +54,8 @@
                         <h1 class="display-4">713MB</h1>
                     </div>
 
-                    <chart-bar label="@lang('admin.dashboard.unit', ['unit' => 'MB'])"
+                    <chart-bar class="position-absolute" style="bottom: 0;"
+                               label="@lang('admin.dashboard.unit', ['unit' => 'MB'])"
                                :labels="['images', 'avatars', 'videos']"
                                :data="[101, 99, 513]"
                                point-background-color="rgba(255, 237, 74, .8)"
@@ -64,7 +67,7 @@
 
         <div class="row mt-5">
             <div class="col-md-4">
-                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100 position-relative" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.last_1_hour_cpu_usage')
@@ -73,7 +76,8 @@
                         <h1 class="display-4">평균 52.36%</h1>
                     </div>
 
-                    <chart-line label="@lang('admin.dashboard.unit', ['unit' => '%'])"
+                    <chart-line class="position-absolute" style="bottom: 0;"
+                                label="@lang('admin.dashboard.unit', ['unit' => '%'])"
                                 :labels="['04:40', '04:45', '04:50', '04:55', '05:00', '05:05', '05:10', '05:15', '05:20', '05:25', '05:30']"
                                 :data="[46, 60, 56, 50, 53, 56, 50, 56, 53, 46, 50]"
                                 point-background-color="rgba(56, 193, 114, .8)"
