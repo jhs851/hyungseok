@@ -84,7 +84,7 @@
                                                 <i class="fas fa-pen"></i>
                                             </a>
 
-                                            <form method="POST" action="{{ route('developments.destroy', compact('development')) }}">
+                                            <form method="POST" action="{{ route('developments.destroy', $development->id) }}">
                                                 @csrf
                                                 @method('DELETE')
 

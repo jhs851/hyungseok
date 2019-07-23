@@ -175,14 +175,15 @@
                                                 <a :href="`/admin/developments/${development.id}/edit`" class="text-black-50 h4 ml-2">
                                                     <i class="far fa-edit"></i>
                                                 </a>
-                                                <a href="#" class="text-black-50 h4 ml-2">
-                                                    <i class="far fa-trash-alt"></i>
 
-                                                    <form method="POST" :action="`/admin/developments/${development.id}`" class="d-none" @submit="destroy">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </a>
+                                                <form class="d-inline ml-2" method="POST" :action="`/admin/developments/${development.id}`">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" class="btn btn-link p-0" @click="destroy">
+                                                        <i class="far fa-trash-alt text-black-50 h4 mb-0"></i>
+                                                    </button>
+                                                </form>
                                             </td>
                                         </tr>
 

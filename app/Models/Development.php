@@ -164,7 +164,7 @@ class Development extends Model
      */
     public function toSearchableArray() : array
     {
-        return $this->toArray() + ['created_at_timestamp' => $this->created_at->timestamp];
+        return $this->fresh()->toArray() + ['created_at_timestamp' => $this->created_at->timestamp];
     }
 
     /**

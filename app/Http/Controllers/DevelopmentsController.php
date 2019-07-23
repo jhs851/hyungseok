@@ -51,7 +51,7 @@ class DevelopmentsController extends Controller
      */
     public function create() : View
     {
-        return view('developments.create');
+        return view('developments.create', ['development' => new Development]);
     }
 
     /**
