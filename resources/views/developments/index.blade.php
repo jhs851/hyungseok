@@ -2,7 +2,7 @@
 
 @section('content')
     <search-view class="container py-3" index="developments" v-cloak>
-        <div class="row" slot-scope="{ onSelect, query, indicesToSuggestions, getSuggestion, log }">
+        <div class="row" slot-scope="{ onSelect, query, indicesToSuggestions, getSuggestion }">
             <div class="col-md-4">
                 <div class="card rounded-0 my-2">
                     <div class="card-header">

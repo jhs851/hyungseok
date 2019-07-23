@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Events\DevelopmentRecivedNewComment;
 use App\Models\{Comment, Development, Tag, User};
+use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -164,5 +165,44 @@ class DevelopmentTest extends TestCase
     public function testWhenindexingAItInTheScountAddTheCreatedAtTimestampThenImportIt() : void
     {
         $this->assertArrayHasKey('created_at_timestamp', $this->development->toSearchableArray());
+    }
+
+    /**
+     * 개발 모델은 주어진 Carbon 인스턴스(year, month)의 글만 가져올 수 있습니다.
+     */
+    public function testItCanOnlyBringBackPostsOfAGivenMonth() : void
+    {
+        $subMonth = Carbon::now()->subMonth();
+
+        create(Development::class, ['created_at' => $subMonth]);
+
+        $this->assertCount(2, Development::all());
+
+        $this->assertCount(1, Development::monthlies()->get());
+
+        $this->assertCount(1, Development::monthlies($subMonth)->get());
+    }
+
+    /**
+     * 개발 모델은 일별로 그룹화하고 해당 날짜에 해당하는 포스트의 수를 반환할 수 있습니다.
+     */
+    public function testItCanBeGroupByDayAndReturnedTheCountOfPostsCorrespondingToThatDate() : void
+    {
+        $subDays = Carbon::now()->subDays(2);
+        $yesterday = Carbon::yesterday();
+        $now = Carbon::now();
+
+        // 엊그제 개발 포스트는 4개
+        create(Development::class, ['created_at' => $subDays], 4);
+
+        // 어제의 개발 포스트는 2개
+        create(Development::class, ['created_at' => $yesterday], 2);
+
+        // 오늘 개발 포스트는 3개
+        create(Development::class, ['created_at' => $now], 2);
+
+        $this->assertEquals([$subDays->day, $yesterday->day, $now->day], Development::countsByDays()->get()->pluck('day')->toArray());
+
+        $this->assertEquals([4, 2, 3], Development::countsByDays()->get()->pluck('posts')->toArray());
     }
 }

@@ -16,6 +16,6 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         ]);
 
         // Developments
-        Route::resource('developments', 'DevelopmentsController')->only('index');
+        Route::resource('developments', 'DevelopmentsController')->only(['index', 'create']);
     });
 });

@@ -13,9 +13,13 @@ return [
     ],
     'developments' => [
         'total' => '모든 개발 포스트들',
-        'increase' => '지난달에 비해 :percentage% 상승',
-        'decrease' => '지난달에 비해 :percentage% 하락',
+        'increase' => '이번 달에 :percentage% 상승',
         'month_of_new' => '한 달간 새로운 글',
+        'most_visited' => '방문이 가장 많은 글',
+        'writer' => '작성자',
+        'comments_count' => '댓글 수',
+        'visits_count' => '방문 수',
+        'created_at' => '작성일',
     ],
     'comments' => [
         'title' => '댓글',

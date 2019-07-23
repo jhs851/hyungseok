@@ -4,7 +4,7 @@
     <div class="container-fluid p-5">
         <div class="row">
             <div class="col-md-4">
-                <div class="rounded bg-white" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.traffic_this_month')
@@ -24,7 +24,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="rounded bg-white" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.last_1_hour_cpu_usage')
@@ -43,7 +43,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="rounded bg-white" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.aws_s3_usage')
@@ -64,7 +64,7 @@
 
         <div class="row mt-5">
             <div class="col-md-4">
-                <div class="rounded bg-white" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.last_1_hour_cpu_usage')
@@ -83,7 +83,7 @@
             </div>
 
             <div class="col-md-4">
-                <div class="rounded bg-white" style="height: 300px;">
+                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
                     <div class="py-3 px-4">
                         <h4 class="text-muted font-weight-bold">
                             @lang('admin.dashboard.database_useage')
