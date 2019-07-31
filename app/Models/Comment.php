@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
-use App\Core\RecordsActivity;
+use App\Core\{RecordsActivity, Searchable};
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo};
 use Illuminate\Support\Carbon;
 
 class Comment extends Model
 {
-    use RecordsActivity;
+    use RecordsActivity, Searchable;
 
     /**
      * The attributes that are mass assignable.

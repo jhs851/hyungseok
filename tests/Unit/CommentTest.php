@@ -113,4 +113,12 @@ class CommentTest extends TestCase
 
         $this->assertTrue($this->comment->fresh()->isBest);
     }
+
+    /**
+     * 댓글 모델을 스카웃에 인덱싱할 때 created_at_timestamp 키를 추가하고 임포트 합니다.
+     */
+    public function testWhenindexingAItInTheScountAddTheCreatedAtTimestampThenImportIt() : void
+    {
+        $this->assertArrayHasKey('created_at_timestamp', $this->comment->toSearchableArray());
+    }
 }

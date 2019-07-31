@@ -1,22 +1,29 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CommentRequest;
 use App\Services\CommentsService;
 use App\Models\{Comment, Development};
-use Illuminate\Http\JsonResponse;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\{JsonResponse, RedirectResponse};
+use Illuminate\View\View;
 
 class CommentsController extends Controller
 {
     use CommentsService;
 
     /**
-     * CommentsController 생성자 입니다.
+     * 리소스 목록을 표시합니다.
+     *
+     * @return View
      */
-    public function __construct()
+    public function index() : View
     {
-        $this->middleware('verified');
+        return view('admin.comments.index', [
+            'commentsCount' => Comment::count(),
+            'mostCommentable' => Development::orderBy('comments_count', 'desc')->first(),
+        ]);
     }
 
     /**
@@ -54,10 +61,16 @@ class CommentsController extends Controller
      * 리소스를 제거 한 후에 응답입니다.
      *
      * @param  Comment  $comment
-     * @return JsonResponse
+     * @return JsonResponse|RedirectResponse
      */
-    public function destroyed(Comment $comment) : JsonResponse
+    public function destroyed(Comment $comment)
     {
-        return response()->json(['message' => trans('developments.deleted')]);
+        if (request()->expectsJson()) {
+            return response()->json(['message' => trans('developments.deleted')]);
+        }
+
+        flash()->success(trans('developments.deleted'));
+
+        return redirect(route('admin.comments.index'));
     }
 }

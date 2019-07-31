@@ -23,7 +23,7 @@
             </li>
 
             <li class="nav-item {{ Str::contains(request()->path(), 'comments') ? 'active' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.comments.index') }}" class="nav-link">
                     <i class="far fa-comment"></i> @lang('admin.comments.title')
                 </a>
             </li>

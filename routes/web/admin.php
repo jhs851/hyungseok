@@ -17,5 +17,12 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
 
         // Developments
         Route::resource('developments', 'DevelopmentsController');
+
+        // Comments
+        Route::post('/developments/{development}/comments', [
+            'as' => 'comments.store',
+            'uses' => 'CommentsController@store',
+        ]);
+        Route::resource('comments', 'CommentsController')->only(['index', 'update', 'destroy']);
     });
 });

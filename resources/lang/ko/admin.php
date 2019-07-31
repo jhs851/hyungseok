@@ -23,6 +23,8 @@ return [
     ],
     'comments' => [
         'title' => '댓글',
+        'total' => '총 댓글 수',
+        'most_commentable' => '가장 많은 댓글이 달린 글',
     ],
     'favorites' => [
         'title' => '좋아요',

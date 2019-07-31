@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Core\{DevelopmentsService, Trending};
+use App\Core\Trending;
+
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
+use App\Services\DevelopmentsService;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\{JsonResponse, RedirectResponse};

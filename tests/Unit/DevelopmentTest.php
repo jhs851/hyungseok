@@ -17,7 +17,7 @@ class DevelopmentTest extends TestCase
 
     /**
      * Development 인스턴스.
-     * 
+     *
      * @var Development
      */
     protected $development;
@@ -160,7 +160,7 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 개발 모델을 스카웃에 인덱싱할 때 user 키와 favorites 키를 제거하고 임포트 합니다.
+     * 개발 모델을 스카웃에 인덱싱할 때 created_at_timestamp 키를 추가하고 임포트 합니다.
      */
     public function testWhenindexingAItInTheScountAddTheCreatedAtTimestampThenImportIt() : void
     {
@@ -172,7 +172,7 @@ class DevelopmentTest extends TestCase
      */
     public function testItCanOnlyBringBackPostsOfAGivenMonth() : void
     {
-        $subMonth = Carbon::now()->subMonth();
+        $subMonth = Carbon::now()->subMonthsNoOverflow();
 
         create(Development::class, ['created_at' => $subMonth]);
 

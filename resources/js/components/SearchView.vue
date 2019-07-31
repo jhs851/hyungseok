@@ -12,6 +12,10 @@
             index: {
                 type: String,
                 required: true
+            },
+            reference: {
+                type: String,
+                default: 'title'
             }
         },
 
@@ -28,7 +32,7 @@
         methods: {
             onSelect(selected) {
                 if (selected) {
-                    this.query = selected.item.title;
+                    this.query = selected.item[this.reference];
                 }
             },
 
@@ -37,7 +41,7 @@
             },
 
             getSuggestion(suggestion) {
-                return suggestion.item.title;
+                return suggestion.item[this.reference];
             }
         }
     }

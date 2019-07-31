@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Core;
+namespace App\Services;
 
 use App\Http\Requests\DevelopmentRequest;
 use App\Models\Development;
