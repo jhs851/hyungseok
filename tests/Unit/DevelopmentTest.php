@@ -188,9 +188,10 @@ class DevelopmentTest extends TestCase
      */
     public function testItCanBeGroupByDayAndReturnedTheCountOfPostsCorrespondingToThatDate() : void
     {
-        $subDays = Carbon::now()->subDays(2);
-        $yesterday = Carbon::yesterday();
-        $now = Carbon::now();
+        $this->development->delete();
+        $subDays = Carbon::now()->setDay(1);
+        $yesterday = Carbon::now()->setDay(2);
+        $now = Carbon::now()->setDay(3);
 
         // 엊그제 개발 포스트는 4개
         create(Development::class, ['created_at' => $subDays], 4);
@@ -198,11 +199,11 @@ class DevelopmentTest extends TestCase
         // 어제의 개발 포스트는 2개
         create(Development::class, ['created_at' => $yesterday], 2);
 
-        // 오늘 개발 포스트는 3개
+        // 오늘 개발 포스트는 2개
         create(Development::class, ['created_at' => $now], 2);
 
         $this->assertEquals([$subDays->day, $yesterday->day, $now->day], Development::countsByDays()->get()->pluck('day')->toArray());
 
-        $this->assertEquals([4, 2, 3], Development::countsByDays()->get()->pluck('posts')->toArray());
+        $this->assertEquals([4, 2, 2], Development::countsByDays()->get()->pluck('posts')->toArray());
     }
 }

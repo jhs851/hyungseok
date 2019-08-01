@@ -45,7 +45,7 @@ class Development extends Model
         static::deleting(function (Development $development) {
             $development->comments->each->delete();
 
-            $development->tags()->detach();
+            $development->tags->each->detach();
         });
     }
 
@@ -76,7 +76,9 @@ class Development extends Model
      */
     public function tags() : BelongsToMany
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->belongsToMany(Tag::class)
+            ->withTimestamps()
+            ->using(DevelopmentTag::class);
     }
 
     /**

@@ -25,6 +25,15 @@ return [
         'title' => '댓글',
         'total' => '총 댓글 수',
         'most_commentable' => '가장 많은 댓글이 달린 글',
+        'empty' => '등록된 댓글이 없습니다.',
+    ],
+    'tags' => [
+        'total' => '총 태그 수',
+        'most_mentioned' => '가장 많이 언급된 태그',
+        'unmentioned_tags' => '언급되지 않은 태그들',
+        'create' => '태그 생성',
+        'mentions_count' => '언급 된 수',
+        'empty' => '등록된 태그가 없습니다.<br><a href="' . route('admin.tags.create') . '" class="btn btn-outline-primary mt-2">태그 생성</a>',
     ],
     'favorites' => [
         'title' => '좋아요',

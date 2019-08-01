@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Core\Trending;
-use App\Models\{Comment, Development};
+use App\Models\{Comment, Development, Tag};
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\{Artisan, File, Redis};
 use SplFileInfo;
@@ -72,6 +72,14 @@ class RefreshDatabase extends Command
 
         Artisan::call('scout:import', [
             'model' => Comment::class,
+        ]);
+
+        Artisan::call('scout:flush', [
+            'model' => Tag::class,
+        ]);
+
+        Artisan::call('scout:import', [
+            'model' => Tag::class,
         ]);
 
         $this->info('Refreshed.');

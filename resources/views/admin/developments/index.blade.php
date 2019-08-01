@@ -1,13 +1,5 @@
 @extends('admin.layouts.app')
 
-@section('style')
-    <style>
-        .table th, .table td {
-            padding: 1.5rem .75rem;
-        }
-    </style>
-@stop
-
 @section('content')
     <div class="container-fluid p-5">
         <div class="row">

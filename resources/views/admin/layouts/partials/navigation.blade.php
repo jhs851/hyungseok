@@ -29,7 +29,7 @@
             </li>
 
             <li class="nav-item {{ Str::contains(request()->path(), 'tags') ? 'active' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.tags.index') }}" class="nav-link">
                     <i class="fas fa-tags"></i> @lang('validation.attributes.tags')
                 </a>
             </li>

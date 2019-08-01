@@ -24,5 +24,8 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
             'uses' => 'CommentsController@store',
         ]);
         Route::resource('comments', 'CommentsController')->only(['index', 'update', 'destroy']);
+
+        // Tags
+        Route::resource('tags', 'TagsController')->except(['show', 'edit']);
     });
 });

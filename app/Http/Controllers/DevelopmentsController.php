@@ -53,6 +53,7 @@ class DevelopmentsController extends Controller
      * 리소르를 저장한 후에 응답입니다.
      *
      * @param  DevelopmentRequest  $request
+     * @param  Development  $development
      * @return RedirectResponse
      */
     public function stored(DevelopmentRequest $request, Development $development) : RedirectResponse
