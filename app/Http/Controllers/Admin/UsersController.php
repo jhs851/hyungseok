@@ -2,19 +2,28 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 
 class UsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 리소스 목록을 표시합니다.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index() : View
     {
-        //
+        $usersCount = User::count();
+        $monthliesCount = User::monthlies()->count();
+        $incremental = parseFloat($monthliesCount / $usersCount * 100);
+        $countsByDays = User::countsByDays()->get();
+        $activeUsersCount = User::whereNotNull('email_verified_at')->count();
+        $unactiveUsersCount = User::whereNull('email_verified_at')->count();
+
+        return view('admin.users.index', compact('usersCount', 'monthliesCount', 'incremental', 'countsByDays', 'activeUsersCount', 'unactiveUsersCount'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Core\{NumericalStatementable, Searchable};
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\{Hash, Storage};
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use Notifiable;
+    use Notifiable, NumericalStatementable, Searchable;
 
     /**
      * 대량 할당할 수 있는 특성.

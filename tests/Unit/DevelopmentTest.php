@@ -204,6 +204,6 @@ class DevelopmentTest extends TestCase
 
         $this->assertEquals([$subDays->day, $yesterday->day, $now->day], Development::countsByDays()->get()->pluck('day')->toArray());
 
-        $this->assertEquals([4, 2, 2], Development::countsByDays()->get()->pluck('posts')->toArray());
+        $this->assertEquals([4, 2, 2], Development::countsByDays()->get()->pluck('count')->toArray());
     }
 }

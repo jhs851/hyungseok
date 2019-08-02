@@ -3,10 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Core\Trending;
-use App\Models\{Comment, Development, Tag};
+use App\Models\{Comment, Development, Tag, User};
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\{Artisan, File, Redis};
-use SplFileInfo;
+use Illuminate\Support\Facades\{Artisan, Redis};
 
 class RefreshDatabase extends Command
 {
@@ -50,38 +49,24 @@ class RefreshDatabase extends Command
 
         Redis::del((new Trending)->cacheKey());
 
-        collect(File::files(public_path('avatars')))
-            ->filter(function (SplFileInfo $file) {
-                return ! in_array($file->getFilename(), ['default.png', '.gitignore']);
-            })
-            ->each(function (SplFileInfo $file) {
-                File::delete($file->getPathname());
-            });
-
-        Artisan::call('scout:flush', [
-            'model' => Development::class,
-        ]);
-
-        Artisan::call('scout:import', [
-            'model' => Development::class,
-        ]);
-
-        Artisan::call('scout:flush', [
-            'model' => Comment::class,
-        ]);
-
-        Artisan::call('scout:import', [
-            'model' => Comment::class,
-        ]);
-
-        Artisan::call('scout:flush', [
-            'model' => Tag::class,
-        ]);
-
-        Artisan::call('scout:import', [
-            'model' => Tag::class,
+        $this->refreshScout([
+            Development::class, Comment::class, Tag::class, User::class,
         ]);
 
         $this->info('Refreshed.');
+    }
+
+    /**
+     * Scout 에 등록된 모델들을 새로고침 합니다.
+     *
+     * @param  array  $models
+     */
+    protected function refreshScout(array $models = []) : void
+    {
+        foreach ($models as $model) {
+            Artisan::call('scout:flush', compact('model'));
+
+            Artisan::call('scout:import', compact('model'));
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -107,7 +108,7 @@ class UserTest extends TestCase
 
         $this->assertTrue($admin->isAdmin);
     }
-    
+
     /**
      * 유저 모델은 이메일이 인증되었는지 확인하는 Mutator를 가지고 있습니다.
      */
@@ -128,5 +129,53 @@ class UserTest extends TestCase
         $this->user->avatar_path = 'avatars/me.jpg';
 
         $this->assertEquals(Storage::url('avatars/me.jpg'), $this->user->avatar);
+    }
+
+    /**
+     * 유저 모델을 스카웃에 인덱싱할 때 created_at_timestamp 키를 추가하고 임포트 합니다.
+     */
+    public function testWhenindexingAItInTheScountAddTheCreatedAtTimestampThenImportIt() : void
+    {
+        $this->assertArrayHasKey('created_at_timestamp', $this->user->toSearchableArray());
+    }
+
+    /**
+     * 유저 모델은 주어진 Carbon 인스턴스(year, month)의 글만 가져올 수 있습니다.
+     */
+    public function testItCanOnlyBringBackPostsOfAGivenMonth() : void
+    {
+        $subMonth = Carbon::now()->subMonthsNoOverflow();
+
+        create(User::class, ['created_at' => $subMonth]);
+
+        $this->assertCount(2, User::all());
+
+        $this->assertCount(1, User::monthlies()->get());
+
+        $this->assertCount(1, User::monthlies($subMonth)->get());
+    }
+
+    /**
+     * 개발 모델은 일별로 그룹화하고 해당 날짜에 해당하는 포스트의 수를 반환할 수 있습니다.
+     */
+    public function testItCanBeGroupByDayAndReturnedTheCountOfPostsCorrespondingToThatDate() : void
+    {
+        $this->user->delete();
+        $subDays = Carbon::now()->setDay(1);
+        $yesterday = Carbon::now()->setDay(2);
+        $now = Carbon::now()->setDay(3);
+
+        // 엊그제 개발 포스트는 4개
+        create(User::class, ['created_at' => $subDays], 4);
+
+        // 어제의 개발 포스트는 2개
+        create(User::class, ['created_at' => $yesterday], 2);
+
+        // 오늘 개발 포스트는 2개
+        create(User::class, ['created_at' => $now], 2);
+
+        $this->assertEquals([$subDays->day, $yesterday->day, $now->day], User::countsByDays()->get()->pluck('day')->toArray());
+
+        $this->assertEquals([4, 2, 2], User::countsByDays()->get()->pluck('count')->toArray());
     }
 }

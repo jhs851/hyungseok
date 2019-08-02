@@ -55,5 +55,14 @@ return [
     ],
     'users' => [
         'title' => '사용자',
+        'total' => '총 사용자 수',
+        'month_of_new' => '한 달간 새로운 사용자',
+        'active_users' => '활성화 된 사용자',
+        'unactive_users' => '비활성화 된 사용자',
+        'search_placeholder' => '이름 및 이메일을 검색하세요.',
+        'create' => '사용자 생성',
+        'avatar' => '아바타',
+        'active_status' => '활성 상태',
+        'created_at' => '가입일',
     ],
 ];
