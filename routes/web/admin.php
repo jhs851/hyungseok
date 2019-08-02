@@ -32,6 +32,10 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
         Route::resource('favorites', 'FavoritesController')->only(['index', 'destroy']);
 
         // Notifications
+        Route::delete('notifications/{notification}/mark', [
+            'as' => 'notifications.mark',
+            'uses' => 'NotificationsController@mark',
+        ]);
         Route::resource('notifications', 'NotificationsController');
 
         // Users

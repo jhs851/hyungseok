@@ -2,84 +2,56 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\View\View;
 
 class NotificationsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 리소스 목록을 표시합니다.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function index()
+    public function index() : View
     {
-        //
+        return view('admin.notifications.index', [
+            'notificationsCount' => DatabaseNotification::count(),
+            'readNotifications' => DatabaseNotification::whereNotNull('read_at')->latest()->paginate(10),
+            'unreadNotifications' => DatabaseNotification::whereNull('read_at')->latest()->paginate(10),
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 읽지 않은 알림을 읽음으로 표시합니다.
      *
-     * @return \Illuminate\Http\Response
+     * @param  DatabaseNotification  $notification
+     * @return RedirectResponse
      */
-    public function create()
+    public function mark(DatabaseNotification $notification) : RedirectResponse
     {
-        //
+        $notification->markAsRead();
+
+        flash()->success(trans('admin.notifications.marked'));
+
+        return redirect(route('admin.notifications.index'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 지정된 리소스를 스토리지에서 제거합니다.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  DatabaseNotification  $notification
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function store(Request $request)
+    public function destroy(DatabaseNotification $notification) : RedirectResponse
     {
-        //
-    }
+        $notification->delete();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        flash()->success(trans('developments.deleted'));
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return redirect(route('admin.notifications.index'));
     }
 }

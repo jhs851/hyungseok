@@ -47,6 +47,11 @@ return [
     ],
     'notifications' => [
         'title' => '알림',
+        'read_notifications' => '읽은 알림들',
+        'unread_notifications' => '읽지 않은 알림들',
+        'read_empty' => '읽은 알림이 없습니다.',
+        'unread_empty' => '읽지 않은 알림이 없습니다.',
+        'marked' => '읽음 상태로 표시했습니다.',
     ],
     'users' => [
         'title' => '사용자',

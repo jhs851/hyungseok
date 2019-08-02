@@ -106,6 +106,8 @@
                                     @endforelse
                                 </tbody>
                             </table>
+
+                            {{ $favorites->render() }}
                         </div>
                     </div>
                 </div>
