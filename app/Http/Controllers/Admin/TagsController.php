@@ -18,7 +18,11 @@ class TagsController extends Controller
      */
     public function index() : View
     {
-        return view('admin.tags.index', ['tags' => new Tag]);
+        return view('admin.tags.index', [
+            'tagsCount' => Tag::count(),
+            'mostMentionedTag' => Tag::orderBy('mentions', 'desc')->first(),
+            'unmentionedTags' => Tag::where('mentions', 0)->get(),
+        ]);
     }
 
     /**

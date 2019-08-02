@@ -50,7 +50,7 @@ trait Favoritable
      */
     public function unfavorite()
     {
-        $this->favorites()->where(['user_id' => auth()->id()])->get()->each->delete();
+        $this->favorites()->where('user_id', auth()->id())->get()->each->delete();
 
         return $this;
     }

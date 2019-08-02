@@ -3,37 +3,33 @@
 @section('content')
     <div class="container-fluid p-5">
         <div class="row">
-            <div class="col-md-4">
-                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
-                    <div class="d-flex flex-column py-3 px-4 h-100">
-                        <h4 class="text-muted font-weight-bold">
-                            @lang('admin.comments.total')
-                        </h4>
+            @component('admin.layouts.components.card')
+                <div class="d-flex flex-column py-3 px-4 h-100">
+                    <h4 class="text-muted font-weight-bold">
+                        @lang('admin.comments.total')
+                    </h4>
 
-                        <h1 class="display-4 mb-auto">{{ number_format($commentsCount) }}</h1>
-                    </div>
+                    <h1 class="display-4 mb-auto">{{ number_format($commentsCount) }}</h1>
                 </div>
-            </div>
+            @endcomponent
 
-            <div class="col-md-4">
-                <div class="rounded bg-white z-depth-1 hvr-float w-100" style="height: 300px;">
-                    <div class="d-flex flex-column h-100 py-3 px-4">
-                        <h4 class="text-muted font-weight-bold">
-                            @lang('admin.comments.most_commentable')
-                        </h4>
+            @component('admin.layouts.components.card')
+                <div class="d-flex flex-column h-100 py-3 px-4">
+                    <h4 class="text-muted font-weight-bold">
+                        @lang('admin.comments.most_commentable')
+                    </h4>
 
-                        <h1>
-                            <a href="{{ route('admin.developments.show', $mostCommentable->id) }}">
-                                {{ $mostCommentable->title }}
-                            </a>
-                        </h1>
+                    <h1>
+                        <a href="{{ route('admin.developments.show', $mostCommentable->id) }}">
+                            {{ $mostCommentable->title }}
+                        </a>
+                    </h1>
 
-                        <h3 class="text-right mt-auto">
-                            {{ $mostCommentable->comments_count }}
-                        </h3>
-                    </div>
+                    <h3 class="text-right mt-auto">
+                        {{ $mostCommentable->comments_count }}
+                    </h3>
                 </div>
-            </div>
+            @endcomponent
         </div>
 
         <search-view class="row mt-5 align-items-end" index="comments" reference="body" v-cloak>
@@ -137,64 +133,14 @@
                                         </tr>
 
                                         <tr v-if="! items.length">
-                                            <td colspan="8">
+                                            <td colspan="5">
                                                 @lang('admin.comments.empty')
                                             </td>
                                         </tr>
                                     </tbody>
                                 </table>
 
-                                <ais-pagination class="mt-3">
-                                    <ul slot-scope="{ currentRefinement, nbPages, pages, isFirstPage, isLastPage, refine, createURL }"
-                                        class="pagination justify-content-center" role="navigation">
-
-                                        <template v-if="isFirstPage">
-                                            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.first')">
-                                                <span class="page-link" aria-hidden="true">&laquo;</span>
-                                            </li>
-
-                                            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                                                <span class="page-link" aria-hidden="true">&lsaquo;</span>
-                                            </li>
-                                        </template>
-
-                                        <template v-else>
-                                            <li class="page-item">
-                                                <a class="page-link" :href="createURL(0)" @click.prevent="refine(0)" rel="first" aria-label="@lang('pagination.first')">&laquo;</a>
-                                            </li>
-
-                                            <li class="page-item">
-                                                <a class="page-link" :href="createURL(currentRefinement - 1)" @click.prevent="refine(currentRefinement - 1)" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
-                                            </li>
-                                        </template>
-
-                                        <li v-for="page in pages" :key="page" class="page-item" :class="{ active: page === currentRefinement }">
-                                            <span v-if="page === currentRefinement" class="page-link">@{{ page + 1 }}</span>
-
-                                            <a v-else class="page-link" :href="createURL(page)" @click.prevent="refine(page)">@{{ page + 1 }}</a>
-                                        </li>
-
-                                        <template v-if="isLastPage">
-                                            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                                                <span class="page-link" aria-hidden="true">&rsaquo;</span>
-                                            </li>
-
-                                            <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.last')">
-                                                <span class="page-link" aria-hidden="true">&raquo;</span>
-                                            </li>
-                                        </template>
-
-                                        <template v-else>
-                                            <li class="page-item">
-                                                <a class="page-link" :href="createURL(currentRefinement + 1)"  @click.prevent="refine(currentRefinement + 1)" rel="next" aria-label="@lang('pagination.next')">&rsaquo;</a>
-                                            </li>
-
-                                            <li class="page-item">
-                                                <a class="page-link" :href="createURL(nbPages)" @click.prevent="refine(nbPages)" rel="last" aria-label="@lang('pagination.last')">&raquo;</a>
-                                            </li>
-                                        </template>
-                                    </ul>
-                                </ais-pagination>
+                                @include('layouts.partials.ais-pagination')
                             </div>
                         </div>
                     </div>

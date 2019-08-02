@@ -27,5 +27,14 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function () {
 
         // Tags
         Route::resource('tags', 'TagsController')->except(['show', 'edit']);
+
+        // Favorites
+        Route::resource('favorites', 'FavoritesController')->only(['index', 'destroy']);
+
+        // Notifications
+        Route::resource('notifications', 'NotificationsController');
+
+        // Users
+        Route::resource('users', 'UsersController');
     });
 });

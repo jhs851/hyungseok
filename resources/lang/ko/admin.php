@@ -37,6 +37,13 @@ return [
     ],
     'favorites' => [
         'title' => '좋아요',
+        'total' => '모든 좋아요 수',
+        'most_favorited' => '가장 많은 좋아요를 받은 글',
+        'writer' => '좋아한 사람',
+        'type' => '타입',
+        'favorited_post' => '좋아한 글',
+        'created_at' => '좋아한 날',
+        'empty' => '좋아한 기록이 없습니다 :(',
     ],
     'notifications' => [
         'title' => '알림',

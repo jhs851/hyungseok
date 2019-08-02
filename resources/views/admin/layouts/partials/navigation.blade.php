@@ -35,19 +35,19 @@
             </li>
 
             <li class="nav-item {{ Str::contains(request()->path(), 'favorites') ? 'active' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.favorites.index') }}" class="nav-link">
                     <i class="fas fa-heart"></i> @lang('admin.favorites.title')
                 </a>
             </li>
 
             <li class="nav-item {{ Str::contains(request()->path(), 'notifications') ? 'active' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.notifications.index') }}" class="nav-link">
                     <i class="fas fa-bell"></i> @lang('admin.notifications.title')
                 </a>
             </li>
 
             <li class="nav-item {{ Str::contains(request()->path(), 'users') ? 'active' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="{{ route('admin.users.index') }}" class="nav-link">
                     <i class="fas fa-users"></i> @lang('admin.users.title')
                 </a>
             </li>
