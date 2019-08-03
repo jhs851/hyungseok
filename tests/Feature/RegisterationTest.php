@@ -5,7 +5,7 @@ namespace Tests\Feautre;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
-use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\{Event, Hash};
 use Tests\TestCase;
 
 class RegisterationTest extends TestCase
@@ -83,6 +83,18 @@ class RegisterationTest extends TestCase
     {
         $this->publishRegister(['password_confirmation' => ''])
              ->assertSessionHasErrors('password');
+    }
+
+    /**
+     * 데이터 베이스에 레코드를 저장하기 전에 비밀번호를 해쉬화 합니다.
+     */
+    public function testHashThePasswordBeforeSavingTheRecordToTheDatabase() : void
+    {
+        $password = 'password';
+
+        $user = create(User::class, ['password' => $password]);
+
+        $this->assertTrue(Hash::check($password, $user->getAuthPassword()));
     }
 
     /**

@@ -18,7 +18,7 @@
                             <table class="table table-hover text-center h5 font-weight-light mb-0">
                                 <colgroup>
                                     <col style="width: 15%;">
-                                    <col style="width: 8%;">
+                                    <col style="width: 10%;">
                                     <col>
                                     <col style="width: 12%;">
                                     <col style="width: 8%;">
@@ -83,7 +83,7 @@
                             <table class="table table-hover text-center h5 font-weight-light mb-0">
                                 <colgroup>
                                     <col style="width: 15%;">
-                                    <col style="width: 8%;">
+                                    <col style="width: 10%;">
                                     <col>
                                     <col style="width: 12%;">
                                     <col style="width: 8%;">

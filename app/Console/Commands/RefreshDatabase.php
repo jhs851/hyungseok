@@ -40,14 +40,22 @@ class RefreshDatabase extends Command
      */
     public function handle()
     {
+        $this->comment('Migration refreshing with seeding...');
+
         Artisan::call('migrate:refresh', [
             '--force' => true,
             '--seed' => true,
         ]);
 
+        $this->comment('Cache clearing...');
+
         Artisan::call('cache:clear');
 
+        $this->comment('Redis clearing...');
+
         Redis::del((new Trending)->cacheKey());
+
+        $this->comment('Scout refresh...');
 
         $this->refreshScout([
             Development::class, Comment::class, Tag::class, User::class,

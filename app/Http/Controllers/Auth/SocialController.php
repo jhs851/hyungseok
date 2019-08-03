@@ -74,7 +74,7 @@ class SocialController extends Controller
      */
     protected function register(Request $request, SocialUser $socialUser)
     {
-        event(new Registered($user = User::register($socialUser->getRaw())));
+        event(new Registered($user = User::create($socialUser->getRaw())));
 
         $this->guard()->login($user);
 

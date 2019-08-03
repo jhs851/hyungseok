@@ -13,7 +13,7 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         Development::all()->each(function (Development $development) {
-            factory(Comment::class, 10)->create(['development_id' => $development->id])->each(function ($comment) {
+            factory(Comment::class, 5)->create(['development_id' => $development->id])->each(function ($comment) {
                 $comment->activities()->create([
                     'type' => 'created_comment',
                     'user_id' => $comment->user->id,

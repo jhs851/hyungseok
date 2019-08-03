@@ -84,7 +84,7 @@ class UserTest extends TestCase
     {
         $user = make(User::class);
 
-        $this->user->register($user->toArray());
+        $this->user->create($user->toArray());
 
         $this->assertDatabaseHas('users', ['email' => $user->email]);
     }

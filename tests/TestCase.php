@@ -4,7 +4,8 @@ namespace Tests;
 
 use App\Exceptions\Handler;
 use App\Models\User;
-use Illuminate\Contracts\Container\BindingResolutionException;
+use Exception;
+use Illuminate\Contracts\Container\BindingResolutionException as BindingResolutionExceptionAlias;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -23,10 +24,19 @@ abstract class TestCase extends BaseTestCase
      * Setup the test environment.
      *
      * @return void
-     * @throws BindingResolutionException
+     * @throws BindingResolutionExceptionAlias
+     * @throws Exception
      */
     protected function setUp() : void
     {
+        if (! $this->app) {
+            $this->refreshApplication();
+        }
+
+        if ($this->app->environment() !== 'testing' || config('database.default') !== 'sqlite') {
+            throw new Exception('Failed to read PHPUnit configuration file.');
+        }
+
         parent::setUp();
 
         $this->disableExceptionHandling();
@@ -51,7 +61,7 @@ abstract class TestCase extends BaseTestCase
      * Http 환경에서는 오류 페이지를 렌더링해서 리다이렉트 합니다.
      * Test 환경에서는 Laravel의 Exception Handling을 비활성화하고 예외를 던집니다.
      *
-     * @throws BindingResolutionException
+     * @throws BindingResolutionExceptionAlias
      * @see https://gist.github.com/adamwathan/125847c7e3f16b88fa33a9f8b42333da
      */
     protected function disableExceptionHandling()

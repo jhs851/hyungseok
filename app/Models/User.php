@@ -86,21 +86,6 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * 주어진 data로 User 레코드를 저장하고 반환합니다.
-     *
-     * @param  array  $data
-     * @return static
-     */
-    public static function register(array $data) : User
-    {
-        return static::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => isset($data['password']) && $data['password'] ? Hash::make($data['password']) : null,
-        ]);
-    }
-
-    /**
      * 사용자가 관리자인지 확인합니다.
      *
      * @return bool
@@ -131,7 +116,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * 아바타 경로를 반환합니다.
+     * 아바타 경로를 반환하는 Mutator 입니다.
      *
      * @return string
      */
@@ -142,5 +127,17 @@ class User extends Authenticatable implements MustVerifyEmail
         }
 
         return asset('avatars/default.png');
+    }
+
+    /**
+     * 비밀번호를 저장할 때 Hashing 하는 Mutator 입니다.
+     *
+     * @param  string|null  $password
+     */
+    public function setPasswordAttribute(string $password = null) : void
+    {
+        if ($password) {
+            $this->attributes['password'] = Hash::make($password);
+        }
     }
 }

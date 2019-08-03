@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Http\Request;
+use Illuminate\Http\{RedirectResponse, Request};
 
 class LoginController extends Controller
 {
@@ -33,12 +34,29 @@ class LoginController extends Controller
     }
 
     /**
+     * Log the user out of the application.
+     *
+     * @param  Request  $request
+     * @return RedirectResponse
+     */
+    public function logout(Request $request) : RedirectResponse
+    {
+        return User::withoutSyncingToSearch(function () use ($request) {
+            $this->guard()->logout();
+
+            $request->session()->invalidate();
+
+            return $this->loggedOut($request) ?: redirect('/');
+        });
+    }
+
+    /**
      * 사용자가 응용 프로그램에서 로그아웃되었습니다.
      *
      * @param  Request  $request
-     * @return mixed
+     * @return RedirectResponse
      */
-    protected function loggedOut(Request $request)
+    protected function loggedOut(Request $request) : RedirectResponse
     {
         flash()->success(__('auth.logged_out'));
 

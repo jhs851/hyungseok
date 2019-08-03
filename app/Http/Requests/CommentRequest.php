@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Core\SupportFormRequest;
 use App\Models\Comment;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Gate;
 
 class CommentRequest extends FormRequest
 {
+    use SupportFormRequest;
+
     /**
      * 사용자에게 이 요청을 할 수 있는 권한이 있는지 확인합니다.
      *
@@ -49,26 +52,6 @@ class CommentRequest extends FormRequest
             'user_id' => auth()->id(),
             'body' => $this->input('body'),
         ];
-    }
-
-    /**
-     * 요청 메서드가 POST인지 확인합니다.
-     *
-     * @return bool
-     */
-    protected function isCreate() : bool
-    {
-        return $this->method() === 'POST';
-    }
-
-    /**
-     * 요청 메서드가 PUT, PETCh인지 확인합니다.
-     *
-     * @return bool
-     */
-    protected function isUpdate() : bool
-    {
-        return in_array($this->method(), ['PUT', 'PETCH']);
     }
 
     /**

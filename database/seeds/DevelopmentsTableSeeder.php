@@ -12,7 +12,7 @@ class DevelopmentsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Development::class, 50)->create()->each(function ($development) {
+        factory(Development::class, 10)->create()->each(function ($development) {
             $development->activities()->create([
                 'type' => 'created_development',
                 'user_id' => $development->user->id,

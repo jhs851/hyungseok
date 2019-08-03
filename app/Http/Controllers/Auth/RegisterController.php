@@ -2,15 +2,27 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\{Hash, Validator};
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\View\View;
 
 class RegisterController extends Controller
 {
     use RegistersUsers;
+
+    /**
+     * Show the application registration form.
+     *
+     * @return View
+     */
+    public function showRegistrationForm() : View
+    {
+        return view('auth.register', ['user' => new User]);
+    }
 
     /**
      * RegisterController의 생성자 입니다.
@@ -30,11 +42,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        return Validator::make($data, (new UserRequest)->rules());
     }
 
     /**
@@ -45,7 +53,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data) : User
     {
-        return User::register($data);
+        return User::create($data);
     }
 
     /**

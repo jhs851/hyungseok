@@ -64,5 +64,13 @@ return [
         'avatar' => '아바타',
         'active_status' => '활성 상태',
         'created_at' => '가입일',
+        'edit' => '사용자 변경',
+        'active' => '활성화',
+        'unactive' => '비활성화',
+        'is_admin' => '관리자 유무',
+        'admin' => '관리자',
+        'general' => '일반 회원',
+        'destroy' => '사용자 삭제',
+        'store' => '사용자를 생성 했습니다.',
     ],
 ];

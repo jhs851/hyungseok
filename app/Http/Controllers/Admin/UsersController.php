@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\UserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
+use Exception;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Controllers\Controller;
 use Illuminate\View\View;
 
@@ -27,68 +30,81 @@ class UsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 새 리소스를 생성하기 위한 폼을 표시합니다.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
-    public function create()
+    public function create() : View
     {
-        //
+        return view('admin.users.create', ['user' => new User]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 새로 생성된 리소스를 저장소에 저장합니다.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  UserRequest  $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(UserRequest $request) : RedirectResponse
     {
-        //
+        event(new Registered($user = User::create($request->all())));
+
+        flash()->success(trans('admin.users.store'));
+
+        return redirect(route('admin.users.index'));
     }
 
     /**
-     * Display the specified resource.
+     * 지정된 리소스를 표시합니다.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return View
      */
-    public function show($id)
+    public function show(User $user) : View
     {
-        //
+        return view('admin.users.show', compact('user'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 리소스를 변경하기 위한 폼을 표시합니다.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return View
      */
-    public function edit($id)
+    public function edit(User $user) : View
     {
-        //
+        return view('admin.users.edit', compact('user'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * 스토리지에서 지정된 리소스를 업데이트합니다.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  UserRequest  $request
+     * @param  User  $user
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, User $user) : RedirectResponse
     {
-        //
+        $user->update($request->all());
+
+        flash()->success(trans('developments.updated'));
+
+        return redirect(route('admin.users.show', $user->id));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 지정된 리소스를 스토리지에서 제거합니다.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  User  $user
+     * @return RedirectResponse
+     * @throws Exception
      */
-    public function destroy($id)
+    public function destroy(User $user) : RedirectResponse
     {
-        //
+        $user->delete();
+
+        flash()->success(trans('developments.deleted'));
+
+        return redirect(route('admin.users.index'));
     }
 }
