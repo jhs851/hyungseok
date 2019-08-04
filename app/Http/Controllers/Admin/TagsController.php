@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\TagCreated;
 use App\Http\Requests\TagRequest;
 use App\Models\Tag;
 use Exception;
@@ -43,7 +44,7 @@ class TagsController extends Controller
      */
     public function store(TagRequest $request) : RedirectResponse
     {
-        Tag::create($request->all());
+        TagCreated::dispatch(Tag::create($request->all()));
 
         flash()->success(trans('developments.store'));
 

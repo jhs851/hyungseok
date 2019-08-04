@@ -45,6 +45,8 @@
                     });
                 }
             });
+
+            Echo.channel('tags').listen('TagCreated', ({tag}) => this.tags.push(tag));
         },
 
         methods: {

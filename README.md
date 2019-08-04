@@ -41,7 +41,8 @@ This project is a personal project for my development record and my daily life r
 - [x] Use storage
 - [x] Changed to svg the icon.
 - [x] Change storage driver to s3
-- [ ] Create Adminitrator page
+- [x] Create Adminitrator page
+- [x] Build realtime features
 - [ ] Speed optimization
 - [ ] Open the server
 - [ ] Register mail in Mailgun
