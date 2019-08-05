@@ -43,7 +43,9 @@ This project is a personal project for my development record and my daily life r
 - [x] Change storage driver to s3
 - [x] Create Adminitrator page
 - [x] Build realtime features
-- [ ] Speed optimization
+- [ ] Connect AWS RDS
+- [ ] Handle exceptions with slack
+- [ ] Use Queue with Supervisor
 - [ ] Open the server
 - [ ] Register mail in Mailgun
 - [ ] Implement social login registration and authentication.

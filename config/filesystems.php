@@ -63,7 +63,7 @@ return [
             'secret' => env('AWS_SECRET_ACCESS_KEY'),
             'region' => env('AWS_DEFAULT_REGION'),
             'bucket' => env('AWS_BUCKET'),
-            'url' => 'https://hyungseok-storage.s3.ap-northeast-2.amazonaws.com/',
+            'url' => 'https://hyungseok.s3.ap-northeast-2.amazonaws.com/storage/',
 
             'cache' => [
                 'store' => env('CACHE_DRIVER', 'file'),
