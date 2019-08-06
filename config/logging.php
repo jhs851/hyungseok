@@ -36,7 +36,7 @@ return [
     'channels' => [
         'stack' => [
             'driver' => 'stack',
-            'channels' => ['daily', 'custom'],
+            'channels' => ['daily', 'sentry'],
             'ignore_exceptions' => false,
         ],
 
@@ -90,12 +90,8 @@ return [
             'level' => 'debug',
         ],
 
-        'custom' => [
-            'driver' => 'custom',
-            'via' => App\Logging\SlackCustomLogger::class,
-            'url' => env('LOG_SLACK_WEBHOOK_URL'),
-            'username' => env('APP_NAME'),
-            'emoji' => env('APP_URL') . '/images/etc/logo.png',
+        'sentry' => [
+            'driver' => 'sentry',
             'level' => 'error',
         ],
     ],

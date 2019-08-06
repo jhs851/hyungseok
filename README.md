@@ -43,10 +43,10 @@ This project is a personal project for my development record and my daily life r
 - [x] Change storage driver to s3
 - [x] Create Adminitrator page
 - [x] Build realtime features
-- [x] Handle exceptions with slack
-- [ ] Use Queue with Supervisor
+- [x] Stop hoping my users will report errors with [sentry.io](https://sentry.io/welcome/) 
 - [ ] Open the server
 - [ ] Connect AWS RDS
+- [ ] Use Queue with Supervisor
 - [ ] Register mail in Mailgun
 - [ ] Implement social login registration and authentication.
 - [ ] Social login testing.
