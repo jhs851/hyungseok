@@ -32,19 +32,21 @@
                             :data="{{ json_encode($countsByDays->pluck('count')->values()) }}"></chart-line>
             @endcomponent
 
-            @component('admin.layouts.components.card')
-                <div class="d-flex flex-column py-3 px-4 h-100">
-                    <h4 class="text-muted font-weight-bold">
-                        @lang('admin.developments.most_visited')
-                    </h4>
+            @if ($mostVisited)
+                @component('admin.layouts.components.card')
+                    <div class="d-flex flex-column py-3 px-4 h-100">
+                        <h4 class="text-muted font-weight-bold">
+                            @lang('admin.developments.most_visited')
+                        </h4>
 
-                    <h1 class="display-4 mb-auto">{{ number_format($mostVisited->visits) }}</h1>
+                        <h1 class="display-4 mb-auto">{{ number_format($mostVisited->visits) }}</h1>
 
-                    <h2 class="text-muted mb-0">
-                        <a href="{{ route('developments.show', $mostVisited->id) }}">{{ $mostVisited->title }}</a>
-                    </h2>
-                </div>
-            @endcomponent
+                        <h2 class="text-muted mb-0">
+                            <a href="{{ route('developments.show', $mostVisited->id) }}">{{ $mostVisited->title }}</a>
+                        </h2>
+                    </div>
+                @endcomponent
+            @endif
         </div>
 
         <search-view class="row mt-5 align-items-end" index="developments" v-cloak>

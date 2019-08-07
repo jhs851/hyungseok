@@ -68,8 +68,8 @@
 
 
         <div class="dropdown" v-if="authorize(model)">
-            <a id="avatarDropdown" class="dropdown-toggle-split" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img class="avatar mr-2" :src="avatar" alt="">
+            <a id="avatarDropdown" class="dropdown-toggle-split p-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <slot :avatar="avatar"></slot>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="avatarDropdown">
@@ -84,7 +84,7 @@
         </div>
 
         <a v-else :href="avatar" target="_blank">
-            <img class="avatar mr-2" :src="avatar" alt="">
+            <slot :avatar="avatar"></slot>
         </a>
     </div>
 </template>

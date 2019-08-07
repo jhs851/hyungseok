@@ -7,7 +7,10 @@
                 <div class="card">
                     <div class="card-header d-flex align-items-center">
                         <div class="d-flex align-items-center mr-auto">
-                            <img class="avatar avatar-sm mr-2" src="{{ $user->avatar }}" alt="">
+                            <avatar :model="{{ $user }}">
+                                <img class="avatar avatar-sm mr-2" slot-scope="{ avatar }" :src="avatar" alt="">
+                            </avatar>
+
                             {{ $user->name }}
                         </div>
 

@@ -22,7 +22,7 @@
             <tag v-for="tag in tags" :key="tag.id" :data="tag" @delete="deleted"></tag>
 
             <tr v-if="! tags.length">
-                <td colspan="5" v-text="trans('admin.tags.empty')"></td>
+                <td colspan="5" v-html="trans('admin.tags.empty')"></td>
             </tr>
         </tbody>
     </table>

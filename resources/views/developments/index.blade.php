@@ -85,19 +85,27 @@
                                     @lang('developments.empty_tags')
                                 </small>
 
-                                <div v-for="item in items" :key="item.value" class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" :id="item.value" @change.prevent="refine(item.value)">
-                                    <label class="custom-control-label" :for="item.value">
-                                        <ais-highlight attribute="item" :hit="item"></ais-highlight>
-                                        <small class="badge badge-warning font-weight-normal" v-text="item.count.toLocaleString()"></small>
-                                    </label>
-                                </div>
+                                <template v-if="items.length">
+                                    <div v-for="item in items" :key="item.value" class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" :id="item.value"
+                                               @change.prevent="refine(item.value)">
+                                        <label class="custom-control-label" :for="item.value">
+                                            <ais-highlight attribute="item" :hit="item"></ais-highlight>
+                                            <small class="badge badge-warning font-weight-normal"
+                                                   v-text="item.count.toLocaleString()"></small>
+                                        </label>
+                                    </div>
 
-                                <div class="text-right mt-3">
-                                    <a href="#" class="btn btn-primary" @click.prevent="toggleShowMore" :disabled="! canToggleShowMore">
-                                        @{{ ! isShowingMore ? trans('developments.show_more') : trans('developments.show_less') }}
-                                    </a>
-                                </div>
+                                    <div class="text-right mt-3">
+                                        <a href="#" class="btn btn-primary" @click.prevent="toggleShowMore"
+                                           :disabled="! canToggleShowMore">
+                                            @{{ ! isShowingMore ? trans('developments.show_more') :
+                                            trans('developments.show_less') }}
+                                        </a>
+                                    </div>
+                                </template>
+
+                                <span v-else>@lang('developments.empty_tags')</span>
                             </template>
                         </ais-refinement-list>
                     </div>

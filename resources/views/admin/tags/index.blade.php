@@ -13,21 +13,23 @@
                 </div>
             @endcomponent
 
-            @component('admin.layouts.components.card')
-                <div class="d-flex flex-column h-100 py-3 px-4">
-                    <h4 class="text-muted font-weight-bold">
-                        @lang('admin.tags.most_mentioned')
-                    </h4>
+            @if ($mostMentionedTag)
+                @component('admin.layouts.components.card')
+                    <div class="d-flex flex-column h-100 py-3 px-4">
+                        <h4 class="text-muted font-weight-bold">
+                            @lang('admin.tags.most_mentioned')
+                        </h4>
 
-                    <h1>
-                        {{ $mostMentionedTag->name }}
-                    </h1>
+                        <h1>
+                            {{ $mostMentionedTag->name }}
+                        </h1>
 
-                    <h3 class="text-right mt-auto">
-                        {{ $mostMentionedTag->mentions }}
-                    </h3>
-                </div>
-            @endcomponent
+                        <h3 class="text-right mt-auto">
+                            {{ $mostMentionedTag->mentions }}
+                        </h3>
+                    </div>
+                @endcomponent
+            @endif
 
             @component('admin.layouts.components.card')
                 <div class="d-flex flex-column h-100 py-3 px-4">

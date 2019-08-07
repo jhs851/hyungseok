@@ -23,7 +23,7 @@ class DevelopmentsController extends Controller
     {
         $developmentsCount = Development::count();
         $monthliesCount = Development::monthlies()->count();
-        $incremental = parseFloat($monthliesCount / $developmentsCount * 100);
+        $incremental = $monthliesCount ? parseFloat($monthliesCount / $developmentsCount * 100) : 0;
         $countsByDays = Development::withoutAll()->countsByDays()->get();
         $mostVisited = Development::withoutAll()->orderBy('visits', 'desc')->first();
 

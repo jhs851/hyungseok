@@ -13,23 +13,25 @@
                 </div>
             @endcomponent
 
-            @component('admin.layouts.components.card')
-                <div class="d-flex flex-column h-100 py-3 px-4">
-                    <h4 class="text-muted font-weight-bold">
-                        @lang('admin.comments.most_commentable')
-                    </h4>
+            @if ($mostCommentable)
+                @component('admin.layouts.components.card')
+                    <div class="d-flex flex-column h-100 py-3 px-4">
+                        <h4 class="text-muted font-weight-bold">
+                            @lang('admin.comments.most_commentable')
+                        </h4>
 
-                    <h1>
-                        <a href="{{ route('admin.developments.show', $mostCommentable->id) }}">
-                            {{ $mostCommentable->title }}
-                        </a>
-                    </h1>
+                        <h1>
+                            <a href="{{ route('admin.developments.show', $mostCommentable->id) }}">
+                                {{ $mostCommentable->title }}
+                            </a>
+                        </h1>
 
-                    <h3 class="text-right mt-auto">
-                        {{ $mostCommentable->comments_count }}
-                    </h3>
-                </div>
-            @endcomponent
+                        <h3 class="text-right mt-auto">
+                            {{ $mostCommentable->comments_count }}
+                        </h3>
+                    </div>
+                @endcomponent
+            @endif
         </div>
 
         <search-view class="row mt-5 align-items-end" index="comments" reference="body" v-cloak>
