@@ -113,22 +113,10 @@
                                     <ais-highlight attribute="user.name" :hit="development" highlighted-tag-name="em" />
                                 </a>
 
-                                <div>
-                                    <small class="mr-3">
-                                        <i class="far fa-eye mr-1"></i>
-                                        @{{ development.visits }}
-                                    </small>
-
-                                    <small class="mr-3">
-                                        <i class="far fa-comment mr-1"></i>
-                                        @{{ development.comments_count }}
-                                    </small>
-
-                                    <small>
-                                        <i class="far fa-heart mr-1"></i>
-                                        @{{ development.favoritesCount }}
-                                    </small>
-                                </div>
+                                <small>
+                                    <i class="far fa-clock mr-1"></i>
+                                    @{{ development.created_at | dateFormat('Y. M. D') }}
+                                </small>
                             </div>
 
                             <div class="card-body">
@@ -150,10 +138,22 @@
                                     </li>
                                 </ul>
 
-                                <small>
-                                    <i class="far fa-clock mr-1"></i>
-                                    @{{ development.created_at | dateFormat('Y. M. D') }}
-                                </small>
+                                <div>
+                                    <small class="mr-3">
+                                        <i class="far fa-eye mr-1"></i>
+                                        @{{ development.visits }}
+                                    </small>
+
+                                    <small class="mr-3">
+                                        <i class="far fa-comment mr-1"></i>
+                                        @{{ development.comments_count }}
+                                    </small>
+
+                                    <small>
+                                        <i class="far fa-heart mr-1"></i>
+                                        @{{ development.favoritesCount }}
+                                    </small>
+                                </div>
                             </div>
                         </div>
 
