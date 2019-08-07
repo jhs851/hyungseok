@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use App\Core\{Favoritable, NumericalStatementable, RecordsActivity, Searchable};
+use App\Core\{Favoritable, NumericalStatementable, RecordsActivity};
 use App\Events\DevelopmentRecivedNewComment;
+use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\BelongsToMany, Relations\HasMany};
 
 class Development extends Model
@@ -106,5 +107,19 @@ class Development extends Model
         $this->update(['best_comment_id' => $comment->id]);
 
         return $this;
+    }
+
+    /**
+     * Get the indexable data array for the model.
+     *
+     * @return array
+     */
+    public function toSearchableArray() : array
+    {
+        $array = $this->fresh()->toArray();
+
+        unset($array['body']);
+
+        return $array + ['created_at_timestamp' => $this->created_at->timestamp];
     }
 }

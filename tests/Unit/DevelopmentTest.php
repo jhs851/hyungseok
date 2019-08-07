@@ -160,11 +160,13 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 개발 모델을 스카웃에 인덱싱할 때 created_at_timestamp 키를 추가하고 임포트 합니다.
+     * 개발 모델을 스카웃에 인덱싱할 때 created_at_timestamp 키를 추가하고 body 키를 삭제한 후에 임포트 합니다.
      */
     public function testWhenindexingAItInTheScountAddTheCreatedAtTimestampThenImportIt() : void
     {
         $this->assertArrayHasKey('created_at_timestamp', $this->development->toSearchableArray());
+
+        $this->assertArrayNotHasKey('body', $this->development->toSearchableArray());
     }
 
     /**
