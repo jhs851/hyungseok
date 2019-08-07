@@ -135,7 +135,8 @@
                                 </h5>
 
                                 <p class="card-text text-black-50">
-                                    <ais-highlight attribute="body" :hit="development" highlighted-tag-name="em" />
+                                    @{{ development.body | strLimit(230) }}
+                                    {{--<ais-highlight attribute="body" :hit="development" highlighted-tag-name="em" />--}}
                                 </p>
                             </div>
 

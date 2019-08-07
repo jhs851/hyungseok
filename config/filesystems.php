@@ -65,8 +65,8 @@ return [
             'bucket' => env('AWS_BUCKET'),
             'url' => 'https://hyungseok.s3.ap-northeast-2.amazonaws.com/',
             'paths' => [
-                'images' => 'storage/images/',
-                'avatars' => 'storage/avatars/',
+                'images' => 'storage/images',
+                'avatars' => 'storage/avatars',
                 'videos' => 'storage/videos',
             ],
 

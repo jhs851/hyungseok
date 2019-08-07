@@ -104,7 +104,7 @@
 
                         <vue-markdown class="markdown-body" :task-lists="false" @rendered="enablePrism">@{{ form.body }}</vue-markdown>
 
-                        <ul class="list-unstyled mb-0 d-flex mt-auto">
+                        <ul class="list-unstyled mb-0 d-flex mt-auto pt-4">
                             <li v-for="tag in tags" class="mr-2">
                                 <span class="badge badge-light font-weight-normal px-3 py-2" v-text="`#${tag.name}`"></span>
                             </li>
