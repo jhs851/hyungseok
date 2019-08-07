@@ -18,7 +18,7 @@ class UploadImagesController extends Controller
     {
         return response()->json([
             'message' => trans('developments.uploaded_image'),
-            'path' => Storage::url($request->file('image')->store('images')),
+            'path' => Storage::url($request->file('image')->store(config('filesystems.disks.s3.paths.images'))),
         ]);
     }
 }

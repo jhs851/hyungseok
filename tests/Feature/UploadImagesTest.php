@@ -21,7 +21,7 @@ class UploadImagesTest extends TestCase
              ->post(route('images.store'), ['image' => UploadedFile::fake()->image('foobar.jpg')])
              ->assertStatus(403);
     }
-    
+
     /**
      * 이메일 미인증 사용자는 이미지를 업로드 할 수 없습니다.
      */
@@ -57,6 +57,6 @@ class UploadImagesTest extends TestCase
 
         $this->post(route('images.store'), ['image' => $file = UploadedFile::fake()->image('foobar.jpg')]);
 
-        Storage::assertExists('images/' . $file->hashName());
+        Storage::assertExists(config('filesystems.disks.s3.paths.images') . $file->hashName());
     }
 }

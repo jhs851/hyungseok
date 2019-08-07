@@ -54,7 +54,7 @@ class AvatarRequest extends FormRequest
      */
     public function storeAvatar() : string
     {
-        $path = 'avatars/' . Str::random(40) . '.png';
+        $path = config('filesystems.disks.s3.paths.avatars') . Str::random(40) . '.png';
 
         $image = Image::make($this->get('src'))
                       ->rotate((Int) $this->get('rotate') * -1);
