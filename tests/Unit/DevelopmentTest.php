@@ -9,6 +9,7 @@ use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 class DevelopmentTest extends TestCase
@@ -160,13 +161,16 @@ class DevelopmentTest extends TestCase
     }
 
     /**
-     * 개발 모델을 스카웃에 인덱싱할 때 created_at_timestamp 키를 추가하고 body 키를 삭제한 후에 임포트 합니다.
+     * 개발 모델을 스카웃에 인덱싱할 때 created_at_timestamp 키를 추가하고 body 키는 글자수를 제한한 후에 임포트 합니다.
      */
     public function testWhenindexingAItInTheScountAddTheCreatedAtTimestampThenImportIt() : void
     {
         $this->assertArrayHasKey('created_at_timestamp', $this->development->toSearchableArray());
 
-        $this->assertArrayNotHasKey('body', $this->development->toSearchableArray());
+        $randomString = Str::random(1000);
+        $development = create(Development::class, ['body' => $randomString]);
+
+        $this->assertEquals(Str::limit($randomString, 400), $development->toSearchableArray()['body']);
     }
 
     /**

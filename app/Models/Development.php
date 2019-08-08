@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Core\{Favoritable, NumericalStatementable, RecordsActivity};
 use App\Events\DevelopmentRecivedNewComment;
+use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\{Model, Relations\BelongsTo, Relations\BelongsToMany, Relations\HasMany};
 
@@ -118,7 +119,8 @@ class Development extends Model
     {
         $array = $this->fresh()->toArray();
 
-        unset($array['body']);
+        // algolia 프리티어는 한 객체의 크기를 제한합니다.
+        $array['body'] = Str::limit($array['body'], 400);
 
         return $array + ['created_at_timestamp' => $this->created_at->timestamp];
     }
