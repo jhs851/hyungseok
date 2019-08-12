@@ -1,8 +1,22 @@
 @extends('layouts.app')
 
+@section('style')
+    <style>
+        #navigation {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            z-index: 1030;
+            background-color: #fff !important;
+            border-bottom: 1px solid #dee2e6 !important;
+        }
+    </style>
+@stop
+
 @section('content')
     <development ref="form" inline-template v-cloak :data="{{ $development }}">
-        <div class="container">
+        <div class="container pt-5">
             <div class="row py-5">
                 <div class="col-12 p-3 p-md-5 bg-white shadow d-flex flex-column" style="min-height: 800px;">
                     <template v-if="editing">
@@ -102,7 +116,7 @@
 
                         <hr class="mb-5">
 
-                        <vue-markdown class="markdown-body" :task-lists="false" @rendered="enablePrism">@{{ form.body }}</vue-markdown>
+                        <markdown-reader>@{{ form.body }}</markdown-reader>
 
                         <ul class="list-unstyled mb-0 d-flex mt-auto pt-4">
                             <li v-for="tag in tags" class="mr-2">

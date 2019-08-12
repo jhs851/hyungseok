@@ -58,7 +58,7 @@
 
                 <hr class="mb-5">
 
-                <vue-markdown class="markdown-body" :task-lists="false" @rendered="enablePrism">{{ $development->body }}</vue-markdown>
+                <markdown-reader>{{ $development->body }}</markdown-reader>
 
                 <ul class="list-unstyled mb-0 d-flex mt-auto">
                     @foreach ($development->tags as $tag)

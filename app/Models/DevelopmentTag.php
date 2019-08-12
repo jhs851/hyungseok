@@ -23,12 +23,14 @@ class DevelopmentTag extends Pivot
         parent::boot();
 
        static::created(function (Pivot $pivot) {
-           $pivot->tag->increment('mentions');
+           $pivot->tag->mentions++;
+           $pivot->tag->save();
        });
 
        static::deleted(function (Pivot $pivot) {
            if ($pivot->tag->exists) {
-               $pivot->tag->decrement('mentions');
+               $pivot->tag->mentions--;
+               $pivot->tag->save();
            }
        });
     }

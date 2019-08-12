@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" :id="name" tabindex="-1" role="dialog" :aria-labelledby="name" aria-hidden="true" v-cloak>
+    <div class="modal fade" :id="name" tabindex="-1" role="dialog" :aria-labelledby="name" aria-hidden="true" v-cloak :class="modalClasses" :style="modalStyles">
         <div class="modal-dialog" :class="getDialogClasses" :style="dialogStyles" role="document">
             <div class="modal-content" :class="contentClasses" :style="contentStyles">
                 <div v-if="hasHeader" class="modal-header" :class="headerClasses">
@@ -10,7 +10,7 @@
                     </button>
                 </div>
 
-                <div class="modal-body">
+                <div class="modal-body" :class="bodyClasses">
                     <slot name="body"></slot>
                 </div>
 
@@ -43,6 +43,10 @@
                 type: String,
                 default: ''
             },
+            modalClasses: {
+                type: String,
+                default: ''
+            },
             dialogClasses: {
                 type: String,
                 default: ''
@@ -52,6 +56,14 @@
                 default: ''
             },
             headerClasses: {
+                type: String,
+                default: ''
+            },
+            bodyClasses: {
+                type: String,
+                default: ''
+            },
+            modalStyles: {
                 type: String,
                 default: ''
             },

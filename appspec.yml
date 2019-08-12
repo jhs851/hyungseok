@@ -2,4 +2,4 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/hyungseok/codeship/build
+    destination: /home/ubuntu/app/codeship/builds

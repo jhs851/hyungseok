@@ -55,6 +55,7 @@ class Activity extends Model
     public static function feed(User $user, int $take = 50) : Collection
     {
         return static::where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
             ->take($take)
             ->get()
             ->groupBy(function ($activity) {

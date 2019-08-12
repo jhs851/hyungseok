@@ -1,9 +1,9 @@
 <template>
     <div>
         <modal name="markdownHelperModal" ref="modal" full-height="right"
-               dialog-styles="width: 800px; max-width: 800px;"
-               content-classes="border-top-0 border-bottom-0 rounded-0 position-absolute h-100" content-styles="width: 400px; right: 0;"
-               header-classes="rounded-0">
+               modal-styles="width: 800px; left: unset; right: 0;" dialog-styles="width: 800px; max-width: 800px;"
+               content-classes="border-0 rounded-0 position-absolute h-100" content-styles="width: 400px; right: 0;"
+               header-classes="rounded-0 border-left" body-classes="border-left bg-white">
             <h5 class="mb-0" slot="header" v-text="trans('markdown.header')"></h5>
 
             <div slot="body">
@@ -41,8 +41,9 @@
             </div>
         </modal>
 
-        <button type="button" class="btn btn-primary btn-sm btn-floating position-fixed"
-                data-toggle="modal" data-target="#markdownHelperModal" data-backdrop="false" style="right: 30px; bottom: 30px;">
+        <button type="button" class="btn btn-primary btn-sm btn-floating position-fixed" data-toggle="modal"
+                data-target="#markdownHelperModal" data-backdrop="false" data-keyboard="false" data-focus="false"
+                style="right: 30px; bottom: 30px;">
             <i class="fas fa-question"></i>
         </button>
     </div>

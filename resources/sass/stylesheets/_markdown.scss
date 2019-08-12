@@ -1,3 +1,4 @@
+.table-of-contents,
 .markdown-body blockquote,
 .markdown-body > dl,
 .markdown-body > ol,
@@ -15,6 +16,11 @@
 .markdown-body h5,
 .markdown-body h6 {
     margin-top: 54px;
+}
+
+.markdown-body img {
+    display: block;
+    margin: 0 auto;
 }
 
 code[class*="language-"],

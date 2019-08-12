@@ -6,7 +6,7 @@
             </a>
         </h5>
 
-        <p class="card-text text-black-50">{{ str_limit($activity->subject->body) }}</p>
+        <p class="card-text text-black-50">{{ Str::limit($activity->subject->body) }}</p>
     </div>
 
     <div class="card-footer d-flex justify-content-between">
@@ -18,12 +18,17 @@
         <div>
             <small class="mr-3">
                 <i class="far fa-eye mr-1"></i>
-                0
+                {{ $activity->subject->visits }}
+            </small>
+
+            <small class="mr-3">
+                <i class="far fa-comment mr-1"></i>
+                {{ $activity->subject->comments_count }}
             </small>
 
             <small>
-                <i class="far fa-comment mr-1"></i>
-                {{ $activity->subject->comments_count }}
+                <i class="far fa-heart mr-1"></i>
+                {{ $activity->subject->favorites_count }}
             </small>
         </div>
     </div>
