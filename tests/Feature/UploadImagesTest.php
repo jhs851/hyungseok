@@ -57,6 +57,6 @@ class UploadImagesTest extends TestCase
 
         $this->post(route('images.store'), ['image' => $file = UploadedFile::fake()->image('foobar.jpg')]);
 
-        Storage::assertExists(config('filesystems.disks.s3.paths.images') . '/' . $file->hashName());
+        Storage::assertExists('images/' . $file->hashName());
     }
 }

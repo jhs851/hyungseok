@@ -18,6 +18,8 @@ class CreateTagsTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('mentions')->default(0);
             $table->timestamps();
+
+            $table->unique('name');
         });
     }
 
