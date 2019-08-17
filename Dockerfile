@@ -21,4 +21,6 @@ RUN docker-php-source extract && \
 
 RUN rm -rf /var/cache/apk/*
 
+RUN sed -i "s/;date.timezone =/date.timezone = Asia\/Seoul/g" "$PHP_INI_DIR/php.ini-production"
+
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
