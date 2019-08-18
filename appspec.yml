@@ -3,9 +3,8 @@ os: linux
 files:
   - source:  /
     destination: /home/ubuntu/app/codeship/hyungseok/
-
-hooks:
-  AfterInstall:
-    - location: ./scripts/change_permissions.sh
-      timeout: 300
-      runas: root
+permissions:
+  - object: /home/ubuntu/app/codeship/hyungseok/storage
+    mode: 777
+    type:
+      - directory
