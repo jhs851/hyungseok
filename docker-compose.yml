@@ -22,6 +22,7 @@ services:
     volumes:
       - ./:/app
     working_dir: /app/public
+    command: sh -c "cd .. && php artisan clear-compiled && php artisan optimize && php artisan migrate"
 
   redis:
     image: redis:latest
@@ -30,3 +31,9 @@ services:
     ports:
       - '6379:6379'
     command: redis-server /redis.conf
+
+  node:
+    image: node:latest
+    volumes:
+      - ./:/app
+    command: sh -c "npm install && npm run production"
