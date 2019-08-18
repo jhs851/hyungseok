@@ -25,3 +25,8 @@ services:
 
   redis:
     image: redis:latest
+    volumes:
+      - ./etc/redis.conf:/redis.conf
+    ports:
+      - '6379:6379'
+    command: redis-server /redis.conf
