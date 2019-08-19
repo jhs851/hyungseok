@@ -47,7 +47,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Open the server
 - [x] Connect AWS RDS
 - [ ] Use Queue with Supervisor
-- [ ] Register mail in Mailgun
+- [x] Register mail in Mailgun
 - [ ] Implement social login registration and authentication.
 - [ ] Social login testing.
 - [ ] Mobile UI Enhancements
