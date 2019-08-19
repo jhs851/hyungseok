@@ -14,6 +14,6 @@ permissions:
       - directory
 hooks:
   AfterInstall:
-    - location: scripts/running-dokcer.sh
+    - location: scripts/execute-deploy.sh
       timeout: 300
       runas: root
