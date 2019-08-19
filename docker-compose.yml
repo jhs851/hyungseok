@@ -14,14 +14,12 @@ services:
       - '80:80'
       - '443:443'
     environment:
-      NGINX_HOST: 52.78.217.23 hyungseok.kr www.hyungseok.kr api.hyungseok.kr m.hyungseok.kr
+      NGINX_HOST: hyungseok.kr www.hyungseok.kr api.hyungseok.kr m.hyungseok.kr
       NGINX_PORT: 80
     command: sh -c "envsubst \"`env | awk -F = '{printf \" $$%s\", $$1}'`\" < /app/etc/hyungseok_ssl.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
   phpfpm:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: jhs851/php-fpm:7.3
     volumes:
       - ./:/app
     working_dir: /app
