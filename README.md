@@ -44,8 +44,8 @@ This project is a personal project for my development record and my daily life r
 - [x] Create Adminitrator page
 - [x] Build realtime features
 - [x] Stop hoping my users will report errors with [sentry.io](https://sentry.io/welcome/) 
-- [ ] Open the server
-- [ ] Connect AWS RDS
+- [x] Open the server
+- [x] Connect AWS RDS
 - [ ] Use Queue with Supervisor
 - [ ] Register mail in Mailgun
 - [ ] Implement social login registration and authentication.
