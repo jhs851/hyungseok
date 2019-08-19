@@ -52,6 +52,7 @@ This project is a personal project for my development record and my daily life r
 - [ ] Social login testing.
 - [ ] Mobile UI Enhancements
 - [ ] Localization (English)
+- [ ] Auto save Temporary Developments
 - [ ] Create an Application with Web View
 
 ## Technology stacks
