@@ -14,6 +14,6 @@ permissions:
       - directory
 hooks:
   AfterInstall:
-    - location: scripts/running-dokcer.sh
+    - location: /home/ubuntu/app/codeship/hyungseok/scripts/running-dokcer.sh
       timeout: 300
       runas: root
