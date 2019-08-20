@@ -33,6 +33,7 @@ return [
         'with_github' => '깃헙으로 로그인',
         'with_google' => '구글로 로그인',
         'with_facebook' => '페이스북으로 로그인',
+        'invalid' => '유효하지 않습니다',
     ],
     'activities' => '활동내역',
     'created_development' => '작성한 개발 포스트들',

@@ -4,6 +4,7 @@
 Auth::routes(['verify' => true]);
 
 // Social
+Route::view('/social/invalid', 'auth.social.invalid');
 Route::get('/social/{provider}', [
     'as' => 'social.login',
     'uses' => 'Auth\SocialController@execute',
