@@ -47,7 +47,7 @@ return [
     'naver' => [
         'client_id' => env('NAVER_KEY'),
         'client_secret' => env('NAVER_SECRET'),
-        'redirect' => env('APP_URL') . env('NAVER_REDIRECT_URI'),
+        'redirect' => env('NAVER_REDIRECT_URI'),
         'rules' => [
             'name' => 'required',
             'email' => ['required', 'email'],

@@ -15,7 +15,7 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             \App\SocialiteProviders\Naver\NaverExtendSocialite::class,
-            \SocialiteProviders\Kakao\KakaoExtendSocialite::class,
+            \App\SocialiteProviders\Kakao\KakaoExtendSocialite::class,
             \SocialiteProviders\Google\GoogleExtendSocialite::class,
             \SocialiteProviders\Facebook\FacebookExtendSocialite::class,
         ],

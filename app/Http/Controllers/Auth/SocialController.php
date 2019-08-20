@@ -56,6 +56,8 @@ class SocialController extends Controller
     {
         $socialUser = Socialite::driver($provider)->user();
 
+        dd($socialUser);
+
         if ($user = User::where('email', $socialUser->getEmail())->first()) {
             $this->guard()->login($user, true);
 

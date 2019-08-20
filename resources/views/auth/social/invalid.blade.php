@@ -3,18 +3,15 @@
 @section('title', trans('auth.social.invalid'))
 @section('code', '422')
 @section('message')
-    @lang('auth.social.reasons_of_invalid')
-
-    <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-    </ul>
+    @lang('auth.social.reasons_of_invalid')<br>
+    <small style="color: #e3342f;">
+        {!!  implode('<br>', $errors->all()) !!}
+    </small>
 @stop
 @section('button')
     <a href="{{ route('login') }}">
         <button class="bg-transparent text-grey-darkest font-bold uppercase tracking-wide py-3 px-6 border-2 border-grey-light hover:border-grey rounded-lg">
-            @lang('auth.login')
+            @lang('auth.social.retry')
         </button>
     </a>
 @stop
