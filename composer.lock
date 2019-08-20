@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58169eee6b26ec9fa5175765522058c6",
+    "content-hash": "f6c5c46ccd6d90e23973d8fbda4809ce",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3538,6 +3538,43 @@
                 }
             ],
             "description": "Facebook (facebook.com) OAuth2 Provider for Laravel Socialite",
+            "time": "2019-01-11T19:47:04+00:00"
+        },
+        {
+            "name": "socialiteproviders/github",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/SocialiteProviders/GitHub.git",
+                "reference": "afb7c96c749e7ba787d4a1a182b5d8f4fdc852a9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/SocialiteProviders/GitHub/zipball/afb7c96c749e7ba787d4a1a182b5d8f4fdc852a9",
+                "reference": "afb7c96c749e7ba787d4a1a182b5d8f4fdc852a9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0",
+                "socialiteproviders/manager": "~2.0 || ~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SocialiteProviders\\GitHub\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Komarev",
+                    "email": "ell@cybercog.su"
+                }
+            ],
+            "description": "GitHub OAuth2 Provider for Laravel Socialite",
             "time": "2019-01-11T19:47:04+00:00"
         },
         {
@@ -7827,7 +7864,8 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "socialiteproviders/facebook": 20
+        "socialiteproviders/facebook": 20,
+        "socialiteproviders/github": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

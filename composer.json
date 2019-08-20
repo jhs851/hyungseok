@@ -25,6 +25,7 @@
         "pusher/pusher-php-server": "~4.0",
         "sentry/sentry-laravel": "1.1.0",
         "socialiteproviders/facebook": "dev-master",
+        "socialiteproviders/github": "dev-master",
         "socialiteproviders/google": "^3.0",
         "socialiteproviders/kakao": "^4.0",
         "socialiteproviders/naver": "^3.1"
