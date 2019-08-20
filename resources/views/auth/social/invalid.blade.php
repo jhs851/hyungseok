@@ -3,7 +3,8 @@
 @section('title', trans('auth.social.invalid'))
 @section('code', '422')
 @section('message')
-    다음 유효성 검사 실패로 소셜 로그인에 실패했습니다.<br>
+    @lang('auth.social.reasons_of_invalid')
+
     <ul>
         @foreach ($errors->all() as $error)
             <li>{{ $error }}</li>

@@ -34,6 +34,7 @@ return [
         'with_google' => '구글로 로그인',
         'with_facebook' => '페이스북으로 로그인',
         'invalid' => '유효하지 않습니다',
+        'reasons_of_invalid' => '다음 유효성 검사 실패로 소셜 로그인에 실패했습니다.',
     ],
     'activities' => '활동내역',
     'created_development' => '작성한 개발 포스트들',
