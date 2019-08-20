@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6c5c46ccd6d90e23973d8fbda4809ce",
+    "content-hash": "f58463b4f4f5c36e7522886a81e27842",
     "packages": [
         {
             "name": "algolia/algoliasearch-client-php",
@@ -3502,117 +3502,6 @@
                 "sentry"
             ],
             "time": "2019-07-04T10:36:53+00:00"
-        },
-        {
-            "name": "socialiteproviders/facebook",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SocialiteProviders/Facebook.git",
-                "reference": "c89d5fa4c770c9e1ec0e472ccb7dd7353a199619"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SocialiteProviders/Facebook/zipball/c89d5fa4c770c9e1ec0e472ccb7dd7353a199619",
-                "reference": "c89d5fa4c770c9e1ec0e472ccb7dd7353a199619",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "socialiteproviders/manager": "~3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SocialiteProviders\\Facebook\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Oleksandr Prypkhan (Alex Wells)",
-                    "email": "autaut03@googlemail.com"
-                }
-            ],
-            "description": "Facebook (facebook.com) OAuth2 Provider for Laravel Socialite",
-            "time": "2019-01-11T19:47:04+00:00"
-        },
-        {
-            "name": "socialiteproviders/github",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SocialiteProviders/GitHub.git",
-                "reference": "afb7c96c749e7ba787d4a1a182b5d8f4fdc852a9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SocialiteProviders/GitHub/zipball/afb7c96c749e7ba787d4a1a182b5d8f4fdc852a9",
-                "reference": "afb7c96c749e7ba787d4a1a182b5d8f4fdc852a9",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "socialiteproviders/manager": "~2.0 || ~3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SocialiteProviders\\GitHub\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Anton Komarev",
-                    "email": "ell@cybercog.su"
-                }
-            ],
-            "description": "GitHub OAuth2 Provider for Laravel Socialite",
-            "time": "2019-01-11T19:47:04+00:00"
-        },
-        {
-            "name": "socialiteproviders/google",
-            "version": "v3.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/SocialiteProviders/Google-Plus.git",
-                "reference": "2ff6bbd2f4d616ece912386807b59ba5f3b76895"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/SocialiteProviders/Google-Plus/zipball/2ff6bbd2f4d616ece912386807b59ba5f3b76895",
-                "reference": "2ff6bbd2f4d616ece912386807b59ba5f3b76895",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0",
-                "socialiteproviders/manager": "~3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SocialiteProviders\\Google\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Brian Faust",
-                    "email": "hello@brianfaust.de"
-                }
-            ],
-            "description": "Google OAuth2 Provider for Laravel Socialite",
-            "time": "2017-01-25T09:48:29+00:00"
         },
         {
             "name": "socialiteproviders/kakao",
@@ -7863,10 +7752,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "socialiteproviders/facebook": 20,
-        "socialiteproviders/github": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
