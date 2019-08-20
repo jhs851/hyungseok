@@ -58,6 +58,10 @@ return [
         'client_id' => env('KAKAO_KEY'),
         'client_secret' => env('KAKAO_SECRET'),
         'redirect' => env('KAKAO_REDIRECT_URI'),
+        'rules' => [
+            'properties.nickname' => 'required',
+            'kakao_account.email' => ['required', 'email'],
+        ],
     ],
 
     'github' => [

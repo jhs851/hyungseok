@@ -156,5 +156,7 @@ return [
         'tags.*' => '태그',
         'image' => '이미지',
         'mentions' => '언급 된 수',
+        'properties.nickname' => '이름',
+        'kakao_account.email' => '이메일',
     ],
 ];
