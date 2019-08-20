@@ -16,7 +16,7 @@ class EventServiceProvider extends ServiceProvider
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             \App\SocialiteProviders\Naver\NaverExtendSocialite::class,
             \App\SocialiteProviders\Kakao\KakaoExtendSocialite::class,
-            \App\SocialiteProviders\GitHub\GitHubExtendSocialite::class,
+            \App\SocialiteProviders\GitHub\GithubExtendSocialite::class,
             \SocialiteProviders\Google\GoogleExtendSocialite::class,
             \SocialiteProviders\Facebook\FacebookExtendSocialite::class,
         ],
