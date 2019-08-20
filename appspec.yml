@@ -3,7 +3,6 @@ os: linux
 files:
   - source:  /
     destination: /home/ubuntu/app/codeship/hyungseok/
-    overwrite: true
 permissions:
   - object: /home/ubuntu/app/codeship/hyungseok/storage
     mode: 777
@@ -12,6 +11,10 @@ permissions:
 hooks:
   ValidateService:
     - location: scripts/restart-codedeploy-agent.sh
+      timeout: 300
+      runas: root
+  BeforeInstall:
+    - location: scripts/before-install.sh
       timeout: 300
       runas: root
   AfterInstall:
