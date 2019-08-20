@@ -4,7 +4,7 @@ namespace App\SocialiteProviders\Github;
 
 use SocialiteProviders\Manager\SocialiteWasCalled;
 
-class GitHubExtendSocialite
+class GithubExtendSocialite
 {
     /**
      * Execute the provider.
