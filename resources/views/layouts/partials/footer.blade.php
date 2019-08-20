@@ -58,11 +58,11 @@
                         </div>
                     </div>
 
-                    <a class="policy-link" href="#" target="_blank">
+                    <a class="policy-link" href="{{ route('terms') }}" target="_blank">
                         @lang('home.footer.terms')
                     </a>
 
-                    <a class="policy-link" href="#" target="_blank">
+                    <a class="policy-link" href="{{ route('privacy') }}" target="_blank">
                         @lang('home.footer.privacy')
                     </a>
                 </div>

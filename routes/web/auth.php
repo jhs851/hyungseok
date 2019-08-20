@@ -25,3 +25,19 @@ Route::delete('/users/{user}/avatar', [
     'as' => 'users.avatar.destroy',
     'uses' => 'AvatarsController@destroy',
 ]);
+
+// Privacy
+Route::get('/privacy', [
+    'as' => 'privacy',
+    'uses' => function () {
+        return view('auth.privacy');
+    },
+]);
+
+// Terms
+Route::get('/terms', [
+    'as' => 'terms',
+    'uses' => function () {
+        return view('auth.terms');
+    },
+]);

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\{Facades\Date, Str};
 use Illuminate\Http\{RedirectResponse, Request, Response};
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialUser;
@@ -75,6 +76,10 @@ class SocialController extends Controller
     protected function register(Request $request, SocialUser $socialUser)
     {
         event(new Registered($user = User::create($socialUser->getRaw())));
+
+        $user->email_verified_at = Date::now();
+        $user->remember_token = Str::random(60);
+        $user->save();
 
         $this->guard()->login($user, true);
 
