@@ -99,6 +99,7 @@ class FacebookProvider extends AbstractProvider
     {
         $this->getHttpClient()->request('DELETE', $this->graphUrl.'/'.$this->version.'/'.$user['id'].'/permissions', [
             'headers' => ['Accept' => 'application/json'],
+            'form_params' => ['access_token' => $token],
         ]);
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Laravel\Socialite\Two\{AbstractProvider, InvalidStateException};
 use SocialiteProviders\Manager\OAuth2\User;
+use Laravel\Socialite\Two\User as BaseUser;
 
 trait SocialProvideSupporter
 {
@@ -22,9 +23,9 @@ trait SocialProvideSupporter
     /**
      * 사용자를 반환합니다.
      *
-     * @return User
+     * @return BaseUser
      */
-    public function user(): User
+    public function user(): BaseUser
     {
         if ($this->hasInvalidState()) {
             throw new InvalidStateException();
