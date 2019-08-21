@@ -29,4 +29,4 @@ Route::delete('/users/{user}/avatar', [
 // Privacy
 Route::view('/privacy', 'auth.privacy');
 // Terms
-Route::get('/terms', 'auth.terms');
+Route::view('/terms', 'auth.terms');
