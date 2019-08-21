@@ -16,6 +16,7 @@ class EventServiceProvider extends ServiceProvider
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
             \App\SocialiteProviders\Naver\NaverExtendSocialite::class,
             \App\SocialiteProviders\Kakao\KakaoExtendSocialite::class,
+            \App\SocialiteProviders\Facebook\FacebookExtendSocialite::class,
         ],
         \App\Events\DevelopmentRecivedNewComment::class => [
             \App\Listeners\NotifyMentionedUsers::class,
