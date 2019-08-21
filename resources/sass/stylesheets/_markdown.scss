@@ -21,6 +21,8 @@
 .markdown-body img {
     display: block;
     margin: 0 auto;
+    padding: 5px;
+    @extend .z-depth-1;
 }
 
 code[class*="language-"],

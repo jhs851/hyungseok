@@ -11,16 +11,6 @@ use Laravel\Socialite\Two\User as BaseUser;
 trait SocialProvideSupporter
 {
     /**
-     * 가져올 설정을 추가합니다.
-     *
-     * @return array
-     */
-    public static function additionalConfigKeys(): array
-    {
-        return ['rules'];
-    }
-
-    /**
      * 사용자를 반환합니다.
      *
      * @return BaseUser
@@ -66,5 +56,27 @@ trait SocialProvideSupporter
         }
 
         return $this;
+    }
+
+    /**
+     * 소셜과의 연동을 해제합니다.
+     *
+     * @param string $code
+     * @param string $token
+     * @param array  $user
+     */
+    protected function removeAccessTokenResponse(string $code, string $token, array $user): void
+    {
+        //
+    }
+
+    /**
+     * 가져올 설정을 추가합니다.
+     *
+     * @return array
+     */
+    public static function additionalConfigKeys(): array
+    {
+        return ['rules'];
     }
 }

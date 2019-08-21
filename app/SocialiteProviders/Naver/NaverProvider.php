@@ -16,9 +16,10 @@ class NaverProvider extends BaseNaverProvider
      *
      * @param string $code
      * @param string $token
+     * @param array  $user
      * @throws GuzzleException
      */
-    protected function removeAccessTokenResponse(string $code, string $token): void
+    protected function removeAccessTokenResponse(string $code, string $token, array $user): void
     {
         $this->getHttpClient()->request('POST', $this->getTokenUrl(), [
             'headers' => ['Accept' => 'application/json'],

@@ -2,10 +2,16 @@
     <nav id="navigation" class="navbar navbar-expand-md navbar-light" :class="writing || editing ? 'fixed-top bg-white border-bottom' : ''">
         <a class="navbar-brand font-weight-bold" href="{{ route('home') }}">HS</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="navbar-icon collapsed" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-label="{{ __('Toggle navigation') }}">
+            <div class="navbar-icon-label" aria-hidden="true">
+                <div class="navbar-icon-bread navbar-icon-bread-top">
+                    <div class="navbar-icon-bread-crust navbar-icon-bread-crust-top"></div>
+                </div>
+                <div class="navbar-icon-bread navbar-icon-bread-bottom">
+                    <div class="navbar-icon-bread-crust navbar-icon-bread-crust-bottom"></div>
+                </div>
+            </div>
+        </div>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
@@ -23,16 +29,6 @@
                         <a class="dropdown-item" href="{{ route('developments.create') }}">
                             @lang('developments.create')
                         </a>
-
-                        {{--@auth
-                            <a class="dropdown-item" href="{{ route('developments.index', ['by' => auth()->user()->name]) }}">
-                                @lang('developments.my_developments')
-                            </a>
-                        @endauth
-
-                        <a class="dropdown-item" href="{{ route('developments.index', ['popularity' => 1]) }}">
-                            @lang('developments.popularity')
-                        </a>--}}
                     </div>
                 </li>
 

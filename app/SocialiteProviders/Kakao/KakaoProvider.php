@@ -11,6 +11,24 @@ class KakaoProvider extends BaseKakaoProvider
     use SocialProvideSupporter;
 
     /**
+     * Get the POST fields for the token request.
+     *
+     * @param string $code
+     *
+     * @return array
+     */
+    protected function getTokenFields($code): array
+    {
+        return [
+            'grant_type' => 'authorization_code',
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'redirect_uri' => $this->redirectUrl,
+            'code' => $code,
+        ];
+    }
+
+    /**
      * Get the Unlink URL for the provider.
      *
      * @return string
@@ -25,9 +43,10 @@ class KakaoProvider extends BaseKakaoProvider
      *
      * @param string $code
      * @param string $token
+     * @param array  $user
      * @throws GuzzleException
      */
-    protected function removeAccessTokenResponse(string $code, string $token): void
+    protected function removeAccessTokenResponse(string $code, string $token, array $user): void
     {
         $this->getHttpClient()->request('POST', $this->getUnlinkUrl(), [
             'headers' => [

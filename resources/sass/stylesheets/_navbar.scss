@@ -1,3 +1,111 @@
+#navigation {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 0;
+    height: 48px;
+    padding: 0 1rem;
+
+    @include media-breakpoint-up(md) {
+        position: static;
+        width: auto;
+        height: auto;
+        padding: 0.5rem 1rem;
+    }
+
+    .navbar-icon {
+        right: .5rem;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        width: 48px;
+        border-bottom: none;
+
+        @include media-breakpoint-up(md) {
+            display: none;
+        }
+
+        .navbar-icon-label {
+            display: block;
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
+            @include transition(opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1));
+
+            @include hover-focus-active {
+                opacity: .65
+            }
+        }
+
+        .navbar-icon-bread {
+            position: absolute;
+            z-index: 3;
+            top: 9px;
+            left: 9px;
+            width: 30px;
+            height: 30px;
+            @include transition(opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1));
+        }
+
+        &.collapsed .navbar-icon-bread-top {
+            @include transform(none);
+            @include transition(transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96));
+        }
+
+        .navbar-icon-bread-top {
+            z-index: 4;
+            @include transform(rotate(45deg));
+            @include transition(transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s);
+        }
+
+        &.collapsed .navbar-icon-bread-bottom {
+            @include transform(none);
+            @include transition(transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96));
+        }
+
+        .navbar-icon-bread-bottom {
+            @include transform(rotate(-45deg));
+            @include transition(transform .3192s cubic-bezier(0.04, 0.04, 0.12, 0.96) .1008s);
+        }
+
+        .navbar-icon-bread-crust {
+            display: block;
+            width: 17px;
+            height: 1px;
+            background: $black;
+            position: absolute;
+            left: 7px;
+            z-index: 1
+        }
+
+        &.collapsed .navbar-icon-bread-crust-top {
+            @include transform(translateY(-3px));
+            @include transition(transform .1596s cubic-bezier(0.52, 0.16, 0.52, 0.84) .1008s);
+        }
+
+        .navbar-icon-bread-crust-top {
+            top: 14px;
+            @include transform(none);
+            @include transition(transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96));
+        }
+
+        &.collapsed .navbar-icon-bread-crust-bottom {
+            @include transform(translateY(3px));
+            @include transition(transform .1596s cubic-bezier(0.52, 0.16, 0.52, 0.84) .1008s);
+        }
+
+        .navbar-icon-bread-crust-bottom {
+            bottom: 14px;
+            @include transform(none);
+            @include transition(transform .1806s cubic-bezier(0.04, 0.04, 0.12, 0.96));
+        }
+    }
+}
+
 #app.used-side-navbar {
     margin-left: 300px;
 }

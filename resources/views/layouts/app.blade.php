@@ -57,6 +57,10 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     @yield('style')
+
+    <style>
+
+    </style>
 </head>
 
 <body>

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Illuminate\Support\{Facades\Date, Str};
+use Illuminate\Support\Str;
 use Illuminate\Http\{RedirectResponse, Request, Response};
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialUser;
@@ -24,11 +24,11 @@ class SocialController extends Controller
      */
     public function execute(Request $request, string $provider)
     {
-        if (!array_key_exists($provider, config('services'))) {
+        if (! array_key_exists($provider, config('services'))) {
             return $this->sendNotSupportedResponse($provider);
         }
 
-        if (!$request->has('code')) {
+        if (! $request->has('code')) {
             return $this->redirectToProvider($provider);
         }
 
@@ -77,7 +77,7 @@ class SocialController extends Controller
     {
         event(new Registered($user = User::create($socialUser->getRaw())));
 
-        $user->email_verified_at = Date::now();
+        $user->email_verified_at = $user->freshTimestamp();
         $user->remember_token = Str::random(60);
         $user->save();
 

@@ -2,28 +2,55 @@
 
 @section('style')
     <style>
-        #navigation {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            z-index: 1030;
+        #door {
+            background: url({{ asset('images/backgrounds/light.jpg') }}) center / cover no-repeat;
+            height: 450px;
         }
 
-        main {
-            padding: 15px;
-            position: relative;
+        #door h1 {
+            letter-spacing: 2px;
+        }
+
+        @media (min-width: 768px) {
+            #navigation {
+                position: absolute;
+                top: 15px;
+                left: 15px;
+                right: 15px;
+                z-index: 1030;
+            }
+
+            main {
+                padding: 15px;
+                position: relative;
+            }
+
+            #door {
+                height: calc(100vh - 30px);
+            }
+
+            #door h1 {
+                letter-spacing: 10px;
+            }
         }
     </style>
 @stop
 
 @section('content')
-    <div class="d-flex justify-content-center align-items-center flex-column text-center mb-9" style="background: url('/images/backgrounds/light.jpg') center / cover no-repeat; height: calc(100vh - 30px);">
-        <h1 class="font-weight-bold display-3 mb-4 wow fadeInUp" style="letter-spacing: 10px;">
+    <div id="door" class="d-flex justify-content-center align-items-center flex-column text-center mb-9">
+        <h1 class="d-block d-md-none font-weight-bold mb-2 wow fadeInUp">
             @lang('home.main.title')
         </h1>
 
-        <h3 class="mb-4 pb-2 wow fadeInUp" data-wow-delay=".6s">
+        <h1 class="d-none d-md-block font-weight-bold display-3 mb-4 wow fadeInUp">
+            @lang('home.main.title')
+        </h1>
+
+        <h6 class="d-block d-md-none mb-2 pb-2 wow fadeInUp" data-wow-delay=".6s">
+            @lang('home.main.description')
+        </h6>
+
+        <h3 class="d-none d-md-block mb-4 pb-2 wow fadeInUp" data-wow-delay=".6s">
             @lang('home.main.description')
         </h3>
 
@@ -46,7 +73,7 @@
 
         <div class="row wow fadeInUp">
             @forelse ($developments as $index => $development)
-                <div class="col-4">
+                <div class="col-md-4">
                     <div class="card border-0 z-depth-1-half hvr-float">
                         <a class="overlay-link" href="{{ route('developments.show', ['development' => $development->id]) }}"></a>
 

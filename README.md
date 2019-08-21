@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://user-images.githubusercontent.com/23352881/57301434-fcbbe380-7113-11e9-8fd6-1718b3b224c4.png"><img src="https://user-images.githubusercontent.com/23352881/57301434-fcbbe380-7113-11e9-8fd6-1718b3b224c4.png" alt="logo"></a>
+<a href="https://hyungseok.kr/images/etc/github-logo.png"><img src="https://hyungseok.kr/images/etc/github-logo.png" alt="logo"></a>
 </p>
 
 <p align="center">
@@ -52,7 +52,8 @@ This project is a personal project for my development record and my daily life r
 - [ ] Mobile UI Enhancements
 - [ ] Localization (English)
 - [ ] Auto save Temporary Developments
-- [ ] Create an Application with Web View
+- [ ] Secret Developments
+- [ ] Create an Android Application with Web View
 
 ## Technology stacks
 
