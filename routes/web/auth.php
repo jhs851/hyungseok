@@ -27,17 +27,6 @@ Route::delete('/users/{user}/avatar', [
 ]);
 
 // Privacy
-Route::get('/privacy', [
-    'as' => 'privacy',
-    'uses' => function () {
-        return view('auth.privacy');
-    },
-]);
-
+Route::view('/privacy', 'auth.privacy');
 // Terms
-Route::get('/terms', [
-    'as' => 'terms',
-    'uses' => function () {
-        return view('auth.terms');
-    },
-]);
+Route::get('/terms', 'auth.terms');
