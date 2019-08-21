@@ -59,7 +59,7 @@ trait SocialProvideSupporter
         try {
             $validator->validate();
         } catch (ValidationException $exception) {
-            $this->removeAccessTokenResponse($this->getCode(), $token);
+            $this->removeAccessTokenResponse($this->getCode(), $token, $user);
 
             throw $exception->redirectTo('/social/invalid');
         }

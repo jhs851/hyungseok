@@ -4,6 +4,8 @@ namespace App\SocialiteProviders\Facebook;
 
 use App\Core\SocialProvideSupporter;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\User;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
 
@@ -83,6 +85,21 @@ class FacebookProvider extends AbstractProvider
         $data = json_decode($response->getBody(), true);
 
         return Arr::add($data, 'expires_in', Arr::pull($data, 'expires'));
+    }
+
+    /**
+     * 소셜과의 연동을 해제합니다.
+     *
+     * @param string $code
+     * @param string $token
+     * @param array  $user
+     * @throws GuzzleException
+     */
+    protected function removeAccessTokenResponse(string $code, string $token, array $user): void
+    {
+        $this->getHttpClient()->request('DELETE', $this->graphUrl.'/'.$this->version.'/'.$user['id'].'/permissions', [
+            'headers' => ['Accept' => 'application/json'],
+        ]);
     }
 
     /**
