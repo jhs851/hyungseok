@@ -111,3 +111,17 @@ textarea {
 .best-comment {
     background-color: rgba($info, .6);
 }
+
+main {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+
+    @include media-breakpoint-up(md) {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+}
+
+.card-footer .tags {
+    @include flex(75%);
+}

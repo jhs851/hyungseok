@@ -35,6 +35,18 @@
     display: flex;
 }
 
+@mixin flex($width) {
+    -webkit-flex: 0 0 $width;
+    flex: 0 0 $width;
+    max-width: $width;
+}
+
+// Align Items
+@mixin align-items($position) {
+    -ms-flex-align: $position !important;
+    align-items: $position !important
+}
+
 // Transform
 @mixin transition($transition...) {
     -webkit-transition: $transition;

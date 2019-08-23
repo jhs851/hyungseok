@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\{RedirectResponse, Request};
 
 class LoginController extends Controller
@@ -19,6 +20,37 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Handle a login request to the application.
+     *
+     * @param Request $request
+     * @return mixed
+     * @throws ValidationException
+     */
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
+
+            return $this->sendLockoutResponse($request);
+        }
+
+        if (User::socialUser($request->input('email'))->exists()) {
+            return $this->sendSocialUserResponse($request);
+        }
+
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
 
     /**
@@ -61,5 +93,18 @@ class LoginController extends Controller
         flash()->success(__('auth.logged_out'));
 
         return redirect($this->redirectPath());
+    }
+
+    /**
+     * 소셜 사용자가 네이티비 로그인 시도를 했을 때의 응답입니다.
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    protected function sendSocialUserResponse(Request $request): RedirectResponse
+    {
+        flash()->error(trans('auth.social.is_social'));
+
+        return back()->onlyInput($this->username());
     }
 }

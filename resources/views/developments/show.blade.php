@@ -60,7 +60,7 @@
                     <template v-else>
                         <h2 class="mb-5" v-text="form.title"></h2>
 
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between flex-column flex-md-row">
                             <div>
                                 <a href="#" class="text-dark">
                                     {{ $development->user->name }}
@@ -118,8 +118,8 @@
 
                         <markdown-reader>@{{ form.body }}</markdown-reader>
 
-                        <ul class="list-unstyled mb-0 d-flex mt-auto pt-4">
-                            <li v-for="tag in tags" class="mr-2">
+                        <ul class="list-unstyled mb-0 d-flex mt-auto flex-wrap pt-4">
+                            <li v-for="tag in tags" class="mt-2 mr-2">
                                 <span class="badge badge-light font-weight-normal px-3 py-2" v-text="`#${tag.name}`"></span>
                             </li>
                         </ul>

@@ -19,3 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
             port: 8080
         }
     });
+
+if (mix.inProduction()) {
+    mix.version();
+}

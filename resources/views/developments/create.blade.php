@@ -12,6 +12,8 @@
                             @csrf
 
                             @include('developments.partials.form')
+
+                            <button type="submit" class="d-block d-md-none btn btn-primary btn-lg btn-block rounded-0">@lang('developments.submit')</button>
                         </form>
                     </div>
                 </div>

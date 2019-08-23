@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use App\Core\{NumericalStatementable, Searchable};
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Relations\{HasMany, HasOne};
@@ -139,5 +140,18 @@ class User extends Authenticatable implements MustVerifyEmail
         if ($password) {
             $this->attributes['password'] = Hash::make($password);
         }
+    }
+
+    /**
+     * 소셜 사용자인지 확인하는 빌더를 반환합니다.
+     *
+     * @param Builder $query
+     * @param string  $email
+     * @return Builder
+     */
+    public function scopeSocialUser(Builder $query, string $email): Builder
+    {
+        return $query->where('email', $email)
+            ->whereNull('password');
     }
 }

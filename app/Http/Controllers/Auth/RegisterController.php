@@ -15,16 +15,6 @@ class RegisterController extends Controller
     use RegistersUsers;
 
     /**
-     * Show the application registration form.
-     *
-     * @return View
-     */
-    public function showRegistrationForm() : View
-    {
-        return view('auth.register', ['user' => new User]);
-    }
-
-    /**
      * RegisterController의 생성자 입니다.
      *
      * @return void
@@ -32,6 +22,16 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return View
+     */
+    public function showRegistrationForm() : View
+    {
+        return view('auth.register', ['user' => new User]);
     }
 
     /**

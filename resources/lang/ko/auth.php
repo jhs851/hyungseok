@@ -36,6 +36,7 @@ return [
         'invalid' => '유효하지 않습니다',
         'reasons_of_invalid' => '다음 유효성 검사를 통과하지 못해 소셜 로그인에 실패했습니다.',
         'retry' => '다시 시도',
+        'is_social' => '귀하는 회원이 아닙니다. 지난번엔 소셜 로그인 하셨습니다.',
     ],
     'activities' => '활동내역',
     'created_development' => '작성한 개발 포스트들',

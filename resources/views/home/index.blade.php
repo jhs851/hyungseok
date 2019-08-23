@@ -2,17 +2,27 @@
 
 @section('style')
     <style>
-        #door {
+        #mobile-navbar {
+            background-color: transparent !important;
+            border-bottom: none !important;
+        }
+
+        main {
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .door {
             background: url({{ asset('images/backgrounds/light.jpg') }}) center / cover no-repeat;
             height: 450px;
         }
 
-        #door h1 {
+        .door h1 {
             letter-spacing: 2px;
         }
 
         @media (min-width: 768px) {
-            #navigation {
+            #pc-navbar {
                 position: absolute;
                 top: 15px;
                 left: 15px;
@@ -25,11 +35,11 @@
                 position: relative;
             }
 
-            #door {
+            .door {
                 height: calc(100vh - 30px);
             }
 
-            #door h1 {
+            .door h1 {
                 letter-spacing: 10px;
             }
         }
@@ -37,7 +47,7 @@
 @stop
 
 @section('content')
-    <div id="door" class="d-flex justify-content-center align-items-center flex-column text-center mb-9">
+    <div class="door d-flex justify-content-center align-items-center flex-column text-center mb-9">
         <h1 class="d-block d-md-none font-weight-bold mb-2 wow fadeInUp">
             @lang('home.main.title')
         </h1>
@@ -60,7 +70,7 @@
         ]) @endcomponent
     </div>
 
-    <div class="container mb-6">
+    <div class="container pb-6">
         <div class="row mb-5">
             <div class="col-12">
                 <h3 class="mb-3 text-center font-weight-bold wow fadeInUp">
@@ -73,7 +83,7 @@
 
         <div class="row wow fadeInUp">
             @forelse ($developments as $index => $development)
-                <div class="col-md-4">
+                <div class="col-md-4 mb-3 mb-md-0">
                     <div class="card border-0 z-depth-1-half hvr-float">
                         <a class="overlay-link" href="{{ route('developments.show', ['development' => $development->id]) }}"></a>
 
@@ -92,12 +102,12 @@
                             </small>
 
                             <div>
-                                <small class="mr-3">
+                                <small class="mr-1 mr-md-3">
                                     <i class="far fa-eye mr-1"></i>
                                     {{ $development->visits }}
                                 </small>
 
-                                <small class="mr-3">
+                                <small class="mr-1 mr-md-3">
                                     <i class="far fa-comment mr-1"></i>
                                     {{ $development->comments_count }}
                                 </small>

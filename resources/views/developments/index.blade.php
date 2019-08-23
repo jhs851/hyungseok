@@ -50,7 +50,7 @@
                 </div>
 
                 @if ($trending)
-                    <div class="card rounded-0 my-2">
+                    <div class="d-none d-md-block card rounded-0 my-2">
                         <div class="card-header">
                             @lang('developments.trending')
                         </div>
@@ -69,7 +69,7 @@
                     </div>
                 @endif
 
-                <div class="card rounded-0 my-2">
+                <div class="d-none d-md-block card rounded-0 my-2">
                     <div class="card-header">
                         @lang('developments.filter_by_tag')
                     </div>
@@ -140,19 +140,19 @@
                             </div>
 
                             <div class="card-footer d-flex justify-content-between">
-                                <ul class="list-unstyled d-flex m-0">
+                                <ul class="tags list-unstyled d-flex flex-wrap m-0">
                                     <li class="mr-1" v-for="tag in development.tags">
                                         <span class="badge badge-warning font-weight-normal px-2 py-1" v-text="`#${tag.name}`"></span>
                                     </li>
                                 </ul>
 
                                 <div>
-                                    <small class="mr-3">
+                                    <small class="mr-1 mr-md-3">
                                         <i class="far fa-eye mr-1"></i>
                                         @{{ development.visits }}
                                     </small>
 
-                                    <small class="mr-3">
+                                    <small class="mr-1 mr-md-3">
                                         <i class="far fa-comment mr-1"></i>
                                         @{{ development.comments_count }}
                                     </small>
