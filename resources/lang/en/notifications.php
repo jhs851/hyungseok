@@ -3,6 +3,6 @@
 return [
     'whoops' => 'Whoops!',
     'hello' => 'Hello!',
-    'regards' => 'Regards,',
-    'handle' => 'If you’re having trouble clicking the ":actionText" button, copy and paste the URL below<br>into your web browser: [:actionURL](:actionURL)',
+    'regards' => 'Regards.',
+    'handle' => 'If you have trouble clicking the ":actionText", please copy and paste the URL below.<br>To web address: [:actionURL](:actionURL)',
 ];

@@ -38,6 +38,9 @@ try {
 
     // chart.js
     window.Chart = require('chart.js');
+
+    // ES6 Promise
+    require('es6-promise').polyfill();
 } catch (e) {}
 
 // Prismjs

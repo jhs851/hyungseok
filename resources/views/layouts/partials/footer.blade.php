@@ -48,13 +48,15 @@
                 <div class="col-md-3">
                     <div class="dropdown policy-link policy-locales">
                         <button class="dropdown-toggle" id="localeDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            한국어
+                            @lang('languages.' . app()->getLocale())
                         </button>
 
                         <div class="dropdown-menu" role="menu" aria-labelledby="localeDropdownMenuLink">
-                            <a href="#" class="dropdown-item active">
-                                한국어
-                            </a>
+                            @foreach (config('app.locales') as $locale)
+                                <a href="{{ route('locale', $locale) }}" class="dropdown-item {{ app()->getLocale() === $locale ? 'active' : '' }}">
+                                    @lang("languages.{$locale}")
+                                </a>
+                            @endforeach
                         </div>
                     </div>
 

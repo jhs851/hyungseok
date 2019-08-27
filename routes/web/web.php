@@ -6,8 +6,14 @@ Route::get('/', [
     'uses' => 'HomeController',
 ]);
 
-// Localization
+// Frontend Localization
 Route::get('/js/languages.js', [
     'as' => 'assets.lang',
-    'uses' => 'LanguagesController',
+    'uses' => 'LanguagesController@front',
+]);
+
+// Backend Localization
+Route::get('/locale/{locale}', [
+    'as' => 'locale',
+    'uses' => 'LanguagesController@back',
 ]);

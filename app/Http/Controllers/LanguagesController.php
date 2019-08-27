@@ -2,15 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\{RedirectResponse, Response};
 use Illuminate\Support\Facades\Cache;
+use InvalidArgumentException;
 use KgBot\LaravelLocalization\Classes\ExportLocalizations;
 
 class LanguagesController extends Controller
 {
-    public function __invoke(ExportLocalizations $localizations)
+    /**
+     * @param ExportLocalizations $localizations
+     * @return Response
+     */
+    public function front(ExportLocalizations $localizations): Response
     {
         return response($this->getContent($localizations))
             ->header('Content-type', 'text/javascript');
+    }
+
+    /**
+     * 언어를 설정합니다.
+     *
+     * @param string $locale
+     * @return RedirectResponse
+     */
+    public function back(string $locale): RedirectResponse
+    {
+        if (! in_array($locale, config('app.locales'))) {
+            throw new InvalidArgumentException(trans('home.not_support_language', ['locale' => $locale]));
+        }
+
+        $cookie = cookie()->forever('locale', $locale);
+
+        cookie()->queue($cookie);
+
+        return redirect('/')->withCookie($cookie);
     }
 
     /**

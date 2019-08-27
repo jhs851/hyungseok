@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\{Carbon, Facades\Crypt, ServiceProvider};
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if ($locale = request()->cookie('locale')) {
+            app()->setLocale(Crypt::decrypt($locale, false));
+
+            Carbon::setLocale(app()->getLocale());
+        }
     }
 }

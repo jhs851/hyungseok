@@ -1,19 +1,55 @@
 <?php
 
 return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
+    'login' => 'Login',
+    'register' => 'Register',
+    'remember' => 'Remember me',
+    'forgot_password' => 'Forget your password?',
+    'welcome' => 'Welcome! :name',
+    'logout' => 'Logout',
+    'logged_out' => 'Bye :)',
+    'already_logined' => 'Already logged in.',
+    'unauthenticated' => 'Unauthenticated.',
+    'sending' => 'Sending email...',
+    'passwords' => [
+        'reset' => 'Reset Password',
+        'send' => 'Send Password Reset Link',
+    ],
+    'verify' => [
+        'title' => 'Verify Email',
+        'description' => 'To verify your email, send the email verify email to the button below!',
+        'send' => 'Send Verify Email',
+        'sent' => 'An email verify link has been sent to your email address.',
+        'verified' => 'Verified.',
+        'ensure' => 'Your email address requires verification.',
+        'already' => 'Your email is verified.',
+    ],
+    'social' => [
+        'not_supported' => '[:provider] is a social login that is not supported.',
+        'with_naver' => 'Login with Naver',
+        'with_kakao' => 'Login with Kakao',
+        'with_github' => 'Login with Github',
+        'with_google' => 'Login with Google',
+        'with_facebook' => 'Login with Facebook',
+        'invalid' => 'Invalid',
+        'reasons_of_invalid' => 'Social login failed because the following validation failed:',
+        'retry' => 'Retry',
+        'is_social' => 'You are not a member. Last time, you logged in to social.',
+    ],
+    'activities' => 'Activities',
+    'created_development' => 'Created Developments',
+    'created_comment' => 'Created Comments',
+    'created_favorite' => 'Created Favorites',
+    'empty_activities' => 'No activity details.<br><a href="' . route('developments.create') . '" class="btn btn-outline-primary mt-2">Writing</a>',
+    'avatars' => [
+        'title' => 'Drag to select the area to use!',
+        'store' => 'Saved.',
+        'submit' => 'Submit',
+        'fail_to_create_image' => 'Fail to create image.',
+        'removed' => 'Removed',
+        'edit' => 'Edit',
+        'destroy' => 'Destroy',
+    ],
 ];
