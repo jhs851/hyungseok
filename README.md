@@ -53,7 +53,7 @@ This project is a personal project for my development record and my daily life r
 - [x] Localization (English)
 - [ ] Auto save Temporary Developments
 - [ ] Secret Developments
-- [ ] Create an Android Application with Web View
+- [ ] Rebuild Authorization for Developments
 
 ## Technology stacks
 
