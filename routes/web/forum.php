@@ -30,3 +30,6 @@ Route::post('/images', [
     'as' => 'images.store',
     'uses' => 'UploadImagesController@store',
 ]);
+
+// Temporary Developments
+Route::resource('temporary-developments', 'TemporaryDevelopmentsController')->except(['create', 'show', 'edit']);

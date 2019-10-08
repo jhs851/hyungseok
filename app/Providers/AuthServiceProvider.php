@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\{Comment, Development, User};
-use App\Policies\{CommentPolicy, DevelopmentPolicy, UserPolicy};
+use App\Models\{Comment, Development, TemporaryDevelopment, User};
+use App\Policies\{CommentPolicy, DevelopmentPolicy, TemporaryDevelopmentPolicy, UserPolicy};
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -18,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
         Development::class => DevelopmentPolicy::class,
         Comment::class => CommentPolicy::class,
         User::class => UserPolicy::class,
+        TemporaryDevelopment::class => TemporaryDevelopmentPolicy::class,
     ];
 
     /**

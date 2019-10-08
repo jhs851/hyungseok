@@ -2,11 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Models\User;
+use App\Models\{Comment, Development, Favorite, TemporaryDevelopment, User};
 use Carbon\Carbon;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\{Collection, Relations\HasOne};
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Notifications\DatabaseNotification;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -75,6 +76,30 @@ class UserTest extends TestCase
     public function testItHasManyActivities() : void
     {
         $this->assertInstanceOf(Collection::class, $this->user->activities);
+    }
+
+    /**
+     * 유저 모델은 여러개의 댓글을 가지고 있습니다.
+     */
+    public function testItHasManyComments(): void
+    {
+        $this->assertInstanceOf(Collection::class, $this->user->comments);
+    }
+
+    /**
+     * 유저 모델은 여러개의 좋아요를 가지고 있습니다.
+     */
+    public function testItHasManyFavorites(): void
+    {
+        $this->assertInstanceOf(Collection::class, $this->user->favorites);
+    }
+
+    /**
+     * 유저 모델은 최대 한개의 임시 개발글을 가지고 있습니다.
+     */
+    public function testItHasOneTemporaryDevelopment(): void
+    {
+        $this->assertInstanceOf(HasOne::class, $this->user->temporaryDevelopment());
     }
 
     /**
@@ -156,7 +181,7 @@ class UserTest extends TestCase
     }
 
     /**
-     * 개발 모델은 일별로 그룹화하고 해당 날짜에 해당하는 포스트의 수를 반환할 수 있습니다.
+     * 유저 모델은 일별로 그룹화하고 해당 날짜에 해당하는 포스트의 수를 반환할 수 있습니다.
      */
     public function testItCanBeGroupByDayAndReturnedTheCountOfPostsCorrespondingToThatDate() : void
     {
@@ -177,5 +202,31 @@ class UserTest extends TestCase
         $this->assertEquals([$subDays->day, $yesterday->day, $now->day], User::countsByDays()->get()->pluck('day')->toArray());
 
         $this->assertEquals([4, 2, 2], User::countsByDays()->get()->pluck('count')->toArray());
+    }
+
+    /**
+     * 사용자를 삭제했을 때 사용자의 개발글, 활동내역, 댓글, 좋아요, 알림, 임시 개발글을 삭제합니다.
+     */
+    public function testWhenDeleteItDeleteUsersDevelopmentsActivitiesCommentsFavoritesNotificationsAndTemporaryDevelopments(): void
+    {
+        tap($this->user, function (User $user) {
+            $this->signIn($user);
+
+            $development = create(Development::class, ['user_id' => $user->id]);
+            $activity = $development->activities->first();
+            $comment = create(Comment::class, ['user_id' => $user->id]);
+            $favorite = create(Favorite::class, ['user_id' => $user->id]);
+            $notification = create(DatabaseNotification::class);
+            $temporaryDevelopment = create(TemporaryDevelopment::class, ['user_id' => $user->id]);
+
+            $user->delete();
+
+            $this->assertEmpty($development->fresh());
+            $this->assertEmpty($activity->fresh());
+            $this->assertEmpty($comment->fresh());
+            $this->assertEmpty($favorite->fresh());
+            $this->assertEmpty($notification->fresh());
+            $this->assertEmpty($temporaryDevelopment->fresh());
+        });
     }
 }

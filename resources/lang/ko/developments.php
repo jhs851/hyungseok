@@ -39,4 +39,8 @@ return [
     ],
     'uploaded_images' => '업로드된 이미지들',
     'uploaded_image' => '이미지가 저장 됐습니다. 경로를 확인해주세요.',
+    'temporary' => [
+        'store' => '임시 개발글이 저장되었습니다',
+        'updated' => '임시 개발글이 변경되었습니다',
+    ],
 ];

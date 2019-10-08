@@ -39,4 +39,8 @@ return [
     ],
     'uploaded_images' => 'Uploaded Images',
     'uploaded_image' => 'The image has been saved. Please check the route.',
+    'temporary' => [
+        'store' => 'Temporary development saved',
+        'updated' => 'Temporary development updated',
+    ],
 ];

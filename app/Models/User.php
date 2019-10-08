@@ -57,6 +57,30 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function (User $user) {
+            $user->developments->each->delete();
+
+            $user->activities()->delete();
+
+            $user->comments->each->delete();
+
+            $user->favorites()->delete();
+
+            $user->notifications()->delete();
+
+            $user->temporaryDevelopment()->delete();
+        });
+    }
+
+    /**
      * Development에 대한 HasMany 인스턴스를 반환합니다.
      *
      * @return HasMany
@@ -77,6 +101,26 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Comment 모델에 대한 HasMany 인스턴스를 반환합니다.
+     *
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    /**
+     * Favorite 모델에 대한 HasMany 인스턴스를 반환합니다.
+     *
+     * @return HasMany
+     */
+    public function favorites(): HasMany
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+    /**
      * 사용자가 마지막에 작성한 Comment에 대해 HasOne 인스턴스를 반환합니다.
      *
      * @return HasOne
@@ -84,6 +128,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function lastComment() : HasOne
     {
         return $this->hasOne(Comment::class)->latest();
+    }
+
+    /**
+     * 사용자의 임시 개발글에 대한 HasOne 인스턴스를 반환합니다.
+     *
+     * @return HasOne
+     */
+    public function temporaryDevelopment(): HasOne
+    {
+        return $this->hasOne(TemporaryDevelopment::class);
     }
 
     /**
