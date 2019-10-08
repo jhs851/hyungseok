@@ -54,10 +54,12 @@ This project is a personal project for my development record and my daily life r
 - [ ] Auto save Temporary Developments
 - [ ] Secret Developments
 - [ ] Rebuild Authorization for Developments
+- [ ] Docker with [Rancher](https://rancher.com/)
+- [ ] Update to Laravel 6.0 version
 
 ## Technology stacks
 
-- **[PHP 7.1](https://www.php.net/)**
+- **[PHP 7.3](https://www.php.net/)**
 - **[Laravel 5.8](https://github.com/laravel/laravel)**
 - [Symfony 4.2](https://symfony.com/)
 - [PHPUnit 7.5](https://phpunit.de/)
