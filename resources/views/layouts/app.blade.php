@@ -22,7 +22,7 @@
 
     {{-- Facebook Meta --}}
     <meta property="og:title" content="{{ config('app.name') }}">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="{{ asset('images/etc/og.jpg') }}">
     <meta property="og:type" content="Website">
     <meta property="og:author" content="{{ config('app.name') }}">
     <meta property="og:url" content="{{ config('project.url') }}">
@@ -31,14 +31,14 @@
     {{-- Google Meta --}}
     <meta itemprop="name" content="{{ config('app.name') }}">
     <meta itemprop="description" content="{{ config('app.description') }}">
-    <meta itemprop="image" content="">
+    <meta itemprop="image" content="{{ asset('images/etc/og.jpg') }}">
     <meta itemprop="author" content="{{ config('app.name') }}">
 
     {{--  Twitter Meta --}}
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ config('app.name') }}">
     <meta name="twitter:description" content="{{ config('app.description') }}">
-    <meta name="twitter:image" content="">
+    <meta name="twitter:image" content="{{ asset('images/etc/og.jpg') }}">
     <meta name="twitter:domain" content="{{ config('project.url') }}">
 
     {{-- CSRF Token --}}
