@@ -42,5 +42,7 @@ return [
     'temporary' => [
         'store' => 'Temporary development saved',
         'updated' => 'Temporary development updated',
+        'exists' => "There's an article been writing before.\nDo you want to continue with this?",
+        'loaded' => 'Brought up a previously written article.',
     ],
 ];

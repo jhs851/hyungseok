@@ -32,10 +32,10 @@ class TemporaryDevelopmentTest extends TestCase
     }
 
     /**
-     * 임시 개발 모델의 fillable은 개발포스트 ID와 제목과 본문 입니다.
+     * 임시 개발 모델의 fillable은 제목과 본문 입니다.
      */
     public function testItFillableIsTheDevelopmentIdAndTitleAndBody() : void
     {
-        $this->assertEquals(['development_id', 'title', 'body'], $this->temporaryDevelopment->getFillable());
+        $this->assertEquals(['title', 'body'], $this->temporaryDevelopment->getFillable());
     }
 }

@@ -12,7 +12,6 @@ class TemporaryDevelopment extends Model
      * @var array
      */
     protected $fillable = [
-        'development_id',
         'title',
         'body',
     ];

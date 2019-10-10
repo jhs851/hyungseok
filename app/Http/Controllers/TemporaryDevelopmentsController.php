@@ -6,6 +6,7 @@ use App\Http\Requests\TemporaryDevelopmentRequest;
 use App\Models\TemporaryDevelopment;
 use Exception;
 use Illuminate\Http\{JsonResponse, Request};
+use Psr\Log\InvalidArgumentException;
 
 class TemporaryDevelopmentsController extends Controller
 {
@@ -40,10 +41,8 @@ class TemporaryDevelopmentsController extends Controller
      */
     public function store(TemporaryDevelopmentRequest $request): JsonResponse
     {
-        $request->user()->temporaryDevelopment()->create($request->all());
-
         return response()->json([
-            'message' => trans('developments.temporary.store'),
+            'temporaryDevelopment' => $request->user()->temporaryDevelopment()->create($request->all()),
         ]);
     }
 
@@ -52,15 +51,10 @@ class TemporaryDevelopmentsController extends Controller
      *
      * @param TemporaryDevelopmentRequest $request
      * @param TemporaryDevelopment        $temporaryDevelopment
-     * @return JsonResponse
      */
-    public function update(TemporaryDevelopmentRequest $request, TemporaryDevelopment $temporaryDevelopment): JsonResponse
+    public function update(TemporaryDevelopmentRequest $request, TemporaryDevelopment $temporaryDevelopment): void
     {
         $temporaryDevelopment->update($request->all());
-
-        return response()->json([
-            'message' => trans('developments.temporary.updated'),
-        ]);
     }
 
     /**

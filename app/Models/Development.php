@@ -43,6 +43,12 @@ class Development extends Model
     {
         parent::boot();
 
+        static::created(function (Development $development) {
+            if ($development->user->temporaryDevelopment) {
+                $development->user->temporaryDevelopment->delete();
+            }
+        });
+
         static::deleting(function (Development $development) {
             $development->comments->each->delete();
 

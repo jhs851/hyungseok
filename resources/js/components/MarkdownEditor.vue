@@ -184,7 +184,7 @@
                 data.append('image', $event.target.files[0]);
 
                 axios.post('/images', data, { 'content-type': 'multipart/form-data' })
-                     .then(({data}) => {
+                     .then(({ data }) => {
                          toastr.success(data.message);
 
                          this.$emit('uploaded', data.path);

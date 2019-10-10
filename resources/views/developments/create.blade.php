@@ -1,7 +1,10 @@
 @extends('layouts.app', ['writing' => true])
 
 @section('content')
-    <create-development-view ref="form" inline-template>
+    <create-development-view ref="form" inline-template
+                             title="{{ old('title', $development->title) }}"
+                             body="{{ old('body', $development->body) }}"
+    >
         <div>
             <markdown-helper></markdown-helper>
 

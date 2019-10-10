@@ -11,7 +11,7 @@
 @endif
 
 <div class="form-group">
-    <input type="text" class="border-0 h2 w-100" name="title" value="{{ old('title', $development->title) }}"
+    <input type="text" class="border-0 h2 w-100" v-model="form.title"
            placeholder="@lang('validation.attributes.title')" required autocomplete="title"
            autofocus>
 </div>
@@ -19,7 +19,7 @@
 <hr class="mb-5">
 
 <div class="form-group">
-    <markdown-editor name="body" value="{{ old('body', $development->body) }}" @uploaded="addPath"></markdown-editor>
+    <markdown-editor v-model="form.body" name="body" @uploaded="addPath"></markdown-editor>
 </div>
 
 <div class="form-group">

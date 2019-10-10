@@ -95,9 +95,9 @@ class UserTest extends TestCase
     }
 
     /**
-     * 유저 모델은 최대 한개의 임시 개발글을 가지고 있습니다.
+     * 유저 모델은 최대 한개의 새글 쓰기 중인 임시 개발글을 가지고 있습니다.
      */
-    public function testItHasOneTemporaryDevelopment(): void
+    public function testItHasOnetemporaryDevelopment(): void
     {
         $this->assertInstanceOf(HasOne::class, $this->user->temporaryDevelopment());
     }

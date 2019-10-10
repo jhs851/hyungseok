@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('content')
-    <create-development-view ref="form" inline-template>
+    <edit-development-view ref="form" inline-template>
         <div>
             <markdown-helper></markdown-helper>
 
@@ -28,5 +28,5 @@
                 </div>
             </div>
         </div>
-    </create-development-view>
+    </edit-development-view>
 @stop

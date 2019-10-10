@@ -131,7 +131,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
-     * 사용자의 임시 개발글에 대한 HasOne 인스턴스를 반환합니다.
+     * 사용자의 새글 쓰기 중인 임시 개발글에 대한 HasOne 인스턴스를 반환합니다.
      *
      * @return HasOne
      */

@@ -51,7 +51,8 @@ This project is a personal project for my development record and my daily life r
 - [x] Implement social login registration and authentication.
 - [ ] Mobile UI Enhancements
 - [x] Localization (English)
-- [ ] Auto save Temporary Developments
+- [x] Auto save Temporary Developments
+- [ ] Users can have multiple Temporary developments
 - [ ] Secret Developments
 - [ ] Rebuild Authorization for Developments
 - [ ] Docker with [Rancher](https://rancher.com/)

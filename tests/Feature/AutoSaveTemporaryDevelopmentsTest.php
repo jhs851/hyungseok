@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Models\{TemporaryDevelopment, User};
+use App\Models\{Tag, TemporaryDevelopment, User};
 use Illuminate\Contracts\Container\BindingResolutionException as BindingResolutionExceptionAlias;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
@@ -71,9 +71,8 @@ class AutoSaveTemporaryDevelopmentsTest extends TestCase
      */
     public function testTemporaryDevelopmentTitleIsRequires(): void
     {
-        $this->signIn();
-
-        $this->withExceptionHandling()
+        $this->signIn()
+             ->withExceptionHandling()
              ->post(route('temporary-developments.store'), ['title' => ''])
              ->assertSessionHasErrors('title');
     }
@@ -83,9 +82,8 @@ class AutoSaveTemporaryDevelopmentsTest extends TestCase
      */
     public function testTemporaryDevelopmentBodyIsRequires(): void
     {
-        $this->signIn();
-
-        $this->withExceptionHandling()
+        $this->signIn()
+            ->withExceptionHandling()
             ->post(route('temporary-developments.store'), ['title' => 'Foobar', 'body' => ''])
             ->assertSessionHasErrors('body');
     }
@@ -109,9 +107,8 @@ class AutoSaveTemporaryDevelopmentsTest extends TestCase
      */
     public function testUnauthorizeUsersCannotUpdateAndDeleteTemporaryDevelopments(): void
     {
-        $this->withExceptionHandling();
-
-        $this->signIn();
+        $this->withExceptionHandling()
+             ->signIn();
 
         $this->put(route('temporary-developments.update', $this->temporaryDevelopment->id))
              ->assertStatus(403);
@@ -125,12 +122,11 @@ class AutoSaveTemporaryDevelopmentsTest extends TestCase
      */
     public function testUsersCanUpdateTemporaryDevelopments(): void
     {
-        $this->signIn(User::find($this->temporaryDevelopment->user_id));
-
-        $this->put(route('temporary-developments.update', $this->temporaryDevelopment->id), [
-            'title' => 'Updated',
-            'body' => 'Updated Body',
-        ]);
+        $this->signIn(User::find($this->temporaryDevelopment->user_id))
+             ->put(route('temporary-developments.update', $this->temporaryDevelopment->id), [
+                 'title' => 'Updated',
+                 'body' => 'Updated Body',
+             ]);
 
         tap($this->temporaryDevelopment->fresh(), function ($temporaryDevelopment) {
             $this->assertEquals('Updated', $temporaryDevelopment->title);
@@ -143,9 +139,8 @@ class AutoSaveTemporaryDevelopmentsTest extends TestCase
      */
     public function testUsersCanDeleteTemporaryDevelopments(): void
     {
-        $this->signIn(User::find($this->temporaryDevelopment->user_id));
-
-        $this->delete(route('temporary-developments.destroy', $this->temporaryDevelopment->id));
+        $this->signIn(User::find($this->temporaryDevelopment->user_id))
+             ->delete(route('temporary-developments.destroy', $this->temporaryDevelopment->id));
 
         $this->assertDatabaseMissing('temporary_developments', ['id' => $this->temporaryDevelopment->id]);
     }
@@ -155,10 +150,27 @@ class AutoSaveTemporaryDevelopmentsTest extends TestCase
      */
     public function testUsersCanViewTheirTemporaryDevelopmentIfTheyHaveOne(): void
     {
-        $this->signIn(User::find($this->temporaryDevelopment->user_id));
+        $this->signIn();
 
-        $response = $this->get(route('temporary-developments.index'))->json();
+        create(TemporaryDevelopment::class, ['user_id' => auth()->id()]);
+
+        $response = $this->get(route('temporary-developments.index', ['action' => 'create']))->json();
 
         $this->assertCount(1, $response);
+    }
+
+    /**
+     * 개발 글을 작성완료 했을 때 저장돼있던 임시 개발글은 삭제됩니다.
+     */
+    public function testWhenCompleteTheDevelopmentTheTemporaryDevelopmentThatWasSavedWillBeDelete(): void
+    {
+        $this->signIn(User::find($this->temporaryDevelopment->user_id))
+             ->post(route('developments.store', [
+                 'title' => 'Foo',
+                 'body' => 'Bar',
+                 'tags' => [create(Tag::class)->id],
+             ]));
+
+        $this->assertEquals(null, $this->temporaryDevelopment->fresh());
     }
 }
