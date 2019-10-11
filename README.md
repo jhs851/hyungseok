@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="https://app.codeship.com/projects/354805"><img src="https://app.codeship.com/projects/f5833210-8a64-0137-83c2-4a2b1c33cef4/status?branch=master" alt="Codeship Status for jhs851/hyungseok"></a>
-<a href="https://www.php.net/index.php"><img src="https://img.shields.io/badge/php-%3E%3D%207.1-8892BF.svg?style=flat-square" alt="Minimum PHP Version"></a>
+<a href="https://www.php.net/index.php"><img src="https://img.shields.io/badge/php-%3E%3D%207.3-8892BF.svg?style=flat-square" alt="Minimum PHP Version"></a>
 <a href="https://github.com/jhs851/hyungseok"><img src="https://img.shields.io/badge/license-MIT-brightgreen.svg" alt="License"></a>
 </p>
 

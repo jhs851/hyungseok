@@ -11,7 +11,7 @@
 @endif
 
 <div class="form-group">
-    <input type="text" class="border-0 h2 w-100" v-model="form.title"
+    <input type="text" class="border-0 h2 w-100" v-model="form.title" name="title"
            placeholder="@lang('validation.attributes.title')" required autocomplete="title"
            autofocus>
 </div>

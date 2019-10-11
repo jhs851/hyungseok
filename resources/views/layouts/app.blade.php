@@ -7,8 +7,8 @@
     <meta name="msapplication-tap-highlight" content="no">
 
     {{-- Search Console --}}
-    <meta name="google-site-verification" content="" />
-    <meta name="naver-site-verification" content=""/>
+    <meta name="google-site-verification" content="9OfmFTLfTaEGdInH1DdDeGl1yhwvDH_bDwgcqkmqSE0" />
+    <meta name="naver-site-verification" content="1777393a27cb76a3ac32a28851f278825448e605"/>
 
     {{-- Chrome, Firefox OS and Opera --}}
     <meta name="theme-color" content="">

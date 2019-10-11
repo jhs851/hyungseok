@@ -16,6 +16,7 @@ class CreateTemporaryDevelopmentsTable extends Migration
         Schema::create('temporary_developments', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id')->index();
+            $table->unsignedInteger('development_id')->index()->nullable();
             $table->string('title');
             $table->text('body');
             $table->timestamps();
