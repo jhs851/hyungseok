@@ -3,16 +3,16 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Notifications\VerifyEmail;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Routing\Exceptions\InvalidSignatureException;
 use Illuminate\Support\Facades\{Event, Notification, URL};
 use Tests\TestCase;
 
 class VerificationTest extends TestCase
-{   
+{
     use DatabaseMigrations;
 
     /**
@@ -76,7 +76,7 @@ class VerificationTest extends TestCase
     /**
      * 이메일 인증시 링크가 서명되있는지 확인합니다.
      */
-    public function testVerifyThatTheLinkIsSignedWhenVerificateTheEmail()
+    public function testVerifyThatTheLinkIsSignedWhenVerificateTheEmail(): void
     {
         $this->signIn();
 
@@ -102,7 +102,7 @@ class VerificationTest extends TestCase
     /**
      * 올바른 링크로 이메일 인증을 시도한다면 이메일을 인증합니다.
      */
-    public function testIfAttemptToVerificateAnEmailWithTheCorrectLinkVerificateEmail()
+    public function testIfAttemptToVerificateAnEmailWithTheCorrectLinkVerificateEmail(): void
     {
         $this->signIn($user = factory(User::class)->state('unconfirmed')->create());
 
@@ -116,7 +116,7 @@ class VerificationTest extends TestCase
     /**
      * 이메일이 인증되면 이벤트를 실행합니다.
      */
-    public function testEmailVerifiedToFireEvent()
+    public function testEmailVerifiedToFireEvent(): void
     {
         Event::fake();
 
@@ -130,7 +130,7 @@ class VerificationTest extends TestCase
     /**
      * 이메일 인증되면 리디렉션 합니다.
      */
-    public function testEmailVerificatedRedirect()
+    public function testEmailVerificatedRedirect(): void
     {
         $this->signIn();
 
@@ -143,7 +143,7 @@ class VerificationTest extends TestCase
     /**
      * 이메일이 인증되지 않은 사용자는 인증 이메일을 전송할 수 있습니다.
      */
-    public function testUsersWhoseEmailNotVerificatedCanSendVerificationEmails()
+    public function testUsersWhoseEmailNotVerificatedCanSendVerificationEmails(): void
     {
         $this->signIn($user = factory(User::class)->state('unconfirmed')->create());
 
@@ -157,7 +157,7 @@ class VerificationTest extends TestCase
     /**
      * 인증 이메일을 전송한 후에 resent 세션과 함께 리디렉션 합니다.
      */
-    public function testAfterSendingTheVerificationEmailRedirectItWithResentSession()
+    public function testAfterSendingTheVerificationEmailRedirectItWithResentSession(): void
     {
         $this->signIn(factory(User::class)->state('unconfirmed')->create());
 

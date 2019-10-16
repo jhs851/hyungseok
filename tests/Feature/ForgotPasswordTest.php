@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Auth\Notifications\ResetPassword;
+use App\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\{DatabaseMigrations, TestResponse};
 use Illuminate\Support\Facades\{Notification, Password};
 use Tests\TestCase;
@@ -76,7 +76,7 @@ class ForgotPasswordTest extends TestCase
 
         Notification::assertSentTo($user, ResetPassword::class);
     }
-    
+
     /**
      * 메일을 정상적으로 발송했다면 성공 응답을 반환합니다.
      */

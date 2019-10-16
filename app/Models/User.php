@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\{ResetPassword, VerifyEmail};
 use Illuminate\Database\Eloquent\Builder;
 use App\Core\{NumericalStatementable, Searchable};
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -207,5 +208,24 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $query->where('email', $email)
             ->whereNull('password');
+    }
+
+    /**
+     * Send the email verification notification.
+     */
+    public function sendEmailVerificationNotification(): void
+    {
+        $this->notify(new VerifyEmail);
+    }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token): void
+    {
+        $this->notify(new ResetPassword($token));
     }
 }

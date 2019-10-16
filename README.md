@@ -46,17 +46,19 @@ This project is a personal project for my development record and my daily life r
 - [x] Stop hoping my users will report errors with [sentry.io](https://sentry.io/welcome/) 
 - [x] Open the server
 - [x] Connect AWS RDS
-- [ ] Use Queue with Supervisor
 - [x] Register mail in Mailgun
 - [x] Implement social login registration and authentication.
-- [ ] Mobile UI Enhancements
 - [x] Localization (English)
 - [x] Auto save Temporary Developments
+- [ ] Use Queue with Supervisor
+- [ ] Mobile UI Enhancements
 - [ ] Users can have multiple Temporary developments
 - [ ] Secret Developments
 - [ ] Rebuild Authorization for Developments
 - [ ] Docker with [Rancher](https://rancher.com/)
-- [ ] Update to Laravel 6.0 version
+- [ ] Update to Laravel 6.0
+- [ ] SEO
+- [ ] Create Mobile Application with React Native or Vue Native
 
 ## Technology stacks
 
