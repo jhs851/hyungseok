@@ -31,7 +31,7 @@
         "hover.css": "^2.3.2",
         "jquery": "^3.2",
         "laravel-echo": "^1.5.4",
-        "lodash": "^4.17.5",
+        "lodash": "^4.17.19",
         "moment": "^2.24.0",
         "node-waves": "^0.7.6",
         "popper.js": "^1.12",
