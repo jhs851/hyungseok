@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://hyungseok.kr/images/etc/github-logo.png"><img src="https://hyungseok.kr/images/etc/github-logo.png" alt="logo"></a>
+<a href="https://hyungseok.kr"><img src="https://hyungseok.kr/images/etc/github-logo.png" alt="logo"></a>
 </p>
 
 <p align="center">
@@ -10,7 +10,11 @@
 
 ## About HYUNGSEOK
 
-This project is a personal project for my development record and my daily life record. The PHP [Laravel](https://github.com/laravel/laravel) framework was used to build the home page. I want to get feedback on what I've developed, and I hope everyone can come and show off their own diaries and hobbies.
+This project is a personal project for my development record. The PHP [Laravel](https://github.com/laravel/laravel) framework was used to build the home page. I want to get feedback on what I've developed.
+
+## Website
+
+[https://hyungseok.kr](https://hyungseok.kr)
 
 ## Task Lists
 
@@ -49,13 +53,13 @@ This project is a personal project for my development record and my daily life r
 - [x] Register mail in Mailgun
 - [x] Implement social login registration and authentication.
 - [x] Localization (English)
-- [x] Auto save Temporary Developments
+- [x] Auto saves Temporary Developments
+- [ ] Docker with [Rancher](https://rancher.com/)
 - [ ] Use Queue with Supervisor
 - [ ] Mobile UI Enhancements
 - [ ] Users can have multiple Temporary developments
 - [ ] Secret Developments
 - [ ] Rebuild Authorization for Developments
-- [ ] Docker with [Rancher](https://rancher.com/)
 - [ ] Update to Laravel 6.0
 - [ ] SEO
 - [ ] Create Mobile Application with React Native or Vue Native
