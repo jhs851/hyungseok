@@ -18,49 +18,49 @@ class VerificationTest extends TestCase
     /**
      * 손님은 접근할 수 없습니다.
      */
-//    public function testGuestsCannotAccess() : void
-//    {
-//        $this->withExceptionHandling();
-//
-//        $this->get(route('verification.notice'))
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('login'));
-//
-//        $this->get(URL::signedRoute('verification.verify', ['id' => create(User::class)->id]))
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('login'));
-//
-//        $this->get(route('verification.resend'))
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('login'));
-//    }
-//
-//    /**
-//     * 사용자가 이메일 인증 폼을 요청했을 때 이메일이 인증된 사용자는 리디렉션 합니다.
-//     */
-//    public function testUserWhoseVerifiedWillBeRedirected() : void
-//    {
-//        // User factory에서 email_verified_at 컬럼을 채워 넣습니다.
-//        $this->signIn($verifiedUser = create(User::class));
-//
-//        $this->get(route('verification.notice'))
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('home'));
-//
-//        $this->get( URL::signedRoute('verification.verify', ['id' => $verifiedUser->id]))
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('home'));
-//
-//        $this->get(route('verification.resend'))
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('home'));
-//    }
+    public function testGuestsCannotAccess() : void
+    {
+        $this->withExceptionHandling();
+
+        $this->get(route('verification.notice'))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('login'));
+
+        $this->get(URL::signedRoute('verification.verify', ['id' => create(User::class)->id]))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('login'));
+
+        $this->get(route('verification.resend'))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('login'));
+    }
+
+    /**
+     * 사용자가 이메일 인증 폼을 요청했을 때 이메일이 인증된 사용자는 리디렉션 합니다.
+     */
+    public function testUserWhoseVerifiedWillBeRedirected() : void
+    {
+        // User factory에서 email_verified_at 컬럼을 채워 넣습니다.
+        $this->signIn($verifiedUser = create(User::class));
+
+        $this->get(route('verification.notice'))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
+
+        $this->get( URL::signedRoute('verification.verify', ['id' => $verifiedUser->id]))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
+
+        $this->get(route('verification.resend'))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
+    }
 
     /**
      * verfied 되지 않고, 로그인한 사용자는 이메일을 전송하는 view에 접근할 수 있습니다.
