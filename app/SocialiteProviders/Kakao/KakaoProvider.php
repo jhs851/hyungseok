@@ -5,6 +5,7 @@ namespace App\SocialiteProviders\Kakao;
 use App\Core\SocialProvideSupporter;
 use GuzzleHttp\Exception\GuzzleException;
 use SocialiteProviders\Kakao\KakaoProvider as BaseKakaoProvider;
+use SocialiteProviders\Manager\OAuth2\User;
 
 class KakaoProvider extends BaseKakaoProvider
 {
@@ -54,5 +55,28 @@ class KakaoProvider extends BaseKakaoProvider
                 'Authorization' => "Bearer {$token}",
             ],
         ]);
+    }
+
+    /**
+     * Map the raw user array to a Socialite User instance.
+     *
+     * @param array $user
+     *
+     * @return \Laravel\Socialite\User
+     */
+    protected function mapUserToObject(array $user)
+    {
+        $is_email_valid = array_get($user, 'kakao_account.is_email_valid');
+        $is_email_verified = array_get($user, 'kakao_account.is_email_verified');
+
+        $user = [
+            'id' => $user['id'],
+            'nickname' => $user['properties']['nickname'],
+            'name' => $user['properties']['nickname'],
+            'email' => $is_email_valid && $is_email_verified ? array_get($user, 'kakao_account.email') : null,
+            'avatar' => array_get($user, 'properties.profile_image'),
+        ];
+
+        return (new User())->setRaw($user)->map($user);
     }
 }
