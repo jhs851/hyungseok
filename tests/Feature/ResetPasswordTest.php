@@ -15,34 +15,34 @@ class ResetPasswordTest extends TestCase
     /**
      * 손님은 접근할 수 없습니다.
      */
-//    public function testGuestsCannotAccess() : void
-//    {
-//        $this->signIn();
-//
-//        $this->get(route('password.reset', ['token' => $this->getToken(auth()->user())]))
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('home'));
-//
-//        $this->publishPasswordUpdate()
-//             ->assertStatus(302)
-//             ->assertSessionHas('flash_notification')
-//             ->assertRedirect(route('home'));
-//    }
+    public function testGuestsCannotAccess() : void
+    {
+        $this->signIn();
+
+        $this->get(route('password.reset', ['token' => $this->getToken(auth()->user())]))
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
+
+        $this->publishPasswordUpdate()
+             ->assertStatus(302)
+             ->assertSessionHas('flash_notification')
+             ->assertRedirect(route('home'));
+    }
 
     /**
      * Password Reset 폼에 필요한 필드들이 보입니다.
      */
-//    public function testViewTheFieldsRequiredForRResetForm() : void
-//    {
-//        $user = make(User::class);
-//
-//        $this->get(route('password.reset', ['token' => $this->getToken($user)]))
-//             ->assertSee('name="token"')
-//             ->assertSee('name="email"')
-//             ->assertSee('name="password"')
-//             ->assertSee('name="password_confirmation"');
-//    }
+    public function testViewTheFieldsRequiredForRResetForm() : void
+    {
+        $user = make(User::class);
+
+        $this->get(route('password.reset', ['token' => $this->getToken($user)]))
+             ->assertSee('name="token"')
+             ->assertSee('name="email"')
+             ->assertSee('name="password"')
+             ->assertSee('name="password_confirmation"');
+    }
 
     /**
      * 토큰, 이메일, 비밀번호, 비밀번호 확인 필드는 반드시 필요합니다.
