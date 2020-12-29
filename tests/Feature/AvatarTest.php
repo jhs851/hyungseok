@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Faker\Provider\Image;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -57,7 +56,7 @@ class AvatarTest extends TestCase
         Storage::fake();
 
         $this->post(route('users.avatar.store', auth()->user()->id), [
-            'src' => Image::imageUrl(64, 64),
+            'src' => 'http://via.placeholder.com/64x64',
         ]);
 
         tap(auth()->user()->fresh()->avatar_path, function (string $path) {
