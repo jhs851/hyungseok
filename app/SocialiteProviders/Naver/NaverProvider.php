@@ -5,7 +5,7 @@ namespace App\SocialiteProviders\Naver;
 use App\Core\SocialProvideSupporter;
 use GuzzleHttp\Exception\GuzzleException;
 use SocialiteProviders\Manager\OAuth2\User;
-use SocialiteProviders\Naver\NaverProvider as BaseNaverProvider;
+use SocialiteProviders\Naver\Provider as BaseNaverProvider;
 
 class NaverProvider extends BaseNaverProvider
 {
