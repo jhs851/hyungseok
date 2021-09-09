@@ -27,7 +27,7 @@ class BroadcastTest extends TestCase
 
         $this->post(route('admin.tags.store', ['name' => $tag->name]));
 
-        $logPath = storage_path('logs/laravel-' . Carbon::now()->format('Y-m-d') . '.log');
+        $logPath = storage_path('logs/laravel.log');
         $logFile = preg_split('/\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}] testing\.INFO:/', File::get($logPath));
 
         if (count($logFile)) {
