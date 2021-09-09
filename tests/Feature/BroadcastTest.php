@@ -4,9 +4,8 @@ namespace Tests\Feature;
 
 use App\Events\TagCreated;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Event;
 use App\Models\{Tag, User};
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Tests\TestCase;
 
@@ -21,25 +20,14 @@ class BroadcastTest extends TestCase
      */
     public function testCreatedTagWhenFireBroadcastEvents() : void
     {
+        Event::fake();
+
         $this->signIn(factory(User::class)->state('admin')->create());
 
         $tag = make(Tag::class);
 
         $this->post(route('admin.tags.store', ['name' => $tag->name]));
 
-        $logPath = storage_path('logs/laravel.log');
-        $logFile = preg_split('/\[[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}] testing\.INFO:/', File::get($logPath));
-
-        if (count($logFile)) {
-            $supposedLastEventLogged = $logFile[count($logFile) - 1];
-
-            $this->assertContains('Broadcasting [', $supposedLastEventLogged);
-
-            $this->assertContains('Broadcasting [' . TagCreated::class . ']', $supposedLastEventLogged);
-
-            $this->assertContains('Broadcasting [' . TagCreated::class . '] on channels [tags]', $supposedLastEventLogged);
-        } else {
-            $this->fail('No informations found in the file log \'' . $logPath . '\'.');
-        }
+        Event::assertDispatched(TagCreated::class);
     }
 }
