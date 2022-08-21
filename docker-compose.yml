@@ -7,16 +7,16 @@ services:
       - ./:/app
       - ./etc/nginx.conf:/etc/nginx/nginx.conf
       - ./etc/fastcgi_params:/etc/nginx/fastcgi_params
-      - /etc/letsencrypt/live/hyungseok.kr/fullchain.pem:/etc/letsencrypt/fullchain.pem
-      - /etc/letsencrypt/live/hyungseok.kr/privkey.pem:/etc/letsencrypt/privkey.pem
-      - /etc/ssl/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
-    ports:
-      - '80:80'
-      - '443:443'
+    expose:
+      - '8000'
     environment:
-      NGINX_HOST: hyungseok.kr www.hyungseok.kr api.hyungseok.kr m.hyungseok.kr
-      NGINX_PORT: 80
-    command: sh -c "envsubst \"`env | awk -F = '{printf \" $$%s\", $$1}'`\" < /app/etc/hyungseok_ssl.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+      LETSENCRYPT_HOST: hyungseok.kr,www.hyungseok.kr,api.hyungseok.kr,m.hyungseok.kr
+      VIRTUAL_HOST: hyungseok.kr,www.hyungseok.kr,api.hyungseok.kr,m.hyungseok.kr
+      VIRTUAL_PORT: 8000
+    command: sh -c "envsubst \"`env | awk -F = '{printf \" $$%s\", $$1}'`\" < /app/etc/hyungseok.template > /etc/nginx/conf.d/hyungseok.kr.conf && nginx -g 'daemon off;'"
+    depends_on:
+      - phpfpm
+      - redis
 
   phpfpm:
     image: jhs851/php-7.3-fpm:0.1
@@ -32,3 +32,8 @@ services:
     ports:
       - '6379:6379'
     command: redis-server /redis.conf
+
+networks:
+  default:
+    external:
+      name: proxy

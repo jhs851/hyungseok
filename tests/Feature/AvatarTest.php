@@ -56,7 +56,7 @@ class AvatarTest extends TestCase
         Storage::fake();
 
         $this->post(route('users.avatar.store', auth()->user()->id), [
-            'src' => 'http://via.placeholder.com/64x64',
+            'src' => 'https://via.placeholder.com/64x64',
         ]);
 
         tap(auth()->user()->fresh()->avatar_path, function (string $path) {

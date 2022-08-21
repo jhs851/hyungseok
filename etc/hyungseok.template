@@ -1,6 +1,6 @@
 server {
-    listen       ${NGINX_PORT};
-    server_name  ${NGINX_HOST};
+    listen       ${VIRTUAL_PORT};
+    server_name  localhost;
     root   /app/public;
 
     server_tokens off;
