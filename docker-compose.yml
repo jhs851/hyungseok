@@ -2,23 +2,25 @@ version: '3'
 
 services:
   nginx:
-    image: nginx:latest
+    container_name: hyungseok-nginx
+    image: nginx:alpine
     volumes:
       - ./:/app
       - ./etc/nginx.conf:/etc/nginx/nginx.conf
       - ./etc/fastcgi_params:/etc/nginx/fastcgi_params
-    expose:
-      - '8000'
+      - ./etc/hyungseok.kr.template:/etc/nginx/conf.d/hyungseok.kr.conf
     environment:
       LETSENCRYPT_HOST: hyungseok.kr,www.hyungseok.kr,api.hyungseok.kr,m.hyungseok.kr
       VIRTUAL_HOST: hyungseok.kr,www.hyungseok.kr,api.hyungseok.kr,m.hyungseok.kr
-      VIRTUAL_PORT: 8000
-    command: sh -c "envsubst \"`env | awk -F = '{printf \" $$%s\", $$1}'`\" < /app/etc/hyungseok.template > /etc/nginx/conf.d/hyungseok.kr.conf && nginx -g 'daemon off;'"
     depends_on:
       - phpfpm
       - redis
+    networks:
+      - default
+      - proxy
 
   phpfpm:
+    container_name: hyungseok-phpfpm
     image: jhs851/php-7.3-fpm:0.1
     volumes:
       - ./:/app
@@ -26,6 +28,7 @@ services:
     command: sh -c "php artisan clear-compiled && php artisan optimize && php artisan migrate --force && cd public && php-fpm"
 
   redis:
+    container_name: redis
     image: redis:latest
     volumes:
       - ./etc/redis.conf:/redis.conf
@@ -34,6 +37,6 @@ services:
     command: redis-server /redis.conf
 
 networks:
-  default:
-    external:
-      name: proxy
+  proxy:
+    driver: bridge
+    external: true
