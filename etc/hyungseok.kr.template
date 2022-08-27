@@ -1,6 +1,6 @@
 server {
-    listen       ${VIRTUAL_PORT};
-    server_name  localhost;
+    listen       80;
+    server_name  hyungseok.kr www.hyungseok.kr m.hyungseok.kr api.hyungseok.kr;
     root   /app/public;
 
     server_tokens off;
