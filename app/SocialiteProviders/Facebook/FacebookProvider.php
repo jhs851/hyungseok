@@ -72,22 +72,6 @@ class FacebookProvider extends AbstractProvider
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getAccessTokenResponse($code)
-    {
-        $postKey = (version_compare(ClientInterface::VERSION, '6') === 1) ? 'form_params' : 'body';
-
-        $response = $this->getHttpClient()->post($this->getTokenUrl(), [
-            $postKey => $this->getTokenFields($code),
-        ]);
-
-        $data = json_decode($response->getBody(), true);
-
-        return Arr::add($data, 'expires_in', Arr::pull($data, 'expires'));
-    }
-
-    /**
      * 소셜과의 연동을 해제합니다.
      *
      * @param string $code

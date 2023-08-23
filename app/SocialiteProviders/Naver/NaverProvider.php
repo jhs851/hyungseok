@@ -32,6 +32,23 @@ class NaverProvider extends BaseNaverProvider
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function getUserByToken($token)
+    {
+        $response = $this->getHttpClient()->get(
+            'https://openapi.naver.com/v1/nid/me',
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer '.$token,
+                ],
+            ]
+        );
+
+        return json_decode($response->getBody()->getContents(), true)['response'];
+    }
+
+    /**
      * Map the raw user array to a Socialite User instance.
      *
      * @param array $user
