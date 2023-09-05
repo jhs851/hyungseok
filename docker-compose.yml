@@ -2,6 +2,7 @@ version: '3'
 
 services:
   nginx:
+    restart: always
     container_name: hyungseok-nginx
     image: nginx:alpine
     volumes:
@@ -20,6 +21,7 @@ services:
       - proxy
 
   phpfpm:
+    restart: always
     container_name: hyungseok-phpfpm
     image: jhs851/php-7.3-fpm:0.1
     volumes:
@@ -28,6 +30,7 @@ services:
     command: sh -c "php artisan clear-compiled && php artisan optimize && php artisan migrate --force && cd public && php-fpm"
 
   redis:
+    restart: always
     container_name: redis
     image: redis:latest
     volumes:
@@ -38,5 +41,4 @@ services:
 
 networks:
   proxy:
-    driver: bridge
     external: true

@@ -2,9 +2,9 @@ version: 0.0
 os: linux
 files:
   - source:  /
-    destination: /home/ubuntu/app/codeship/hyungseok/
+    destination: /home/ubuntu/app/circleci/hyungseok/
 permissions:
-  - object: /home/ubuntu/app/codeship/hyungseok/storage
+  - object: /home/ubuntu/app/circleci/hyungseok/storage
     mode: 777
     type:
       - directory
@@ -18,7 +18,4 @@ hooks:
     - location: scripts/deploy.sh
       timeout: 300
       runas: root
-  ValidateService:
-    - location: scripts/restart-codedeploy-agent.sh
-      timeout: 300
-      runas: root
+
