@@ -20,15 +20,6 @@ services:
       - default
       - proxy
 
-  composer:
-    restart: "no"
-    container_name: hyungseok-composer
-    image: composer:lts
-    volumes:
-      - ./:/app
-    working_dir: /app
-    command: "composer install --no-interaction"
-
   phpfpm:
     restart: always
     container_name: hyungseok-phpfpm
@@ -36,8 +27,6 @@ services:
     volumes:
       - ./:/app
     working_dir: /app
-    depends_on:
-      - composer
     command: sh -c "php artisan clear-compiled && php artisan optimize && php artisan migrate --force && cd public && php-fpm"
 
   redis:
